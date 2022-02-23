@@ -1,0 +1,3 @@
+autorandr --change
+tint2&
+nitrogen --restore&
