@@ -335,7 +335,7 @@
             <item label="Reconfigure"> <action name="Reconfigure"/> </item>
             <separator/>
             <item label="Exit"> <action name="Execute">
-                <execute>/home/benl/.config/myconfigs/shutdown_dialog.sh</execute>
+                <execute>/home/benl/.config/shutdown_dialog.sh</execute>
             </action>  </item>
         </menu>
     </menu>
