@@ -12,3 +12,8 @@
 - vim
 - picom
 - tint2
+
+### needed for shutdown script:
+
+- make it executable: ```chmod +x ~/.config/shutdown_dialog.sh```
+- dependencies: jshon recode cowsay
