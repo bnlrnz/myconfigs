@@ -334,7 +334,9 @@
             <menu id="client-list-menu"/>
             <item label="Reconfigure"> <action name="Reconfigure"/> </item>
             <separator/>
-            <item label="Exit"> <action name="Exit"/> </item>
+            <item label="Exit"> <action name="Execute">
+                <execute>/home/benl/.config/myconfigs/shutdown_dialog.sh</execute>
+            </action>  </item>
         </menu>
     </menu>
 </openbox_menu>
