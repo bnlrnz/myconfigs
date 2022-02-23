@@ -1,0 +1,12 @@
+/** Basic config file **/
+
+configuration {
+    modi:               "window,drun,ssh,combi";
+    show-icons:         true;
+    icon-theme:         "Adapta-Nokto";
+    combi-modi:         "window,drun";
+    matching:           "fuzzy";
+    sort:               true;
+    sorting-method:     "fzf";
+}
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
