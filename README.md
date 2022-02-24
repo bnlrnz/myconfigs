@@ -8,6 +8,7 @@
 ### configs for:
 
 - openbox
+- rofi
 - alfred
 - vim
 - picom
