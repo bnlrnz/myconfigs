@@ -17,8 +17,8 @@ case $? in
   2)
      openbox --exit;;
   3)
-     sudo shutdown -r now;;
+     shutdown -r now;;
   4)
-     sudo shutdown -h now;;
+     shutdown -h now;;
 
 esac
