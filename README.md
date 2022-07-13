@@ -12,7 +12,7 @@
 - alfred
 - vim
 - picom
-- tint2
+- tint2 (now polybar)
 
 ### needed for shutdown script:
 
