@@ -1,4 +1,4 @@
 autorandr --change &
 (sleep 5 && sudo /usr/bin/systemctl restart vboxservice.service) &
-nitrogen --restore &
+xfce4-terminal -x nohup nitrogen --restore &
 xfce4-terminal -x nohup polybar &
