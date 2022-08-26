@@ -11,10 +11,11 @@ inactive_text_color="#707880"
 inactive_bg=
 inactive_underline=
 
-separator="·"
+separator="|"
 show="window_class" # options: window_title, window_class, window_classname
 forbidden_classes="Polybar Conky Gmrun nm-applet rofi"
-empty_desktop_message="Desktop"
+empty_desktop_message=":"
+
 
 char_limit=10
 max_windows=15
