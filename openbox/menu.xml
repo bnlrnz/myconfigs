@@ -1,342 +1,161 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openbox_menu>
-    <menu id="root-menu" label="OpenBox 3">
-        <menu id="1" label="Development">
-            <item label="CMake"> <action name="Execute">
-                <execute>cmake-gui</execute>
-            </action> </item>
-            <item label="CMake curses GUI (ccmake)"> <action name="Execute">
-                <execute>xfce4-terminal -e ccmake</execute>
-            </action> </item>
-            <item label="Code - OSS"> <action name="Execute">
-                <execute>code-oss</execute>
-            </action> </item>
-            <item label="Electron 13"> <action name="Execute">
-                <execute>electron13</execute>
-            </action> </item>
-            <item label="Elementary Perf"> <action name="Execute">
-                <execute>elementary_perf</execute>
-            </action> </item>
-            <item label="Elementary Test"> <action name="Execute">
-                <execute>elementary_test</execute>
-            </action> </item>
-            <item label="Fluid Demo"> <action name="Execute">
-                <execute>fluid-demo</execute>
-            </action> </item>
-            <item label="IDLE (Python IDE)"> <action name="Execute">
-                <execute>idle</execute>
-            </action> </item>
-            <item label="Python"> <action name="Execute">
-                <execute>xfce4-terminal -e python</execute>
-            </action> </item>
-            <item label="Qt Assistant"> <action name="Execute">
-                <execute>assistant</execute>
-            </action> </item>
-            <item label="Qt Designer"> <action name="Execute">
-                <execute>designer</execute>
-            </action> </item>
-            <item label="Qt Linguist"> <action name="Execute">
-                <execute>linguist</execute>
-            </action> </item>
-            <item label="Qt QDBusViewer"> <action name="Execute">
-                <execute>qdbusviewer</execute>
-            </action> </item>
-            <item label="Sublime Text"> <action name="Execute">
-                <execute>subl</execute>
-            </action> </item>
-            <item label="Tclsh8.6"> <action name="Execute">
-                <execute>xfce4-terminal -e tclsh8.6</execute>
-            </action> </item>
-        </menu>
-        <menu id="2" label="Editors">
-            <item label="AA Fire"> <action name="Execute">
-                <execute>xfce4-terminal -e aafire -driver slang</execute>
-            </action> </item>
-            <item label="Nano"> <action name="Execute">
-                <execute>xfce4-terminal -e nano</execute>
-            </action> </item>
-            <item label="Vi"> <action name="Execute">
-                <execute>xfce4-terminal -e vi</execute>
-            </action> </item>
-            <item label="Vim"> <action name="Execute">
-                <execute>xfce4-terminal -e vim</execute>
-            </action> </item>
-        </menu>
-        <menu id="18" label="Games">
-            <menu id="9" label="Adventure">
-                <item label="Sclient"> <action name="Execute">
-                    <execute>sclient</execute>
-                </action> </item>
-            </menu>
-            <menu id="10" label="Arcade">
-                <item label="PacMan"> <action name="Execute">
-                    <execute>pacman</execute>
-                </action> </item>
-            </menu>
-            <menu id="11" label="Board">
-                <item label="Monopoly"> <action name="Execute">
-                    <execute>xfce4-terminal -e monop</execute>
-                </action> </item>
-            </menu>
-        </menu>
-        <menu id="6" label="Graphics">
-            <item label="Bitmap"> <action name="Execute">
-                <execute>bitmap</execute>
-            </action> </item>
-            <item label="dotty"> <action name="Execute">
-                <execute>dotty</execute>
-            </action> </item>
-            <item label="Gcolor2"> <action name="Execute">
-                <execute>gcolor2</execute>
-            </action> </item>
-            <item label="lefty"> <action name="Execute">
-                <execute>lefty</execute>
-            </action> </item>
-            <item label="scanimage"> <action name="Execute">
-                <execute>xfce4-terminal -e scanimage</execute>
-            </action> </item>
-            <item label="Viewnior"> <action name="Execute">
-                <execute>viewnior</execute>
-            </action> </item>
-            <item label="XGlyph"> <action name="Execute">
-                <execute>xglyph</execute>
-            </action> </item>
-        </menu>
-        <menu id="7" label="Multimedia">
-            <item label="ALSA mixer"> <action name="Execute">
-                <execute>xfce4-terminal -e alsamixer</execute>
-            </action> </item>
-            <item label="PulseAudio Volume Control"> <action name="Execute">
-                <execute>pavucontrol</execute>
-            </action> </item>
-            <item label="Qt V4L2 test Utility"> <action name="Execute">
-                <execute>qv4l2</execute>
-            </action> </item>
-            <item label="Qt V4L2 video capture utility"> <action name="Execute">
-                <execute>qvidcap</execute>
-            </action> </item>
-            <item label="VLC media player"> <action name="Execute">
-                <execute>vlc</execute>
-            </action> </item>
-            <item label="VLC media player"> <action name="Execute">
-                <execute>qvlc</execute>
-            </action> </item>
-        </menu>
-        <menu id="5" label="Network">
-            <item label="Avahi SSH Server Browser"> <action name="Execute">
-                <execute>bssh</execute>
-            </action> </item>
-            <item label="Avahi VNC Server Browser"> <action name="Execute">
-                <execute>bvnc</execute>
-            </action> </item>
-            <item label="FTP"> <action name="Execute">
-                <execute>xfce4-terminal -e ftp</execute>
-            </action> </item>
-            <item label="Google Chrome"> <action name="Execute">
-                <execute>google-chrome-stable</execute>
-            </action> </item>
-            <item label="Mail"> <action name="Execute">
-                <execute>xfce4-terminal -e mail</execute>
-            </action> </item>
-            <item label="Talk"> <action name="Execute">
-                <execute>xfce4-terminal -e talk</execute>
-            </action> </item>
-            <item label="Telnet"> <action name="Execute">
-                <execute>xfce4-terminal -e telnet</execute>
-            </action> </item>
-            <item label="Wireshark"> <action name="Execute">
-                <execute>wireshark</execute>
-            </action> </item>
-        </menu>
-        <menu id="3" label="Office">
-            <item label="ONLYOFFICE Desktop Editors"> <action name="Execute">
-                <execute>onlyoffice</execute>
-            </action> </item>
-            <item label="qpdfview"> <action name="Execute">
-                <execute>qpdfview</execute>
-            </action> </item>
-        </menu>
-        <menu id="4" label="Science">
-            <item label="bc"> <action name="Execute">
-                <execute>xfce4-terminal -e bc</execute>
-            </action> </item>
-            <item label="dc"> <action name="Execute">
-                <execute>xfce4-terminal -e dc</execute>
-            </action> </item>
-        </menu>
-        <menu id="19" label="Shells">
-            <item label="GIT"> <action name="Execute">
-                <execute>xfce4-terminal -e git</execute>
-            </action> </item>
-            <item label="Thunar File Manager"> <action name="Execute">
-                <execute>thunar</execute>
-            </action> </item>
-            <item label="Xfce Terminal"> <action name="Execute">
-                <execute>xfce4-terminal</execute>
-            </action> </item>
-        </menu>
-        <menu id="37" label="System">
-            <menu id="36" label="Settings">
-                <menu id="21" label="GNOME">
-                    <item label="About Me"> <action name="Execute">
-                        <execute>mugshot</execute>
-                    </action> </item>
-                    <item label="Advanced Network Configuration"> <action name="Execute">
-                        <execute>nm-connection-editor</execute>
-                    </action> </item>
-                    <item label="Bluetooth Manager"> <action name="Execute">
-                        <execute>blueman-manager</execute>
-                    </action> </item>
-                </menu>
-                <menu id="35" label="Xfce">
-                    <item label="Bluetooth Adapters"> <action name="Execute">
-                        <execute>blueman-adapters</execute>
-                    </action> </item>
-                </menu>
-                <item label="ARandR"> <action name="Execute">
-                    <execute>arandr</execute>
-                </action> </item>
-                <item label="Elementary Configuration"> <action name="Execute">
-                    <execute>elementary_config</execute>
-                </action> </item>
-                <item label="File Manager Settings"> <action name="Execute">
-                    <execute>thunar-settings</execute>
-                </action> </item>
-                <item label="Kvantum Manager"> <action name="Execute">
-                    <execute>kvantummanager</execute>
-                </action> </item>
-                <item label="Manage Printing"> <action name="Execute">
-                    <execute>xdg-open http://localhost:631/</execute>
-                </action> </item>
-                <item label="Manjaro Notifier Settings"> <action name="Execute">
-                    <execute>msm_notifier --settings</execute>
-                </action> </item>
-                <item label="Manjaro Settings Manager"> <action name="Execute">
-                    <execute>manjaro-settings-manager</execute>
-                </action> </item>
-                <item label="nitrogen"> <action name="Execute">
-                    <execute>nitrogen</execute>
-                </action> </item>
-                <item label="Openbox Settings"> <action name="Execute">
-                    <execute>obconf-qt</execute>
-                </action> </item>
-                <item label="SCIM Input Method"> <action name="Execute">
-                    <execute>scim-setup</execute>
-                </action> </item>
-                <item label="Tint2 Settings"> <action name="Execute">
-                    <execute>tint2conf</execute>
-                </action> </item>
-                <item label="Xfce Terminal Settings"> <action name="Execute">
-                    <execute>xfce4-terminal --preferences</execute>
-                </action> </item>
-            </menu>
-            <item label="Avahi Zeroconf Browser"> <action name="Execute">
-                <execute>avahi-discover</execute>
-            </action> </item>
-            <item label="fish"> <action name="Execute">
-                <execute>xfce4-terminal -e fish</execute>
-            </action> </item>
-            <item label="GDM Setup"> <action name="Execute">
-                <execute>gksu gdmsetup</execute>
-            </action> </item>
-            <item label="GParted"> <action name="Execute">
-                <execute>gparted</execute>
-            </action> </item>
-            <item label="GtkHash"> <action name="Execute">
-                <execute>gtkhash</execute>
-            </action> </item>
-            <item label="Hardware Locality lstopo"> <action name="Execute">
-                <execute>lstopo</execute>
-            </action> </item>
-            <item label="HPLIP File printing"> <action name="Execute">
-                <execute>hp-print</execute>
-            </action> </item>
-            <item label="Htop"> <action name="Execute">
-                <execute>xfce4-terminal -e htop</execute>
-            </action> </item>
-            <item label="Manjaro Hello"> <action name="Execute">
-                <execute>manjaro-hello</execute>
-            </action> </item>
-            <item label="pstree"> <action name="Execute">
-                <execute>xfce4-terminal -e pstree</execute>
-            </action> </item>
-            <item label="pstree"> <action name="Execute">
-                <execute>xfce4-terminal -e pstree.x11</execute>
-            </action> </item>
-            <item label="Software Token"> <action name="Execute">
-                <execute>stoken-gui</execute>
-            </action> </item>
-            <item label="Software Token (small)"> <action name="Execute">
-                <execute>stoken-gui --small</execute>
-            </action> </item>
-            <item label="Timeshift"> <action name="Execute">
-                <execute>timeshift-launcher</execute>
-            </action> </item>
-            <item label="Tint2"> <action name="Execute">
-                <execute>tint2</execute>
-            </action> </item>
-            <item label="Top"> <action name="Execute">
-                <execute>xfce4-terminal -e top</execute>
-            </action> </item>
-        </menu>
-        <menu id="38" label="Utilities">
-            <item label="About Xfce"> <action name="Execute">
-                <execute>xfce4-about</execute>
-            </action> </item>
-            <item label="Albert"> <action name="Execute">
-                <execute>albert</execute>
-            </action> </item>
-            <item label="Catfish File Search"> <action name="Execute">
-                <execute>catfish</execute>
-            </action> </item>
-            <item label="compton"> <action name="Execute">
-                <execute>compton</execute>
-            </action> </item>
-            <item label="Engrampa Archive Manager"> <action name="Execute">
-                <execute>engrampa</execute>
-            </action> </item>
-            <item label="Galculator"> <action name="Execute">
-                <execute>galculator</execute>
-            </action> </item>
-            <item label="Help"> <action name="Execute">
-                <execute>yelp</execute>
-            </action> </item>
-            <item label="HP Device Manager"> <action name="Execute">
-                <execute>hp-toolbox</execute>
-            </action> </item>
-            <item label="Info"> <action name="Execute">
-                <execute>xfce4-terminal -e info</execute>
-            </action> </item>
-            <item label="KeePass Password Safe"> <action name="Execute">
-                <execute>keepass</execute>
-            </action> </item>
-            <item label="Manjaro User Guide"> <action name="Execute">
-                <execute>manjaro-documentation</execute>
-            </action> </item>
-            <item label="picom"> <action name="Execute">
-                <execute>picom</execute>
-            </action> </item>
-            <item label="Xev"> <action name="Execute">
-                <execute>xfce4-terminal -e xev</execute>
-            </action> </item>
-            <item label="Xkill"> <action name="Execute">
-                <execute>xkill</execute>
-            </action> </item>
-            <item label="Xrefresh"> <action name="Execute">
-                <execute>xrefresh</execute>
-            </action> </item>
-            <item label="Xsetroot"> <action name="Execute">
-                <execute>xsetroot</execute>
-            </action> </item>
-        </menu>
-        <separator/>
-        <menu id="40" label="OpenBox">
-            <menu id="client-list-menu"/>
-            <item label="Reconfigure"> <action name="Reconfigure"/> </item>
-            <separator/>
-            <item label="Exit"> <action name="Execute">
-                <execute>/home/benl/.config/shutdown_dialog.sh</execute>
-            </action>  </item>
-        </menu>
-    </menu>
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="https://openbox.org/"
+ xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://openbox.org/">
+  <menu id="root-menu" label="Applications">
+    <item label="File Manager"><action name="Execute"><command><![CDATA[thunar]]></command></action></item>
+    <item label="Terminal"><action name="Execute"><command><![CDATA[xfce4-terminal]]></command></action></item>
+    <item label="Web Browser"><action name="Execute"><command><![CDATA[google-chrome-stable]]></command></action></item>
+    <item label="Run command" icon="/home/benl/.config/obmenu-generator/icons/93d08435ae2e772594ce246887641698.png"><action name="Execute"><command><![CDATA[rofi -modi drun,run -show drun]]></command></action></item>
+  <menu id="0.227053647003235" label="Accessories">
+    <item label="About Xfce" icon="/home/benl/.config/obmenu-generator/icons/2777892b95f4d349e0983bf07ccf5cb4.png"><action name="Execute"><command><![CDATA[xfce4-about]]></command></action></item>
+    <item label="Bulk Rename" icon="/home/benl/.config/obmenu-generator/icons/c2c47267f18c412a241b1b25181e8986.png"><action name="Execute"><command><![CDATA[thunar --bulk-rename]]></command></action></item>
+    <item label="Calculator" icon="/home/benl/.config/obmenu-generator/icons/8016b3f5d10ba485510c409683d5ba35.png"><action name="Execute"><command><![CDATA[gnome-calculator]]></command></action></item>
+    <item label="Catfish File Search" icon="/home/benl/.config/obmenu-generator/icons/d46005460f3d8477447c972ab7c2baf4.png"><action name="Execute"><command><![CDATA[/usr/bin/catfish]]></command></action></item>
+    <item label="Conky Manager" icon="/home/benl/.config/obmenu-generator/icons/834e9d51c1680c79e82d4f253b9666ae.png"><action name="Execute"><command><![CDATA[conky-manager]]></command></action></item>
+    <item label="Elementary Perf" icon="/home/benl/.config/obmenu-generator/icons/34e20017ceba2a97c8a7b8940e73b1a6.png"><action name="Execute"><command><![CDATA[elementary_perf]]></command></action></item>
+    <item label="Elementary Test" icon="/home/benl/.config/obmenu-generator/icons/34e20017ceba2a97c8a7b8940e73b1a6.png"><action name="Execute"><command><![CDATA[elementary_test]]></command></action></item>
+    <item label="Engrampa Archive Manager" icon="/home/benl/.config/obmenu-generator/icons/b2c7fba27738e9031182e51679eed3db.png"><action name="Execute"><command><![CDATA[engrampa]]></command></action></item>
+    <item label="Galculator" icon="/home/benl/.config/obmenu-generator/icons/ebabf13b7395f3900ac04799b2c4b96d.png"><action name="Execute"><command><![CDATA[galculator]]></command></action></item>
+    <item label="GtkHash" icon="/home/benl/.config/obmenu-generator/icons/bcf337884592a345faff28b912a5f32e.png"><action name="Execute"><command><![CDATA[gtkhash]]></command></action></item>
+    <item label="Gxmessage" icon="/home/benl/.config/obmenu-generator/icons/f310b1af0ec0f9523970adddd755a4c1.png"><action name="Execute"><command><![CDATA[gxmessage]]></command></action></item>
+    <item label="Help" icon="/home/benl/.config/obmenu-generator/icons/ec6768dc3f5f11dc89b3890c434d943f.png"><action name="Execute"><command><![CDATA[yelp]]></command></action></item>
+    <item label="HP Device Manager" icon="/home/benl/.config/obmenu-generator/icons/4526504abccd9e43802080dd5f3cf6c6.png"><action name="Execute"><command><![CDATA[hp-toolbox]]></command></action></item>
+    <item label="ipython" icon="/home/benl/.config/obmenu-generator/icons/bf18882ffa5cc199c894710ab4cdb2f7.png"><action name="Execute"><command><![CDATA[xterm -e 'ipython']]></command></action></item>
+    <item label="KeePass Password Safe" icon="/home/benl/.config/obmenu-generator/icons/8afbe307ece70b257381b48ebb9a3e1a.png"><action name="Execute"><command><![CDATA[keepass]]></command></action></item>
+    <item label="Kvantum Manager" icon="/home/benl/.config/obmenu-generator/icons/c0ba4605d33c6af7a781b467064e0f4a.png"><action name="Execute"><command><![CDATA[kvantummanager]]></command></action></item>
+    <item label="Manjaro User Guide"><action name="Execute"><command><![CDATA[/usr/bin/manjaro-documentation]]></command></action></item>
+    <item label="nitrogen" icon="/home/benl/.config/obmenu-generator/icons/dc07ea0146d8fe8408ee1b3a35dded2d.png"><action name="Execute"><command><![CDATA[nitrogen]]></command></action></item>
+    <item label="picom"><action name="Execute"><command><![CDATA[picom]]></command></action></item>
+    <item label="Screenshot" icon="/home/benl/.config/obmenu-generator/icons/2526930f238ef3ae7d938a7374c3a1ec.png"><action name="Execute"><command><![CDATA[xfce4-screenshooter]]></command></action></item>
+    <item label="Software Token (small)" icon="/home/benl/.config/obmenu-generator/icons/e9851426713acbc595832d6334314cb7.png"><action name="Execute"><command><![CDATA[stoken-gui --small]]></command></action></item>
+    <item label="Software Token" icon="/home/benl/.config/obmenu-generator/icons/e9851426713acbc595832d6334314cb7.png"><action name="Execute"><command><![CDATA[stoken-gui]]></command></action></item>
+    <item label="Thunar File Manager" icon="/home/benl/.config/obmenu-generator/icons/c2c47267f18c412a241b1b25181e8986.png"><action name="Execute"><command><![CDATA[thunar]]></command></action></item>
+    <item label="Vim" icon="/home/benl/.config/obmenu-generator/icons/9f954f62b318e85d9716dec7d44b1f3b.png"><action name="Execute"><command><![CDATA[xterm -e 'vim']]></command></action></item>
+  </menu>
+  <menu id="0.190998336623551" label="Development">
+    <item label="CMake" icon="/home/benl/.config/obmenu-generator/icons/cf0e257b9b587e28f00d8cec758be61b.png"><action name="Execute"><command><![CDATA[cmake-gui]]></command></action></item>
+    <item label="Code - OSS" icon="/home/benl/.config/obmenu-generator/icons/41a4834d1a6de52190fa64cda9e600a2.png"><action name="Execute"><command><![CDATA[/usr/bin/code-oss --unity-launch]]></command></action></item>
+    <item label="Electron 19" icon="/home/benl/.config/obmenu-generator/icons/321332a3098745618b46377bd6c4e8c7.png"><action name="Execute"><command><![CDATA[electron19]]></command></action></item>
+    <item label="Elementary Perf" icon="/home/benl/.config/obmenu-generator/icons/34e20017ceba2a97c8a7b8940e73b1a6.png"><action name="Execute"><command><![CDATA[elementary_perf]]></command></action></item>
+    <item label="Elementary Test" icon="/home/benl/.config/obmenu-generator/icons/34e20017ceba2a97c8a7b8940e73b1a6.png"><action name="Execute"><command><![CDATA[elementary_test]]></command></action></item>
+    <item label="Fluid Demo" icon="/home/benl/.config/obmenu-generator/icons/fc6d267172bc8ec62f02361aec5ddb59.png"><action name="Execute"><command><![CDATA[fluid-demo]]></command></action></item>
+    <item label="haroopad" icon="/home/benl/.config/obmenu-generator/icons/a0d0da1fd12e051894e30a8579257c25.png"><action name="Execute"><command><![CDATA[haroopad]]></command></action></item>
+    <item label="ipython" icon="/home/benl/.config/obmenu-generator/icons/bf18882ffa5cc199c894710ab4cdb2f7.png"><action name="Execute"><command><![CDATA[xterm -e 'ipython']]></command></action></item>
+    <item label="Meld" icon="/home/benl/.config/obmenu-generator/icons/80d7e34d6d5ea9541c92649de8d79965.png"><action name="Execute"><command><![CDATA[meld]]></command></action></item>
+    <item label="Qt Assistant" icon="/home/benl/.config/obmenu-generator/icons/3bb6d46336f7aaecfae814f93d35b07a.png"><action name="Execute"><command><![CDATA[assistant]]></command></action></item>
+    <item label="Qt Designer" icon="/home/benl/.config/obmenu-generator/icons/580afd8248a539ef9534ed90c5e44ae3.png"><action name="Execute"><command><![CDATA[designer]]></command></action></item>
+    <item label="Qt Linguist" icon="/home/benl/.config/obmenu-generator/icons/041b1c381692ee5c7dbb8a4f8dc31d0d.png"><action name="Execute"><command><![CDATA[linguist]]></command></action></item>
+    <item label="Qt QDBusViewer" icon="/home/benl/.config/obmenu-generator/icons/8987e411110305d3b077341066ed23cc.png"><action name="Execute"><command><![CDATA[qdbusviewer]]></command></action></item>
+    <item label="Sublime Text" icon="/home/benl/.config/obmenu-generator/icons/0ae0c2941d429f0f86b4cdf86eaa80bb.png"><action name="Execute"><command><![CDATA[subl]]></command></action></item>
+  </menu>
+  <menu id="0.269655945981992" label="Education">
+    <item label="LibreOffice Math" icon="/home/benl/.config/obmenu-generator/icons/91ab676fc942dc96d15c868480dbdcf0.png"><action name="Execute"><command><![CDATA[libreoffice --math]]></command></action></item>
+  </menu>
+  <menu id="0.583660586361425" label="Graphics">
+    <item label="Gcolor2" icon="/home/benl/.config/obmenu-generator/icons/1846ad88e3256098c75664c0e1771d69.png"><action name="Execute"><command><![CDATA[gcolor2]]></command></action></item>
+    <item label="LibreOffice Draw" icon="/home/benl/.config/obmenu-generator/icons/98a0a28f171d63dc2be3910835bb4dad.png"><action name="Execute"><command><![CDATA[libreoffice --draw]]></command></action></item>
+    <item label="Pinta" icon="/home/benl/.config/obmenu-generator/icons/db423ba29e3aa303ab43779b54e0f816.png"><action name="Execute"><command><![CDATA[pinta]]></command></action></item>
+    <item label="Viewnior" icon="/home/benl/.config/obmenu-generator/icons/d80572fc38e0dd8c46c27d0649ba9325.png"><action name="Execute"><command><![CDATA[viewnior]]></command></action></item>
+  </menu>
+  <menu id="0.243218561995565" label="Multimedia">
+    <item label="Audacity" icon="/home/benl/.config/obmenu-generator/icons/ca0316a84166e6e7eed018e7601be12b.png"><action name="Execute"><command><![CDATA[env UBUNTU_MENUPROXY=0 audacity]]></command></action></item>
+    <item label="PulseAudio Volume Control" icon="/home/benl/.config/obmenu-generator/icons/ccc798b842fe8337c191b23e446ce8c3.png"><action name="Execute"><command><![CDATA[pavucontrol]]></command></action></item>
+    <item label="Qt V4L2 test Utility" icon="/home/benl/.config/obmenu-generator/icons/c7862ca2d9fa1c149efd73cb87a38b54.png"><action name="Execute"><command><![CDATA[qv4l2]]></command></action></item>
+    <item label="Qt V4L2 video capture utility" icon="/home/benl/.config/obmenu-generator/icons/c7862ca2d9fa1c149efd73cb87a38b54.png"><action name="Execute"><command><![CDATA[qvidcap]]></command></action></item>
+    <item label="Spotify" icon="/home/benl/.config/obmenu-generator/icons/4c0d6496803637f013ec81648213ebaa.png"><action name="Execute"><command><![CDATA[spotify --uri=%U]]></command></action></item>
+    <item label="VLC media player" icon="/home/benl/.config/obmenu-generator/icons/e2980ee324069b6ce7f3bac9c5af0301.png"><action name="Execute"><command><![CDATA[/usr/bin/vlc --started-from-file]]></command></action></item>
+    <item label="Volume Icon" icon="/home/benl/.config/obmenu-generator/icons/ccc798b842fe8337c191b23e446ce8c3.png"><action name="Execute"><command><![CDATA[volumeicon]]></command></action></item>
+  </menu>
+  <menu id="0.549088134881444" label="Network">
+    <item label="Avahi SSH Server Browser"><action name="Execute"><command><![CDATA[/usr/bin/bssh]]></command></action></item>
+    <item label="Avahi VNC Server Browser"><action name="Execute"><command><![CDATA[/usr/bin/bvnc]]></command></action></item>
+    <item label="Google Chrome" icon="/home/benl/.config/obmenu-generator/icons/d9a7d86fbf61cd229bbe95dc4fc7bdc5.png"><action name="Execute"><command><![CDATA[/usr/bin/google-chrome-stable]]></command></action></item>
+    <item label="Signal" icon="/home/benl/.config/obmenu-generator/icons/9981e970e6837cf73be222185635e264.png"><action name="Execute"><command><![CDATA[signal-desktop --]]></command></action></item>
+    <item label="Telegram Desktop" icon="/home/benl/.config/obmenu-generator/icons/63bc1f4391ee7dc9e3d26148fde8234d.png"><action name="Execute"><command><![CDATA[telegram-desktop --]]></command></action></item>
+    <item label="Wireshark" icon="/home/benl/.config/obmenu-generator/icons/e47ffc46a739bac5b9fb25e8ec23d97b.png"><action name="Execute"><command><![CDATA[wireshark]]></command></action></item>
+  </menu>
+  <menu id="0.000347512678072093" label="Office">
+    <item label="LibreOffice Base" icon="/home/benl/.config/obmenu-generator/icons/afea34f0b24fa2f34fc8906593709122.png"><action name="Execute"><command><![CDATA[libreoffice --base]]></command></action></item>
+    <item label="LibreOffice Calc" icon="/home/benl/.config/obmenu-generator/icons/b0274d20f7796518393a76740eb788c1.png"><action name="Execute"><command><![CDATA[libreoffice --calc]]></command></action></item>
+    <item label="LibreOffice Draw" icon="/home/benl/.config/obmenu-generator/icons/98a0a28f171d63dc2be3910835bb4dad.png"><action name="Execute"><command><![CDATA[libreoffice --draw]]></command></action></item>
+    <item label="LibreOffice Impress" icon="/home/benl/.config/obmenu-generator/icons/a98e2fc5dd7feeb02a6c7b73b0ce3799.png"><action name="Execute"><command><![CDATA[libreoffice --impress]]></command></action></item>
+    <item label="LibreOffice Math" icon="/home/benl/.config/obmenu-generator/icons/91ab676fc942dc96d15c868480dbdcf0.png"><action name="Execute"><command><![CDATA[libreoffice --math]]></command></action></item>
+    <item label="LibreOffice Start Center" icon="/home/benl/.config/obmenu-generator/icons/39d497cac0e7189934ac1649594c0d41.png"><action name="Execute"><command><![CDATA[libreoffice]]></command></action></item>
+    <item label="LibreOffice Writer" icon="/home/benl/.config/obmenu-generator/icons/1d7385cff54d381548576cf6a7c98701.png"><action name="Execute"><command><![CDATA[libreoffice --writer]]></command></action></item>
+    <item label="ONLYOFFICE Desktop Editors" icon="/home/benl/.config/obmenu-generator/icons/7071c1373a2c5c0b08756dfed4bd3ec9.png"><action name="Execute"><command><![CDATA[/usr/bin/onlyoffice]]></command></action></item>
+    <item label="qpdfview" icon="/home/benl/.config/obmenu-generator/icons/db583407a51bd2e3be719679ae627ebd.png"><action name="Execute"><command><![CDATA[qpdfview --unique]]></command></action></item>
+  </menu>
+  <menu id="0.787527171237421" label="Other">
+    <item label="Google Keep - Notes and Lists" icon="/home/benl/.config/obmenu-generator/icons/bd321d063f53f8577e255284e394f6eb.png"><action name="Execute"><command><![CDATA[/opt/google/chrome/google-chrome --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki]]></command></action></item>
+    <item label="hp-uiscan" icon="/home/benl/.config/obmenu-generator/icons/2d4dc1de6fa56fbdd02758d647cba9b0.png"><action name="Execute"><command><![CDATA[/usr/bin/hp-uiscan]]></command></action></item>
+    <item label="Rofi Theme Selector"><action name="Execute"><command><![CDATA[rofi-theme-selector]]></command></action></item>
+    <item label="Rofi"><action name="Execute"><command><![CDATA[rofi -show]]></command></action></item>
+    <item label="XScreenSaver" icon="/home/benl/.config/obmenu-generator/icons/0c9d2e811a1ed1d305cc086be02a0aaa.png"><action name="Execute"><command><![CDATA[xscreensaver]]></command></action></item>
+  </menu>
+  <menu id="0.778387646647761" label="Settings">
+    <item label="About Me" icon="/home/benl/.config/obmenu-generator/icons/f14b0ddee5fa32eaef1ad1805af3d63a.png"><action name="Execute"><command><![CDATA[/usr/bin/mugshot]]></command></action></item>
+    <item label="Add/Remove Software" icon="/home/benl/.config/obmenu-generator/icons/43cab2017ed0a2d15360d43e241f3b64.png"><action name="Execute"><command><![CDATA[pamac-manager]]></command></action></item>
+    <item label="Advanced Network Configuration"><action name="Execute"><command><![CDATA[nm-connection-editor]]></command></action></item>
+    <item label="ARandR"><action name="Execute"><command><![CDATA[arandr]]></command></action></item>
+    <item label="Bluetooth Adapters" icon="/home/benl/.config/obmenu-generator/icons/e4997d9435808bf4d07c9c4bf2b7560f.png"><action name="Execute"><command><![CDATA[blueman-adapters]]></command></action></item>
+    <item label="Bluetooth Manager" icon="/home/benl/.config/obmenu-generator/icons/0b1bb7995ff83f53b75e6a66465d8184.png"><action name="Execute"><command><![CDATA[blueman-manager]]></command></action></item>
+    <item label="Camset" icon="/home/benl/.config/obmenu-generator/icons/09d3da50c2c7925becd14a285004cc82.png"><action name="Execute"><command><![CDATA[camset]]></command></action></item>
+    <item label="Elementary Configuration" icon="/home/benl/.config/obmenu-generator/icons/34e20017ceba2a97c8a7b8940e73b1a6.png"><action name="Execute"><command><![CDATA[elementary_config]]></command></action></item>
+    <item label="File Manager Settings" icon="/home/benl/.config/obmenu-generator/icons/c2c47267f18c412a241b1b25181e8986.png"><action name="Execute"><command><![CDATA[thunar-settings]]></command></action></item>
+    <item label="Kvantum Manager" icon="/home/benl/.config/obmenu-generator/icons/c0ba4605d33c6af7a781b467064e0f4a.png"><action name="Execute"><command><![CDATA[kvantummanager]]></command></action></item>
+    <item label="Manjaro Notifier Settings"><action name="Execute"><command><![CDATA[msm_notifier --settings]]></command></action></item>
+    <item label="Manjaro Settings Manager"><action name="Execute"><command><![CDATA[manjaro-settings-manager]]></command></action></item>
+    <item label="Openbox Settings" icon="/home/benl/.config/obmenu-generator/icons/61f3de6fd06f9847e869878302ba1980.png"><action name="Execute"><command><![CDATA[obconf-qt]]></command></action></item>
+    <item label="Panel" icon="/home/benl/.config/obmenu-generator/icons/3afad1492ed508acb549bf343afd8c8c.png"><action name="Execute"><command><![CDATA[xfce4-panel --preferences]]></command></action></item>
+    <item label="Preferred Applications"><action name="Execute"><command><![CDATA[libfm-pref-apps]]></command></action></item>
+    <item label="PulseAudio Volume Control" icon="/home/benl/.config/obmenu-generator/icons/ccc798b842fe8337c191b23e446ce8c3.png"><action name="Execute"><command><![CDATA[pavucontrol]]></command></action></item>
+    <item label="Removable Drives and Media" icon="/home/benl/.config/obmenu-generator/icons/1035f7ea1bf18306b2573c19ecaaa4ac.png"><action name="Execute"><command><![CDATA[thunar-volman-settings]]></command></action></item>
+    <item label="SCIM Input Method" icon="/home/benl/.config/obmenu-generator/icons/508fc90d11d8630927f656f1944b871f.png"><action name="Execute"><command><![CDATA[scim-setup]]></command></action></item>
+    <item label="Xfce Terminal Settings" icon="/home/benl/.config/obmenu-generator/icons/db76bef0367ad4715ebe2fe66f0f94d6.png"><action name="Execute"><command><![CDATA[xfce4-terminal --preferences]]></command></action></item>
+    <item label="XScreenSaver Settings" icon="/home/benl/.config/obmenu-generator/icons/0c9d2e811a1ed1d305cc086be02a0aaa.png"><action name="Execute"><command><![CDATA[xscreensaver-settings]]></command></action></item>
+  </menu>
+  <menu id="0.403053358256102" label="System">
+    <item label="Add/Remove Software" icon="/home/benl/.config/obmenu-generator/icons/43cab2017ed0a2d15360d43e241f3b64.png"><action name="Execute"><command><![CDATA[pamac-manager]]></command></action></item>
+    <item label="Avahi Zeroconf Browser"><action name="Execute"><command><![CDATA[/usr/bin/avahi-discover]]></command></action></item>
+    <item label="Bulk Rename" icon="/home/benl/.config/obmenu-generator/icons/c2c47267f18c412a241b1b25181e8986.png"><action name="Execute"><command><![CDATA[thunar --bulk-rename]]></command></action></item>
+    <item label="conky" icon="/home/benl/.config/obmenu-generator/icons/318979f26d22619bc4641612b7836f9c.png"><action name="Execute"><command><![CDATA[conky --daemonize --pause=1]]></command></action></item>
+    <item label="fish" icon="/home/benl/.config/obmenu-generator/icons/3fd26cc24cb2b5f3d5a0d4f6872087d8.png"><action name="Execute"><command><![CDATA[xterm -e 'fish']]></command></action></item>
+    <item label="GParted" icon="/home/benl/.config/obmenu-generator/icons/a7ee8bca1e5e7f2273955590a1a9ab45.png"><action name="Execute"><command><![CDATA[/usr/bin/gparted]]></command></action></item>
+    <item label="Hardware Locality lstopo"><action name="Execute"><command><![CDATA[lstopo]]></command></action></item>
+    <item label="Htop" icon="/home/benl/.config/obmenu-generator/icons/dfd897cf7539d79d86b3b2db1c9e118c.png"><action name="Execute"><command><![CDATA[xterm -e 'htop']]></command></action></item>
+    <item label="Manage Printing" icon="/home/benl/.config/obmenu-generator/icons/955d8ecf74f6c0a372e138e2ba5e2458.png"><action name="Execute"><command><![CDATA[/usr/bin/xdg-open http://localhost:631/]]></command></action></item>
+    <item label="OpenJDK Java 18 Console"><action name="Execute"><command><![CDATA[/usr/lib/jvm/java-18-openjdk/bin/jconsole]]></command></action></item>
+    <item label="OpenJDK Java 18 Shell"><action name="Execute"><command><![CDATA[xterm -e '/usr/lib/jvm/java-18-openjdk/bin/jshell']]></command></action></item>
+    <item label="Thunar File Manager" icon="/home/benl/.config/obmenu-generator/icons/c2c47267f18c412a241b1b25181e8986.png"><action name="Execute"><command><![CDATA[thunar]]></command></action></item>
+    <item label="Timeshift" icon="/home/benl/.config/obmenu-generator/icons/7589e5e757ce5621003e9849acc6e9ed.png"><action name="Execute"><command><![CDATA[timeshift-launcher]]></command></action></item>
+    <item label="Xfce Terminal" icon="/home/benl/.config/obmenu-generator/icons/2e165448f8ecdf79d930b03958d87f01.png"><action name="Execute"><command><![CDATA[xfce4-terminal]]></command></action></item>
+  </menu>
+  <separator/>
+  <menu id="0.851790638656706" label="Advanced Settings">
+    <item label="Conky RC" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.conkyrc]]></command></action></item>
+    <item label="Tint2 Panel" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.config/tint2/tint2rc]]></command></action></item>
+  <menu id="0.128896836181845" label="Obmenu-Generator">
+    <item label="Menu Schema" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.config/obmenu-generator/schema.pl]]></command></action></item>
+    <item label="Menu Config" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.config/obmenu-generator/config.pl]]></command></action></item>
+  <separator/>
+    <item label="Generate a static menu"><action name="Execute"><command><![CDATA[obmenu-generator -s -c]]></command></action></item>
+    <item label="Generate a static menu with icons"><action name="Execute"><command><![CDATA[obmenu-generator -s -i -c]]></command></action></item>
+  <separator/>
+    <item label="Generate a dynamic menu"><action name="Execute"><command><![CDATA[obmenu-generator -p]]></command></action></item>
+    <item label="Generate a dynamic menu with icons"><action name="Execute"><command><![CDATA[obmenu-generator -p -i]]></command></action></item>
+  <separator/>
+    <item label="Refresh cache" icon="/home/benl/.config/obmenu-generator/icons/d0e77a1ba4f4fc93d27c36ed701631c1.png"><action name="Execute"><command><![CDATA[obmenu-generator -d]]></command></action></item>
+  </menu>
+  <menu id="0.530505168980188" icon="/home/benl/.config/obmenu-generator/icons/cbd33e85d4e0834359519a4e282b2aeb.png" label="Openbox">
+    <item label="Openbox Autostart" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.config/openbox/autostart]]></command></action></item>
+    <item label="Openbox RC" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.config/openbox/rc.xml]]></command></action></item>
+    <item label="Openbox Menu" icon="/home/benl/.config/obmenu-generator/icons/43ebad90d7eb3b3f86e685aa684531bf.png"><action name="Execute"><command><![CDATA[subl ~/.config/openbox/menu.xml]]></command></action></item>
+    <item label="Reconfigure Openbox" icon="/home/benl/.config/obmenu-generator/icons/cbd33e85d4e0834359519a4e282b2aeb.png"><action name="Execute"><command><![CDATA[openbox --reconfigure]]></command></action></item>
+  </menu>
+  </menu>
+  <separator/>
+    <item label="Lock"><action name="Execute"><command><![CDATA[xscreensaver-command -lock]]></command></action></item>
+    <item label="Exit" icon="/home/benl/.config/obmenu-generator/icons/a0efb6badce8b1525c3e815580208339.png"><action name="Execute"><command><![CDATA[~/.config/shutdown_dialog.sh]]></command></action></item>
+  </menu>
 </openbox_menu>
