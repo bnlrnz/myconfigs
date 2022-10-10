@@ -1,6 +1,6 @@
 #!/bin/bash
 
-msg=$(wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u | recode html)
+msg=$(curl -H "Accept: text/plain" https://icanhazdadjoke.com/; echo)
 
 if [ -z "$msg" ]
     then
