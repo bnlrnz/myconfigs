@@ -1,0 +1,10 @@
+../*
+!.gitignore
+!.git/
+!../obmenu-generator/*
+!../openbox/*
+!../polybar/*
+!../rofi/*
+!../shutdown_dialog.sh
+!../picom.conf
+!../README.md
