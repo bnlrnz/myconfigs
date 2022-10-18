@@ -1,5 +1,6 @@
 ../*
-../'Code - OSS'/
+../.*
+../'Code - OSS'/*
 !.gitignore
 !.git/
 !../obmenu-generator/*
