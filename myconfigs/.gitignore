@@ -2,6 +2,8 @@
 !.gitignore
 !.git/
 !../obmenu-generator/*
+../obmenu-generator/cache.db
+../obmenu-generator/icons/
 !../openbox/*
 !../polybar/*
 !../rofi/*
