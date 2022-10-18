@@ -12,7 +12,7 @@
 - rofi
 - vim
 - picom
-- polyba
+- polybar
 
 ### needed for shutdown script:
 
