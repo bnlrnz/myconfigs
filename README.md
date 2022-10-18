@@ -8,11 +8,11 @@
 ### configs for:
 
 - openbox
+- obmenu-generator
 - rofi
-- alfred
 - vim
 - picom
-- tint2 (now polybar)
+- polyba
 
 ### needed for shutdown script:
 
