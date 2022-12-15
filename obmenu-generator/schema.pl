@@ -97,7 +97,7 @@ our $SCHEMA = [
     {sep => undef},
 
     ## The xscreensaver lock command
-    {item => ['xscreensaver-command -lock', 'Lock', 'system-lock-screen']},
+    {item => ['xlock', 'Lock', 'system-lock-screen']},
 
     ## This option uses the default Openbox's "Exit" action
     #{item => ['xscreensaver-command -lock', 'Lock', 'system-lock-screen']},
