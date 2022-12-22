@@ -14,6 +14,7 @@
 - vim
 - picom
 - polybar
+- networkmanager-dmenu-git
 
 ### needed for shutdown script:
 
