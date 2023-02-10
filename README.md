@@ -27,6 +27,7 @@
 
 ## Gnome
 save config: ```dconf dump / > dconf-settings.ini```
+
 load config: ```cat dconf-settings.ini | dconf load /```
 
 Configured extensions:
