@@ -33,10 +33,11 @@ load config: ```cat dconf-settings.ini | dconf load /```
 Configured extensions:
 ```
 gnome-extensions list --enabled
+
 arcmenu@arcmenu.com
-appindicatorsupport@rgcjonas.gmail.com
 dash-to-panel@jderose9.github.com
 no-overview@fthx
-Move_Clock@rmy.pobox.com
 impatience@gfxmonk.net
+gestureImprovements@gestures
+date-menu-formatter@marcinjakubowski.github.com
 ```
