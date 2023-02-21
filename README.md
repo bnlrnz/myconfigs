@@ -37,7 +37,7 @@ gnome-extensions list --enabled
 arcmenu@arcmenu.com
 dash-to-panel@jderose9.github.com
 no-overview@fthx
-impatience@gfxmonk.net
+tiling-assistant@leleat-on-github
 gestureImprovements@gestures
 date-menu-formatter@marcinjakubowski.github.com
 ```
