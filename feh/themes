@@ -1,0 +1,10 @@
+feh \
+    --conversion-timeout 0 \
+    --no-fehbg \
+    -S filename\
+    -d \
+    --title "%n — Type: %t, %wx%h, Zoom: %z [%u/%l]" \
+    --geometry 1600x870 \
+    --scale-down \
+    --auto-zoom \
+    --auto-reload \
