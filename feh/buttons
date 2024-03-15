@@ -1,0 +1,62 @@
+#
+# feh mousebindings configuration
+#
+# Syntax: <action> <button>
+#
+# Possible button values:
+#   1: Left mouse button (LMB)
+#   2: Middle mouse button (MMB)
+#   3: Right mouse button (RMB)
+#   4: Mousewheel up
+#   5: Mousewheel down
+#
+# You can specify modifier key to use along with mouse button:
+#   C: Control key
+#   S: Shift key
+#   1: Mod1 key (Alt key)
+#   4: Mod4 key (Super—or also called Windows—key)
+#
+# Each modifier is followed by a hyphen, e.g: C-S-1 means Ctrl+Shift+LMB
+#
+# Writing <action> without <button> will unbind the mousebinding.
+#
+
+#
+# First we unbind all existing mousebindings.
+#
+
+# Reload current image
+reload
+# Pan the current image
+pan
+# Zoom current image
+zoom
+# Toggle menu
+toggle_menu
+# Show previous image
+prev_img
+# Show next image
+next_img
+# Blur current image
+blur
+# Rotate current image
+rotate
+# Zoom in
+zoom_in
+# Zoom out
+zoom_out
+
+#
+# Then we add just what we use
+#
+
+# Pan by holding left mouse button
+pan 1
+# Zoom by holding Ctrl key and scroll
+zoom_in C-4
+zoom_out C-5
+# Navigating between images by scrolling
+prev_img 4
+next_img 5
+# Toggle menu using right click
+toggle_menu 3
