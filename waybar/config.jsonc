@@ -7,8 +7,10 @@
     "gtk-layer-shell": true,
     "height": 30,
     "modules-left": [
+        "wlr/taskbar",
+    ],
+    "modules-center": [
         "hyprland/workspaces",
-        "wlr/taskbar"
     ],
     "modules-right": [
         "temperature",
@@ -17,6 +19,7 @@
         //"pulseaudio",
         "wireplumber",
         "backlight",
+        "custom/vpn_temis",
         "tray",
         "clock",
         "custom/power_btn",
@@ -32,6 +35,15 @@
         "format": "",
         "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
         "tooltip": false
+    },
+
+    "custom/vpn_temis":  {
+        "format": "{icon} TEMIS",
+        "tooltip-format": "{icon} TEMIS",
+        "exec": "ip route | grep -q '10.0.2.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
+        "return-type": "json",
+        "interval": 5,
+        "format-icons": ["",""]
     },
 
     "hyprland/workspaces": {
