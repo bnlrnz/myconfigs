@@ -14,12 +14,19 @@
         "temperature",
         "custom/power_profile",
         "battery",
-        "pulseaudio",
+        //"pulseaudio",
+        "wireplumber",
         "backlight",
         "tray",
         "clock",
         "custom/power_btn",
     ],
+
+    "temperature" : {
+        "format": "{temperatureC}°C",
+        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
+        "input-filename": "temp1_input"
+    },
 
     "custom/power_btn": {
         "format": "",
@@ -96,7 +103,7 @@
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
-    "pulseaudio": {
+    /*"pulseaudio": {
         "format": "{icon} {volume}%",
         "format-muted": "",
         "on-click": "pamixer -t",
@@ -115,6 +122,25 @@
         },
         "tooltip": true,
         "tooltip-format": "{icon} at {volume}%"
+    },*/
+    
+    "wireplumber": {
+         "format": "{icon} {volume}%",
+        "format-muted": "  0%",
+        "on-click": "wpctl set-mute 60 toggle",
+        "on-click-right": "pwvucontrol",
+        //"on-scroll-up": "pamixer -i 1",
+        //"on-scroll-down": "pamixer -d 1",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
     },
 
     "backlight": {
