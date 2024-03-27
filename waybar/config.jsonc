@@ -139,10 +139,8 @@
     "wireplumber": {
          "format": "{icon} {volume}%",
         "format-muted": "  0%",
-        "on-click": "wpctl set-mute 60 toggle",
+        "on-click": "wpctl set-mute %DEFAULT_AUDIO_SINK% toggle",
         "on-click-right": "pwvucontrol",
-        //"on-scroll-up": "pamixer -i 1",
-        //"on-scroll-down": "pamixer -d 1",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
