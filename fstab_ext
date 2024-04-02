@@ -1,0 +1,4 @@
+UUID=40627945-fa8a-45dc-bae0-3a65c8d75f01 /home/ben/Workspace              ext4    defaults,noatime 0 1
+/dev/disk/by-label/Data_SATA /run/media/ben/Data_SATA/ auto defaults,nosuid,nodev,nofail,x-gvfs-show,uid=1000,gid=1000,umask=002,fmask=037,dmask=027,rw,exec 0 0
+/dev/disk/by-label/Data_M.2 /run/media/ben/Data_M.2/ auto defaults,nosuid,nodev,nofail,x-gvfs-show,uid=1000,gid=1000,umask=002,fmask=037,dmask=027,rw,exec 0 0
+/home/ben/.steam/steam/steamapps/compatdata /run/media/ben/Data_M.2/Spiele/Steam_Games/steamapps/compatdata none defaults,bind,nofail,x-systemd.device-timeout=5 0 0
