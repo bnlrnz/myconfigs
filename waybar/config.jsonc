@@ -14,9 +14,7 @@
     ],
     "modules-right": [
         "temperature",
-        "custom/power_profile",
         "battery",
-        //"pulseaudio",
         "wireplumber",
         "backlight",
         "custom/vpn_temis",
