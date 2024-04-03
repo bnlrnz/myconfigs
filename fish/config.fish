@@ -10,6 +10,7 @@ if status --is-login
 end
 
 export TERM=xterm-256color
+export EDITOR=nvim
 
 alias vim="nvim" 
 
