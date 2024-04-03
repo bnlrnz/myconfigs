@@ -1,7 +1,0 @@
-autorandr --change &
-xfce4-terminal -x nohup xfce4-power-manager &
-xfce4-terminal -x nohup nitrogen --restore &
-xfce4-terminal -x nohup polybar &
-xfce4-terminal -x nohup nm-applet &
-xfce4-terminal -x nohup blueman-applet &
-setxkbmap de &
