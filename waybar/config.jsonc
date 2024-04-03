@@ -36,7 +36,7 @@
     },
 
     "custom/vpn_temis":  {
-        "format": "{icon} TEMIS",
+        "format": " {icon} TEMIS",
         "tooltip-format": "{icon} TEMIS",
         "exec": "ip route | grep -q '10.0.2.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
         "return-type": "json",
@@ -112,28 +112,7 @@
         "format-alt": "{icon}{capacity}%",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
-
-    /*"pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "",
-        "on-click": "pamixer -t",
-        "on-click-right": "pavucontrol",
-        "on-scroll-up": "pamixer -i 1",
-        "on-scroll-down": "pamixer -d 1",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "tooltip": true,
-        "tooltip-format": "{icon} at {volume}%"
-    },*/
-    
+   
     "wireplumber": {
          "format": "{icon} {volume}%",
         "format-muted": "  0%",
