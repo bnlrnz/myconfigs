@@ -276,6 +276,14 @@ in
    netcat
    bind
    dig
+   du-dust
+   bat
+   eza
+   helix
+   lite-xl
+   micro
+   unstable.threema-desktop
+   whatsapp-for-linux
    mpv
    ninja
    font-awesome

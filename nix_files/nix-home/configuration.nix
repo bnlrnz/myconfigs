@@ -213,8 +213,8 @@ in
    wayland
    xwayland
    xorg.libX11
-   hyprland
-   (pkgs.hyprland.override { 
+   unstable.hyprland
+   (pkgs.unstable.hyprland.override { 
   	enableXWayland = true;
   	legacyRenderer = false;
   	withSystemd = true;
@@ -276,6 +276,9 @@ in
    netcat
    bind
    dig
+   du-dust
+   bat
+   eza
    mpv
    ninja
    font-awesome
@@ -343,7 +346,9 @@ in
    feh
    wpaperd
    google-chrome
-   #sublime4
+   helix
+   lite-xl
+   micro
    vscode
    ghidra-bin
    keepassxc
@@ -352,6 +357,7 @@ in
    telegram-desktop
    signal-desktop
    unstable.threema-desktop
+   whatsapp-for-linux
    tcpreplay
    tcpdump
    gnumake
