@@ -12,6 +12,12 @@ end
 export TERM=xterm-256color
 export EDITOR=nvim
 
-alias vim="nvim" 
+alias vi="nvim"
+alias vim="hx" 
+alias ll="eza --icons -l -b -o -g -M"
+alias l="eza --icons -l -a -b -o -g -M"
+alias du="dust"
+alias cat="bat -p --paging=never"
+alias less="bat --paging=always"
 
 fish_ssh_agent
