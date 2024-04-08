@@ -56,7 +56,16 @@
   nixpkgs.config.pulseaudio = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "webex"
+      "mongodb"
+      "mongodb-compass"
+      "libsciter"
+      "google-chrome"
+      "vscode"
+  ];
 
   environment.systemPackages = with pkgs; [
     vim
@@ -155,8 +164,6 @@
     gparted
     sqlitebrowser
     qalculate-gtk
-    mongodb
-    mongodb-compass
     sqlite
     wlr-randr
     filezilla
@@ -205,6 +212,7 @@
     feh
     wpaperd
     google-chrome
+    firefox
     vscode
     ghidra-bin
     keepassxc
