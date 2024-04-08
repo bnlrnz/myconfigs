@@ -68,6 +68,17 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    ### unfree packages
+    webex
+    mongodb
+    mongodb-compass
+    libsciter
+    google-chrome
+    vscode
+    ###
+    openbox
+    openbox-menu
+    obconf
     vim
     wget
     curlFull.dev # only dev has curl-config
@@ -95,6 +106,7 @@
     swayidle
     swaylock-effects
     waybar
+    rofi
     wofi
     wlogout
     xdg-desktop-portal-hyprland
@@ -116,19 +128,6 @@
     glibc
     nextcloud-client
     gsettings-desktop-schemas
-    catppuccin
-    catppuccin-kvantum
-    catppuccin-cursors
-    catppuccin-gtk
-    (catppuccin-gtk.override {
-      accents = [
-        "teal"
-      ]; # You can specify multiple accents here to output multiple themes
-      size = "compact";
-      tweaks =
-        [ "rimless" "black" ]; # You can also specify multiple tweaks here
-      variant = "macchiato";
-    })
     killall
     helvum
     ripgrep

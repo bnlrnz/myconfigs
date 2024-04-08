@@ -1,10 +1,14 @@
 { config, pkgs, unstable-pkgs, lib, ... }: {
+  
+  services.xserver.enable = true;
+  services.xserver.windowManager.openbox.enable = true;
+  # services.xserver.displayManager.sddm.enable = true;
   # start gdm display manager in backgroud
-  services.xserver.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-    autoSuspend = true;
-  };
+  #services.xserver.displayManager.gdm = {
+  #  enable = true;
+  #  wayland = true;
+  #  autoSuspend = true;
+  #};
 
   # enable pipewire
   security.rtkit.enable = true;
