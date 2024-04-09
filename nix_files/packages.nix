@@ -74,6 +74,7 @@
     obconf
     arandr
     tint2
+    nitrogen
     vim
     wget
     curlFull.dev # only dev has curl-config
