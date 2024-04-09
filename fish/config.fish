@@ -13,7 +13,7 @@ export TERM=xterm-256color
 export EDITOR=nvim
 
 alias vi="nvim"
-alias vim="hx" 
+alias vim="nvim" 
 alias ll="eza --icons -l -b -o -g -M"
 alias l="eza --icons -l -a -b -o -g -M"
 alias du="dust"
