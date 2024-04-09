@@ -19,5 +19,6 @@ alias l="eza --icons -l -a -b -o -g -M"
 alias du="dust"
 alias cat="bat -p --paging=never"
 alias less="bat --paging=always"
+alias x11="env -u WAYLAND_DISPLAY"
 
 fish_ssh_agent
