@@ -1,7 +1,16 @@
 { config, pkgs, unstable-pkgs, lib, ... }: {
   
-  services.xserver.enable = true;
-  services.xserver.windowManager.openbox.enable = true;
+  services.xserver = {
+    autorun = false;
+    enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    layout = "de";
+    xkbVariant = "";
+    windowManager.openbox.enable = true;
+  };
   # services.xserver.displayManager.sddm.enable = true;
   # start gdm display manager in backgroud
   #services.xserver.displayManager.gdm = {
@@ -9,6 +18,13 @@
   #  wayland = true;
   #  autoSuspend = true;
   #};
+
+  # setup hyprland
+  programs.xwayland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   # enable pipewire
   security.rtkit.enable = true;

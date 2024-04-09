@@ -1,12 +1,5 @@
 { config, pkgs, unstable-pkgs, lib, ... }: {
 
-  # setup hyprland
-  programs.xwayland.enable = true;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
   # enable fish
   programs.fish.enable = true;
 
@@ -79,6 +72,9 @@
     openbox
     openbox-menu
     obconf
+    arandr
+    sddm
+    sddm-chili-theme
     vim
     wget
     curlFull.dev # only dev has curl-config
@@ -226,6 +222,7 @@
     cmake
     cmakeCurses
     usbutils
+    unstable.nwg-displays
     gio-sharp
   ];
 }

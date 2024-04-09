@@ -57,12 +57,6 @@ in {
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
-
   # Configure console keymap
   console.keyMap = "de";
 
