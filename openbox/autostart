@@ -1,0 +1,3 @@
+autorandr --change &
+setxkbmap de &
+tint2 &
