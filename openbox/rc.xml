@@ -42,7 +42,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Artwiz-boxed</name>
+    <name>Matcha-light-azul</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -54,7 +54,7 @@
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
   -->
-    <keepBorder>yes</keepBorder>
+    <keepBorder>no</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
       <name>sans</name>
@@ -120,7 +120,7 @@
 
        use obconf if you want to change these without having to log out
        and back in -->
-    <number>4</number>
+    <number>1</number>
     <firstdesk>1</firstdesk>
     <names>
       <!-- set names up here if you want to, like this:
@@ -128,7 +128,7 @@
     <name>desktop 2</name>
     -->
     </names>
-    <popupTime>875</popupTime>
+    <popupTime>0</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
        desktops.  Set this to 0 to disable the popup. -->
   </desktops>
@@ -153,10 +153,10 @@
      Many programs reserve space automatically, but you can use this in other
      cases. -->
   <margins>
-    <top>2</top>
-    <bottom>2</bottom>
-    <left>2</left>
-    <right>2</right>
+    <top>0</top>
+    <bottom>0</bottom>
+    <left>0</left>
+    <right>0</right>
   </margins>
   <dock>
     <position>TopLeft</position>
@@ -178,78 +178,6 @@
   </dock>
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
-    <!-- Keybindings for desktop switching -->
-    <keybind key="C-A-Left">
-      <action name="GoToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Right">
-      <action name="GoToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Up">
-      <action name="GoToDesktop">
-        <to>up</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Down">
-      <action name="GoToDesktop">
-        <to>down</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Left">
-      <action name="SendToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Right">
-      <action name="SendToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Up">
-      <action name="SendToDesktop">
-        <to>up</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Down">
-      <action name="SendToDesktop">
-        <to>down</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="W-F1">
-      <action name="GoToDesktop">
-        <to>1</to>
-      </action>
-    </keybind>
-    <keybind key="W-F2">
-      <action name="GoToDesktop">
-        <to>2</to>
-      </action>
-    </keybind>
-    <keybind key="W-F3">
-      <action name="GoToDesktop">
-        <to>3</to>
-      </action>
-    </keybind>
-    <keybind key="W-F4">
-      <action name="GoToDesktop">
-        <to>4</to>
-      </action>
-    </keybind>
-    <keybind key="W-d">
-      <action name="ToggleShowDesktop"/>
-    </keybind>
     <!-- Keybindings for windows -->
     <keybind key="A-F4">
       <action name="Close"/>
@@ -294,40 +222,120 @@
         </finalactions>
       </action>
     </keybind>
-    <!-- Keybindings for window switching with the arrow keys -->
-    <keybind key="W-S-Right">
-      <action name="DirectionalCycleWindows">
-        <direction>right</direction>
-      </action>
-    </keybind>
-    <keybind key="W-S-Left">
-      <action name="DirectionalCycleWindows">
-        <direction>left</direction>
-      </action>
-    </keybind>
-    <keybind key="W-S-Up">
-      <action name="DirectionalCycleWindows">
-        <direction>up</direction>
-      </action>
-    </keybind>
-    <keybind key="W-S-Down">
-      <action name="DirectionalCycleWindows">
-        <direction>down</direction>
-      </action>
-    </keybind>
     <!-- Keybindings for running applications -->
+    <keybind key="Super-space">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>rofi drun</name>
+        </startupnotify>
+        <command>rofi -modi drun,run -show drun</command>
+      </action>
+    </keybind>
+    <keybind key="A-F1">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Terminal</name>
+        </startupnotify>
+        <command>kitty</command>
+      </action>
+    </keybind>
     <keybind key="W-e">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>thunar</name>
+          <name>Thunar</name>
         </startupnotify>
         <command>thunar</command>
       </action>
     </keybind>
-    <keybind key="W-space">
+    <!-- Screenshot -->
+    <keybind key="Print">
       <action name="Execute">
-        <command>rofi -show run</command>
+        <command>sh -c "import -window root ~/Pictures/$(date '+%Y%m%d-%H%M%S').png"</command>
+      </action>
+    </keybind>
+    <!-- Window snapping code we are adding -->
+    <keybind key="Super-Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>50%</width>
+        <height>100%</height>
+        <x>0%</x>
+        <y>0%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>50%</width>
+        <height>100%</height>
+        <x>50%</x>
+        <y>0%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-Down">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>100%</width>
+        <height>50%</height>
+        <x>0%</x>
+        <y>50%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-Up">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>100%</width>
+        <height>50%</height>
+        <x>0%</x>
+        <y>0%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-F">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>100%</width>
+        <height>100%</height>
+        <x>0%</x>
+        <y>0%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-Q">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>50%</width>
+        <height>50%</height>
+        <x>0%</x>
+        <y>0%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-W">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>50%</width>
+        <height>50%</height>
+        <x>50%</x>
+        <y>0%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-A">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>50%</width>
+        <height>50%</height>
+        <x>0%</x>
+        <y>50%</y>
+      </action>
+    </keybind>
+    <keybind key="Super-S">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>50%</width>
+        <height>50%</height>
+        <x>50%</x>
+        <y>50%</y>
       </action>
     </keybind>
   </keyboard>
