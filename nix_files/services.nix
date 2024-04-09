@@ -1,23 +1,17 @@
 { config, pkgs, unstable-pkgs, lib, ... }: {
   
   services.xserver = {
-    autorun = false;
+    #autorun = false;
     enable = true;
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
     layout = "de";
     xkbVariant = "";
     windowManager.openbox.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+      autoSuspend = true;
+    };
   };
-  # services.xserver.displayManager.sddm.enable = true;
-  # start gdm display manager in backgroud
-  #services.xserver.displayManager.gdm = {
-  #  enable = true;
-  #  wayland = true;
-  #  autoSuspend = true;
-  #};
 
   # setup hyprland
   programs.xwayland.enable = true;
@@ -32,7 +26,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    #pulse.enable = true;
+    pulse.enable = true;
     wireplumber.enable = true;
   };
 

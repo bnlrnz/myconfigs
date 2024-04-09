@@ -73,8 +73,7 @@
     openbox-menu
     obconf
     arandr
-    sddm
-    sddm-chili-theme
+    tint2
     vim
     wget
     curlFull.dev # only dev has curl-config
@@ -223,6 +222,7 @@
     cmakeCurses
     usbutils
     unstable.nwg-displays
+    unstable.nwg-look
     gio-sharp
   ];
 }
