@@ -60,6 +60,12 @@
       "vscode"
   ];
 
+  # shared libs
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    libcxx
+  ];
+
   environment.systemPackages = with pkgs; [
     ### unfree packages
     webex
@@ -105,6 +111,8 @@
     rofi
     wofi
     wlogout
+    android-tools
+    scrcpy
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
     themechanger
