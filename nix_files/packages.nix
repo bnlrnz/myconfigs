@@ -98,6 +98,7 @@
     kitty
     gnome.gnome-terminal
     gnome.dconf-editor
+    gnome.gnome-keyring
     dconf
     pcmanfm
     jq
@@ -142,6 +143,7 @@
     cairo.dev
     netcat
     bind
+    okular
     dig
     du-dust
     bat
@@ -192,6 +194,7 @@
     python311Full
     python311Packages.pip
     python311Packages.ipython
+    allure
     brightnessctl
     bluez
     bluez-tools

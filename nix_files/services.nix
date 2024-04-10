@@ -35,6 +35,10 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  # gnome keyring
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
+
   # enable user polkit service
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
