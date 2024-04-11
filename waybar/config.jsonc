@@ -64,7 +64,12 @@
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
-            "wofi"
+            "wofi",
+            "org.telegram.desktop",
+            "Signal",
+            "threema-web",
+            "whatsapp-for-linux",
+            "org.keepassxc.KeePassXC"
          ],
     },
 
