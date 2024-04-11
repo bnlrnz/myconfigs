@@ -7,6 +7,8 @@
     "gtk-layer-shell": true,
     "height": 30,
     "modules-left": [
+        "custom/chat",
+        "custom/keepass",
         "wlr/taskbar",
     ],
     "modules-center": [
@@ -22,6 +24,18 @@
         "clock",
         "custom/power_btn",
     ],
+
+    "custom/chat" : {
+        "format": " 📫 ",
+        "tooltip-format": "{icon} W-c",
+        "on-click": "hyprctl dispatch togglespecialworkspace messengers"
+    },
+
+    "custom/keepass" : {
+        "format": " 🔐 ",
+        "tooltip-format": "{icon} W-k",
+        "on-click": "hyprctl dispatch togglespecialworkspace keepass"
+    },
 
     "temperature" : {
         "format": "{temperatureC}°C",
