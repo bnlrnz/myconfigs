@@ -15,7 +15,6 @@
         "hyprland/workspaces",
     ],
     "modules-right": [
-        "temperature",
         "battery",
         "wireplumber",
         "backlight",
@@ -35,12 +34,6 @@
         "format": " 🔐 ",
         "tooltip-format": "{icon} W-k",
         "on-click": "hyprctl dispatch togglespecialworkspace keepass"
-    },
-
-    "temperature" : {
-        "format": "{temperatureC}°C",
-        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
-        "input-filename": "temp1_input"
     },
 
     "custom/power_btn": {
@@ -87,37 +80,6 @@
          ],
     },
 
-    "cpu": {
-        "interval": 10,
-        "format": " {usage}%",
-        "max-length": 10,
-        "format-alt-click": "click-right",
-        "format-alt": " {usage}%",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-
-    "memory": {
-        "interval": 30,
-        "format": " {}%",
-        "format-alt-click": "click-right",
-        "format-alt": " {}%",
-        "max-length": 10,
-        "tooltip": true,
-        "tooltip-format": "Memory - {used:0.1f}GB used",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-    
-    "disk": {
-        "interval": 30,
-        "format": "󰋊 {percentage_used}%",
-        "path": "/",
-        "format-alt-click": "click-right",
-        "format-alt": "󰋊 {percentage_used}%",
-        "tooltip": true,
-        "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-
     "battery": {
         "states": {
             "good": 95,
@@ -133,7 +95,7 @@
     },
    
     "wireplumber": {
-         "format": "{icon} {volume}%",
+        "format": "{icon} {volume}%",
         "format-muted": "  0%",
         "on-click": "wpctl set-mute %DEFAULT_AUDIO_SINK% toggle",
         "on-click-right": "pwvucontrol",
