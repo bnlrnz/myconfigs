@@ -64,6 +64,12 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libcxx
+    libpcap
+    openssl
+    stdenv.cc.cc
+    zlib
+    fuse3
+    curl
   ];
 
   environment.systemPackages = with pkgs; [
@@ -75,6 +81,7 @@
     google-chrome
     vscode
     ###
+    xorg.xinit
     openbox
     openbox-menu
     obconf
@@ -82,6 +89,7 @@
     tint2
     nitrogen
     vim
+    greetd.tuigreet
     wget
     curlFull.dev # only dev has curl-config
     neovim
@@ -89,8 +97,8 @@
     wayland
     xwayland
     xorg.libX11
-    unstable.hyprland
-    (pkgs.unstable.hyprland.override {
+    hyprland
+    (pkgs.hyprland.override {
       enableXWayland = true;
       legacyRenderer = false;
       withSystemd = true;
