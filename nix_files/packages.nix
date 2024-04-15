@@ -187,6 +187,7 @@
     rustdesk
     tmux
     nmap
+    wayland-pipewire-idle-inhibit
     neofetch
     nettools
     grim
