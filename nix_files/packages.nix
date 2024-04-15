@@ -155,6 +155,7 @@
     dig
     du-dust
     bat
+    nil
     eza
     helix
     lite-xl
