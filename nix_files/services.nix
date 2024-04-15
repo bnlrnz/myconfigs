@@ -89,4 +89,19 @@
       Experimental = true;
     };
   };
+
+  # nfs mounts
+  services.rpcbind.enable = true;
+  
+#  fileSystems."/mnt/org-sz31" = {
+#    device = "fs1.temislab.de:/vsanfs/org-sz31";
+#    fsType = "nfs";
+#    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "hard" "nfsvers=4.1" "sec=sys" "rw" "intr" "noexec" "nosuid" "timeo=20"];
+#  };
+
+  fileSystems."/mnt/user-belo" = {
+    device = "fs1.temislab.de:/vsanfs/user-belo";
+    fsType = "nfs";
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+  };
 }
