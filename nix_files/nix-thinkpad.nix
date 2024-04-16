@@ -60,7 +60,8 @@ in {
   # Configure console keymap
   console.keyMap = "de";
 
-  services.getty.autologinUser = "belo";
+  # TODO: setup for tty1 only or it will be a security risc
+  # services.getty.autologinUser = "belo";
 
   # allow users to build packages
   nix.settings.allowed-users = [ "@wheel" "belo" ];
