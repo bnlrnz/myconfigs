@@ -1,4 +1,11 @@
-{ config, pkgs, unstable-pkgs, lib, ... }: {
+{ config, pkgs, unstable-pkgs, lib, ... }: 
+let
+    unfreePredicate = pkg: builtins.elem (lib.getName pkg) ["mongodb"];   
+    pinnedMongodb = import (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/eb090f7b923b1226e8beb954ce7c8da99030f4a8.tar.gz";
+    }) { config = { allowUnfreePredicate = unfreePredicate; }; };
+in
+{
 
   # enable fish
   programs.fish.enable = true;
@@ -75,7 +82,7 @@
   environment.systemPackages = with pkgs; [
     ### unfree packages
     webex
-    mongodb
+    pinnedMongodb.mongodb
     mongodb-compass
     libsciter
     google-chrome
