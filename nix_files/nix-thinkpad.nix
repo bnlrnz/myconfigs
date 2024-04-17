@@ -5,8 +5,18 @@
 { config, pkgs, unstable-pkgs, lib, ... }:
 
 let
+  # unstable packages
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+
+  # auto login script only for tty1 and belo
+  script = pkgs.writeText "login-program.sh" ''
+    if [[ "$(tty)" == '/dev/tty1' ]]; then
+      ${pkgs.shadow}/bin/login -f belo;
+    else
+      ${pkgs.shadow}/bin/login;
+    fi
+  '';
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-thinkpad.nix
@@ -60,8 +70,12 @@ in {
   # Configure console keymap
   console.keyMap = "de";
 
-  # TODO: setup for tty1 only or it will be a security risc
-  # services.getty.autologinUser = "belo";
+  # services.getty.autologinUser = "belo"; 
+  services.getty = {
+    loginProgram = "${pkgs.bash}/bin/sh";
+    loginOptions = toString script;
+    extraArgs = [ "--skip-login" ];
+  };
 
   # allow users to build packages
   nix.settings.allowed-users = [ "@wheel" "belo" ];
