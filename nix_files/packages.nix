@@ -6,6 +6,8 @@ let
     }) { config = { allowUnfreePredicate = unfreePredicate; }; };
 in
 {
+  # linux kernel package
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # enable fish
   programs.fish.enable = true;
@@ -104,8 +106,8 @@ in
     wayland
     xwayland
     xorg.libX11
-    hyprland
-    (pkgs.hyprland.override {
+    unstable.hyprland
+    (pkgs.unstable.hyprland.override {
       enableXWayland = true;
       legacyRenderer = false;
       withSystemd = true;
