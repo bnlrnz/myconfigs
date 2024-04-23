@@ -9,6 +9,8 @@ in
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  nix.gc.automatic = true;
+
   # enable fish
   programs.fish.enable = true;
 
@@ -22,6 +24,7 @@ in
     thunar-archive-plugin
     thunar-volman
   ];
+  programs.file-roller.enable = true;
 
   # for thumbnails
   services.tumbler.enable = true;
@@ -160,6 +163,7 @@ in
     cairo.dev
     netcat
     bind
+    guvcview
     okular
     dig
     du-dust
