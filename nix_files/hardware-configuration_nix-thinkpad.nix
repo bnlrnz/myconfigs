@@ -12,7 +12,7 @@
     "nvme"
     "usb_storage"
     "sd_mod"
-    "acpi"
+    #"acpi" currently missing in 6.8.6
     "acpi_call"
     "thinkpad-acpi"
   ];

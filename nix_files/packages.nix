@@ -1,5 +1,7 @@
 { config, pkgs, unstable-pkgs, lib, ... }: 
 let
+    # pin mongo db version since it is marked as unfree and gets
+    # build from source on every upgrade, which can take several hours
     unfreePredicate = pkg: builtins.elem (lib.getName pkg) ["mongodb"];   
     pinnedMongodb = import (builtins.fetchTarball {
         url = "https://github.com/NixOS/nixpkgs/archive/eb090f7b923b1226e8beb954ce7c8da99030f4a8.tar.gz";
