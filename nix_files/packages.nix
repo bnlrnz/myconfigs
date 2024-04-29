@@ -247,6 +247,7 @@ in
     whatsapp-for-linux
     wl-clipboard
     wlogout
+    unstable.wlr-layout-ui
     wlr-randr
     wofi
     wpaperd
