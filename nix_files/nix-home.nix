@@ -116,6 +116,9 @@ in {
     permissions = "u+rx,g+x";
   };
 
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
