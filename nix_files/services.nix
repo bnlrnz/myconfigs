@@ -1,41 +1,15 @@
 { config, pkgs, unstable-pkgs, lib, ... }: {
- 
+  # allow nix flakes  
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # let this run for now
+  # sometimes we need this e.g. for webex
   services.xserver = {
     enable = true;
     displayManager.startx.enable = true;
     windowManager.openbox.enable = true;
     libinput.enable = true;
   };
-
-  #services.greetd = {
-  #  enable = true;
-  #  settings = {
-  #    initial_session = {
-  #      command = "Hyprland";
-  #      user = "ben";
-  #    };
-  #    default_session = {
-  #      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions --time --asterisks --remember --remember-session";
-  #      user = "ben";
-  #    };
-  #  };
-  #};
-
-  # this is a life saver.
-  # literally no documentation about this anywhere.
-  # might be good to write about this...
-  # https://www.reddit.com/r/NixOS/comments/u0cdpi/tuigreet_with_xmonad_how/
-  #systemd.services.greetd.serviceConfig = {
-  #  Type = "idle";
-  #  # After = [ "getty@tty2.service" ];
-  #  StandardInput = "tty";
-  #  StandardOutput = "tty";
-  #  StandardError = "journal"; # Without this errors will spam on screen
-  #  # Without these bootlogs will spam on screen
-  #  TTYReset = true;
-  #  TTYVHangup = true;
-  #  TTYVTDisallocate = true;
-  #};
 
   # gnome keyring
   services.gnome.gnome-keyring.enable = true;
