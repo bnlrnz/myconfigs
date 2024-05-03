@@ -27,6 +27,9 @@
     fsType = "ext4";
   };
 
+  # enable amd gpu drivers
+  services.xserver.videoDrivers = ["amdgpu"];
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/8518e7e8-9dae-4c50-9d0f-852b1aae3895"; }];
 
@@ -40,4 +43,14 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # steam only for home pc
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+      "\${HOME}/.steam/root/compatibilitytools.d";
+  };
 }
