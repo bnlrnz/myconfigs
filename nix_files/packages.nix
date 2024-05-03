@@ -60,6 +60,13 @@ in
   # Audio for apps
   nixpkgs.config.pulseaudio = true;
 
+  # enable opengl
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
@@ -70,6 +77,9 @@ in
       "libsciter"
       "google-chrome"
       "vscode"
+      "steam"
+      "steam-original"
+      "steam-run"
   ];
 
   # shared libs
@@ -198,6 +208,7 @@ in
     pkg-config
     podman
     polkit_gnome
+    protonup # update manager for proton
     pwvucontrol
     python311Full
     python311Packages.dbus-python
@@ -261,5 +272,6 @@ in
     xorg.xinit
     xwayland
     yazi
+    zellij
   ];
 }
