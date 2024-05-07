@@ -5,3 +5,8 @@
 - ```cd myconfigs```
 - ```git config core.worktree "../../"```
 - ```git reset --hard origin/main```
+
+### Color Schemes / Icons
+- Dracula (Theme)
+- Kora (Icons)
+- Breeze (Mouse)
