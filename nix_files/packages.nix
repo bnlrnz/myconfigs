@@ -115,6 +115,7 @@ in
     bluez-tools
     brightnessctl
     btop
+    btrfs-progs
     cairo
     cairo.dev
     clang
@@ -208,6 +209,7 @@ in
     pkg-config
     podman
     polkit_gnome
+    protontricks
     protonup # update manager for proton
     pwvucontrol
     python311Full
@@ -235,8 +237,8 @@ in
     tmux
     udevil
     udiskie
-    unstable.hyprland
-    (pkgs.unstable.hyprland.override {
+    hyprland
+    (pkgs.hyprland.override {
       enableXWayland = true;
       legacyRenderer = false;
       withSystemd = true;
@@ -266,6 +268,7 @@ in
     x2goclient
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
+    xdg-desktop-portal
     xfce.thunar
     xfce.xfce4-settings
     xorg.libX11

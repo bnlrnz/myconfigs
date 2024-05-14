@@ -27,6 +27,22 @@
     fsType = "ext4";
   };
 
+  fileSystems."/run/media/ben/Data_M2" = {
+    device = "/dev/disk/by-label/Data_M2";
+    fsType = "btrfs";
+    options = [
+      "noatime"
+      "rw"
+      "suid"
+      "exec"
+      "dev"
+      "auto"
+      "ssd"
+      "nofail"
+      "async"
+    ];
+  };
+
   # enable amd gpu drivers
   services.xserver.videoDrivers = ["amdgpu"];
 
@@ -43,6 +59,9 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.opengl.extraPackages = [ pkgs.amdvlk ];
+  hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
   # steam only for home pc
   programs.steam.enable = true;

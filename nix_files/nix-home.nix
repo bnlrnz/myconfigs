@@ -76,7 +76,7 @@ in {
   users.users.ben = {
     isNormalUser = true;
     description = "ben";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode"];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
