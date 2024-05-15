@@ -153,7 +153,6 @@ in
     gobject-introspection
     google-chrome
     gparted
-    greetd.tuigreet
     grim
     gsettings-desktop-schemas
     gtk2
@@ -161,8 +160,6 @@ in
     gtk4
     guvcview
     gvfs
-    helix
-    helvum
     jetbrains-mono
     jq
     keepassxc
@@ -181,16 +178,13 @@ in
     lxqt.lxqt-policykit
     mako
     meson
-    micro
     mpv
     ncurses
     neofetch
     neovim
     netcat
-    netcat
     nettools
     networkmanagerapplet
-    nextcloud-client
     nextcloud-client
     nil
     ninja
@@ -203,9 +197,7 @@ in
     onlyoffice-bin
     openbox
     openbox-menu
-    openfortivpn
     openssl.dev # dev needed for openssl headers
-    pcmanfm
     pkg-config
     podman
     polkit_gnome
@@ -274,7 +266,6 @@ in
     xorg.libX11
     xorg.xinit
     xwayland
-    yazi
-    zellij
+    yazi # terminal file browser
   ];
 }
