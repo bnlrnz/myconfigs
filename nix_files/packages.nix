@@ -33,7 +33,7 @@ in
 
   # kvantum theme
   xdg.portal.lxqt = {
-    enable = true;
+    enable = false;
     styles =
       [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
   };

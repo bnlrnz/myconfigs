@@ -8,8 +8,9 @@
     enable = true;
     displayManager.startx.enable = true;
     windowManager.openbox.enable = true;
-    libinput.enable = true;
   };
+  
+  services.libinput.enable = true;
 
   # gnome keyring
   services.gnome.gnome-keyring.enable = true;
