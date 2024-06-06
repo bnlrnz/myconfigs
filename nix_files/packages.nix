@@ -211,6 +211,7 @@ in
     qalculate-gtk
     ripgrep
     rofi
+    rose-pine-cursor
     rustdesk
     scrcpy
     signal-desktop
@@ -229,6 +230,7 @@ in
     tmux
     udevil
     udiskie
+    hyprcursor
     hyprland
     (pkgs.hyprland.override {
       enableXWayland = true;
@@ -260,6 +262,7 @@ in
     x2goclient
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
     xdg-desktop-portal
     xfce.thunar
     xfce.xfce4-settings
