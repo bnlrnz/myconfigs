@@ -9,8 +9,6 @@
     displayManager.startx.enable = true;
     windowManager.openbox.enable = true;
   };
-  
-  services.libinput.enable = true;
 
   services.libinput.enable = true;
 
@@ -82,4 +80,14 @@
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   };
+  fileSystems."/mnt/svc-specbutler" = {
+    device = "fs1.temislab.de:/vsanfs/svc-specbutler";
+    fsType = "nfs";
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+  };
+  fileSystems."/mnt/svc-scasbrowser" = {
+    device = "fs1.temislab.de:/vsanfs/svc-scasbrowser";
+    fsType = "nfs";
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+  }; 
 }
