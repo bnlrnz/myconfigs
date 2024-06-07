@@ -34,8 +34,8 @@ in
   # kvantum theme
   xdg.portal.lxqt = {
     enable = true;
-    styles =
-      [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
+  #  styles =
+  #    [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
   };
 
   # setup wireshark
@@ -175,6 +175,7 @@ in
     lite-xl
     lsof
     lxappearance
+    #lxqt.xdg-desktop-portal-lxqt
     lxqt.lxqt-policykit
     mako
     meson
