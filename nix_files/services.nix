@@ -9,6 +9,8 @@
     displayManager.startx.enable = true;
     windowManager.openbox.enable = true;
   };
+  
+  services.libinput.enable = true;
 
   services.libinput.enable = true;
 
