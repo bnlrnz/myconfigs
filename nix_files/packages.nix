@@ -80,6 +80,7 @@ in
       "steam"
       "steam-original"
       "steam-run"
+      "burpsuite"
   ];
 
   # shared libs
@@ -116,6 +117,7 @@ in
     brightnessctl
     btop
     btrfs-progs
+    burpsuite
     cairo
     cairo.dev
     clang
@@ -128,6 +130,8 @@ in
     desktop-file-utils
     dig
     du-dust
+    dracula-theme
+    dracula-icon-theme
     exfat
     exfatprogs
     eza
@@ -165,6 +169,7 @@ in
     keepassxc
     killall
     kitty
+    kora-icon-theme
     libcap
     libglibutil
     libreoffice
@@ -190,6 +195,7 @@ in
     nil
     ninja
     nitrogen
+    nixos-firewall-tool
     nmap
     noto-fonts-color-emoji
     ntfs3g
@@ -199,6 +205,7 @@ in
     openbox
     openbox-menu
     openssl.dev # dev needed for openssl headers
+    phinger-cursors
     pkg-config
     podman
     polkit_gnome
