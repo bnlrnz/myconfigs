@@ -66,13 +66,7 @@
     };
   };
 
-  # ctf hosts
-  networking.extraHosts =
-    ''
-      10.13.37.11 start.ctf.cert-bund.de
-    '';
-
-# nfs mounts
+  # nfs mounts
   services.rpcbind.enable = true;
   
 #  fileSystems."/mnt/org-sz31" = {

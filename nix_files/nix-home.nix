@@ -37,7 +37,16 @@ in {
     enable = true;
     checkReversePath = false;
     allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
+    allowedTCPPorts = [ 31337 ]; # TODO: temporary for passive ftp access
   };
+  # ctf hosts
+  networking.extraHosts =
+    ''
+      10.13.37.12 starfleet
+      10.13.37.12 vault.starfleet
+      10.13.37.12 medical.starfleet
+      10.13.37.12 crusher.starfleet
+    '';
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
