@@ -7,6 +7,6 @@
 - ```git reset --hard origin/main```
 
 ### Color Schemes / Icons
-- Dracula (Theme)
-- Kora (Icons)
-- Breeze (Mouse)
+- [Dracula](https://draculatheme.com/) (Theme)
+- [Dracula](https://draculatheme.com/) (Icons)
+- [Phinger](https://github.com/phisch/phinger-cursors) (Cursor)
