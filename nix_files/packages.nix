@@ -170,6 +170,7 @@ in
     killall
     kitty
     kora-icon-theme
+    lapce
     libcap
     libglibutil
     libreoffice
@@ -177,10 +178,8 @@ in
     libsForQt5.okular
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
-    lite-xl
     lsof
     lxappearance
-    #lxqt.xdg-desktop-portal-lxqt
     lxqt.lxqt-policykit
     mako
     meson
@@ -237,8 +236,8 @@ in
     tmux
     udevil
     udiskie
-    hyprland
-    (pkgs.hyprland.override {
+    unstable.hyprland
+    (pkgs.unstable.hyprland.override {
       enableXWayland = true;
       legacyRenderer = false;
       withSystemd = true;
@@ -268,6 +267,7 @@ in
     x2goclient
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
     xdg-desktop-portal
     xfce.thunar
     xfce.xfce4-settings
