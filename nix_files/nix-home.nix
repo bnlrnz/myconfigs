@@ -42,10 +42,10 @@ in {
   # ctf hosts
   networking.extraHosts =
     ''
-      10.13.37.12 starfleet
-      10.13.37.12 vault.starfleet
-      10.13.37.12 medical.starfleet
-      10.13.37.12 crusher.starfleet
+      #10.13.37.10 vault.starfleet
+      #10.13.37.10 medical.starfleet
+      #10.13.37.10 crusher.starfleet
+      10.13.37.11 reynholm.industries
     '';
 
   # Set your time zone.
