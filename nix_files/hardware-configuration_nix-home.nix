@@ -63,6 +63,10 @@
   hardware.opengl.extraPackages = [ pkgs.amdvlk ];
   hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
+  # enable bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   # steam only for home pc
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
