@@ -7,27 +7,29 @@
     /*min-height: 0;*/
 }
 
+@import url("./colors.css");
+
 window#waybar {
-    background: #1e1e2e;
-    color: #cdd6f4;
+    background: @background;
+    color: @purple;
 }
 
 tooltip {
-    background: #1e1e2e;
+    background: @background-darker;
     opacity: 0.8;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
-    border-color: #11111b;
+    border-color: @background-darker;
 }
 
 tooltip label{
-    color: #cdd6f4;
+    color: @purple;
 }
 
 button {
-    background: #1e1e1e;
-    color: #f3f0fe;
+    background: @background;
+    color: @purple;
     box-shadow: inset 0 -3px transparent;
     border: none;
     border-radius: 0;
@@ -40,20 +42,20 @@ button:hover {
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: #11111b;
-    color: #555555;
+    padding: 0 10px;
+    background: @background;
+    color: @foreground;
 }
-
-#workspaces button.persistent {
-    background-color: #d8dee9;
-    color: #4c566a;
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background-image: linear-gradient(0deg, @selection, @background-darker);
 }
-
 #workspaces button.active {
-    box-shadow: inset 0 -4px #4c566a;
-    background-color: #ffffff;
-    color: #000000;
+    background-image: linear-gradient(0deg, @purple, @selection);
+}
+#workspaces button.urgent {
+    background-image: linear-gradient(0deg, @red, @background-darker);
 }
 
 #custom-launch_wofi,
@@ -76,7 +78,7 @@ button:hover {
 #temperature,
 #workspaces,
 #backlight {
-    background: #1e1e2e;
+    background: @background;
     opacity: 0.8;
     padding: 0px 8px;
     margin: 0px 3px;
