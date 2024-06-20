@@ -11,7 +11,7 @@
 
 window#waybar {
     background: @background;
-    color: @purple;
+    color: @foreground;
 }
 
 tooltip {
@@ -29,7 +29,7 @@ tooltip label{
 
 button {
     background: @background;
-    color: @purple;
+    color: @foreground;
     box-shadow: inset 0 -3px transparent;
     border: none;
     border-radius: 0;
@@ -38,7 +38,7 @@ button {
 button:hover {
     transition-duration: .1s;
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -3px @pink;
 }
 
 #workspaces button {
@@ -49,13 +49,13 @@ button:hover {
 #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    background-image: linear-gradient(0deg, @selection, @background-darker);
+    background: @pink;
 }
 #workspaces button.active {
-    background-image: linear-gradient(0deg, @purple, @selection);
+    background: @purple;
 }
 #workspaces button.urgent {
-    background-image: linear-gradient(0deg, @red, @background-darker);
+    background: @red;
 }
 
 #custom-launch_wofi,
