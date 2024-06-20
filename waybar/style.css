@@ -1,22 +1,20 @@
+@import url("./colors.css");
+
 * {
-    /*border: none;
-    border-radius: 0;*/
     font-family: "NotoSans Nerd Font";
     font-weight: bold;
     font-size: 16px;
-    /*min-height: 0;*/
 }
 
-@import url("./colors.css");
-
 window#waybar {
-    background: @background;
+    background: @transparent;
     color: @foreground;
+    border-radius: 10px;
 }
 
 tooltip {
-    background: @background-darker;
-    opacity: 0.8;
+    background: @background;
+    opacity: 1.0;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
@@ -30,15 +28,18 @@ tooltip label{
 button {
     background: @background;
     color: @foreground;
-    box-shadow: inset 0 -3px transparent;
     border: none;
-    border-radius: 0;
+    padding: 0 10px;
+    border-radius: 10px;
 }
 
 button:hover {
     transition-duration: .1s;
-    background: inherit;
-    box-shadow: inset 0 -3px @pink;
+    background: @pink;
+}
+
+#taskbar button.active {
+    background: @purple;
 }
 
 #workspaces button {
@@ -46,95 +47,61 @@ button:hover {
     background: @background;
     color: @foreground;
 }
+
 #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
     background: @pink;
+    border-radius: 20px;
 }
+
 #workspaces button.active {
     background: @purple;
 }
+
 #workspaces button.urgent {
     background: @red;
 }
 
-#custom-launch_wofi,
-#custom-lock_screen,
-#custom-light_dark,
 #custom-power_btn,
-#custom-power_profile,
-#custom-weather,
-#custom-myhyprv,
+#custom-keepass,
+#custom-chat,
+#custom-power_btn,
+#custom-vpn_temis,
 #window,
+#taskbar,
 #cpu,
 #disk,
 #custom-updates,
 #memory,
 #clock,
 #battery,
-#pulseaudio,
 #network,
 #tray,
 #temperature,
 #workspaces,
+#wireplumber,
 #backlight {
     background: @background;
-    opacity: 0.8;
-    padding: 0px 8px;
-    margin: 0px 3px;
+    opacity: 1.0;
+    padding: 0 5px;
+    margin: 2px 2px;
     border: 0px;
-}
-
-#custom-launch_wofi {
-    border-radius: 10px 0px 0px 10px;
-}
-
-#custom-light_dark {
-    border-radius: 0px 10px 10px 0px;
-    margin-right: 10px;
-}
-
-#temperature.critical {
-    color: #e92d4d;
-}
-
-
-#workspaces {
-    padding-right: 0px;
-    padding-left: 5px;
-}
-
-#custom-power_profile, #battery, #temperature{
-    color: #a6e3a1;
-    border-left: 0px;
-    border-right: 0px;
-}
-
-#window {
     border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
 }
 
-#custom-launch_wofi {
-    color: #89b4fa;
-    margin-left: 10px;
-    border-right: 0px;
+#clock {
+    padding-right: 10px;
 }
 
-#pulseaudio {
-    color: #89b4fa;
-    border-left: 0px;
-    border-right: 0px;
+#wireplumber {
+    color: @blue;
 }
 
-#pulseaudio.microphone {
-    color: #cba6f7;
-    border-left: 0px;
-    border-right: 0px;
+#backlight {
+    color: @orange;
 }
 
 #battery {
-    color: #a6e3a1;
-    border-left: 0px;
+    color: @green;
 }
