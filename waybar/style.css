@@ -105,3 +105,17 @@ button:hover {
 #battery {
     color: @green;
 }
+
+#battery:hover,
+#backlight:hover,
+#wireplumber:hover,
+#custom-power_btn:hover,
+#custom-keepass:hover,
+#custom-chat:hover,
+#custom-power_btn:hover,
+#custom-vpn_temis:hover,
+*:hover{
+    background: @pink;
+    border-radius: 20px;
+    color: @foreground;
+}
