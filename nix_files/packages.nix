@@ -231,7 +231,7 @@ in
     tcpreplay
     telegram-desktop
     themechanger
-    threema-desktop
+    #threema-desktop
     tint2
     tmux
     udevil
@@ -244,7 +244,7 @@ in
     })
     unstable.nwg-displays
     unstable.nwg-look
-    unstable.threema-desktop
+    #unstable.threema-desktop
     unstable.tshark.dev
     unstable.wireshark
     usbutils
