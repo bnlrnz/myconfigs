@@ -45,7 +45,7 @@ in {
       #10.13.37.10 vault.starfleet
       #10.13.37.10 medical.starfleet
       #10.13.37.10 crusher.starfleet
-      10.13.37.11 reynholm.industries
+      10.13.37.10 tos-web
     '';
 
   # Set your time zone.

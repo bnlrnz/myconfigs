@@ -231,7 +231,6 @@ in
     tcpreplay
     telegram-desktop
     themechanger
-    threema-desktop
     tint2
     tmux
     udevil
@@ -244,7 +243,7 @@ in
     })
     unstable.nwg-displays
     unstable.nwg-look
-    unstable.threema-desktop
+    #unstable.threema-desktop # currently broken 10/07/2024
     unstable.tshark.dev
     unstable.wireshark
     usbutils
@@ -275,5 +274,6 @@ in
     xorg.xinit
     xwayland
     yazi # terminal file browser
+    unstable.zed-editor
   ];
 }
