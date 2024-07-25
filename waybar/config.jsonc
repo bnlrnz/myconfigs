@@ -45,7 +45,7 @@
         "format": " {icon} ",
         "tooltip-format": "{icon} TEMIS",
         "exec": "ip route | grep -q '10.0.2.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
-        "on-click": "nmcli connection up 'TEMIS Openconnect'",
+        "on-click": "nmcli c show --active | grep 'TEMIS Openconnect' && nmcli c down 'TEMIS Openconnect' || nmcli c up 'TEMIS Openconnect'",
         "return-type": "json",
         "interval": 5,
         "format-icons": ["",""]
