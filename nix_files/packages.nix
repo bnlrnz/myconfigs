@@ -111,6 +111,7 @@ in
     autofs5
     bat
     bind
+    binwalk
     blueman
     bluez
     bluez-tools
@@ -164,6 +165,7 @@ in
     gtk4
     guvcview
     gvfs
+    hashcat
     jetbrains-mono
     jq
     keepassxc
@@ -204,21 +206,25 @@ in
     openbox
     openbox-menu
     openssl.dev # dev needed for openssl headers
+    padbuster
     phinger-cursors
     pkg-config
     podman
     polkit_gnome
     protontricks
     protonup # update manager for proton
+    pwndbg
+    pwntools
     pwvucontrol
     python311Full
     python311Packages.dbus-python
     python311Packages.ipython
     python311Packages.pip
+    python311Packages.ipdb
     qalculate-gtk
     ripgrep
     rofi
-    rustdesk
+    #rustdesk
     scrcpy
     signal-desktop
     slurp

@@ -60,7 +60,7 @@
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl.extraPackages = [ pkgs.amdvlk ];
+  hardware.opengl.extraPackages = [ pkgs.amdvlk pkgs.rocmPackages.clr.icd ];
   hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
   # enable bluetooth
