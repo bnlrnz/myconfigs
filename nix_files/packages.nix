@@ -162,6 +162,7 @@ in
     filezilla
     firefox
     fish
+    fzf
     font-awesome
     gcc
     gdb
