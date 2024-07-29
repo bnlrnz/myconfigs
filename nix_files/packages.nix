@@ -81,7 +81,29 @@ in
       "steam-original"
       "steam-run"
       "burpsuite"
+      "corefonts"
+      "vista-fonts"
   ];
+
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      font-awesome
+      nerdfonts
+      source-han-sans
+      open-sans
+      corefonts
+      vistafonts
+    ];
+    fontconfig.defaultFonts = {
+      serif = [ "Noto Serif" "Source Han Serif" ];
+      sansSerif = [ "Open Sans" "Source Han Sans" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+    enableDefaultPackages = true;
+  };
 
   # shared libs
   programs.nix-ld.enable = true;

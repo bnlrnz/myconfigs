@@ -91,24 +91,6 @@ in {
   };
   users.defaultUserShell = pkgs.fish;
 
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      font-awesome
-      nerdfonts
-      source-han-sans
-      open-sans
-    ];
-    fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Source Han Serif" ];
-      sansSerif = [ "Open Sans" "Source Han Sans" ];
-      emoji = [ "Noto Color Emoji" ];
-    };
-    enableDefaultPackages = true;
-  };
-
   #security.wrappers.dumpcap = {
   #  source = lib.mkDefault "${pkgs.unstable.wireshark}/bin/dumpcap";
   #  capabilities = "cap_net_raw,cap_net_admin+eip";
