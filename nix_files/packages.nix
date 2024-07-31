@@ -166,6 +166,7 @@ in
     font-awesome
     gcc
     gdb
+    gef
     ghidra-bin
     gimp
     gio-sharp
@@ -230,6 +231,7 @@ in
     openbox-menu
     openssl.dev # dev needed for openssl headers
     padbuster
+    patchelf
     phinger-cursors
     pkg-config
     podman
