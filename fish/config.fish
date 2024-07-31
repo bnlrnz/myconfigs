@@ -20,5 +20,6 @@ alias du="dust"
 alias cat="bat -p --paging=never"
 alias less="bat --paging=always"
 alias x11="env -u WAYLAND_DISPLAY"
+alias gdb="gef"
 
 fish_ssh_agent
