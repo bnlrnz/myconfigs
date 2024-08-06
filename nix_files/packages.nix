@@ -196,7 +196,6 @@ in
     killall
     kitty
     kora-icon-theme
-    lapce
     libcap
     libglibutil
     libreoffice
@@ -239,6 +238,7 @@ in
     protontricks
     protonup # update manager for proton
     pwndbg
+    pwninit
     pwntools
     pwvucontrol
     python311Full
