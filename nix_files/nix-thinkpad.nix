@@ -49,6 +49,16 @@ in {
     allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
   };
 
+  # ctf hosts
+  networking.extraHosts =
+    ''
+      10.13.37.11 vault.starfleet
+      10.13.37.11 medical.starfleet
+      10.13.37.11 crusher.starfleet
+      10.13.37.11 dev.crusher.starfleet
+      10.13.37.11 start.ctf.cert-bund.de
+    '';
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 

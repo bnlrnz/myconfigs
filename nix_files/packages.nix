@@ -134,6 +134,7 @@ in
     bat
     bind
     binwalk
+    bless
     blueman
     bluez
     bluez-tools
@@ -159,6 +160,7 @@ in
     exfatprogs
     eza
     feh
+    feroxbuster
     filezilla
     firefox
     fish
@@ -180,6 +182,7 @@ in
     gnome.gnome-terminal
     gnumake
     gobject-introspection
+    gobuster
     google-chrome
     gparted
     grim
@@ -190,6 +193,7 @@ in
     guvcview
     gvfs
     hashcat
+    inetutils
     jetbrains-mono
     jq
     keepassxc
