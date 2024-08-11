@@ -46,6 +46,7 @@ in {
       #10.13.37.10 medical.starfleet
       #10.13.37.10 crusher.starfleet
       10.13.37.10 reynholm.industries
+      10.13.37.10 bornholm.reynholm.industries
       10.13.37.10 recruiting.reynholm.industries
       10.13.37.10 ldap.reynholm.industries
       10.13.37.10 cdn.reynholm.industries
