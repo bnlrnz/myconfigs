@@ -21,5 +21,6 @@ alias cat="bat -p --paging=never"
 alias less="bat --paging=always"
 alias x11="env -u WAYLAND_DISPLAY"
 alias gdb="gef"
+alias nmapwn="nmap -sV -sS -T4 -A -p- --script all"
 
 fish_ssh_agent
