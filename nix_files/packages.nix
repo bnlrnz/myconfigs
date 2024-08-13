@@ -60,13 +60,6 @@ in
   # Audio for apps
   nixpkgs.config.pulseaudio = true;
 
-  # enable opengl
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
@@ -286,6 +279,7 @@ in
     usrsctp
     vim
     vscode
+    vulkan-tools
     waybar
     wayland
     wayland-pipewire-idle-inhibit
