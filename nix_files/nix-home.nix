@@ -50,6 +50,9 @@ in {
       10.13.37.10 recruiting.reynholm.industries
       10.13.37.10 ldap.reynholm.industries
       10.13.37.10 cdn.reynholm.industries
+      10.13.37.10 ns1.reynholm.industries
+      10.13.37.10 weird.reynholm.industries
+      10.13.37.10 usersearch.reynholm.industries
     '';
 
   # Set your time zone.

@@ -66,9 +66,12 @@
     };
   };
 
+  # enable fwupd -> fwupdmgr
+  services.fwupd.enable = true;
+
   # nfs mounts
   services.rpcbind.enable = true;
-  
+ 
 #  fileSystems."/mnt/org-sz31" = {
 #    device = "fs1.temislab.de:/vsanfs/org-sz31";
 #    fsType = "nfs";

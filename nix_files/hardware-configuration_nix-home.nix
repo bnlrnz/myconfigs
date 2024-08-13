@@ -8,10 +8,10 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
+  
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/309eef6b-aa69-43be-b517-b1ac8024d4cc";
     fsType = "ext4";
@@ -43,9 +43,6 @@
     ];
   };
 
-  # enable amd gpu drivers
-  services.xserver.videoDrivers = ["amdgpu"];
-
   swapDevices =
     [{ device = "/dev/disk/by-uuid/8518e7e8-9dae-4c50-9d0f-852b1aae3895"; }];
 
@@ -56,12 +53,30 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp39s0.useDHCP = lib.mkDefault true;
 
+  # enable amd gpu drivers
+  # services.xserver.videoDrivers = ["amdgpu"];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl.extraPackages = [ pkgs.amdvlk pkgs.rocmPackages.clr.icd ];
-  hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+  hardware.opengl.driSupport = true;
+
+  hardware.opengl.extraPackages = [
+    #pkgs.amdvlk
+    pkgs.rocmPackages.clr.icd
+  ];
+  #hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+
+  # TESTING: force RADV - amdvlk seams to crash some games...
+  environment.variables.AMD_VULKAN_ICD = "RADV";
+
+  # settings for amd gpu & cpu power profile
+  programs.corectrl.enable = true;
+
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
 
   # enable bluetooth
   hardware.bluetooth.enable = true;
