@@ -12,11 +12,12 @@
     "nvme"
     "usb_storage"
     "sd_mod"
-    #"acpi" currently missing in 6.8.6
+    #"acpi"
     "acpi_call"
     "thinkpad-acpi"
   ];
-  boot.initrd.kernelModules = [ ];
+
+  boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" "i915" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
 
@@ -42,6 +43,12 @@
   };
 
   hardware.opengl.extraPackages = with pkgs; [
+    (if (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11") then vaapiIntel else intel-vaapi-driver)
+    libvdpau-va-gl
+    intel-media-driver
+  ];
+  
+  hardware.opengl.extraPackages32 = with pkgs.driversi686Linux; [
     (if (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11") then vaapiIntel else intel-vaapi-driver)
     libvdpau-va-gl
     intel-media-driver
