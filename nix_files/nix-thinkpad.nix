@@ -52,11 +52,17 @@ in {
   # ctf hosts
   networking.extraHosts =
     ''
-      10.13.37.11 vault.starfleet
-      10.13.37.11 medical.starfleet
-      10.13.37.11 crusher.starfleet
-      10.13.37.11 dev.crusher.starfleet
-      10.13.37.11 start.ctf.cert-bund.de
+      #10.13.37.10 vault.starfleet
+      #10.13.37.10 medical.starfleet
+      #10.13.37.10 crusher.starfleet
+      10.13.37.11 reynholm.industries
+      10.13.37.11 bornholm.reynholm.industries
+      10.13.37.11 recruiting.reynholm.industries
+      10.13.37.11 ldap.reynholm.industries
+      10.13.37.11 cdn.reynholm.industries
+      10.13.37.11 ns1.reynholm.industries
+      10.13.37.11 weird.reynholm.industries
+      10.13.37.11 usersearch.reynholm.industries
     '';
 
   # Set your time zone.

@@ -46,14 +46,10 @@
     (if (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11") then vaapiIntel else intel-vaapi-driver)
     libvdpau-va-gl
     intel-media-driver
+    onevpl-intel-gpu
+    intel-compute-runtime
   ];
   
-  hardware.opengl.extraPackages32 = with pkgs.driversi686Linux; [
-    (if (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11") then vaapiIntel else intel-vaapi-driver)
-    libvdpau-va-gl
-    intel-media-driver
-  ];
-
   # lid close battery
   services.logind.lidSwitch = "suspend";
 

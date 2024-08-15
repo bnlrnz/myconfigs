@@ -228,6 +228,7 @@ in
     openssl.dev # dev needed for openssl headers
     padbuster
     patchelf
+    pciutils
     phinger-cursors
     pkg-config
     podman
@@ -263,8 +264,8 @@ in
     tmux
     udevil
     udiskie
-    unstable.hyprland
-    (pkgs.unstable.hyprland.override {
+    hyprland
+    (pkgs.hyprland.override {
       enableXWayland = true;
       legacyRenderer = false;
       withSystemd = true;
