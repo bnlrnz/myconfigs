@@ -7,6 +7,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  ctf_ip = "10.13.37.11";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -44,17 +45,18 @@ in {
   # ctf hosts
   networking.extraHosts =
     ''
-      #10.13.37.10 vault.starfleet
-      #10.13.37.10 medical.starfleet
-      #10.13.37.10 crusher.starfleet
-      10.13.37.10 reynholm.industries
-      10.13.37.10 bornholm.reynholm.industries
-      10.13.37.10 recruiting.reynholm.industries
-      10.13.37.10 ldap.reynholm.industries
-      10.13.37.10 cdn.reynholm.industries
-      10.13.37.10 ns1.reynholm.industries
-      10.13.37.10 weird.reynholm.industries
-      10.13.37.10 usersearch.reynholm.industries
+      #${ctf_ip} vault.starfleet
+      #${ctf_ip} medical.starfleet
+      #${ctf_ip} crusher.starfleet
+      ${ctf_ip} reynholm.industries
+      ${ctf_ip} bornholm.reynholm.industries
+      ${ctf_ip} recruiting.reynholm.industries
+      ${ctf_ip} ldap.reynholm.industries
+      ${ctf_ip} cdn.reynholm.industries
+      ${ctf_ip} ns1.reynholm.industries
+      ${ctf_ip} weird.reynholm.industries
+      ${ctf_ip} usersearch.reynholm.industries
+      ${ctf_ip} recruiter2.reynholm.industries
     '';
 
   # Set your time zone.
