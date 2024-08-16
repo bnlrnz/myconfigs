@@ -65,17 +65,17 @@ in
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "webex"
+      "burpsuite"
       "mongodb"
       "mongodb-compass"
       "libsciter"
       "google-chrome"
       "vscode"
+      "corefonts"
+      "vista-fonts"
       "steam"
       "steam-original"
       "steam-run"
-      "burpsuite"
-      "corefonts"
-      "vista-fonts"
   ];
 
   fonts = {
@@ -134,7 +134,6 @@ in
     brightnessctl
     btop
     btrfs-progs
-    burpsuite
     cairo
     cairo.dev
     clang
@@ -153,7 +152,6 @@ in
     exfatprogs
     eza
     feh
-    feroxbuster
     filezilla
     firefox
     fish
@@ -161,8 +159,6 @@ in
     font-awesome
     gcc
     gdb
-    gef
-    ghidra-bin
     gimp
     gio-sharp
     git
@@ -175,7 +171,6 @@ in
     gnome.gnome-terminal
     gnumake
     gobject-introspection
-    gobuster
     google-chrome
     gparted
     grim
@@ -185,7 +180,6 @@ in
     gtk4
     guvcview
     gvfs
-    hashcat
     inetutils
     jetbrains-mono
     jq
@@ -226,7 +220,6 @@ in
     openbox
     openbox-menu
     openssl.dev # dev needed for openssl headers
-    padbuster
     patchelf
     pciutils
     phinger-cursors
@@ -235,9 +228,6 @@ in
     polkit_gnome
     protontricks
     protonup # update manager for proton
-    pwndbg
-    pwninit
-    pwntools
     pwvucontrol
     python311Full
     python311Packages.dbus-python

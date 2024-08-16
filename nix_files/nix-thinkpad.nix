@@ -22,6 +22,7 @@ in {
     ./hardware-configuration_nix-thinkpad.nix
     ./services.nix
     ./packages.nix
+    ./pwn.nix
   ];
 
   # add unstable channel

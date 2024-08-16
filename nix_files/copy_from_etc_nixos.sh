@@ -14,3 +14,5 @@ fi
 
 sudo cp /etc/nixos/packages.nix packages.nix
 sudo cp /etc/nixos/services.nix services.nix
+sudo cp /etc/nixos/steam.nix steam.nix
+sudo cp /etc/nixos/pwn.nix pwn.nix

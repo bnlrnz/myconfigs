@@ -12,6 +12,8 @@ in {
     ./hardware-configuration_nix-home.nix
     ./services.nix
     ./packages.nix
+    ./steam.nix
+    ./pwn.nix
   ];
 
   # add unstable channel
