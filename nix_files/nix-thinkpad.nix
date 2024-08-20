@@ -17,6 +17,9 @@ let
       ${pkgs.shadow}/bin/login;
     fi
   '';
+
+  # the bsi ctf host ip
+  ctf_ip = "10.13.37.10";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-thinkpad.nix
@@ -42,7 +45,13 @@ in {
   # Enable networking
   networking.hostName = "tp-belo"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.1" "10.50.1.1" "9.9.9.9" "8.8.8.8" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    #"10.50.1.1"
+    #"172.20.10.1"
+    "9.9.9.9"
+    "8.8.8.8"
+  ];
   networking.resolvconf.enable = true;
   networking.firewall = {
     enable = true;
@@ -52,27 +61,29 @@ in {
 
   # Generate an immutable /etc/resolv.conf from the nameserver settings
   # above (otherwise DHCP overwrites it):
-  environment.etc."resolv.conf" = with lib; with pkgs; {
-    source = writeText "resolv.conf" ''
-      ${concatStringsSep "\n" (map (ns: "nameserver ${ns}") config.networking.nameservers)}
-      options wlp0s20f3
-    '';
-  };
+  #environment.etc."resolv.conf" = with lib; with pkgs; {
+  #  source = writeText "resolv.conf" ''
+  #    ${concatStringsSep "\n" (map (ns: "nameserver ${ns}") config.networking.nameservers)}
+  #    options edns0
+  #    options timeout:1
+  #  '';
+  #};
 
   # ctf hosts
   networking.extraHosts =
     ''
-      #10.13.37.10 vault.starfleet
-      #10.13.37.10 medical.starfleet
-      #10.13.37.10 crusher.starfleet
-      10.13.37.11 reynholm.industries
-      10.13.37.11 bornholm.reynholm.industries
-      10.13.37.11 recruiting.reynholm.industries
-      10.13.37.11 ldap.reynholm.industries
-      10.13.37.11 cdn.reynholm.industries
-      10.13.37.11 ns1.reynholm.industries
-      10.13.37.11 weird.reynholm.industries
-      10.13.37.11 usersearch.reynholm.industries
+      ${ctf_ip} vault.starfleet
+      ${ctf_ip} medical.starfleet
+      ${ctf_ip} crusher.starfleet
+      ${ctf_ip} reynholm.industries
+      ${ctf_ip} bornholm.reynholm.industries
+      ${ctf_ip} recruiting.reynholm.industries
+      ${ctf_ip} recruiter2.reynholm.industries
+      ${ctf_ip} ldap.reynholm.industries
+      ${ctf_ip} cdn.reynholm.industries
+      ${ctf_ip} ns1.reynholm.industries
+      ${ctf_ip} weird.reynholm.industries
+      ${ctf_ip} usersearch.reynholm.industries
     '';
 
   # Set your time zone.
