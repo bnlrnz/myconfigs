@@ -171,7 +171,6 @@ in
     gnome.gnome-terminal
     gnumake
     gobject-introspection
-    google-chrome
     gparted
     grim
     gsettings-desktop-schemas
