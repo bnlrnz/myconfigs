@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration_nix-vps.nix
       ./wed_web.nix
+      ./nextcloud-pass.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -39,7 +40,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ben = {
      isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "nextcloud" "caddy" ]; # Enable ‘sudo’ for the user.
      shell = pkgs.fish;
   };
 
@@ -74,19 +75,24 @@
 
   services.caddy = {
     enable = true;
-    virtualHosts."testmima.bnlrnz.de".extraConfig = ''
+    virtualHosts."bnlrnz.de".extraConfig = ''
       encode gzip
       file_server
       root * /var/www/MimaSim/web
     '';
-    virtualHosts."testpapa.bnlrnz.de".extraConfig = ''
+    virtualHosts."lorenzjoerg.de".extraConfig = ''
       encode gzip
       file_server
       root * /var/www/grav
       php_fastcgi unix/${config.services.phpfpm.pools.caddy.socket}
     '';
-    virtualHosts."testwedding.bnlrnz.de".extraConfig = ''
+    virtualHosts."wedding.bnlrnz.de".extraConfig = ''
       reverse_proxy unix//var/www/wed_web/wed_web.sock
+    '';
+    virtualHosts."cloud.bnlrnz.de".extraConfig = ''
+      redir /.well-known/carddav /remote.php/dav/ 301
+      redir /.well-known/caldav /remote.php/dav/ 301
+      reverse_proxy http://127.0.0.1:8080
     '';
   }; 
   
@@ -111,7 +117,28 @@
     };
     phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
   };
-  
+ 
+  services.nextcloud = {
+    enable = true;
+    config.adminpassFile = "/etc/nextcloud-admin-pass";
+    package = pkgs.nextcloud30;
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps) calendar onlyoffice;
+    };
+    extraAppsEnable = true;
+    hostName = "localhost";
+    #webserver = "caddy";
+    https = true;
+    configureRedis = true;
+    database.createLocally = true;
+    maxUploadSize = "20G";
+    settings.trusted_proxies = [ "127.0.0.1" ];
+    settings.trusted_domains = [ "cloud.bnlrnz.de" "127.0.0.1" "149.102.140.151" ];
+    settings.default_phone_region = "DE";
+  };
+
+  services.nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 8080; } ];
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
