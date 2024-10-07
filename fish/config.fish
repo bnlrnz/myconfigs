@@ -4,8 +4,12 @@ end
 
 # Start Hyprland at login
 if status --is-login
-  if test -z "$DISPLAY" -a $XDG_VTNR = 1
-	  exec Hyprland
+  if test -z "$DISPLAY"
+    if set -q XDG_VTNR
+      if test $XDG_VTNR = 1
+	      exec Hyprland
+	    end
+	  end
   end
 end
 
@@ -24,3 +28,4 @@ alias gdb="gef"
 alias nmapwn="nmap -sV -sS -T4 -A -p- --script all"
 
 fish_ssh_agent
+fish_config theme choose Tomorrow\ Night\ Bright
