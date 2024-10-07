@@ -121,13 +121,13 @@
   services.nextcloud = {
     enable = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
+    #config.dbtype = "pgsql";
     package = pkgs.nextcloud30;
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps) calendar onlyoffice;
     };
     extraAppsEnable = true;
     hostName = "localhost";
-    #webserver = "caddy";
     https = true;
     configureRedis = true;
     database.createLocally = true;
@@ -135,6 +135,9 @@
     settings.trusted_proxies = [ "127.0.0.1" ];
     settings.trusted_domains = [ "cloud.bnlrnz.de" "127.0.0.1" "149.102.140.151" ];
     settings.default_phone_region = "DE";
+    phpOptions = {
+      "opcache.interned_strings_buffer" = "10";
+    };
   };
 
   services.nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 8080; } ];
