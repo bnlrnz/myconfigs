@@ -122,11 +122,20 @@
     enable = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     #config.dbtype = "pgsql";
+    #config.dbuser = "nextcloud";
+    #config.dbname = "nextcloud";
+    #config.dbhost = "localhost";
     package = pkgs.nextcloud30;
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) calendar onlyoffice;
+      # inherit (config.services.nextcloud.package.packages.apps) calendar onlyoffice;
+      #group_folders = pkgs.fetchNextcloudApp {
+      #    sha256 = "sha256-s9JTLE32tyrv7Cdf3vIiedSUUFu8N0TflDgkIqQ4k1U=";
+      #    url = "https://github.com/nextcloud-releases/groupfolders/releases/download/v18.0.2/groupfolders-v18.0.2.tar.gz";
+      #    license = "gpl3";
+      #};
     };
     extraAppsEnable = true;
+    appstoreEnable = true;
     hostName = "localhost";
     https = true;
     configureRedis = true;
