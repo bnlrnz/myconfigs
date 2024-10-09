@@ -46,6 +46,10 @@
 
   users.defaultUserShell = pkgs.fish;
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "corefonts"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
@@ -94,6 +98,12 @@
       redir /.well-known/caldav /remote.php/dav/ 301
       reverse_proxy http://127.0.0.1:8080
     '';
+    virtualHosts."oo.bnlrnz.de".extraConfig = ''
+      reverse_proxy http://127.0.0.1:8081 {
+        # Required to circumvent bug of Onlyoffice loading mixed non-https content
+        header_up X-Forwarded-Proto https
+      }
+    '';
   }; 
   
   networking.firewall.enable = true;
@@ -127,16 +137,11 @@
     #config.dbhost = "localhost";
     package = pkgs.nextcloud30;
     extraApps = {
-      # inherit (config.services.nextcloud.package.packages.apps) calendar onlyoffice;
-      #group_folders = pkgs.fetchNextcloudApp {
-      #    sha256 = "sha256-s9JTLE32tyrv7Cdf3vIiedSUUFu8N0TflDgkIqQ4k1U=";
-      #    url = "https://github.com/nextcloud-releases/groupfolders/releases/download/v18.0.2/groupfolders-v18.0.2.tar.gz";
-      #    license = "gpl3";
-      #};
+       inherit (config.services.nextcloud.package.packages.apps) onlyoffice;
     };
     extraAppsEnable = true;
     appstoreEnable = true;
-    hostName = "localhost";
+    hostName = "localhost_nextcloud";
     https = true;
     configureRedis = true;
     database.createLocally = true;
@@ -149,7 +154,15 @@
     };
   };
 
-  services.nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 8080; } ];
+  services.nginx.virtualHosts."localhost_nextcloud".listen = [ { addr = "127.0.0.1"; port = 8080; } ];
+
+  services.onlyoffice = {
+    enable = true;
+    hostname = "localhost_onlyoffice";
+    jwtSecretFile = "/etc/nextcloud-admin-pass";
+  };
+
+  services.nginx.virtualHosts."localhost_onlyoffice".listen = [ { addr = "127.0.0.1"; port = 8081; } ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
