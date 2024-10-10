@@ -7,41 +7,41 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration_nix-vps.nix
+    ./hardware-configuration_nix-vps.nix
       ./wed_web.nix
       ./nextcloud-pass.nix
     ];
 
-  # Use the GRUB 2 boot loader.
+# Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  #boot.loader.grub.efiSupport = true;
-  #boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
+#boot.loader.grub.efiSupport = true;
+#boot.loader.grub.efiInstallAsRemovable = true;
+# boot.loader.efi.efiSysMountPoint = "/boot/efi";
+# Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-  networking.hostName = "nix-vps"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networking.hostName = "nix-vps"; # Define your hostname.
+# Pick only one of the below networking options.
+# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
+# Set your time zone.
+    time.timeZone = "Europe/Berlin";
 
-  # Select internationalisation properties.
+# Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-     font = "Lat2-Terminus16";
-     keyMap = lib.mkForce "us";
+    font = "Lat2-Terminus16";
+    keyMap = lib.mkForce "us";
   };
 
   programs.fish.enable = true;
-  
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+
+# Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ben = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "nextcloud" "caddy" ]; # Enable ‘sudo’ for the user.
-     shell = pkgs.fish;
+    isNormalUser = true;
+    extraGroups = [ "wheel" "nextcloud" "caddy" ]; # Enable ‘sudo’ for the user.
+      shell = pkgs.fish;
   };
 
   users.defaultUserShell = pkgs.fish;
@@ -50,66 +50,98 @@
     "corefonts"
   ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     git
-     neovim
-     curl
-     python312
-     python312Packages.flask
-     ripgrep
-     bat
-     eza
-     du-dust
-     htop
-     wget
-     yazi
-   ];
+# List packages installed in system profile. To search, run:
+# $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      git
+      neovim
+      curl
+      python312
+      python312Packages.flask
+      ripgrep
+      bat
+      eza
+      du-dust
+      ffmpeg
+      exiftool
+      htop
+      wget
+      yazi
+  ];
 
-  # Enable the OpenSSH daemon.
+# Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false; # public key only
+      PermitRootLogin = "no";
+      PasswordAuthentication = false; # public key only
     };
   };
 
   services.caddy = {
     enable = true;
     virtualHosts."bnlrnz.de".extraConfig = ''
+      header / {
+      	Strict-Transport-Security "max-age=31536000;"
+      	  X-XSS-Protection "1; mode=block"
+      	  X-Content-Type-Options "nosniff"
+      	  X-Frame-Options "DENY"
+      }
       encode gzip
       file_server
       root * /var/www/MimaSim/web
-    '';
+      '';
     virtualHosts."lorenzjoerg.de".extraConfig = ''
+      header / {
+      	Strict-Transport-Security "max-age=31536000;"
+      	  X-XSS-Protection "1; mode=block"
+      	  X-Content-Type-Options "nosniff"
+      	  X-Frame-Options "DENY"
+      }
       encode gzip
       file_server
       root * /var/www/grav
       php_fastcgi unix/${config.services.phpfpm.pools.caddy.socket}
     '';
     virtualHosts."wedding.bnlrnz.de".extraConfig = ''
+      header / {
+      	Strict-Transport-Security "max-age=31536000;"
+      	  X-XSS-Protection "1; mode=block"
+      	  X-Content-Type-Options "nosniff"
+      	  X-Frame-Options "DENY"
+      }
       reverse_proxy unix//var/www/wed_web/wed_web.sock
     '';
     virtualHosts."cloud.bnlrnz.de".extraConfig = ''
-      redir /.well-known/carddav /remote.php/dav/ 301
-      redir /.well-known/caldav /remote.php/dav/ 301
-      reverse_proxy http://127.0.0.1:8080
+        header / {
+      	  Strict-Transport-Security "max-age=31536000;"
+      	  X-XSS-Protection "1; mode=block"
+      	  X-Content-Type-Options "nosniff"
+      	  X-Frame-Options "DENY"
+        }
+        redir /.well-known/carddav /remote.php/dav/ 301
+        redir /.well-known/caldav /remote.php/dav/ 301
+        reverse_proxy http://127.0.0.1:8080
     '';
     virtualHosts."oo.bnlrnz.de".extraConfig = ''
+      header / {
+      	Strict-Transport-Security "max-age=31536000;"
+      	  X-XSS-Protection "1; mode=block"
+      	  X-Content-Type-Options "nosniff"
+      	  X-Frame-Options "DENY"
+      }
       reverse_proxy http://127.0.0.1:8081 {
         # Required to circumvent bug of Onlyoffice loading mixed non-https content
         header_up X-Forwarded-Proto https
       }
     '';
   }; 
-  
+
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 22 80 443];
- 
-  # phpfpm pool
+
+# phpfpm pool
   services.phpfpm.pools.caddy = {
     user = config.services.caddy.user;
     group = config.services.caddy.group;
@@ -127,17 +159,17 @@
     };
     phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
   };
- 
+
   services.nextcloud = {
     enable = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
-    #config.dbtype = "pgsql";
-    #config.dbuser = "nextcloud";
-    #config.dbname = "nextcloud";
-    #config.dbhost = "localhost";
+#config.dbtype = "pgsql";
+#config.dbuser = "nextcloud";
+#config.dbname = "nextcloud";
+#config.dbhost = "localhost";
     package = pkgs.nextcloud30;
     extraApps = {
-       inherit (config.services.nextcloud.package.packages.apps) onlyoffice;
+      inherit (config.services.nextcloud.package.packages.apps) onlyoffice;
     };
     extraAppsEnable = true;
     appstoreEnable = true;
@@ -164,28 +196,28 @@
 
   services.nginx.virtualHosts."localhost_onlyoffice".listen = [ { addr = "127.0.0.1"; port = 8081; } ];
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+# Copy the NixOS configuration file and link it from the resulting system
+# (/run/current-system/configuration.nix). This is useful in case you
+# accidentally delete configuration.nix.
+# system.copySystemConfiguration = true;
 
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+# This option defines the first version of NixOS you have installed on this particular machine,
+# and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+#
+# Most users should NEVER change this value after the initial install, for any reason,
+# even if you've upgraded your system to a new NixOS release.
+#
+# This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+# so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+# to actually do that.
+#
+# This value being lower than the current NixOS release does NOT mean your system is
+# out of date, out of support, or vulnerable.
+#
+# Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+# and migrated your data accordingly.
+#
+# For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
