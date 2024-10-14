@@ -12,6 +12,8 @@
       ./nextcloud-pass.nix
     ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
 #boot.loader.grub.efiSupport = true;
@@ -66,6 +68,7 @@
       ffmpeg
       exiftool
       htop
+      jq
       wget
       yazi
   ];
@@ -125,16 +128,19 @@
         reverse_proxy http://127.0.0.1:8080
     '';
     virtualHosts."oo.bnlrnz.de".extraConfig = ''
-      header / {
+     header / {
       	Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
       	  X-Content-Type-Options "nosniff"
       	  X-Frame-Options "DENY"
-      }
-      reverse_proxy http://127.0.0.1:8081 {
-        # Required to circumvent bug of Onlyoffice loading mixed non-https content
+     }
+     reverse_proxy http://127.0.0.1:8888 {
+       # Required to circumvent bug of Onlyoffice loading mixed non-https content
         header_up X-Forwarded-Proto https
-      }
+        header_up X-Forwarded-Host oo.bnlrnz.de
+        header_up X-Forwarded-Porto 443
+    
+     }
     '';
   }; 
 
@@ -163,10 +169,6 @@
   services.nextcloud = {
     enable = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
-#config.dbtype = "pgsql";
-#config.dbuser = "nextcloud";
-#config.dbname = "nextcloud";
-#config.dbhost = "localhost";
     package = pkgs.nextcloud30;
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps) onlyoffice;
@@ -192,9 +194,12 @@
     enable = true;
     hostname = "localhost_onlyoffice";
     jwtSecretFile = "/etc/nextcloud-admin-pass";
+    port = 8888;
   };
 
-  services.nginx.virtualHosts."localhost_onlyoffice".listen = [ { addr = "127.0.0.1"; port = 8081; } ];
+  services.nginx.virtualHosts."localhost_onlyoffice" = {
+    listen = [ { addr = "127.0.0.1"; port = 8081; } ];
+  };
 
 # Copy the NixOS configuration file and link it from the resulting system
 # (/run/current-system/configuration.nix). This is useful in case you
