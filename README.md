@@ -10,3 +10,7 @@
 - [Dracula](https://draculatheme.com/) (Theme)
 - [Dracula](https://draculatheme.com/) (Icons)
 - [Phinger](https://github.com/phisch/phinger-cursors) (Cursor)
+- dconf-editor -> /org/gnome/desktop/interface/color-scheme prefer-dark
+- xfce4-appearance-settings
+- themechanger
+- nwg-look
