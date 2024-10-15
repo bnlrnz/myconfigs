@@ -95,4 +95,4 @@
 ../xdg-terminals.list
 ../xfce4/*
 ../xsettingsd/*
-../zed/*
+zed/*
