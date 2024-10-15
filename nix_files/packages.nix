@@ -171,6 +171,7 @@ in
     gnome.gnome-terminal
     gnumake
     gobject-introspection
+    google-chrome
     gparted
     grim
     gsettings-desktop-schemas
@@ -259,6 +260,7 @@ in
       legacyRenderer = false;
       withSystemd = true;
     })
+    hyprshot
     unstable.nwg-displays
     unstable.nwg-look
     #unstable.threema-desktop # currently broken 10/07/2024

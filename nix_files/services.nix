@@ -92,5 +92,10 @@
     device = "fs1.temislab.de:/vsanfs/svc-scasbrowser";
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
-  }; 
+  };
+
+  services.ollama = {
+  	enable = true;
+	acceleration = "rocm";
+  };
 }
