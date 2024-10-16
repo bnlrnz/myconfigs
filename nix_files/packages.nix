@@ -188,6 +188,7 @@ in
     kora-icon-theme
     libcap
     libglibutil
+    libnotify
     libreoffice
     libsForQt5.kwallet
     libsForQt5.okular
@@ -259,7 +260,6 @@ in
       legacyRenderer = false;
       withSystemd = true;
     })
-    hyprshot
     unstable.nwg-displays
     unstable.nwg-look
     #unstable.threema-desktop # currently broken 10/07/2024
