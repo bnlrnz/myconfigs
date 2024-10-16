@@ -166,7 +166,6 @@ in
     glib.dev
     glibc
     gnome.dconf-editor
-    gnome.file-roller
     gnome.gnome-keyring
     gnome.gnome-terminal
     gnumake
@@ -282,6 +281,7 @@ in
     wofi
     wpaperd
     wrapGAppsHook
+    xarchiver
     x2goclient
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
