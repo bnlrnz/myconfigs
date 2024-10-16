@@ -7,7 +7,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  ctf_ip = "10.13.37.11";
+  ctf_ip = "10.13.37.10";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -48,15 +48,19 @@ in {
       #${ctf_ip} vault.starfleet
       #${ctf_ip} medical.starfleet
       #${ctf_ip} crusher.starfleet
-      ${ctf_ip} reynholm.industries
-      ${ctf_ip} bornholm.reynholm.industries
-      ${ctf_ip} recruiting.reynholm.industries
-      ${ctf_ip} ldap.reynholm.industries
-      ${ctf_ip} cdn.reynholm.industries
-      ${ctf_ip} ns1.reynholm.industries
-      ${ctf_ip} weird.reynholm.industries
-      ${ctf_ip} usersearch.reynholm.industries
-      ${ctf_ip} recruiter2.reynholm.industries
+      #${ctf_ip} reynholm.industries
+      #${ctf_ip} bornholm.reynholm.industries
+      #${ctf_ip} recruiting.reynholm.industries
+      #${ctf_ip} ldap.reynholm.industries
+      #${ctf_ip} cdn.reynholm.industries
+      #${ctf_ip} ns1.reynholm.industries
+      #${ctf_ip} weird.reynholm.industries
+      #${ctf_ip} usersearch.reynholm.industries
+      #${ctf_ip} recruiter2.reynholm.industries
+      ${ctf_ip} b2mynht0cjrunxa0cjnuy3l9.ctf.cert-bund.de
+      ${ctf_ip} lana.ctf.cert-bund.de
+      ${ctf_ip} cheryl.ctf.cert-bund.de
+      ${ctf_ip} malory.ctf.cert-bund.de
     '';
 
   # Set your time zone.
