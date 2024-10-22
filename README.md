@@ -14,3 +14,4 @@
 - xfce4-appearance-settings
 - themechanger
 - nwg-look
+- AstroVim for nvim
