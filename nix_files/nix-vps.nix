@@ -107,6 +107,22 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  # optimise store on every build
+  nix.settings.auto-optimise-store = true;
+
+  system.autoUpgrade = {
+    enable = true;
+    #flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "-L" # print build logs
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
   };
 
 # Use the GRUB 2 boot loader.
@@ -157,6 +173,7 @@
       python312
       python312Packages.flask
       ripgrep
+      gcc
       bat
       eza
       du-dust
