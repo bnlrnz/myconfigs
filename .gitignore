@@ -58,6 +58,7 @@ nitrogen/*
 nixpkgs/*
 nwg-bar/*
 nwg-look/*
+nvim/*
 okularpartrc
 okularrc
 onlyoffice/*
