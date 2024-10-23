@@ -59,6 +59,7 @@ nixpkgs/*
 nwg-bar/*
 nwg-look/*
 nvim/*
+nvim.bak/*
 okularpartrc
 okularrc
 onlyoffice/*
