@@ -7,7 +7,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  ctf_ip = "10.13.37.10";
+  ctf_ip = "10.13.37.13";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -37,10 +37,9 @@ in {
   networking.nameservers = [ "10.50.1.1" "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
   networking.resolvconf.enable = true;
   networking.firewall = {
-    enable = true;
+    enable = false;
     checkReversePath = false;
     allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
-    allowedTCPPorts = [ 31337 ]; # TODO: temporary for passive ftp access
   };
   # ctf hosts
   networking.extraHosts =
@@ -58,9 +57,10 @@ in {
       #${ctf_ip} usersearch.reynholm.industries
       #${ctf_ip} recruiter2.reynholm.industries
       ${ctf_ip} b2mynht0cjrunxa0cjnuy3l9.ctf.cert-bund.de
-      ${ctf_ip} lana.ctf.cert-bund.de
-      ${ctf_ip} cheryl.ctf.cert-bund.de
-      ${ctf_ip} malory.ctf.cert-bund.de
+      ${ctf_ip} picshare
+      #${ctf_ip} lana.ctf.cert-bund.de
+      #${ctf_ip} cheryl.ctf.cert-bund.de
+      #${ctf_ip} malory.ctf.cert-bund.de
     '';
 
   # Set your time zone.

@@ -17,6 +17,7 @@
     pwninit
     pwntools
     sqlmap
+    steghide
     strace
   ];
 }

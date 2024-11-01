@@ -94,8 +94,8 @@
     options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   };
 
-  services.ollama = {
-  	enable = true;
-	acceleration = "rocm";
-  };
+  #services.ollama = {
+  # 	enable = true;
+	#  acceleration = "rocm";
+  #};
 }

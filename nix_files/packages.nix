@@ -87,6 +87,7 @@ in
       nerdfonts
       source-han-sans
       open-sans
+      google-fonts
       corefonts
       vistafonts
     ];
@@ -166,6 +167,7 @@ in
     glib.dev
     glibc
     gnome.dconf-editor
+    gnome.file-roller
     gnome.gnome-keyring
     gnome.gnome-terminal
     gnumake
@@ -188,7 +190,6 @@ in
     kora-icon-theme
     libcap
     libglibutil
-    libnotify
     libreoffice
     libsForQt5.kwallet
     libsForQt5.okular
@@ -260,6 +261,7 @@ in
       legacyRenderer = false;
       withSystemd = true;
     })
+    hyprshot
     unstable.nwg-displays
     unstable.nwg-look
     #unstable.threema-desktop # currently broken 10/07/2024
@@ -268,6 +270,7 @@ in
     usbutils
     usermount
     usrsctp
+    unzip
     vim
     vscode
     vulkan-tools
@@ -283,7 +286,6 @@ in
     wofi
     wpaperd
     wrapGAppsHook
-    xarchiver
     x2goclient
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
