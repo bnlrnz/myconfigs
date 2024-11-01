@@ -30,7 +30,7 @@
     },
 
     "custom/keepass" : {
-        "format": " 🗝 ",
+        "format": "🗝",
         "tooltip-format": "{icon} W-k",
         "on-click": "hyprctl dispatch togglespecialworkspace keepass"
     },
