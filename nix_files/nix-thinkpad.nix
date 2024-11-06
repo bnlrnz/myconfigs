@@ -45,6 +45,7 @@ in {
   # Enable networking
   networking.hostName = "tp-belo"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
   networking.nameservers = [
     "1.1.1.1"
     #"10.50.1.1"
@@ -59,6 +60,10 @@ in {
     allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
   };
 
+  # Whether to enable captive browser, a dedicated Chrome instance to log into captive portals without messing with DNS settings.
+  programs.captive-browser.enable = true;
+  programs.captive-browser.interface = "wlp0s20f3";
+
   # Generate an immutable /etc/resolv.conf from the nameserver settings
   # above (otherwise DHCP overwrites it):
   #environment.etc."resolv.conf" = with lib; with pkgs; {
@@ -72,18 +77,20 @@ in {
   # ctf hosts
   networking.extraHosts =
     ''
-      ${ctf_ip} vault.starfleet
-      ${ctf_ip} medical.starfleet
-      ${ctf_ip} crusher.starfleet
-      ${ctf_ip} reynholm.industries
-      ${ctf_ip} bornholm.reynholm.industries
-      ${ctf_ip} recruiting.reynholm.industries
-      ${ctf_ip} recruiter2.reynholm.industries
-      ${ctf_ip} ldap.reynholm.industries
-      ${ctf_ip} cdn.reynholm.industries
-      ${ctf_ip} ns1.reynholm.industries
-      ${ctf_ip} weird.reynholm.industries
-      ${ctf_ip} usersearch.reynholm.industries
+      #${ctf_ip} vault.starfleet
+      #${ctf_ip} medical.starfleet
+      #${ctf_ip} crusher.starfleet
+      #${ctf_ip} reynholm.industries
+      #${ctf_ip} bornholm.reynholm.industries
+      #${ctf_ip} recruiting.reynholm.industries
+      #${ctf_ip} recruiter2.reynholm.industries
+      #${ctf_ip} ldap.reynholm.industries
+      #${ctf_ip} cdn.reynholm.industries
+      #${ctf_ip} ns1.reynholm.industries
+      #${ctf_ip} weird.reynholm.industries
+      #${ctf_ip} usersearch.reynholm.industries
+      ${ctf_ip} picshare
+      ${ctf_ip} b2mynht0cjrunxa0cjnuy3l9.ctf.cert-bund.de
     '';
 
   # Set your time zone.

@@ -279,6 +279,7 @@ in
     wayland-pipewire-idle-inhibit
     wget
     whatsapp-for-linux
+    wirelesstools
     wl-clipboard
     wlogout
     unstable.wlr-layout-ui
