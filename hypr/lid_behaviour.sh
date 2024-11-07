@@ -5,7 +5,8 @@ if [ $(hostname) = "tp-belo" ]; then
   # check if external monitor is NOT attached, ID 0 is the internal monitor
   if [ $(hyprctl monitor | grep -q "ID 1") == 1 ]; then
     if [ "$(cat /proc/acpi/button/lid/LID/state)" = "state:      closed" ]; then
-      sh ~/.config/hypr/swayidle_lock_hibernate.sh
+      # why was this here?
+      #sh ~/.config/hypr/swayidle_lock_hibernate.sh
       exit 0
     fi     
   fi
