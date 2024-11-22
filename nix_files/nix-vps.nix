@@ -219,6 +219,9 @@
       root * /var/www/grav
       php_fastcgi unix/${config.services.phpfpm.pools.caddy.socket}
     '';
+    virtualHosts."www.lorenzjoerg.de".extraConfig = ''
+      redir https://lorenzjoerg.de{uri}
+    '';
     virtualHosts."wedding.bnlrnz.de".extraConfig = ''
       header / {
       	Strict-Transport-Security "max-age=31536000;"
