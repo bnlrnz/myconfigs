@@ -2,18 +2,18 @@
 *
 
 # except:
-!feh/*
-!fish/*
-!home-manager/*
-!hypr/*
-!kitty/*
-!mako/*
-!myconfigs/*
-!nix_files/*
-!openbox/*
-!tint2/*
-!waybar/*
-!wofi/*
-!wpaperd/*
+!feh/
+!fish/
+!home-manager/
+!hypr/
+!kitty/
+!mako/
+!myconfigs/
+!nix_files/
+!openbox/
+!tint2/
+!waybar/
+!wofi/
+!wpaperd/
 !.gitignore
 !README.md
