@@ -3,17 +3,30 @@
 
 # except:
 !feh/
+!feh/**
 !fish/
+!fish/**
 !home-manager/
+!home-manager/**
 !hypr/
+!hypr/**
 !kitty/
+!kitty/**
 !mako/
+!mako/**
 !myconfigs/
+!myconfigs/**
 !nix_files/
+!nix_files/**
 !openbox/
+!openbox/**
 !tint2/
+!tint2/**
 !waybar/
+!waybar/**
 !wofi/
+!wofi/**
 !wpaperd/
+!wpaperd/**
 !.gitignore
 !README.md
