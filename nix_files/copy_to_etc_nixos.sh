@@ -23,3 +23,8 @@ if [ "$hn" == "nix-vps" ]; then
     sudo cp nix-vps.nix /etc/nixos/configuration.nix
     sudo cp hardware-configuration_nix-vps.nix /etc/nixos/
 fi
+
+if [ "$hn" == "nix-vps" ]; then
+    sudo cp nix-pi.nix /etc/nixos/configuration.nix
+    sudo cp hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
+fi
