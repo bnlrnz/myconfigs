@@ -15,10 +15,40 @@
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
 
-  networking.hostName = "nix-pi"; # Define your hostname.
-  # Pick only one of the below networking options.
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking = {
+  	hostName = "nix-pi"; # Define your hostname.
+	extraHosts = ''
+		10.10.10.25 nix
+	'';
+	# Pick only one of the below networking options.
+  	wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  	#networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+	
+	interfaces.end0 = {
+	ipv4.addresses = [{
+			address = "10.10.10.74";
+			prefixLength = 24;
+		}];
+	};
+	defaultGateway = {
+		address = "10.10.10.1";
+		interface = "end0";
+	};
+
+	# Open ports in the firewall.
+  	firewall = {
+		enable = true;
+		allowedTCPPorts = [
+			53	# adguard dns
+			80	# adguard
+			3000	# adguard
+			8123 	# home assistant
+		];
+		allowedUDPPorts = [ 
+			53	# adguard dns
+		];
+	};
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -99,18 +129,24 @@
     };
   };
 
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-	53	# adguard dns
-	80	# adguard
-	3000	# adguard
-	8123 	# home assistant
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "";
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      maxJobs = 4;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    }
   ];
-  networking.firewall.allowedUDPPorts = [ 
-	53	# adguard dns
-  ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = true;
+  programs.ssh.extraConfig = ''
+Host builder
+  HostName nix
+  Port 22
+  User ben
+  IdentitiesOnly yes
+  IdentityFile /root/.ssh/id_builder
+  '';
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
