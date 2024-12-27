@@ -38,7 +38,7 @@ in
   #    [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
   };
 
-  # setup wireshark
+  # setup wireshark - setcap and so on
   programs.wireshark.enable = true;
 
   # add tcpreplay group
@@ -279,7 +279,6 @@ in
     wayland-pipewire-idle-inhibit
     wget
     whatsapp-for-linux
-    wirelesstools
     wl-clipboard
     wlogout
     unstable.wlr-layout-ui
@@ -293,11 +292,13 @@ in
     xdg-desktop-portal-gtk
     xdg-desktop-portal
     xfce.thunar
+    xfce.thunar-archive-plugin
     xfce.xfce4-settings
     xorg.libX11
     xorg.xinit
     xwayland
     yazi # terminal file browser
     unstable.zed-editor
+    zip
   ];
 }

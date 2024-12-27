@@ -7,7 +7,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  ctf_ip = "10.13.37.13";
+ ctf_ip = "10.13.37.10";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -39,8 +39,10 @@ in {
   networking.firewall = {
     enable = false;
     checkReversePath = false;
+    allowedTCPPorts = [ 22 ];
     allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
   };
+
   # ctf hosts
   networking.extraHosts =
     ''
@@ -81,7 +83,7 @@ in {
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Configure keymap in X11
+  # Configure keymap in X1133, 5, 207, 22, 60, 31, 58, 15, 244
   services.xserver = {
     xkb.layout = "de";
     xkb.variant = "";
@@ -103,16 +105,11 @@ in {
     extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode"];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC5gryOW0u3DjD5tyg08rTt1VK12yJ9aRoI19SumzVN9 root@nix-pi"
+    ];
   };
   users.defaultUserShell = pkgs.fish;
-
-  #security.wrappers.dumpcap = {
-  #  source = lib.mkDefault "${pkgs.unstable.wireshark}/bin/dumpcap";
-  #  capabilities = "cap_net_raw,cap_net_admin+eip";
-  #  owner = "root";
-  #  group = "wireshark";
-  #  permissions = "u+rx,g+x";
-  #};
 
   security.wrappers.tcpreplay = {
     source = "${pkgs.tcpreplay}/bin/tcpreplay";
@@ -122,8 +119,14 @@ in {
     permissions = "u+rx,g+x";
   };
 
+  # for raspi remote builds
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

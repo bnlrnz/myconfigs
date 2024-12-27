@@ -6,7 +6,7 @@
     feroxbuster
     file
     gef
-    ghidra-bin
+    unstable.ghidra-bin
     gobuster
     hashcat
     lldb
