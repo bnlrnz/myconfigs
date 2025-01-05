@@ -132,20 +132,21 @@
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {
-      hostName = "";
+      hostName = "builder@nix";
       systems = [ "x86_64-linux" "aarch64-linux" ];
+      sshKey = "/home/ben/.ssh/id_builder";
       maxJobs = 4;
-      speedFactor = 2;
+      speedFactor = 4;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
     }
   ];
+
   programs.ssh.extraConfig = ''
-Host builder
-  HostName nix
+Host nix
   Port 22
-  User ben
+  User builder
   IdentitiesOnly yes
-  IdentityFile /root/.ssh/id_builder
+  IdentityFile /home/ben/.ssh/id_builder
   '';
 
   # Copy the NixOS configuration file and link it from the resulting system
