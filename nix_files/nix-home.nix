@@ -105,11 +105,27 @@ in {
     extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode"];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
+  };
+  users.defaultUserShell = pkgs.fish;
+
+  users.users.builder = {
+    description = "builder for raspi";
+    isSystemUser = true;
+    createHome = false;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC5gryOW0u3DjD5tyg08rTt1VK12yJ9aRoI19SumzVN9 root@nix-pi"
     ];
+    group = "builder";
+    uid = 500;
+    shell = pkgs.bash;
+    #useDefaultShell = true;
   };
-  users.defaultUserShell = pkgs.fish;
+
+  users.groups.builder = {
+    gid = 500;
+  };
+
+  nix.settings.trusted-users = [ "builder" ];
 
   security.wrappers.tcpreplay = {
     source = "${pkgs.tcpreplay}/bin/tcpreplay";
