@@ -91,7 +91,7 @@
 	eza
 	dust
 	bat
-	ripgrep
+#	ripgrep
 	zellij
   ];
 
