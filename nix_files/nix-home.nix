@@ -7,7 +7,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
- ctf_ip = "10.13.37.10";
+ ctf_ip = "10.13.37.11";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -102,7 +102,7 @@ in {
   users.users.ben = {
     isNormalUser = true;
     description = "ben";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode"];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode" "pcap" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };

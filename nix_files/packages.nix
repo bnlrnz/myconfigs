@@ -13,6 +13,8 @@ in
 
   # enable fish
   programs.fish.enable = true;
+  # rebuilds can be terribly slow because of fish rebuilding caches
+  # documentation.man.generateCaches = false;
 
   # gnome settings/themes
   programs.dconf.enable = true;
@@ -40,6 +42,18 @@ in
 
   # setup wireshark - setcap and so on
   programs.wireshark.enable = true;
+  
+  # this should work, but does not...
+  # programs.tcpdump.enable = true;
+  # lets do it by hand until fixed:
+  security.wrappers.tcpdump = {
+    owner = "root";
+    group = "pcap";
+    capabilities = "cap_net_raw+p";
+    permissions = "u+rx,g+x";
+    source = lib.getExe pkgs.tcpdump;
+  };
+  users.groups.pcap = { };
 
   # add tcpreplay group
   users.groups.tcpreplay = { };
@@ -266,7 +280,7 @@ in
     unstable.nwg-look
     #unstable.threema-desktop # currently broken 10/07/2024
     unstable.tshark.dev
-    unstable.wireshark
+    wireshark
     usbutils
     usermount
     usrsctp
