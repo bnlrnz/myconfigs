@@ -28,6 +28,23 @@
     fsType = "ext4";
   };
 
+  fileSystems."/run/media/ben/Data_SATA" = {
+    device = "/dev/disk/by-label/Data_SATA";
+    fsType = "auto";
+    options = [
+      "rw"
+      "nosuid"
+      "nodev"
+      "relatime"
+      "user_id=0"
+      "group_id=0"
+      "default_permissions"
+      "allow_other"
+      "blksize=4096"
+      "uhelper=udisks2"
+    ];
+  };
+
   fileSystems."/run/media/ben/Data_M2" = {
     device = "/dev/disk/by-label/Data_M2";
     fsType = "btrfs";
