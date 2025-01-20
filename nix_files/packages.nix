@@ -90,12 +90,13 @@ in
       "steam"
       "steam-original"
       "steam-run"
+      "steam-unwrapped"
   ];
 
   fonts = {
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       font-awesome
       nerdfonts
@@ -142,7 +143,7 @@ in
     bat
     bind
     binwalk
-    bless
+    #bless not maintained anymore
     blueman
     bluez
     bluez-tools
@@ -174,16 +175,17 @@ in
     font-awesome
     gcc
     gdb
+    ghex
     gimp
     gio-sharp
     git
     glib
     glib.dev
     glibc
-    gnome.dconf-editor
-    gnome.file-roller
-    gnome.gnome-keyring
-    gnome.gnome-terminal
+    dconf-editor
+    file-roller
+    gnome-keyring
+    gnome-terminal
     gnumake
     gobject-introspection
     google-chrome
@@ -222,6 +224,7 @@ in
     nettools
     networkmanagerapplet
     nextcloud-client
+    nfs-utils
     nil
     ninja
     nitrogen

@@ -81,17 +81,17 @@
   fileSystems."/mnt/user-belo" = {
     device = "fs1.temislab.de:/vsanfs/user-belo";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
   };
   fileSystems."/mnt/svc-specbutler" = {
     device = "fs1.temislab.de:/vsanfs/svc-specbutler";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
   };
   fileSystems."/mnt/svc-scasbrowser" = {
     device = "fs1.temislab.de:/vsanfs/svc-scasbrowser";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
   };
 
   #services.ollama = {

@@ -7,7 +7,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
- ctf_ip = "10.13.37.11";
+ ctf_ip = "10.13.37.14";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -37,10 +37,15 @@ in {
   networking.nameservers = [ "10.50.1.1" "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
   networking.resolvconf.enable = true;
   networking.firewall = {
-    enable = false;
+    enable = true;
     checkReversePath = false;
-    allowedTCPPorts = [ 22 ];
-    allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
+    allowedTCPPorts = [
+      22    # SSH
+      2049  # NFSv4
+    ];
+    allowedUDPPorts = [
+      4431  # Fortinet VPN
+    ];
   };
 
   # ctf hosts

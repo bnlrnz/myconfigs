@@ -8,10 +8,11 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" "nfs" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  
+  boot.supportedFilesystems = [ "nfs" ];
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/309eef6b-aa69-43be-b517-b1ac8024d4cc";
     fsType = "ext4";
@@ -57,17 +58,16 @@
   # services.xserver.videoDrivers = ["amdgpu"];
 
   # enable opengl
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl.extraPackages = [
+  hardware.graphics.extraPackages = [
     #pkgs.amdvlk
     pkgs.rocmPackages.clr.icd
   ];
