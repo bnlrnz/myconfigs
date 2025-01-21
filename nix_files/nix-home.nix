@@ -15,6 +15,7 @@ in {
     ./packages.nix
     ./steam.nix
     ./pwn.nix
+    ./k3s.nix
   ];
 
   # add unstable channel
