@@ -130,7 +130,7 @@
 
     "clock": {
         "interval": 60,
-        "format": " KW{:%W %a, %d.%m.%Y %H:%M}",
+        "format": " KW{:%V %a, %d.%m.%Y %H:%M}",
         "max-length": 25
     }
 }
