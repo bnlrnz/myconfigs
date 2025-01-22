@@ -21,6 +21,7 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/3EB6-7D8C";
     fsType = "vfat";
+    options = [ "umask=0077" ];
   };
 
   fileSystems."/home/ben/Workspace" = {
