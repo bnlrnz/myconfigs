@@ -8,4 +8,12 @@
   services.k3s.extraFlags = toString [
     # "--debug" # Optionally add additional args to k3s
   ];
+
+  environment.systemPackages = with pkgs; [
+    kubernetes-helm
+  ];
+
+  environment.sessionVariables = {
+    KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+  };
 }
