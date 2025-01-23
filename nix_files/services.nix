@@ -4,11 +4,11 @@
 
   # let this run for now
   # sometimes we need this e.g. for webex
-  services.xserver = {
-    enable = true;
-    displayManager.startx.enable = true;
-    windowManager.openbox.enable = true;
-  };
+  #services.xserver = {
+  #  enable = true;
+  #  displayManager.startx.enable = true;
+  #  windowManager.openbox.enable = true;
+  #};
 
   services.libinput.enable = true;
 

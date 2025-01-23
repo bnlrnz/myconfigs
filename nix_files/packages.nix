@@ -235,8 +235,8 @@ in
     obconf
     okular
     onlyoffice-bin
-    openbox
-    openbox-menu
+    #openbox
+    #openbox-menu
     openssl.dev # dev needed for openssl headers
     patchelf
     pciutils
@@ -268,7 +268,7 @@ in
     tcpreplay
     telegram-desktop
     themechanger
-    tint2
+    #tint2
     tmux
     udevil
     udiskie
