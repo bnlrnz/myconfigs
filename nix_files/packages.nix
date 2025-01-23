@@ -34,7 +34,7 @@ in
     thunar-archive-plugin
     thunar-volman
   ];
-  programs.file-roller.enable = true;
+  #programs.file-roller.enable = true;
 
   # for thumbnails
   services.tumbler.enable = true;
@@ -188,9 +188,9 @@ in
     glib.dev
     glibc
     dconf-editor
-    file-roller
-    gnome-keyring
-    gnome-terminal
+    #file-roller
+    #gnome-keyring
+    #gnome-terminal
     gnumake
     gobject-introspection
     google-chrome
@@ -284,6 +284,7 @@ in
       withSystemd = true;
     })
     hyprshot
+    hyprpolkitagent
     unstable.nwg-displays
     unstable.nwg-look
     #unstable.threema-desktop # currently broken 10/07/2024
