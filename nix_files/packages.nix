@@ -316,8 +316,8 @@ in
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     xdg-desktop-portal
-    xfce.thunar
-    xfce.thunar-archive-plugin
+    #xfce.thunar
+    #xfce.thunar-archive-plugin
     xfce.xfce4-settings
     xorg.libX11
     xorg.xinit
