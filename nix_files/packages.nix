@@ -69,12 +69,9 @@ in
   # enable polkit
   security.polkit.enable = true;
 
+  # idle and lock
   # allow pam access for swaylock
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
+  programs.hyprlock.enable = true;
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
@@ -270,8 +267,8 @@ in
     sqlite
     sqlitebrowser
     swappy
-    swayidle
-    swaylock-effects
+    #swayidle
+    #swaylock-effects
     tcpdump
     tcpreplay
     telegram-desktop
