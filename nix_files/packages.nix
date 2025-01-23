@@ -9,7 +9,15 @@ in
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  nix.gc.automatic = true;
+  # automatic store optimization
+  nix.optimise.automatic = true;
+
+  # garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # enable fish
   programs.fish.enable = true;
