@@ -13,13 +13,18 @@
     "usb_storage"
     "sd_mod"
     #"acpi"
-    "acpi_call"
+    #"acpi_call"
     "thinkpad-acpi"
   ];
 
   boot.initrd.kernelModules = [ "i915" ];
-  boot.kernelModules = [ "kvm-intel" "acpi_call" "i915" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
+  boot.kernelModules = [
+    "kvm-intel"
+    #"acpi_call"
+    "i915"
+  ];
+  
+  #boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
 
   boot.kernelParams = [
     # Force use of the thinkpad_acpi driver for backlight control.
@@ -32,21 +37,20 @@
 
   # intel internal gpu driver
   environment.variables = {
-    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+    VDPAU_DRIVER = lib.mkIf config.hardware.graphics.enable (lib.mkDefault "va_gl");
   };
 
   # enable opengl
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     (if (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11") then vaapiIntel else intel-vaapi-driver)
     libvdpau-va-gl
     intel-media-driver
-    onevpl-intel-gpu
+    vpl-gpu-rt
     intel-compute-runtime
   ];
   
