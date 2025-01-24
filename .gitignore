@@ -18,10 +18,6 @@
 !myconfigs/**
 !nix_files/
 !nix_files/**
-!openbox/
-!openbox/**
-!tint2/
-!tint2/**
 !waybar/
 !waybar/**
 !wofi/
