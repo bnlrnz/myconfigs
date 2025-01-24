@@ -15,6 +15,13 @@
     xwayland.enable = true;
   };
 
+  services.hypridle = {
+    enable = true;
+    #settings = {
+    #   
+    #};
+  };
+
   # enable pipewire
   security.rtkit.enable = true;
   services.pipewire = {

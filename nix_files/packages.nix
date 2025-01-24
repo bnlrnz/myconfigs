@@ -35,7 +35,7 @@ in
     thunar-archive-plugin
     thunar-volman
   ];
-  #programs.file-roller.enable = true;
+  programs.file-roller.enable = true;
 
   # for thumbnails
   services.tumbler.enable = true;
@@ -73,7 +73,8 @@ in
   # idle and lock
   # allow pam access for swaylock
   # enable hyprlock only only on the laptop
-  programs.hyprlock.enable = hostname == "tp-belo";
+  programs.hyprlock.enable = config.networking.hostName == "tp-beltp-belo";
+
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
@@ -213,7 +214,6 @@ in
     kora-icon-theme
     libcap
     libglibutil
-    libnotify
     libreoffice
     libsForQt5.kwallet
     libsForQt5.okular
