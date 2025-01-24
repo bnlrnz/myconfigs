@@ -211,6 +211,7 @@ in
     kora-icon-theme
     libcap
     libglibutil
+    libnotify
     libreoffice
     libsForQt5.kwallet
     libsForQt5.okular

@@ -54,11 +54,12 @@
     intel-compute-runtime
   ];
   
-  # lid close battery
-  services.logind.lidSwitch = "suspend";
-
-  # lid close on dock
-  services.logind.lidSwitchDocked = "ignore";
+  # lid behaviour -> let hyprland handle thie
+  services.logind = {
+    lidSwitch = "suspend";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "suspend";
+  };
 
   # trim command ssd
   services.fstrim.enable = lib.mkDefault true;
