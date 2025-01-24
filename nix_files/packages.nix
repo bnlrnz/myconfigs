@@ -1,9 +1,10 @@
 { config, pkgs, unstable-pkgs, lib, ... }: 
 let
-    unfreePredicate = pkg: builtins.elem (lib.getName pkg) ["mongodb"];   
-    pinnedMongodb = import (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/eb090f7b923b1226e8beb954ce7c8da99030f4a8.tar.gz";
-    }) { config = { allowUnfreePredicate = unfreePredicate; }; };
+  unfreePredicate = pkg: builtins.elem (lib.getName pkg) ["mongodb"];   
+  pinnedMongodb = import (builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/eb090f7b923b1226e8beb954ce7c8da99030f4a8.tar.gz";
+  }) { config = { allowUnfreePredicate = unfreePredicate; }; };
+  hostname = builtins.getEnv "HOSTNAME";
 in
 {
   # linux kernel package
@@ -71,7 +72,8 @@ in
 
   # idle and lock
   # allow pam access for swaylock
-  programs.hyprlock.enable = true;
+  # enable hyprlock only only on the laptop
+  programs.hyprlock.enable = hostname == "tp-belo";
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
