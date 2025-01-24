@@ -1,4 +1,0 @@
-autorandr --change &
-setxkbmap de &
-nitrogen ~/Wallpapers/ --restore &
-tint2 &
