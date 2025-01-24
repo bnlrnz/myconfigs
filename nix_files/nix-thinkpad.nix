@@ -17,15 +17,13 @@ let
       ${pkgs.shadow}/bin/login;
     fi
   '';
-
-  # the bsi ctf host ip
-  ctf_ip = "10.13.37.10";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-thinkpad.nix
     ./services.nix
     ./packages.nix
     ./pwn.nix
+    ./temis.nix
   ];
 
   # add unstable channel
@@ -48,8 +46,6 @@ in {
   networking.networkmanager.wifi.powersave = false;
   networking.nameservers = [
     "1.1.1.1"
-    #"10.50.1.1"
-    #"172.20.10.1"
     "9.9.9.9"
     "8.8.8.8"
   ];
@@ -57,7 +53,6 @@ in {
   networking.firewall = {
     enable = true;
     checkReversePath = false;
-    allowedUDPPorts = [ 4431 ]; # openfortivpn -> 4431
   };
 
   # Whether to enable captive browser, a dedicated Chrome instance to log into captive portals without messing with DNS settings.
@@ -73,25 +68,6 @@ in {
   #    options timeout:1
   #  '';
   #};
-
-  # ctf hosts
-  networking.extraHosts =
-    ''
-      #${ctf_ip} vault.starfleet
-      #${ctf_ip} medical.starfleet
-      #${ctf_ip} crusher.starfleet
-      #${ctf_ip} reynholm.industries
-      #${ctf_ip} bornholm.reynholm.industries
-      #${ctf_ip} recruiting.reynholm.industries
-      #${ctf_ip} recruiter2.reynholm.industries
-      #${ctf_ip} ldap.reynholm.industries
-      #${ctf_ip} cdn.reynholm.industries
-      #${ctf_ip} ns1.reynholm.industries
-      #${ctf_ip} weird.reynholm.industries
-      #${ctf_ip} usersearch.reynholm.industries
-      ${ctf_ip} picshare
-      ${ctf_ip} b2mynht0cjrunxa0cjnuy3l9.ctf.cert-bund.de
-    '';
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -133,14 +109,6 @@ in {
     shell = pkgs.fish;
   };
   users.defaultUserShell = pkgs.fish;
-
-  #security.wrappers.dumpcap = {
-  #  source = lib.mkDefault "${pkgs.unstable.wireshark}/bin/dumpcap";
-  #  capabilities = "cap_net_raw,cap_net_admin+eip";
-  #  owner = "root";
-  #  group = "wireshark";
-  #  permissions = "u+rx,g+x";
-  #};
 
   security.wrappers.tcpreplay = {
     source = "${pkgs.tcpreplay}/bin/tcpreplay";

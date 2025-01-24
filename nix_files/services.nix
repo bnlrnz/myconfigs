@@ -2,14 +2,6 @@
   # allow nix flakes  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # let this run for now
-  # sometimes we need this e.g. for webex
-  #services.xserver = {
-  #  enable = true;
-  #  displayManager.startx.enable = true;
-  #  windowManager.openbox.enable = true;
-  #};
-
   services.libinput.enable = true;
 
   # gnome keyring
@@ -68,31 +60,6 @@
 
   # enable fwupd -> fwupdmgr
   services.fwupd.enable = true;
-
-  # nfs mounts
-  services.rpcbind.enable = true;
- 
-#  fileSystems."/mnt/org-sz31" = {
-#    device = "fs1.temislab.de:/vsanfs/org-sz31";
-#    fsType = "nfs";
-#    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "hard" "nfsvers=4.1" "sec=sys" "rw" "intr" "noexec" "nosuid" "timeo=20"];
-#  };
-
-  fileSystems."/mnt/user-belo" = {
-    device = "fs1.temislab.de:/vsanfs/user-belo";
-    fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
-  };
-  fileSystems."/mnt/svc-specbutler" = {
-    device = "fs1.temislab.de:/vsanfs/svc-specbutler";
-    fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
-  };
-  fileSystems."/mnt/svc-scasbrowser" = {
-    device = "fs1.temislab.de:/vsanfs/svc-scasbrowser";
-    fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
-  };
 
   #services.ollama = {
   # 	enable = true;
