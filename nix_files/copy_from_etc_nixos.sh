@@ -10,6 +10,7 @@ if [ "$hn" == "nix" ]; then
     sudo cp /etc/nixos/steam.nix steam.nix
     sudo cp /etc/nixos/pwn.nix pwn.nix
     sudo cp /etc/nixos/k3s.nix k3s.nix
+    sudo cp /etc/nixos/temis.nix temis.nix
 fi
 
 if [ "$hn" == "tp-belo" ]; then
@@ -18,6 +19,7 @@ if [ "$hn" == "tp-belo" ]; then
     sudo cp /etc/nixos/packages.nix packages.nix
     sudo cp /etc/nixos/services.nix services.nix
     sudo cp /etc/nixos/pwn.nix pwn.nix
+    sudo cp /etc/nixos/temis.nix temis.nix
 fi
 
 if [ "$hn" == "nix-vps" ]; then

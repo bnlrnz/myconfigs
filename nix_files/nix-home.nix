@@ -7,7 +7,6 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
- ctf_ip = "10.13.37.14";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
@@ -16,6 +15,7 @@ in {
     ./steam.nix
     ./pwn.nix
     ./k3s.nix
+    ./temis.nix
   ];
 
   # add unstable channel
@@ -35,41 +35,15 @@ in {
   # Enable networking
   networking.hostName = "nix";
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "10.50.1.1" "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
+  networking.nameservers = [ "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
   networking.resolvconf.enable = true;
   networking.firewall = {
     enable = true;
     checkReversePath = false;
     allowedTCPPorts = [
-      22    # SSH
-      2049  # NFSv4
-    ];
-    allowedUDPPorts = [
-      4431  # Fortinet VPN
+      22    # SSH for pi
     ];
   };
-
-  # ctf hosts
-  networking.extraHosts =
-    ''
-      #${ctf_ip} vault.starfleet
-      #${ctf_ip} medical.starfleet
-      #${ctf_ip} crusher.starfleet
-      #${ctf_ip} reynholm.industries
-      #${ctf_ip} bornholm.reynholm.industries
-      #${ctf_ip} recruiting.reynholm.industries
-      #${ctf_ip} ldap.reynholm.industries
-      #${ctf_ip} cdn.reynholm.industries
-      #${ctf_ip} ns1.reynholm.industries
-      #${ctf_ip} weird.reynholm.industries
-      #${ctf_ip} usersearch.reynholm.industries
-      #${ctf_ip} recruiter2.reynholm.industries
-      ${ctf_ip} b2mynht0cjrunxa0cjnuy3l9.ctf.cert-bund.de
-      ${ctf_ip} picshare
-      #${ctf_ip} lana.ctf.cert-bund.de
-      #${ctf_ip} cheryl.ctf.cert-bund.de
-      #${ctf_ip} malory.ctf.cert-bund.de
-    '';
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -124,7 +98,6 @@ in {
     group = "builder";
     uid = 500;
     shell = pkgs.bash;
-    #useDefaultShell = true;
   };
 
   users.groups.builder = {
