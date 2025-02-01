@@ -17,6 +17,7 @@
         "wireplumber",
         "backlight",
         "custom/vpn_temis",
+        "custom/vpn_bsi_ctf",
         "tray",
         "custom/chat",
         "custom/keepass",
@@ -42,14 +43,23 @@
     },
 
     "custom/vpn_temis":  {
-        "format": " {icon} ",
-        "tooltip-format": "{icon} TEMIS",
-        "exec": "ip route | grep -q '10.0.2.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
+        "format": " {icon} TEMIS",
+        "exec": "ip route | grep -q '10.50.1.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
         "on-click": "nmcli c show --active | grep 'TEMIS Openconnect' && nmcli c down 'TEMIS Openconnect' || nmcli c up 'TEMIS Openconnect'",
         "return-type": "json",
         "interval": 5,
         "format-icons": ["",""]
     },
+
+    "custom/vpn_bsi_ctf":  {
+        "format": " {icon} CTF",
+        "exec": "ip route | grep -q '10.13.37.0' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
+        "on-click": "ip a | grep bsictfwireguard | grep inet && sudo systemctl stop wg-quick-bsictfwireguard.service || sudo systemctl start wg-quick-bsictfwireguard.service",
+        "return-type": "json",
+        "interval": 5,
+        "format-icons": ["",""]
+    },
+
 
     "hyprland/workspaces": {
         "format": "{name}",
