@@ -1,33 +1,35 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-hn=$(hostname -f)
+hn=$(hostname)
+
+echo "Copying files for $hn"
 
 if [ "$hn" == "nix" ]; then
-    sudo cp nix-home.nix /etc/nixos/configuration.nix
-    sudo cp hardware-configuration_nix-home.nix /etc/nixos/
-    sudo cp packages.nix /etc/nixos/
-    sudo cp services.nix /etc/nixos/
-    sudo cp steam.nix /etc/nixos/
-    sudo cp pwn.nix /etc/nixos/
-    sudo cp k3s.nix /etc/nixos/
-    sudo cp temis.nix /etc/nixos/
+    sudo cp -v nix-home.nix /etc/nixos/configuration.nix
+    sudo cp -v hardware-configuration_nix-home.nix /etc/nixos/
+    sudo cp -v packages.nix /etc/nixos/
+    sudo cp -v services.nix /etc/nixos/
+    sudo cp -v steam.nix /etc/nixos/
+    sudo cp -v pwn.nix /etc/nixos/
+    sudo cp -v k3s.nix /etc/nixos/
+    sudo cp -v temis.nix /etc/nixos/
 fi
 
 if [ "$hn" == "tp-belo" ]; then
-    sudo cp nix-thinkpad.nix /etc/nixos/configuration.nix
-    sudo cp hardware-configuration_nix-thinkpad.nix /etc/nixos/
-    sudo cp packages.nix /etc/nixos/
-    sudo cp services.nix /etc/nixos/
-    sudo cp pwn.nix /etc/nixos/
-    sudo cp temis.nix /etc/nixos/
+    sudo cp -v nix-thinkpad.nix /etc/nixos/configuration.nix
+    sudo cp -v hardware-configuration_nix-thinkpad.nix /etc/nixos/
+    sudo cp -v packages.nix /etc/nixos/
+    sudo cp -v services.nix /etc/nixos/
+    sudo cp -v pwn.nix /etc/nixos/
+    sudo cp -v temis.nix /etc/nixos/
 fi
 
 if [ "$hn" == "nix-vps" ]; then
-    sudo cp nix-vps.nix /etc/nixos/configuration.nix
-    sudo cp hardware-configuration_nix-vps.nix /etc/nixos/
+    sudo cp -v nix-vps.nix /etc/nixos/configuration.nix
+    sudo cp -v hardware-configuration_nix-vps.nix /etc/nixos/
 fi
 
 if [ "$hn" == "nix-vps" ]; then
-    sudo cp nix-pi.nix /etc/nixos/configuration.nix
-    sudo cp hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
+    sudo cp -v nix-pi.nix /etc/nixos/configuration.nix
+    sudo cp -v hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
 fi
