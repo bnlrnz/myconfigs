@@ -36,7 +36,8 @@ in {
   networking.hostName = "nix";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
-  networking.resolvconf.enable = true;
+  #networking.resolvconf.enable = true;
+  services.resolved.enable = true;
   networking.firewall = {
     enable = true;
     checkReversePath = false;
@@ -82,7 +83,7 @@ in {
   users.users.ben = {
     isNormalUser = true;
     description = "ben";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode" "pcap" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode" "pcap" "wireguard" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };

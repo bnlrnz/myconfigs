@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   ctf_ip = "10.13.37.10";
@@ -23,7 +23,42 @@ in
     sqlmap
     steghide
     strace
+    wireguard-tools
   ];
+
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+      commands = [
+        { command = "${pkgs.systemd}/bin/systemctl start wg-quick-bsictfwireguard.service"; options = [ "NOPASSWD" ]; }
+        { command = "${pkgs.systemd}/bin/systemctl stop wg-quick-bsictfwireguard.service"; options = [ "NOPASSWD" ]; }
+      ];
+      groups = [ "wireguard" ];
+    }];
+  };
+
+  # wireguard vpn
+  networking.wg-quick.interfaces.bsictfwireguard = {
+    autostart = false;
+
+    address = [ "10.133.70.5/23" ];
+    dns = [ "10.13.37.1, ctf.cert-bund.de" ];
+    privateKeyFile = "/root/bsictfwireguard_private_key";
+    mtu = 1400;
+
+    peers = [
+      {
+        publicKey = "hz07Q5QYYPGwoLFr7TDK0wGVqjMBwbEaXy9yf0qDSjA=";
+        presharedKeyFile = "/root/bsictfwireguard_preshared_key";
+        allowedIPs = [ "10.13.37.0/24" "10.133.7.0/24" ];
+        endpoint = "vpn.ctf.cert-bund.de:1337";
+        persistentKeepalive = 25;
+      }
+    ];
+  };
+
+  # for wireguard VPN
+  networking.firewall.checkReversePath = false;
 
   # ctf hosts
   networking.extraHosts =

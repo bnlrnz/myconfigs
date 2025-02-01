@@ -68,6 +68,7 @@ button:hover {
 #custom-chat,
 #custom-power_btn,
 #custom-vpn_temis,
+#custom-vpn_bsi_ctf,
 #window,
 #taskbar,
 #cpu,
@@ -114,6 +115,7 @@ button:hover {
 #custom-chat:hover,
 #custom-power_btn:hover,
 #custom-vpn_temis:hover,
+#custom-vpn_bsi_ctf:hover,
 *:hover{
     background: @pink;
     border-radius: 20px;
