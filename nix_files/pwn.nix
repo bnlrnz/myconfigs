@@ -26,12 +26,15 @@ in
     wireguard-tools
   ];
 
+  # introducing a wireguard group
+  users.groups.wireguard = {};
+
   security.sudo = {
     enable = true;
     extraRules = [{
       commands = [
-        { command = "${pkgs.systemd}/bin/systemctl start wg-quick-bsictfwireguard.service"; options = [ "NOPASSWD" ]; }
-        { command = "${pkgs.systemd}/bin/systemctl stop wg-quick-bsictfwireguard.service"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl start wg-quick-bsictfwireguard.service"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl stop wg-quick-bsictfwireguard.service"; options = [ "NOPASSWD" ]; }
       ];
       groups = [ "wireguard" ];
     }];
@@ -42,7 +45,7 @@ in
     autostart = false;
 
     address = [ "10.133.70.5/23" ];
-    dns = [ "10.13.37.1, ctf.cert-bund.de" ];
+    dns = [ "10.133.7.150, ctf.cert-bund.de" ];
     privateKeyFile = "/root/bsictfwireguard_private_key";
     mtu = 1400;
 
