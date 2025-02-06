@@ -104,7 +104,7 @@ in {
   users.users.belo = {
     isNormalUser = true;
     description = "belo";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "wireguard" "tcpreplay" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
