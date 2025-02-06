@@ -49,7 +49,8 @@ in {
     "9.9.9.9"
     "8.8.8.8"
   ];
-  networking.resolvconf.enable = true;
+  #networking.resolvconf.enable = true;
+  services.resolved.enable = true;
   networking.firewall = {
     enable = true;
     checkReversePath = false;
