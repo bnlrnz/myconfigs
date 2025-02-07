@@ -13,18 +13,18 @@
     "usb_storage"
     "sd_mod"
     #"acpi"
-    #"acpi_call"
+    "acpi_call"
     "thinkpad-acpi"
   ];
 
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [
     "kvm-intel"
-    #"acpi_call"
+    "acpi_call"
     "i915"
   ];
   
-  #boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
 
   boot.kernelParams = [
     # Force use of the thinkpad_acpi driver for backlight control.
