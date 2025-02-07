@@ -49,13 +49,9 @@ in {
     "9.9.9.9"
     "8.8.8.8"
   ];
-  #networking.resolvconf.enable = true;
   services.resolved.enable = true;
-  networking.firewall = {
-    enable = true;
-    checkReversePath = false;
-  };
-
+  networking.firewall.enable = true;
+    
   # Whether to enable captive browser, a dedicated Chrome instance to log into captive portals without messing with DNS settings.
   programs.captive-browser.enable = true;
   programs.captive-browser.interface = "wlp0s20f3";

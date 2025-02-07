@@ -35,8 +35,11 @@ in {
   # Enable networking
   networking.hostName = "nix";
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
-  #networking.resolvconf.enable = true;
+  networking.nameservers = [
+    "1.1.1.1"
+    "9.9.9.9"
+    "8.8.8.8"
+  ];
   services.resolved.enable = true;
   networking.firewall = {
     enable = true;
