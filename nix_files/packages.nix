@@ -189,9 +189,6 @@ in
     glib.dev
     glibc
     dconf-editor
-    #file-roller
-    #gnome-keyring
-    #gnome-terminal
     gnumake
     gobject-introspection
     google-chrome
@@ -241,8 +238,6 @@ in
     obconf
     okular
     onlyoffice-bin
-    #openbox
-    #openbox-menu
     openssl.dev # dev needed for openssl headers
     patchelf
     pciutils
@@ -268,13 +263,10 @@ in
     sqlite
     sqlitebrowser
     swappy
-    #swayidle
-    #swaylock-effects
     tcpdump
     tcpreplay
     telegram-desktop
     themechanger
-    #tint2
     tmux
     udevil
     udiskie
@@ -286,7 +278,6 @@ in
     })
     hyprshot
     hyprpolkitagent
-    unstable.nwg-displays
     unstable.nwg-look
     #unstable.threema-desktop # currently broken 10/07/2024
     unstable.tshark.dev
@@ -315,8 +306,6 @@ in
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     xdg-desktop-portal
-    #xfce.thunar
-    #xfce.thunar-archive-plugin
     xfce.xfce4-settings
     xorg.libX11
     xorg.xinit
