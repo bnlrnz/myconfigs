@@ -71,8 +71,7 @@ in
 
   # idle and lock
   # allow pam access for swaylock
-  # enable hyprlock only only on the laptop
-  programs.hyprlock.enable = config.networking.hostName == "tp-belo";
+  programs.hyprlock.enable = true; # this is a handy trick: config.networking.hostName == "tp-belo";
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
