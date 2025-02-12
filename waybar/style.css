@@ -83,6 +83,7 @@ button:hover {
 #workspaces,
 #wireplumber,
 #backlight {
+    font-variant: small-caps;
     background: @background;
     opacity: 1.0;
     padding: 0 5px;
