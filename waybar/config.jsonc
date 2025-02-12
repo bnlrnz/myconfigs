@@ -19,8 +19,8 @@
         "custom/vpn_temis",
         "custom/vpn_bsi_ctf",
         "tray",
-        "custom/chat",
-        "custom/keepass",
+        //"custom/chat",
+        //"custom/keepass",
         "clock",
     ],
 
