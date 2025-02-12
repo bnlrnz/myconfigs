@@ -43,7 +43,7 @@
     },
 
     "custom/vpn_temis":  {
-        "format": " {icon} TEMIS",
+        "format": " {icon} Temis",
         "exec": "ip route | grep -q '10.50.1.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
         "on-click": "nmcli c show --active | grep 'TEMIS Openconnect' && nmcli c down 'TEMIS Openconnect' || nmcli c up 'TEMIS Openconnect'",
         "return-type": "json",
