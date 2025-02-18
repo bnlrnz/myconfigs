@@ -22,6 +22,7 @@ if [ "$hn" == "tp-belo" ]; then
     sudo cp -v services.nix /etc/nixos/
     sudo cp -v pwn.nix /etc/nixos/
     sudo cp -v temis.nix /etc/nixos/
+    sudo cp -v k3s.nix /etc/nixos/
 fi
 
 if [ "$hn" == "nix-vps" ]; then

@@ -24,6 +24,7 @@ in {
     ./packages.nix
     ./pwn.nix
     ./temis.nix
+    ./k3s.nix
   ];
 
   # add unstable channel
@@ -101,7 +102,7 @@ in {
   users.users.belo = {
     isNormalUser = true;
     description = "belo";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "wireguard" "tcpreplay" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "wireguard" "tcpreplay" "kubeusers" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
