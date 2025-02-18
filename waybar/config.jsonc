@@ -52,7 +52,7 @@
     },
 
     "custom/vpn_bsi_ctf":  {
-        "format": " {icon} CTF",
+        "format": " {icon} ctf",
         "exec": "ip route | grep -q '10.13.37.0' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
         "on-click": "ip route | grep -q '10.13.37.0' && sudo systemctl stop wg-quick-bsictfwireguard.service || sudo systemctl start wg-quick-bsictfwireguard.service",
         "return-type": "json",
