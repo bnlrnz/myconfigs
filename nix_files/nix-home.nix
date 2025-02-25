@@ -15,7 +15,7 @@ in {
     ./steam.nix
     ./pwn.nix
     #./k3s.nix
-    ./podman.nix
+    #./podman.nix
     ./temis.nix
   ];
 
@@ -87,7 +87,7 @@ in {
   users.users.ben = {
     isNormalUser = true;
     description = "ben";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode" "pcap" "wireguard" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "tcpreplay" "gamemode" "pcap" "wireguard" "fuse" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
