@@ -242,7 +242,6 @@ in
     pciutils
     phinger-cursors
     pkg-config
-    podman
     polkit_gnome
     protontricks
     protonup # update manager for proton

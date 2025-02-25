@@ -13,6 +13,7 @@ if [ "$hn" == "nix" ]; then
     sudo cp -v pwn.nix /etc/nixos/
     sudo cp -v k3s.nix /etc/nixos/
     sudo cp -v temis.nix /etc/nixos/
+    sudo cp -v podman.nix /etc/nixos/
 fi
 
 if [ "$hn" == "tp-belo" ]; then
@@ -23,6 +24,7 @@ if [ "$hn" == "tp-belo" ]; then
     sudo cp -v pwn.nix /etc/nixos/
     sudo cp -v temis.nix /etc/nixos/
     sudo cp -v k3s.nix /etc/nixos/
+    sudo cp -v podman.nix /etc/nixos/
 fi
 
 if [ "$hn" == "nix-vps" ]; then
