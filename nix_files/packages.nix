@@ -246,11 +246,11 @@ in
     protontricks
     protonup # update manager for proton
     pwvucontrol
-    python311Full
-    python311Packages.dbus-python
-    python311Packages.ipython
-    python311Packages.pip
-    python311Packages.ipdb
+    python312Full
+    python312Packages.dbus-python
+    python312Packages.ipython
+    python312Packages.pip
+    python312Packages.ipdb
     qalculate-gtk
     ripgrep
     rofi
@@ -268,12 +268,6 @@ in
     tmux
     udevil
     udiskie
-    hyprland
-    (pkgs.hyprland.override {
-      enableXWayland = true;
-      legacyRenderer = false;
-      withSystemd = true;
-    })
     hyprshot
     hyprpolkitagent
     unstable.nwg-look
