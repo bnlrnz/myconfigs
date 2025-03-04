@@ -1,23 +1,4 @@
 { config, pkgs, unstable-pkgs, lib, ... }:
-let
-  kubectl-fzf = pkgs.buildGoModule rec {
-    pname = "kubectl-fzf";
-    version = "main"; # Replace with the latest version if needed
-
-    src = pkgs.fetchgit {
-      url = "https://github.com/bonnefoa/kubectl-fzf.git";
-      rev = "main";
-      sha256 = "sha256-NPCsTJYgiBA1xoZq6TH/hCJYOFdoj6Exzb4D9pLRqZQ="; # Replace with actual SHA256
-    };
-
-    vendorHash = "sha256-dOEYHMHHaksy7K1PgfFrSzRcucOgnHjZFpl+/2A1Zzs=";  # Let Nix fetch dependencies
-
-    subPackages = [
-      "cmd/kubectl-fzf-completion"
-      "cmd/kubectl-fzf-server"
-    ];
-  };
-in
 {
   networking.firewall.allowedTCPPorts = [
     6443 # k3s
@@ -31,8 +12,6 @@ in
 
   environment.systemPackages = with pkgs; [
     kubernetes-helm
-    fzf
-    kubectl-fzf
   ];
 
   users.groups.kubeusers = {};
