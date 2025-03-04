@@ -1,10 +1,4 @@
 { config, pkgs, unstable-pkgs, lib, ... }: 
-let
-  unfreePredicate = pkg: builtins.elem (lib.getName pkg) ["mongodb"];   
-  pinnedMongodb = import (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/eb090f7b923b1226e8beb954ce7c8da99030f4a8.tar.gz";
-  }) { config = { allowUnfreePredicate = unfreePredicate; }; };
-in
 {
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -85,7 +79,7 @@ in
     builtins.elem (lib.getName pkg) [
       "webex"
       "burpsuite"
-      "mongodb"
+      "mongodb-ce"
       "mongodb-compass"
       "libsciter"
       "google-chrome"
@@ -134,7 +128,7 @@ in
   environment.systemPackages = with pkgs; [
     ### unfree packages
     webex
-    pinnedMongodb.mongodb
+    mongodb-ce
     mongodb-compass
     libsciter
     google-chrome
@@ -155,7 +149,6 @@ in
     brightnessctl
     btop
     btrfs-progs
-    cairo
     cairo.dev
     clang
     cliphist
@@ -184,7 +177,6 @@ in
     gimp
     gio-sharp
     git
-    glib
     glib.dev
     glibc
     dconf-editor
@@ -209,6 +201,7 @@ in
     libcap
     libglibutil
     libreoffice
+    librewolf-bin
     libsForQt5.kwallet
     libsForQt5.okular
     libsForQt5.qt5ct
