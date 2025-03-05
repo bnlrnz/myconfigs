@@ -142,7 +142,7 @@
     bat
     bind
     binwalk
-    #bless not maintained anymore
+    #bless not maintained anymore -> try Okteta
     blueman
     bluez
     bluez-tools
@@ -229,6 +229,7 @@
     ntfs3g
     obconf
     okular
+    okteta
     onlyoffice-bin
     openssl.dev # dev needed for openssl headers
     patchelf
@@ -247,7 +248,7 @@
     qalculate-gtk
     ripgrep
     rofi
-    #rustdesk
+    rustdesk-flutter
     scrcpy
     signal-desktop
     slurp
@@ -264,7 +265,7 @@
     hyprshot
     hyprpolkitagent
     unstable.nwg-look
-    #unstable.threema-desktop # currently broken 10/07/2024
+    unstable.threema-desktop # currently broken 10/07/2024
     unstable.tshark.dev
     wireshark
     usbutils

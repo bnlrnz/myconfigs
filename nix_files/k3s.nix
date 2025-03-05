@@ -39,7 +39,11 @@
     };
   };
 
-  environment.sessionVariables = {
+  environment.sessionVariables = rec {
     KUBECONFIG = "$HOME/.kube/config";
   };
+  # make sure to have the config there
+  #mkdir ~/.kube 2> /dev/null
+  #sudo k3s kubectl config view --raw > "$KUBECONFIG"
+  #chmod 600 "$KUBECONFIG"
 }
