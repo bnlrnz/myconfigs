@@ -262,6 +262,7 @@
     tmux
     udevil
     udiskie
+    hyprland-monitor-attached
     hyprshot
     hyprpolkitagent
     unstable.nwg-look
