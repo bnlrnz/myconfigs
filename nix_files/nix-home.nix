@@ -14,7 +14,7 @@ in {
     ./packages.nix
     ./steam.nix
     ./pwn.nix
-    #./k3s.nix
+    ./k3s.nix
     #./podman.nix
     ./temis.nix
   ];
