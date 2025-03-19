@@ -32,7 +32,7 @@ if [ "$hn" == "nix-vps" ]; then
     sudo cp -v hardware-configuration_nix-vps.nix /etc/nixos/
 fi
 
-if [ "$hn" == "nix-vps" ]; then
+if [ "$hn" == "nix-pi" ]; then
     sudo cp -v nix-pi.nix /etc/nixos/configuration.nix
     sudo cp -v hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
 fi
