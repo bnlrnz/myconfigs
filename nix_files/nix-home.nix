@@ -14,7 +14,7 @@ in {
     ./packages.nix
     ./steam.nix
     ./pwn.nix
-    ./k3s.nix
+    #./k3s.nix
     #./podman.nix
     ./temis.nix
   ];
@@ -31,7 +31,11 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Limit generations
-  boot.loader.systemd-boot.configurationLimit = 20;
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # optimise store
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "12:15" ];
 
   # Enable networking
   networking.hostName = "nix";
