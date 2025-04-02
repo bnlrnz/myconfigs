@@ -24,7 +24,7 @@ in {
     ./packages.nix
     ./pwn.nix
     ./temis.nix
-    ./k3s.nix
+    #./k3s.nix
   ];
 
   # add unstable channel
