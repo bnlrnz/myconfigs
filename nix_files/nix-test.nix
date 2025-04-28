@@ -46,6 +46,8 @@ in {
     options = "--delete-older-than 30d";
   };
 
+  virtualisation.virtualbox.guest.enable = true;
+
   # Enable networking
   networking.hostName = "nix-test"; # Define your hostname.
   networking.networkmanager.enable = true;
