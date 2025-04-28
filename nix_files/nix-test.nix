@@ -122,7 +122,7 @@ in {
   xdg.portal.lxqt.styles = [
         pkgs.libsForQt5.qtstyleplugin-kvantum
         pkgs.breeze-qt5
-        pkgs.qtcurve
+        pkgs.libsForQt5.qtcurve
   ];
 
   # kwallet needed by python keyring
