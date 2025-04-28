@@ -117,17 +117,13 @@ in {
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
 
-  # setup hyprland
-  programs.xwayland.enable = true;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  # idle and lock
-  # allow pam access for swaylock
-  services.hypridle.enable = true;
-  programs.hyprlock.enable = true; # this is a handy trick: config.networking.hostName == "tp-belo";
+  services.xserver.desktopManager.lxqt.enable = true;
+  xdg.portal.lxqt.enable = true;
+  xdg.portal.lxqt.styles = [
+        pkgs.libsForQt5.qtstyleplugin-kvantum
+        pkgs.breeze-qt5
+        pkgs.qtcurve
+  ];
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
@@ -191,13 +187,10 @@ in {
 
   qt.platformTheme = "lxqt";
 
-  # kvantum theme
-  xdg.portal.lxqt.enable = true;
-  
   # enable polkit
   security.polkit.enable = true;
 
-    # Allow unfree packages
+  # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
@@ -274,7 +267,6 @@ in {
     gio-sharp
     git
     dconf-editor
-    grim
     gsettings-desktop-schemas
     gtk2
     gtk3
@@ -304,9 +296,7 @@ in {
     networkmanagerapplet
     nfs-utils
     nil
-    nitrogen
     nixos-firewall-tool
-    nmap
     noto-fonts-color-emoji
     ntfs3g
     obconf
@@ -325,18 +315,13 @@ in {
     qalculate-gtk
     ripgrep
     signal-desktop
-    slurp
     sqlitebrowser
-    swappy
     tcpdump
     telegram-desktop
     themechanger
     tmux
     udevil
     udiskie
-    hyprland-monitor-attached
-    hyprshot
-    hyprpolkitagent
     unstable.nwg-look
     usbutils
     usermount
@@ -344,16 +329,8 @@ in {
     vim
     vscode
     vulkan-tools
-    waybar
-    wayland
-    wayland-pipewire-idle-inhibit
     wget
-    wl-clipboard
-    wlogout
-    unstable.wlr-layout-ui
-    wlr-randr
-    wofi
-    wpaperd
+    rofi
     wrapGAppsHook
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
@@ -362,7 +339,6 @@ in {
     xfce.xfce4-settings
     xorg.libX11
     xorg.xinit
-    xwayland
     unstable.zed-editor
     zip
   ];
