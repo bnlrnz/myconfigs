@@ -119,6 +119,7 @@ in {
 
   services.xserver.enable = true;
   services.xserver.xkb.layout = "de";
+  services.xserver.xkb.variant = "nodeadkeys";
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
   xdg.portal.lxqt.enable = true;
