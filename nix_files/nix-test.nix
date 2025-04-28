@@ -117,6 +117,8 @@ in {
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
 
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
   xdg.portal.lxqt.enable = true;
   #xdg.portal.lxqt.styles = [
