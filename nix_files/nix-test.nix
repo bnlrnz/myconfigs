@@ -119,11 +119,11 @@ in {
 
   services.xserver.desktopManager.lxqt.enable = true;
   xdg.portal.lxqt.enable = true;
-  xdg.portal.lxqt.styles = [
-        pkgs.libsForQt5.qtstyleplugin-kvantum
-        pkgs.breeze-qt5
-        pkgs.libsForQt5.qtcurve
-  ];
+  #xdg.portal.lxqt.styles = [
+  #      pkgs.libsForQt5.qtstyleplugin-kvantum
+  #      pkgs.breeze-qt5
+  #      pkgs.libsForQt5.qtcurve
+  #];
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
