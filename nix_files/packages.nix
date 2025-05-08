@@ -134,6 +134,7 @@
     google-chrome
     vscode
     ###
+    acpi
     allure
     alsa-utils
     android-tools
@@ -200,6 +201,7 @@
     kora-icon-theme
     libcap
     libglibutil
+    libnotify
     libreoffice
     librewolf-bin
     libsForQt5.kwallet

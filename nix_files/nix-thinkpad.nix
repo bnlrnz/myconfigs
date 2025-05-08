@@ -17,6 +17,18 @@ let
       ${pkgs.shadow}/bin/login;
     fi
   '';
+  batteryCheckScript = ''
+    #!${pkgs.bash}/bin/bash
+    BAT_PCT=$(${pkgs.acpi}/bin/acpi -b | ${pkgs.gnugrep}/bin/grep -P -o '[0-9]+(?=%)')
+    BAT_STA=$(${pkgs.acpi}/bin/acpi -b | ${pkgs.gnugrep}/bin/grep -P -o '\w+(?=,)')
+    echo "$(date) battery status:$BAT_STA percentage:$BAT_PCT"
+    if [ "$BAT_PCT" -le 10 ] && [ "$BAT_PCT" -gt 5 ] && [ "$BAT_STA" = "Discharging" ]; then
+      DISPLAY=:0.0 ${pkgs.libnotify}/bin/notify-send -c device -u normal "󰁺 Low Battery" "Would be wise to keep my charger nearby."
+    fi
+    if [ "$BAT_PCT" -le 5 ] && [ "$BAT_STA" = "Discharging" ]; then
+      DISPLAY=:0.0 ${pkgs.libnotify}/bin/notify-send -c device -u critical "󰁺 Low Battery" "Charge me or watch me die!"
+    fi
+  '';
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-thinkpad.nix
@@ -107,6 +119,27 @@ in {
     shell = pkgs.fish;
   };
   users.defaultUserShell = pkgs.fish;
+
+  systemd.user.services.battery-alert = {
+    description = "Battery Status Notifier";
+    after = [ "graphical-session.target" ];
+    wantedBy = [ "default.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.writeShellScript "battery-check" batteryCheckScript}";
+      Type = "oneshot";
+    };
+  };
+
+  systemd.user.timers.battery-alert = {
+    description = "Timer for battery alert";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5min";
+      OnUnitActiveSec = "5min";
+      Unit = "battery-alert.service";
+    };
+  };
 
   security.wrappers.tcpreplay = {
     source = "${pkgs.tcpreplay}/bin/tcpreplay";
