@@ -119,7 +119,18 @@ in {
   services.xserver.enable = true;
   services.xserver.xkb.layout = "de";
   services.xserver.xkb.variant = "nodeadkeys";
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm = {
+  	enable = true;
+	greeters.gtk = {
+		enable = true;
+		theme.name = "Dracula";
+		theme.package = pkgs.dracula-theme;
+		iconTheme.name = "Dracula";
+		iconTheme.package = pkgs.dracula-icon-theme;
+		cursorTheme.name = "Phinger Cursors (light)";
+		cursorTheme.package = pkgs.phinger-cursors;
+  	};
+  };
   services.xserver.desktopManager.lxqt.enable = true;
   xdg.portal.lxqt.enable = true;
 
@@ -290,6 +301,7 @@ in {
     netcat
     nettools
     networkmanagerapplet
+    nm-tray
     nfs-utils
     nil
     nixos-firewall-tool
