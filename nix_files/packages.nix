@@ -82,7 +82,7 @@
       "mongodb-ce"
       "mongodb-compass"
       "libsciter"
-      "google-chrome"
+      #"google-chrome"
       "vscode"
       "corefonts"
       "vista-fonts"
@@ -131,7 +131,7 @@
     mongodb-ce
     mongodb-compass
     libsciter
-    google-chrome
+    #google-chrome
     vscode
     ###
     acpi
@@ -183,7 +183,6 @@
     dconf-editor
     gnumake
     gobject-introspection
-    google-chrome
     gparted
     grim
     gsettings-desktop-schemas
