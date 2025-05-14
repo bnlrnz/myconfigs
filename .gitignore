@@ -19,6 +19,8 @@ hypr/monitors.conf
 !myconfigs/**
 !nix_files/
 !nix_files/**
+!openbox/
+!openbox/**
 !waybar/
 !waybar/**
 !wofi/
