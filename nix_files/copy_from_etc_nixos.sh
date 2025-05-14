@@ -37,3 +37,8 @@ if [ "$hn" == "nix-pi" ]; then
     sudo cp -v /etc/nixos/configuration.nix nix-pi.nix
     sudo cp -v /etc/nixos/hardware-configuration.nix hardware-configuration_nix-pi.nix
 fi
+
+if [ "$hn" == "nix-test" ]; then
+    sudo cp -v /etc/nixos/configuration.nix nix-test.nix
+    sudo cp -v /etc/nixos/hardware-configuration.nix hardware-configuration_nix-test.nix
+fi

@@ -36,3 +36,9 @@ if [ "$hn" == "nix-pi" ]; then
     sudo cp -v nix-pi.nix /etc/nixos/configuration.nix
     sudo cp -v hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
 fi
+
+if [ "$hn" == "nix-test" ]; then
+    sudo cp -v nix-test.nix /etc/nixos/configuration.nix
+    sudo cp -v hardware-configuration_nix-test.nix /etc/nixos/hardware-configuration.nix
+    sudo cp -v temis.nix /etc/nixos/
+fi

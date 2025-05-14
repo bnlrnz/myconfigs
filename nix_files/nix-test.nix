@@ -10,16 +10,17 @@ let
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
 
   # auto login script only for tty1 and belo
-  script = pkgs.writeText "login-program.sh" ''
-    if [[ "$(tty)" == '/dev/tty1' ]]; then
-      ${pkgs.shadow}/bin/login -f belo;
-    else
-      ${pkgs.shadow}/bin/login;
-    fi
-  '';
+  #script = pkgs.writeText "login-program.sh" ''
+  #  if [[ "$(tty)" == '/dev/tty1' ]]; then
+  #    ${pkgs.shadow}/bin/login -f belo;
+  #  else
+  #   ${pkgs.shadow}/bin/login;
+  # fi
+  #'';
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./temis.nix	
   ];
 
   # add unstable channel
@@ -30,8 +31,6 @@ in {
   };
 
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
@@ -65,7 +64,7 @@ in {
     
   # Whether to enable captive browser, a dedicated Chrome instance to log into captive portals without messing with DNS settings.
   programs.captive-browser.enable = true;
-  programs.captive-browser.interface = "wlp0s20f3";
+  programs.captive-browser.interface = "enp0s3";
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -88,12 +87,12 @@ in {
   # Configure console keymap
   console.keyMap = "de";
 
-  # services.getty.autologinUser = "belo"; 
-  services.getty = {
-    loginProgram = "${pkgs.bash}/bin/sh";
-    loginOptions = toString script;
-    extraArgs = [ "--skip-login" ];
-  };
+  services.getty.autologinUser = "belo"; 
+  #services.getty = {
+  #  loginProgram = "${pkgs.bash}/bin/sh";
+  #  loginOptions = toString script;
+  #  extraArgs = [ "--skip-login" ];
+  #};
 
   # allow users to build packages
   nix.settings.allowed-users = [ "@wheel" "belo" ];
@@ -114,8 +113,8 @@ in {
   services.libinput.enable = true;
   
   # gnome keyring
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
+  #services.gnome.gnome-keyring.enable = true;
+  #security.pam.services.login.enableGnomeKeyring = true;
 
   services.xserver.enable = true;
   services.xserver.xkb.layout = "de";
@@ -123,14 +122,9 @@ in {
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
   xdg.portal.lxqt.enable = true;
-  #xdg.portal.lxqt.styles = [
-  #      pkgs.libsForQt5.qtstyleplugin-kvantum
-  #      pkgs.breeze-qt5
-  #      pkgs.libsForQt5.qtcurve
-  #];
 
   # kwallet needed by python keyring
-  security.pam.services.kdewallet.enableKwallet = true;
+  #security.pam.services.kdewallet.enableKwallet = true;
 
   # enable pipewire
   security.rtkit.enable = true;
@@ -211,7 +205,7 @@ in {
       noto-fonts-cjk-sans
       noto-fonts-emoji
       font-awesome
-      nerdfonts
+      #nerdfonts
       source-han-sans
       open-sans
       google-fonts
@@ -282,8 +276,6 @@ in {
     keepassxc
     killall
     kitty
-    kora-icon-theme
-    libsForQt5.kwallet
     libsForQt5.okular
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
@@ -334,13 +326,12 @@ in {
     vscode
     vulkan-tools
     wget
+    wmctrl
     rofi
     wrapGAppsHook
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     xdg-desktop-portal
-    xfce.xfce4-settings
+    xdotool
     xorg.libX11
     xorg.xinit
     unstable.zed-editor
