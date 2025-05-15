@@ -8,15 +8,6 @@ let
   # unstable packages
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-
-  # auto login script only for tty1 and belo
-  #script = pkgs.writeText "login-program.sh" ''
-  #  if [[ "$(tty)" == '/dev/tty1' ]]; then
-  #    ${pkgs.shadow}/bin/login -f belo;
-  #  else
-  #   ${pkgs.shadow}/bin/login;
-  # fi
-  #'';
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -88,11 +79,6 @@ in {
   console.keyMap = "de";
 
   services.getty.autologinUser = "belo"; 
-  #services.getty = {
-  #  loginProgram = "${pkgs.bash}/bin/sh";
-  #  loginOptions = toString script;
-  #  extraArgs = [ "--skip-login" ];
-  #};
 
   # allow users to build packages
   nix.settings.allowed-users = [ "@wheel" "belo" ];
@@ -112,15 +98,13 @@ in {
 
   services.libinput.enable = true;
   
-  # gnome keyring
-  #services.gnome.gnome-keyring.enable = true;
-  #security.pam.services.login.enableGnomeKeyring = true;
-
   services.xserver.enable = true;
   services.xserver.xkb.layout = "de";
   services.xserver.xkb.variant = "nodeadkeys";
   services.xserver.displayManager.lightdm = {
   	enable = true;
+	autoLogin.enable = true;
+	autoLogin.user = "belo";
 	greeters.gtk = {
 		enable = true;
 		theme.name = "Dracula";
@@ -154,24 +138,6 @@ in {
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
-
-  # enable user polkit service
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
 
   # enable fwupd -> fwupdmgr
   services.fwupd.enable = true;
@@ -301,7 +267,6 @@ in {
     netcat
     nettools
     networkmanagerapplet
-    nm-tray
     nfs-utils
     nil
     nixos-firewall-tool
@@ -313,7 +278,6 @@ in {
     pciutils
     phinger-cursors
     pkg-config
-    polkit_gnome
     pwvucontrol
     python312Full
     python312Packages.dbus-python
@@ -335,15 +299,14 @@ in {
     usermount
     unzip
     vim
-    vscode
     vulkan-tools
     wget
     wmctrl
     rofi
     wrapGAppsHook
+    xcape
     xdg-desktop-portal-gtk
     xdg-desktop-portal
-    xdotool
     xorg.libX11
     xorg.xinit
     unstable.zed-editor
