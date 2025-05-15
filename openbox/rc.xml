@@ -361,6 +361,24 @@
         <command>thunar</command>
       </action>
     </keybind>
+    <keybind key="W-l">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Lock</name>
+        </startupnotify>
+        <command>xscreensaver-command -lock</command>
+      </action>
+    </keybind>
+    <keybind key="W-m">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Leave</name>
+        </startupnotify>
+        <command>lxqt-leave</command>
+      </action>
+    </keybind>
     <keybind key="A-F1">
       <action name="Execute">
         <startupnotify>
@@ -370,7 +388,7 @@
         <command>kitty</command>
       </action>
     </keybind>
-    <keybind key="Super-space">
+    <keybind key="W-space">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
