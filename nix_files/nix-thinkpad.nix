@@ -9,6 +9,9 @@ let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
 
+  # integrated home-manager module... not used for now
+  #home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz;
+
   # auto login script only for tty1 and belo
   script = pkgs.writeText "login-program.sh" ''
     if [[ "$(tty)" == '/dev/tty1' ]]; then
@@ -22,8 +25,8 @@ let
     BAT_PCT=$(${pkgs.acpi}/bin/acpi -b | ${pkgs.gnugrep}/bin/grep -P -o '[0-9]+(?=%)')
     BAT_STA=$(${pkgs.acpi}/bin/acpi -b | ${pkgs.gnugrep}/bin/grep -P -o '\w+(?=,)')
     echo "$(date) battery status:$BAT_STA percentage:$BAT_PCT"
-    if [ "$BAT_PCT" -le 10 ] && [ "$BAT_PCT" -gt 5 ] && [ "$BAT_STA" = "Discharging" ]; then
-      DISPLAY=:0.0 ${pkgs.libnotify}/bin/notify-send -c device -u normal "󰁺 Low Battery" "Would be wise to keep my charger nearby."
+    if [ "$BAT_PCT" -le 15 ] && [ "$BAT_PCT" -gt 5 ] && [ "$BAT_STA" = "Discharging" ]; then
+      DISPLAY=:0.0 ${pkgs.libnotify}/bin/notify-send -c device -u critical "󰁺 Low Battery" "Would be wise to keep my charger nearby."
     fi
     if [ "$BAT_PCT" -le 5 ] && [ "$BAT_STA" = "Discharging" ]; then
       DISPLAY=:0.0 ${pkgs.libnotify}/bin/notify-send -c device -u critical "󰁺 Low Battery" "Charge me or watch me die!"
@@ -37,6 +40,7 @@ in {
     ./pwn.nix
     ./temis.nix
     #./k3s.nix
+    #(import "${home-manager}/nixos")
   ];
 
   # add unstable channel
@@ -148,6 +152,11 @@ in {
     group = "tcpreplay";
     permissions = "u+rx,g+x";
   };
+
+  # integrated home-manager module... not used for now
+  #home-manager.users.belo = {
+  #  home.stateVersion = "24.11";
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

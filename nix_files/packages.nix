@@ -191,6 +191,7 @@
     gtk4
     guvcview
     gvfs
+    #home-manager
     inetutils
     jetbrains-mono
     jq
