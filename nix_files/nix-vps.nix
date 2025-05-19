@@ -7,16 +7,23 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-    ./hardware-configuration_nix-vps.nix
+      ./hardware-configuration_nix-vps.nix
       ./wed_web.nix
       ./nextcloud-pass.nix
+      (builtins.fetchTarball {
+        # Pick a release version you are interested in and set its hash, e.g.
+        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-24.11/nixos-mailserver-nixos-24.11.tar.gz";
+        # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
+        # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
+        sha256 = "0lgrqdgb4z45ng875pa47m2vm7p3hhxn4n80x9z4qwvcdrrxrgch";
+      })
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  
+
   # hardening
   #environment.memoryAllocator.provider = "scudo"; # nextcloud does not like this
   #environment.variables.SCUDO_OPTIONS = "ZeroContents=1";
@@ -125,23 +132,23 @@
     randomizedDelaySec = "45min";
   };
 
-# Use the GRUB 2 boot loader.
+  # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-#boot.loader.grub.efiSupport = true;
-#boot.loader.grub.efiInstallAsRemovable = true;
-# boot.loader.efi.efiSysMountPoint = "/boot/efi";
-# Define on which hard drive you want to install Grub.
+  #boot.loader.grub.efiSupport = true;
+  #boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-    networking.hostName = "nix-vps"; # Define your hostname.
-# Pick only one of the below networking options.
-# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostName = "nix-vps"; # Define your hostname.
+  # Pick only one of the below networking options.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-# Set your time zone.
-    time.timeZone = "Europe/Berlin";
+  # Set your time zone.
+  time.timeZone = "Europe/Berlin";
 
-# Select internationalisation properties.
+  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
@@ -150,11 +157,11 @@
 
   programs.fish.enable = true;
 
-# Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ben = {
     isNormalUser = true;
     extraGroups = [ "wheel" "nextcloud" "caddy" ]; # Enable ‘sudo’ for the user.
-      shell = pkgs.fish;
+    shell = pkgs.fish;
   };
 
   users.defaultUserShell = pkgs.fish;
@@ -163,29 +170,29 @@
     "corefonts"
   ];
 
-# List packages installed in system profile. To search, run:
-# $ nix search wget
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      git
-      neovim
-      curl
-      python312
-      python312Packages.flask
-      ripgrep
-      gcc
-      bat
-      eza
-      du-dust
-      ffmpeg
-      exiftool
-      htop
-      jq
-      wget
-      yazi
+    git
+    neovim
+    curl
+    python312
+    python312Packages.flask
+    ripgrep
+    gcc
+    bat
+    eza
+    du-dust
+    ffmpeg
+    exiftool
+    htop
+    jq
+    wget
+    yazi
   ];
 
-# Enable the OpenSSH daemon.
+  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings = {
@@ -196,6 +203,9 @@
 
   services.caddy = {
     enable = true;
+    virtualHosts."mail.bnlz.de".extraConfig = ''
+      respond 200
+    '';
     virtualHosts."bnlrnz.de".extraConfig = ''
       header / {
       	Strict-Transport-Security "max-age=31536000;"
@@ -206,7 +216,7 @@
       encode gzip
       file_server
       root * /var/www/MimaSim/web
-      '';
+    '';
     virtualHosts."lorenzjoerg.de".extraConfig = ''
       header / {
       	Strict-Transport-Security "max-age=31536000;"
@@ -254,7 +264,6 @@
         header_up X-Forwarded-Proto https
         header_up X-Forwarded-Host oo.bnlrnz.de
         header_up X-Forwarded-Porto 443
-    
      }
     '';
   }; 
@@ -262,7 +271,7 @@
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 22 80 443];
 
-# phpfpm pool
+  # phpfpm pool
   services.phpfpm.pools.caddy = {
     user = config.services.caddy.user;
     group = config.services.caddy.group;
@@ -316,29 +325,75 @@
     listen = [ { addr = "127.0.0.1"; port = 8081; } ];
   };
 
-# Copy the NixOS configuration file and link it from the resulting system
-# (/run/current-system/configuration.nix). This is useful in case you
-# accidentally delete configuration.nix.
-# system.copySystemConfiguration = true;
+  mailserver = {
+    enable = true;
+    fqdn = "mail.bnlz.de";
+    domains = [ "bnlz.de" ];
 
-# This option defines the first version of NixOS you have installed on this particular machine,
-# and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-#
-# Most users should NEVER change this value after the initial install, for any reason,
-# even if you've upgraded your system to a new NixOS release.
-#
-# This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-# so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-# to actually do that.
-#
-# This value being lower than the current NixOS release does NOT mean your system is
-# out of date, out of support, or vulnerable.
-#
-# Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-# and migrated your data accordingly.
-#
-# For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+    # A list of all login accounts. To create the password hashes, use
+    # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
+    loginAccounts = {
+      "ben@bnlz.de" = {
+        hashedPasswordFile = "/etc/ben_mailpw";
+        aliases = [ "me@bnlz.com" "security@bnlz.de" ];
+      };
+    };
+
+    certificateScheme = "manual";
+    certificateFile = "/etc/ssl/private/mailserver/fullchain.pem";
+    keyFile = "/etc/ssl/private/mailserver/privkey.pem";
+  };
+  users.groups.mail = { };  # Ensure group exists
+  
+  users.users.postfix.extraGroups = [ "mail" ];
+  users.users.dovecot2.extraGroups = [ "mail" ];
+  
+  systemd.services.link-caddy-mailserver-certs = {
+    wantedBy = [ "multi-user.target" ];
+    before = [ "postfix.service" "dovecot2.service" ];
+    script = ''
+    CERT_SRC_DIR="/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.bnlz.de"
+    CERT_DST_DIR="/etc/ssl/private/mailserver"
+
+    mkdir -p $CERT_DST_DIR
+
+    ln -sf $CERT_SRC_DIR/mail.bnlz.de.crt $CERT_DST_DIR/fullchain.pem
+    ln -sf $CERT_SRC_DIR/mail.bnlz.de.key $CERT_DST_DIR/privkey.pem
+
+    chmod 640 $CERT_DST_DIR/*
+    chown root:mail $CERT_DST_DIR/*
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+
+  #security.acme.defaults.email = "security@bnlz.de";
+  #security.acme.acceptTerms = true;
+  #security.acme.certs.mail.bnlz.de.listenHTTP = ":8088";
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+  # to actually do that.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
 
