@@ -27,7 +27,7 @@ in {
   boot.loader.grub.useOSProber = true;
 
   # Limit generations
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.grub.configurationLimit = 1;
 
   # automatic store optimization
   nix.optimise.automatic = true;
