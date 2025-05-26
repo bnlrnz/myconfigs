@@ -82,7 +82,7 @@
       "mongodb-ce"
       "mongodb-compass"
       "libsciter"
-      #"google-chrome"
+      "google-chrome"
       "vscode"
       "corefonts"
       "vista-fonts"
@@ -98,7 +98,7 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       font-awesome
-      nerdfonts
+      nerd-fonts.jetbrains-mono
       source-han-sans
       open-sans
       google-fonts
@@ -131,10 +131,9 @@
     mongodb-ce
     mongodb-compass
     libsciter
-    #google-chrome
+    google-chrome
     vscode
     ###
-    acpi
     allure
     alsa-utils
     android-tools
@@ -183,6 +182,7 @@
     dconf-editor
     gnumake
     gobject-introspection
+    google-chrome
     gparted
     grim
     gsettings-desktop-schemas
@@ -191,7 +191,6 @@
     gtk4
     guvcview
     gvfs
-    #home-manager
     inetutils
     jetbrains-mono
     jq
@@ -201,11 +200,10 @@
     kora-icon-theme
     libcap
     libglibutil
-    libnotify
     libreoffice
     librewolf-bin
     libsForQt5.kwallet
-    libsForQt5.okular
+    kdePackages.okular
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     lsof
@@ -230,7 +228,6 @@
     noto-fonts-color-emoji
     ntfs3g
     obconf
-    okular
     okteta
     onlyoffice-bin
     openssl.dev # dev needed for openssl headers

@@ -3,8 +3,17 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
+let
+  unstableTarball = fetchTarball
+    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+in {
+  # add unstable channel
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
+    };
+  };
 
-{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration_nix-vps.nix
@@ -12,10 +21,10 @@
       ./nextcloud-pass.nix
       (builtins.fetchTarball {
         # Pick a release version you are interested in and set its hash, e.g.
-        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-24.11/nixos-mailserver-nixos-24.11.tar.gz";
+        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.05/nixos-mailserver-nixos-25.05.tar.gz";
         # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
         # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-        sha256 = "0lgrqdgb4z45ng875pa47m2vm7p3hhxn4n80x9z4qwvcdrrxrgch";
+        sha256 = "0jpp086m839dz6xh6kw5r8iq0cm4nd691zixzy6z11c4z2vf8v85";
       })
     ];
 
@@ -206,7 +215,7 @@
     virtualHosts."mail.bnlz.de".extraConfig = ''
       respond 200
     '';
-    virtualHosts."bnlrnz.de".extraConfig = ''
+    virtualHosts."bnlz.de".extraConfig = ''
       header / {
       	Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
@@ -241,7 +250,7 @@
       }
       reverse_proxy unix//var/www/wed_web/wed_web.sock
     '';
-    virtualHosts."cloud.bnlrnz.de".extraConfig = ''
+    virtualHosts."cloud.bnlz.de".extraConfig = ''
         header / {
       	  Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
@@ -252,7 +261,7 @@
         redir /.well-known/caldav /remote.php/dav/ 301
         reverse_proxy http://127.0.0.1:8080
     '';
-    virtualHosts."oo.bnlrnz.de".extraConfig = ''
+    virtualHosts."oo.bnlz.de".extraConfig = ''
      header / {
       	Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
@@ -262,7 +271,7 @@
      reverse_proxy http://127.0.0.1:8888 {
        # Required to circumvent bug of Onlyoffice loading mixed non-https content
         header_up X-Forwarded-Proto https
-        header_up X-Forwarded-Host oo.bnlrnz.de
+        header_up X-Forwarded-Host oo.bnlz.de
         header_up X-Forwarded-Porto 443
      }
     '';
@@ -292,8 +301,9 @@
 
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud31;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
-    package = pkgs.nextcloud30;
+    config.dbtype = "sqlite";
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps) onlyoffice;
     };
@@ -305,7 +315,7 @@
     database.createLocally = true;
     maxUploadSize = "20G";
     settings.trusted_proxies = [ "127.0.0.1" ];
-    settings.trusted_domains = [ "cloud.bnlrnz.de" "127.0.0.1" "149.102.140.151" ];
+    settings.trusted_domains = [ "cloud.bnlz.de" "127.0.0.1" "149.102.140.151" "oo.bnlz.de" ];
     settings.default_phone_region = "DE";
     phpOptions = {
       "opcache.interned_strings_buffer" = "10";
@@ -316,6 +326,7 @@
 
   services.onlyoffice = {
     enable = true;
+    package = pkgs.unstable.onlyoffice-documentserver;
     hostname = "localhost_onlyoffice";
     jwtSecretFile = "/etc/nextcloud-admin-pass";
     port = 8888;
@@ -344,10 +355,10 @@
     keyFile = "/etc/ssl/private/mailserver/privkey.pem";
   };
   users.groups.mail = { };  # Ensure group exists
-  
+
   users.users.postfix.extraGroups = [ "mail" ];
   users.users.dovecot2.extraGroups = [ "mail" ];
-  
+
   systemd.services.link-caddy-mailserver-certs = {
     wantedBy = [ "multi-user.target" ];
     before = [ "postfix.service" "dovecot2.service" ];
@@ -361,7 +372,7 @@
     ln -sf $CERT_SRC_DIR/mail.bnlz.de.key $CERT_DST_DIR/privkey.pem
 
     chmod 640 $CERT_DST_DIR/*
-    chown root:mail $CERT_DST_DIR/*
+    chown caddy:mail $CERT_DST_DIR/*
     '';
     serviceConfig = {
       Type = "oneshot";

@@ -11,10 +11,10 @@
     gobuster
     hashcat
     lldb
-    lldb.lib
+    lldb.dev
     ltrace
     padbuster
-    pwndbg
+    #pwndbg # DEPRECATED
     pwninit
     pwntools
     sqlmap
