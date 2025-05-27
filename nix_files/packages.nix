@@ -98,6 +98,7 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       font-awesome
+      nerd-fonts.ubuntu
       nerd-fonts.jetbrains-mono
       source-han-sans
       open-sans
