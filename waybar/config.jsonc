@@ -43,16 +43,16 @@
     },
 
     "custom/vpn_temis":  {
-        "format": " {icon} Temis",
+        "format": "{icon} Temis",
         "exec": "ip route | grep -q '10.50.1.1' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
-        "on-click": "nmcli c show --active | grep 'TEMIS Openconnect' && nmcli c down 'TEMIS Openconnect' || nmcli c up 'TEMIS Openconnect'",
+        "on-click": "nmcli c show --active | grep 'TEMIS VPN' && nmcli c down 'TEMIS VPN' || nmcli c up 'TEMIS VPN'",
         "return-type": "json",
         "interval": 5,
         "format-icons": ["",""]
     },
 
     "custom/vpn_bsi_ctf":  {
-        "format": " {icon} ctf",
+        "format": "{icon} ctf",
         "exec": "ip route | grep -q '10.13.37.0' && echo '{\"text\":\"Connected\",\"class\":\"connected\",\"percentage\":100}' || echo '{\"text\":\"Disconnected\",\"class\":\"disconnected\",\"percentage\":0}'",
         "on-click": "ip route | grep -q '10.13.37.0' && sudo systemctl stop wg-quick-bsictfwireguard.service || sudo systemctl start wg-quick-bsictfwireguard.service",
         "return-type": "json",
@@ -96,7 +96,7 @@
             "warning": 30,
             "critical": 20
         },
-        "format": "{icon}{capacity}%",
+        "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt-click": "click-right",
@@ -140,7 +140,7 @@
 
     "clock": {
         "interval": 60,
-        "format": " KW{:%V %a, %d.%m.%Y %H:%M}",
+        "format": " kw{:%V %a, %d.%m.%Y %H:%M}",
         "max-length": 25
     }
 }
