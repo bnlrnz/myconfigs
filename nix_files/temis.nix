@@ -14,6 +14,53 @@
 
   users.groups.fuse = { };
 
+  networking.networkmanager.ensureProfiles.profiles = {
+    "TEMIS VPN" = {
+      connection = {
+        autoconnect = "false";
+        id = "TEMIS VPN";
+        permissions = "user:belo:;";
+        type = "vpn";
+        uuid = "060dd53b-2787-4487-81d3-d2d2f119cef2";
+      };
+      ipv4 = {
+        method = "auto";
+        never-default = "true";
+      };
+      ipv6 = {
+        addr-gen-mode = "stable-privacy";
+        method = "auto";
+      };
+      proxy = { };
+      vpn = {
+        authtype = "password";
+        autoconnect-flags = "0";
+        certsigs-flags = "0";
+        cookie-flags = "2";
+        disable_udp = "no";
+        enable_csd_trojan = "no";
+        gateway = "vpn.temislab.de:4431";
+        gateway-flags = "2";
+        gwcert-flags = "2";
+        lasthost-flags = "0";
+        pem_passphrase_fsid = "no";
+        prevent_invalid_cert = "no";
+        protocol = "fortinet";
+        resolve-flags = "2";
+        service-type = "org.freedesktop.NetworkManager.openconnect";
+        stoken_source = "disabled";
+        useragent = "belo";
+        xmlconfig-flags = "0";
+      };
+      vpn-secrets = {
+        "certificate:\\5b64:ff9b::cf59:6b02\\5d:4431" =
+          "pin-sha256:uqrIE1lFD0L4iSDjvTlcnPzZ0VJzrZ2jeffMbi4a5UQ=";
+        "form:_login:username" = "belo";
+        lasthost = "vpn.temislab.de:4431";
+        save_passwords = "yes";
+      };
+    };
+  };
   #fileSystems."/mnt/org-sz31" = {
   #  device = "fs1.temislab.de:/vsanfs/org-sz31";
   #  fsType = "nfs";
