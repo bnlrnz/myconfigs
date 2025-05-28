@@ -27,7 +27,7 @@ in {
   boot.loader.grub.useOSProber = true;
 
   # Limit generations
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.grub.configurationLimit = 1;
 
   # automatic store optimization
   nix.optimise.automatic = true;
@@ -101,10 +101,10 @@ in {
   services.xserver.enable = true;
   services.xserver.xkb.layout = "de";
   services.xserver.xkb.variant = "nodeadkeys";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "belo";
   services.xserver.displayManager.lightdm = {
   	enable = true;
-	autoLogin.enable = true;
-	autoLogin.user = "belo";
 	greeters.gtk = {
 		enable = true;
 		theme.name = "Dracula";
@@ -164,6 +164,9 @@ in {
 
   # enable polkit
   security.polkit.enable = true;
+	
+  # gnome keyring is needed for network manager to store VPN passwords
+  services.gnome.gnome-keyring.enable = true;
 
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
