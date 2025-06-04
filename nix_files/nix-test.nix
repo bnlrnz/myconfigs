@@ -120,6 +120,7 @@ in {
 
   # kwallet needed by python keyring
   #security.pam.services.kdewallet.enableKwallet = true;
+  security.pam.services.xscreensaver.enable = true;
 
   # enable pipewire
   security.rtkit.enable = true;
