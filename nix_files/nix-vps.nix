@@ -196,6 +196,8 @@ in {
     ffmpeg
     exiftool
     htop
+    #immich-cli
+    immich-go
     jq
     wget
     yazi
@@ -212,6 +214,12 @@ in {
 
   services.caddy = {
     enable = true;
+    virtualHosts."img.bnlz.de".extraConfig = ''
+      request_body {
+        max_size 500MB
+      }
+      reverse_proxy http://localhost:2283
+    '';
     virtualHosts."mail.bnlz.de".extraConfig = ''
       respond 200
     '';
@@ -378,6 +386,16 @@ in {
       Type = "oneshot";
     };
   };
+
+  services.immich = {
+    enable = true;
+    port = 2283;
+    host = "localhost";
+    accelerationDevices = null;
+    settings.server.externalDomain = "https://img.bnlz.de";
+  };
+
+  users.users.immich.extraGroups = [ "video" "render" ];
 
   #security.acme.defaults.email = "security@bnlz.de";
   #security.acme.acceptTerms = true;
