@@ -6,6 +6,7 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  snappymail_webroot = "/var/lib/snappymail";
 in {
   # add unstable channel
   nixpkgs.config = {
@@ -200,6 +201,7 @@ in {
     immich-go
     jq
     wget
+    snappymail
     yazi
   ];
 
@@ -221,7 +223,16 @@ in {
       reverse_proxy http://localhost:2283
     '';
     virtualHosts."mail.bnlz.de".extraConfig = ''
-      respond 200
+        root * ${pkgs.snappymail}
+        php_fastcgi unix/${config.services.phpfpm.pools.snappymail.socket}
+        file_server
+        encode gzip
+
+        @writable path_regexp writable ^/data/(.*)$
+        handle @writable {
+          root * ${snappymail_webroot}
+          php_fastcgi unix/${config.services.phpfpm.pools.snappymail.socket}
+        }
     '';
     virtualHosts."bnlz.de".extraConfig = ''
       header / {
@@ -288,7 +299,9 @@ in {
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 22 80 443];
 
-  # phpfpm pool
+  ###############
+  # PHP-FPM
+  ###############
   services.phpfpm.pools.caddy = {
     user = config.services.caddy.user;
     group = config.services.caddy.group;
@@ -307,6 +320,9 @@ in {
     phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
   };
 
+  ###############
+  # Nextcloud
+  ###############
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud31;
@@ -332,6 +348,9 @@ in {
 
   services.nginx.virtualHosts."localhost_nextcloud".listen = [ { addr = "127.0.0.1"; port = 8080; } ];
 
+  ###############
+  # Onlyoffice
+  ###############
   services.onlyoffice = {
     enable = true;
     package = pkgs.unstable.onlyoffice-documentserver;
@@ -344,6 +363,9 @@ in {
     listen = [ { addr = "127.0.0.1"; port = 8081; } ];
   };
 
+  ###############
+  # Mailserver
+  ###############
   mailserver = {
     enable = true;
     fqdn = "mail.bnlz.de";
@@ -387,6 +409,9 @@ in {
     };
   };
 
+  ###############
+  # Immich
+  ###############
   services.immich = {
     enable = true;
     port = 2283;
@@ -396,6 +421,33 @@ in {
   };
 
   users.users.immich.extraGroups = [ "video" "render" ];
+
+  ###############
+  # Snappymail
+  ###############
+  systemd.tmpfiles.rules = [
+    "d ${snappymail_webroot} 0750 caddy caddy - -"
+  ];
+
+  # PHP-FPM running as caddy user
+  services.phpfpm.pools.snappymail = {
+    user = "caddy";
+    group = "caddy";
+    phpOptions = ''
+      upload_max_filesize = 100M
+      post_max_size = 50M
+    '';
+    settings = {
+      "pm" = "dynamic";
+      "pm.max_children" = "5";
+      "pm.start_servers" = "2";
+      "pm.min_spare_servers" = "1";
+      "pm.max_spare_servers" = "3";
+      "listen.owner" = "caddy";
+      "listen.group" = "caddy";
+      "listen.mode" = "0600";
+    };
+  };
 
   #security.acme.defaults.email = "security@bnlz.de";
   #security.acme.acceptTerms = true;
