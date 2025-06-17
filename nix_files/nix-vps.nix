@@ -216,13 +216,13 @@ in {
 
   services.caddy = {
     enable = true;
-    virtualHosts."img.bnlz.de".extraConfig = ''
+    virtualHosts."img.b3lo.de".extraConfig = ''
       request_body {
         max_size 500MB
       }
       reverse_proxy http://localhost:2283
     '';
-    virtualHosts."mail.bnlz.de".extraConfig = ''
+    virtualHosts."mail.b3lo.de".extraConfig = ''
         root * ${pkgs.snappymail}
         php_fastcgi unix/${config.services.phpfpm.pools.snappymail.socket}
         file_server
@@ -234,7 +234,7 @@ in {
           php_fastcgi unix/${config.services.phpfpm.pools.snappymail.socket}
         }
     '';
-    virtualHosts."bnlz.de".extraConfig = ''
+    virtualHosts."b3lo.de".extraConfig = ''
       header / {
       	Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
@@ -269,7 +269,7 @@ in {
       }
       reverse_proxy unix//var/www/wed_web/wed_web.sock
     '';
-    virtualHosts."cloud.bnlz.de".extraConfig = ''
+    virtualHosts."cloud.b3lo.de".extraConfig = ''
         header / {
       	  Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
@@ -280,7 +280,7 @@ in {
         redir /.well-known/caldav /remote.php/dav/ 301
         reverse_proxy http://127.0.0.1:8080
     '';
-    virtualHosts."oo.bnlz.de".extraConfig = ''
+    virtualHosts."oo.b3lo.de".extraConfig = ''
      header / {
       	Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
@@ -290,7 +290,7 @@ in {
      reverse_proxy http://127.0.0.1:8888 {
        # Required to circumvent bug of Onlyoffice loading mixed non-https content
         header_up X-Forwarded-Proto https
-        header_up X-Forwarded-Host oo.bnlz.de
+        header_up X-Forwarded-Host oo.b3lo.de
         header_up X-Forwarded-Porto 443
      }
     '';
@@ -339,7 +339,7 @@ in {
     database.createLocally = true;
     maxUploadSize = "20G";
     settings.trusted_proxies = [ "127.0.0.1" ];
-    settings.trusted_domains = [ "cloud.bnlz.de" "127.0.0.1" "149.102.140.151" "oo.bnlz.de" ];
+    settings.trusted_domains = [ "cloud.b3lo.de" "127.0.0.1" "149.102.140.151" "oo.bnlz.de" ];
     settings.default_phone_region = "DE";
     phpOptions = {
       "opcache.interned_strings_buffer" = "10";
@@ -368,15 +368,15 @@ in {
   ###############
   mailserver = {
     enable = true;
-    fqdn = "mail.bnlz.de";
-    domains = [ "bnlz.de" ];
+    fqdn = "mail.b3lo.de";
+    domains = [ "b3lo.de" ];
 
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
-      "ben@bnlz.de" = {
+      "ben@b3lo.de" = {
         hashedPasswordFile = "/etc/ben_mailpw";
-        aliases = [ "me@bnlz.com" "security@bnlz.de" ];
+        aliases = [ "me@b3lo.de" "security@b3lo.de" ];
       };
     };
 
@@ -393,13 +393,13 @@ in {
     wantedBy = [ "multi-user.target" ];
     before = [ "postfix.service" "dovecot2.service" ];
     script = ''
-    CERT_SRC_DIR="/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.bnlz.de"
+    CERT_SRC_DIR="/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.b3lo.de"
     CERT_DST_DIR="/etc/ssl/private/mailserver"
 
     mkdir -p $CERT_DST_DIR
 
-    ln -sf $CERT_SRC_DIR/mail.bnlz.de.crt $CERT_DST_DIR/fullchain.pem
-    ln -sf $CERT_SRC_DIR/mail.bnlz.de.key $CERT_DST_DIR/privkey.pem
+    ln -sf $CERT_SRC_DIR/mail.b3lo.de.crt $CERT_DST_DIR/fullchain.pem
+    ln -sf $CERT_SRC_DIR/mail.b3lo.de.key $CERT_DST_DIR/privkey.pem
 
     chmod 640 $CERT_DST_DIR/*
     chown caddy:mail $CERT_DST_DIR/*
@@ -417,7 +417,7 @@ in {
     port = 2283;
     host = "localhost";
     accelerationDevices = null;
-    settings.server.externalDomain = "https://img.bnlz.de";
+    settings.server.externalDomain = "https://img.b3lo.de";
   };
 
   users.users.immich.extraGroups = [ "video" "render" ];
@@ -449,9 +449,9 @@ in {
     };
   };
 
-  #security.acme.defaults.email = "security@bnlz.de";
+  #security.acme.defaults.email = "security@b3lo.de";
   #security.acme.acceptTerms = true;
-  #security.acme.certs.mail.bnlz.de.listenHTTP = ":8088";
+  #security.acme.certs.mail.b3lo.de.listenHTTP = ":8088";
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
