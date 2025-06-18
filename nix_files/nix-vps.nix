@@ -7,6 +7,15 @@ let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   snappymail_webroot = "/var/lib/snappymail";
+
+  # customOO = pkgs.unstable.onlyoffice-documentserver.overrideAttrs (old: {
+  #   postFixup = ''
+  #     echo "DEBUG: postFixup of custom onlyoffice"
+  #     echo "Patching Onlyoffice at $(pwd)"
+  #     sed -i 's|const ver = '"'"'/.*'"'"';|const ver = '"'"'/'"'"';|' \
+  #     $out/var/www/onlyoffice/documentserver/web-apps/apps/api/documents/api.js
+  #   '';
+  # });
 in {
   # add unstable channel
   nixpkgs.config = {
@@ -33,10 +42,6 @@ in {
 
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # hardening
-  #environment.memoryAllocator.provider = "scudo"; # nextcloud does not like this
-  #environment.variables.SCUDO_OPTIONS = "ZeroContents=1";
 
   security.apparmor = {
     enable = true;
@@ -136,7 +141,6 @@ in {
     flags = [
       "--update-input"
       "nixpkgs"
-      "-L" # print build logs
     ];
     dates = "02:00";
     randomizedDelaySec = "45min";
@@ -144,15 +148,10 @@ in {
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  #boot.loader.grub.efiSupport = true;
-  #boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   networking.hostName = "nix-vps"; # Define your hostname.
   # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
@@ -187,6 +186,7 @@ in {
     git
     neovim
     curl
+    fd
     python312
     python312Packages.flask
     ripgrep
@@ -197,7 +197,6 @@ in {
     ffmpeg
     exiftool
     htop
-    #immich-cli
     immich-go
     jq
     wget
@@ -278,21 +277,22 @@ in {
         }
         redir /.well-known/carddav /remote.php/dav/ 301
         redir /.well-known/caldav /remote.php/dav/ 301
-        reverse_proxy http://127.0.0.1:8080
+        reverse_proxy http://localhost_nextcloud:8080
     '';
     virtualHosts."oo.b3lo.de".extraConfig = ''
-     header / {
-      	Strict-Transport-Security "max-age=31536000;"
+      header / {
+      	  Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
       	  X-Content-Type-Options "nosniff"
       	  X-Frame-Options "DENY"
-     }
-     reverse_proxy http://127.0.0.1:8888 {
-       # Required to circumvent bug of Onlyoffice loading mixed non-https content
-        header_up X-Forwarded-Proto https
-        header_up X-Forwarded-Host oo.b3lo.de
-        header_up X-Forwarded-Porto 443
-     }
+      }
+      
+      reverse_proxy http://127.0.0.1:8888 {
+          # Required to circumvent bug of Onlyoffice loading mixed non-https content
+          header_up X-Forwarded-Proto https
+          header_up X-Forwarded-Host oo.b3lo.de
+          header_up X-Forwarded-Port 443
+        }
     '';
   }; 
 
@@ -339,13 +339,14 @@ in {
     database.createLocally = true;
     maxUploadSize = "20G";
     settings.trusted_proxies = [ "127.0.0.1" ];
-    settings.trusted_domains = [ "cloud.b3lo.de" "127.0.0.1" "149.102.140.151" "oo.bnlz.de" ];
+    settings.trusted_domains = [ "cloud.b3lo.de" "127.0.0.1" "149.102.140.151" "oo.b3lo.de" ];
     settings.default_phone_region = "DE";
     phpOptions = {
       "opcache.interned_strings_buffer" = "10";
     };
   };
 
+  networking.hosts = { "127.0.0.1" = [ "localhost_nextcloud" "localhost_onlyoffice" ]; };
   services.nginx.virtualHosts."localhost_nextcloud".listen = [ { addr = "127.0.0.1"; port = 8080; } ];
 
   ###############
@@ -353,12 +354,14 @@ in {
   ###############
   services.onlyoffice = {
     enable = true;
+    #package = customOO;
     package = pkgs.unstable.onlyoffice-documentserver;
     hostname = "localhost_onlyoffice";
     jwtSecretFile = "/etc/nextcloud-admin-pass";
-    port = 8888;
+    port = 8888; # port 8000 is the default port
   };
 
+  # this is kinda hacky but the onlyffice module runs a nginx server at port 80 by default
   services.nginx.virtualHosts."localhost_onlyoffice" = {
     listen = [ { addr = "127.0.0.1"; port = 8081; } ];
   };
@@ -448,10 +451,6 @@ in {
       "listen.mode" = "0600";
     };
   };
-
-  #security.acme.defaults.email = "security@b3lo.de";
-  #security.acme.acceptTerms = true;
-  #security.acme.certs.mail.b3lo.de.listenHTTP = ":8088";
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
