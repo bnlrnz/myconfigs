@@ -25,7 +25,7 @@ in {
         url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.05/nixos-mailserver-nixos-25.05.tar.gz";
         # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
         # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-        sha256 = "0jpp086m839dz6xh6kw5r8iq0cm4nd691zixzy6z11c4z2vf8v85";
+        sha256 = "1qn5fg0h62r82q7xw54ib9wcpflakix2db2mahbicx540562la1y";
       })
       # nextcloud-extras for caddy support
       "${fetchTarball {
@@ -508,6 +508,14 @@ in {
     # due to out of memory error, build needed to run with this:
     # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
   };
+
+  ################
+  # ollama
+  ################
+  # services.ollama = {
+  #   enable = true;
+  #   loadModels = [ "deepseek-r1:1.5b" ];
+  # };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
