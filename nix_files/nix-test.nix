@@ -271,6 +271,7 @@ in {
     netcat
     nettools
     networkmanagerapplet
+    nextcloud-client
     nfs-utils
     nil
     nixos-firewall-tool
