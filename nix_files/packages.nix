@@ -20,6 +20,17 @@
 
   # gnome settings/themes
   programs.dconf.enable = true;
+  programs.dconf.profiles.user.databases = [
+    {
+      settings."org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        cursor-theme= "phinger-cursors-light";
+        gtk-theme = "Dracula";
+        icon-theme = "Dracula";
+        font-name = "Sans 11";
+      };
+    }
+  ];
 
   # setup thunar
   programs.thunar.enable = true;
