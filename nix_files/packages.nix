@@ -205,6 +205,7 @@
     gvfs
     inetutils
     jetbrains-mono
+    joplin-desktop
     jq
     keepassxc
     killall
