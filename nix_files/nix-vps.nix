@@ -18,7 +18,7 @@ in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration_nix-vps.nix
-      ./wed_web.nix
+      ./sa3_document_manager.nix
       ./nextcloud-pass.nix
       (builtins.fetchTarball {
         # Pick a release version you are interested in and set its hash, e.g.
@@ -255,14 +255,14 @@ in {
     virtualHosts."www.lorenzjoerg.de".extraConfig = ''
       redir https://lorenzjoerg.de{uri}
     '';
-    virtualHosts."wedding.bnlrnz.de".extraConfig = ''
+    virtualHosts."sa3.b3lo.de".extraConfig = ''
       header / {
       	Strict-Transport-Security "max-age=31536000;"
       	  X-XSS-Protection "1; mode=block"
       	  X-Content-Type-Options "nosniff"
       	  X-Frame-Options "DENY"
       }
-      reverse_proxy unix//var/www/wed_web/wed_web.sock
+      reverse_proxy unix//var/www/sa3_document_manager/sa3_document_manager.sock
     '';
     # this is now done by nextlcoud-extras.nix webserver = "caddy";
     # virtualHosts."cloud.b3lo.de".extraConfig = ''
@@ -507,6 +507,20 @@ in {
     # default port is 5678
     # due to out of memory error, build needed to run with this:
     # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
+  };
+
+  systemd.services.n8n = {
+    path = with pkgs; [
+      nix        # Provides nix-shell command
+      python3    # Provides python3 interpreter
+      bash       # Provides bash
+      coreutils  # Provides standard Unix utilities
+    ];
+    
+    # Optional: Add environment variables if needed
+    environment = {
+      NIX_PATH = "nixpkgs=${pkgs.path}";
+    };
   };
 
   ################

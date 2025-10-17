@@ -30,6 +30,7 @@ fi
 if [ "$hn" == "nix-vps" ]; then
     sudo cp -v nix-vps.nix /etc/nixos/configuration.nix
     sudo cp -v hardware-configuration_nix-vps.nix /etc/nixos/
+    sudo cp -v sa3_document_manager.nix /etc/nixos/
 fi
 
 if [ "$hn" == "nix-pi" ]; then
