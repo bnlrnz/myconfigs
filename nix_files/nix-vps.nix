@@ -264,6 +264,16 @@ in {
       }
       reverse_proxy unix//var/www/sa3_document_manager/sa3_document_manager.sock
     '';
+    virtualHosts."sa3mcp.b3lo.de".extraConfig = ''
+      reverse_proxy http://localhost:5555
+    
+      # CORS headers for ChatGPT
+      header {
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type"
+      }
+    '';
     # this is now done by nextlcoud-extras.nix webserver = "caddy";
     # virtualHosts."cloud.b3lo.de".extraConfig = ''
     #   header / {
