@@ -11,6 +11,7 @@
 !hypr/
 !hypr/**
 hypr/monitors.conf
+../hypr/monitors.conf
 !kitty/
 !kitty/**
 !mako/
