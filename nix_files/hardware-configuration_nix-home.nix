@@ -94,6 +94,11 @@
   # TESTING: force RADV - amdvlk seams to crash some games...
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
+  # lact = Linux AMDGPU controller  
+  environment.systemPackages = with pkgs; [ lact ];
+  systemd.packages = with pkgs; [ lact ];
+  systemd.services.lactd.wantedBy = ["multi-user.target"];
+
   # settings for amd gpu & cpu power profile
   programs.corectrl.enable = true;
 
