@@ -10,7 +10,7 @@
     mangohud
     goverlay
     protonup-qt
-    lutris
+    #    lutris
     heroic
     winetricks
     protontricks
