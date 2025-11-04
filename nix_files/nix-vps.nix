@@ -376,7 +376,7 @@ in {
   services.nextcloud = {
     enable = true;
     webserver = "caddy";
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -510,29 +510,29 @@ in {
   ##################
   # n8n
   ##################
-  services.n8n = {
-    enable = true;
-    openFirewall = true;
-    webhookUrl = "n8n.b3lo.de";
-    # default port is 5678
-    # due to out of memory error, build needed to run with this:
-    # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
-  };
-
-  systemd.services.n8n = {
-    path = with pkgs; [
-      nix        # Provides nix-shell command
-      python3    # Provides python3 interpreter
-      bash       # Provides bash
-      coreutils  # Provides standard Unix utilities
-    ];
-    
-    # Optional: Add environment variables if needed
-    environment = {
-      NIX_PATH = "nixpkgs=${pkgs.path}";
-    };
-  };
-
+   services.n8n = {
+     enable = true;
+     openFirewall = true;
+     webhookUrl = "n8n.b3lo.de";
+     # default port is 5678
+     # due to out of memory error, build needed to run with this:
+     # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
+   };
+  
+   systemd.services.n8n = {
+     path = with pkgs; [
+       nix        # Provides nix-shell command
+       python3    # Provides python3 interpreter
+       bash       # Provides bash
+       coreutils  # Provides standard Unix utilities
+     ];
+     
+     # Optional: Add environment variables if needed
+     environment = {
+       NIX_PATH = "nixpkgs=${pkgs.path}";
+     };
+   };
+  
   ################
   # ollama
   ################
