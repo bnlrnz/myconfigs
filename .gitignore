@@ -20,6 +20,8 @@ hypr/monitors.conf
 !myconfigs/**
 !nix_files/
 !nix_files/**
+!nix_files/secrets/
+!nix_files/secrets/**
 !openbox/
 !openbox/**
 !waybar/
