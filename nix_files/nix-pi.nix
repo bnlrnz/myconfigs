@@ -3,11 +3,14 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
-
+let
+  sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      "${sops-nix}/modules/sops"
     ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
@@ -148,6 +151,39 @@ Host nix
   IdentitiesOnly yes
   IdentityFile /home/ben/.ssh/id_builder
   '';
+
+  # wireguard
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.keyFile = "/home/ben/.config/sops/age/keys.txt";
+  sops.age.generateKey = true;
+  sops.secrets."wireguard/pi_private" = { };
+
+  networking.wg-quick.interfaces.wg0 = {
+    address = [ "10.10.11.201/24" ];
+    privateKeyFile = config.sops.secrets."wireguard/pi_private".path;
+    peers = [
+      {
+      	# vps
+        publicKey = "fzWcwGSJfsJYW6Xx/gVKB28B57Wdg9sSYrwlqV+D/F4=";
+        endpoint = "b3lo.de:51820";
+        allowedIPs = [ "10.10.11.0/24" ];
+        persistentKeepalive = 25;
+      }
+    ];
+  };
+
+  # Enable IP forwarding and NAT
+  networking.nat.enable = true;
+  networking.nat.internalInterfaces = [ "wg0" ];
+  networking.nat.externalInterface = "eth0"; # adjust to your Pi's external interface
+
+  # Allow forwarding from home network through wireguard
+  networking.firewall.extraCommands = ''
+    ip route add 10.10.10.0/24 via 10.10.11.201 dev wg0
+  '';
+  
+  networking.firewall.checkReversePath = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
