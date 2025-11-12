@@ -349,7 +349,8 @@ in {
   }; 
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 80 443 51820 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+  networking.firewall.allowedUDPPorts = [ 51820 ];
 
   ###############
   # PHP-FPM
@@ -540,12 +541,14 @@ in {
   ################
   sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.keyFile = "/home/ben/.config/sops/age/keys.txt";
+  sops.age.generateKey = true;
   sops.secrets."wireguard/vps_private" = { };
 
   networking.wg-quick.interfaces = {
     wg0 = {
       address = [ 
-        "10.10.10.200/32"
+        "10.10.11.200/24"
       ];
       listenPort = 51820; 
       privateKeyFile = config.sops.secrets."wireguard/vps_private".path;
@@ -553,7 +556,7 @@ in {
         {
           # raspi
           publicKey = "/jB466c9UawpjHvoJzvDpblnXcgCImlEC+NMYw5pHiE=";
-          allowedIPs = [ "10.10.10.201/24" ];
+          allowedIPs = [ "10.10.11.201/32" "10.10.10.0/24" ];
           persistentKeepalive = 25;
         }
       ];
