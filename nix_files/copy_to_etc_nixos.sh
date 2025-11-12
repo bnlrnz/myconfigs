@@ -112,6 +112,11 @@ if [ "$hn" == "nix-vps" ]; then
         read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/sa3_document_manager.nix"
         sudo cp -v sa3_document_manager.nix /etc/nixos/
     fi
+    if ! diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml > /dev/null ; then
+        diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml
+        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/secrets/secrets.yaml"
+        sudo cp -v -R ./secrets /etc/nixos/
+    fi
 fi
 
 if [ "$hn" == "nix-pi" ]; then
@@ -124,6 +129,11 @@ if [ "$hn" == "nix-pi" ]; then
         diff hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
         read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/hardware-configuration_nix"
         sudo cp -v hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
+    fi
+    if ! diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml > /dev/null ; then
+        diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml
+        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/secrets/secrets.yaml"
+        sudo cp -v -R ./secrets /etc/nixos/
     fi
 fi
 
@@ -144,3 +154,5 @@ if [ "$hn" == "nix-test" ]; then
         sudo cp -v temis.nix /etc/nixos/
     fi
 fi
+
+

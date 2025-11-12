@@ -7,6 +7,7 @@ let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   snappymail_webroot = "/var/lib/snappymail";
+  sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
 in {
   # add unstable channel
   nixpkgs.config = {
@@ -31,6 +32,7 @@ in {
       "${fetchTarball {
         url = "https://github.com/onny/nixos-nextcloud-testumgebung/archive/fa6f062830b4bc3cedb9694c1dbf01d5fdf775ac.tar.gz";
         sha256 = "0gzd0276b8da3ykapgqks2zhsqdv4jjvbv97dsxg0hgrhb74z0fs";}}/nextcloud-extras.nix"
+      "${sops-nix}/modules/sops"
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -347,7 +349,7 @@ in {
   }; 
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 80 443];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 51820 ];
 
   ###############
   # PHP-FPM
@@ -532,7 +534,32 @@ in {
        NIX_PATH = "nixpkgs=${pkgs.path}";
      };
    };
-  
+ 
+  ################
+  # wireguard
+  ################
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.secrets."wireguard/vps_private" = { };
+
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      address = [ 
+        "10.10.10.200/32"
+      ];
+      listenPort = 51820; 
+      privateKeyFile = config.sops.secrets."wireguard/vps_private".path;
+      peers = [
+        {
+          # raspi
+          publicKey = "/jB466c9UawpjHvoJzvDpblnXcgCImlEC+NMYw5pHiE=";
+          allowedIPs = [ "10.10.10.201/24" ];
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
+
   ################
   # ollama
   ################
