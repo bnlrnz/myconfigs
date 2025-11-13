@@ -573,7 +573,12 @@ in {
   networking.interfaces.wg0.ipv4.routes = [
     { address = "10.10.10.0"; prefixLength = 24; via = "10.10.11.201"; }
   ];
-  
+  networking.firewall.extraCommands = ''
+    # Allow forwarding between WireGuard peers
+    iptables -A FORWARD -i wg0 -o wg0 -j ACCEPT
+    iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+  '';
+
   ################
   # ollama
   ################
