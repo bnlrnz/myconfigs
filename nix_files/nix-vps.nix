@@ -553,15 +553,22 @@ in {
       listenPort = 51820; 
       privateKeyFile = config.sops.secrets."wireguard/vps_private".path;
       peers = [
-        {
-          # raspi
+        { # raspi
           publicKey = "/jB466c9UawpjHvoJzvDpblnXcgCImlEC+NMYw5pHiE=";
           allowedIPs = [ "10.10.11.201/32" "10.10.10.0/24" ];
+          persistentKeepalive = 25;
+        }
+        { # pixel ben
+          publicKey = "eBcMo1BtMV4vIfuDZ5vs9KLPtrGyHB/6vpEcKr2lq0I=";
+          allowedIPs = [ "10.10.11.202/32" ];
           persistentKeepalive = 25;
         }
       ];
     };
   };
+
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+  networking.firewall.trustedInterfaces = [ "wg0" ];
 
   ################
   # ollama
