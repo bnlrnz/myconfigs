@@ -176,14 +176,17 @@ Host nix
   # Enable IP forwarding and NAT
   networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "wg0" ];
-  networking.nat.externalInterface = "eth0"; # adjust to your Pi's external interface
+  networking.nat.externalInterface = "end0"; # adjust to your Pi's external interface
 
-  # Allow forwarding from home network through wireguard
+  networking.firewall.checkReversePath = false;
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   networking.firewall.extraCommands = ''
     ip route add 10.10.10.0/24 via 10.10.11.201 dev wg0
+    iptables -A FORWARD -i wg0 -o end0 -j ACCEPT
+    iptables -A FORWARD -i end0 -o wg0 -j ACCEPT
+    iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+    iptables -A FORWARD -i wg0 -p icmp -j ACCEPT
   '';
-  
-  networking.firewall.checkReversePath = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
