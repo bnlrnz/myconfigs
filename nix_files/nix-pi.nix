@@ -167,7 +167,7 @@ Host nix
       	# vps
         publicKey = "fzWcwGSJfsJYW6Xx/gVKB28B57Wdg9sSYrwlqV+D/F4=";
         endpoint = "b3lo.de:51820";
-        allowedIPs = [ "10.10.11.200/32" ];
+        allowedIPs = [ "10.10.11.0/24" ];
         persistentKeepalive = 25;
       }
     ];
