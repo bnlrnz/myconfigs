@@ -563,6 +563,12 @@ in {
           allowedIPs = [ "10.10.11.202/32" ];
           persistentKeepalive = 25;
         }
+        { # macbookair 
+          publicKey = "3im8Bk8aXlevlFmniDrXpYPAbf7eVmR6PjPLM2cJiDM=";
+          allowedIPs = [ "10.10.11.203/32" ];
+          persistentKeepalive = 25;
+        }
+
       ];
     };
   };
