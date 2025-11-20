@@ -158,6 +158,10 @@ in {
   ];
   programs.file-roller.enable = true;
 
+  # neovim
+  programs.neovim.enable = true;
+  programs.neovim.defaultEditor = true;
+
   # for thumbnails
   services.tumbler.enable = true;
 
@@ -182,16 +186,13 @@ in {
   
   fonts = {
     packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
+      nerd-fonts.jetbrains-mono
       font-awesome
-      #nerdfonts
       source-han-sans
       open-sans
       google-fonts
       corefonts
-      vistafonts
+      vista-fonts
     ];
     fontconfig.defaultFonts = {
       serif = [ "Noto Serif" "Source Han Serif" ];
@@ -222,7 +223,6 @@ in {
     autofs5
     bat
     bind
-    btop
     btrfs-progs
     cairo.dev
     cliphist
@@ -242,7 +242,6 @@ in {
     fish
     fzf
     font-awesome
-    ghex
     gio-sharp
     git
     dconf-editor
@@ -252,7 +251,6 @@ in {
     gtk4
     gvfs
     inetutils
-    jetbrains-mono
     jq
     keepassxc
     killall
@@ -261,20 +259,17 @@ in {
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     lsof
-    lxappearance
+    # lxappearance
     lxqt.lxqt-policykit
     mako
-    mpv
     ncurses
-    neofetch
     neovim
     netcat
     nettools
     networkmanagerapplet
     nextcloud-client
     nfs-utils
-    nil
-    nixos-firewall-tool
+    # nixos-firewall-tool
     noto-fonts-color-emoji
     ntfs3g
     obconf
@@ -284,27 +279,17 @@ in {
     phinger-cursors
     pkg-config
     pwvucontrol
-    python312Full
-    python312Packages.dbus-python
-    python312Packages.ipython
-    python312Packages.pip
-    python312Packages.ipdb
-    qalculate-gtk
     ripgrep
     signal-desktop
-    sqlitebrowser
+    # sqlitebrowser
     tcpdump
-    telegram-desktop
-    themechanger
-    tmux
+    # telegram-desktop
     udevil
     udiskie
-    unstable.nwg-look
     usbutils
     usermount
     unzip
     vim
-    vulkan-tools
     wget
     wmctrl
     rofi
