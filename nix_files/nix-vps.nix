@@ -23,10 +23,10 @@ in {
       ./nextcloud-pass.nix
       (builtins.fetchTarball {
         # Pick a release version you are interested in and set its hash, e.g.
-        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.05/nixos-mailserver-nixos-25.05.tar.gz";
+        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
         # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
         # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-        sha256 = "0la8v8d9vzhwrnxmmyz3xnb6vm76kihccjyidhfg6qfi3143fiwq";
+        sha256 = "16kanlk74xnj7xgmjsj7pahy31hlxqcbv76xnsg8qbh54b0hwxgq";
       })
       # nextcloud-extras for caddy support
       "${fetchTarball {
@@ -185,13 +185,13 @@ in {
     neovim
     curl
     fd
-    python312
-    python312Packages.flask
+    #python314
+    #python314Packages.flask
     ripgrep
     gcc
     bat
     eza
-    du-dust
+    dust
     ffmpeg
     exiftool
     htop
@@ -418,6 +418,7 @@ in {
     package = pkgs.unstable.onlyoffice-documentserver;
     hostname = "localhost_onlyoffice";
     jwtSecretFile = "/etc/nextcloud-admin-pass";
+    securityNonceFile = "/etc/onlyoffice/onlyoffice-nonce";
     port = 8888; # port 8000 is the default port
   };
 
@@ -437,10 +438,11 @@ in {
   # Mailserver
   ###############
   mailserver = {
+    stateVersion = 3;
     enable = true;
     fqdn = "mail.b3lo.de";
     domains = [ "b3lo.de" ];
-
+    
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
@@ -522,28 +524,28 @@ in {
   ##################
   # n8n
   ##################
-   services.n8n = {
-     enable = true;
-     openFirewall = true;
-     webhookUrl = "n8n.b3lo.de";
-     # default port is 5678
-     # due to out of memory error, build needed to run with this:
-     # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
-   };
+  services.n8n = {
+    enable = true;
+    openFirewall = true;
+    environment.WEBHOOK_URL = "n8n.b3lo.de";
+    # default port is 5678
+    # due to out of memory error, build needed to run with this:
+    # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
+  };
   
-   systemd.services.n8n = {
-     path = with pkgs; [
-       nix        # Provides nix-shell command
-       python3    # Provides python3 interpreter
-       bash       # Provides bash
-       coreutils  # Provides standard Unix utilities
-     ];
-     
-     # Optional: Add environment variables if needed
-     environment = {
-       NIX_PATH = "nixpkgs=${pkgs.path}";
-     };
-   };
+  systemd.services.n8n = {
+    path = with pkgs; [
+      nix        # Provides nix-shell command
+      python3    # Provides python3 interpreter
+      bash       # Provides bash
+      coreutils  # Provides standard Unix utilities
+    ];
+    
+    # Optional: Add environment variables if needed
+    environment = {
+      NIX_PATH = "nixpkgs=${pkgs.path}";
+    };
+  };
  
   ################
   # wireguard
