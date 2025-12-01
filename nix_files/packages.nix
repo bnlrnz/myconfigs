@@ -1,4 +1,4 @@
-{ config, pkgs, unstable-pkgs, lib, ... }: 
+{ config, pkgs, unstable-pkgs, lib, ... }:
 {
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -39,7 +39,6 @@
     thunar-archive-plugin
     thunar-volman
   ];
-  programs.file-roller.enable = true;
 
   # for thumbnails
   services.tumbler.enable = true;
@@ -107,7 +106,7 @@
     packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       font-awesome
       nerd-fonts.ubuntu
       nerd-fonts.jetbrains-mono
@@ -115,7 +114,7 @@
       open-sans
       google-fonts
       corefonts
-      vistafonts
+      vista-fonts
     ];
     fontconfig.defaultFonts = {
       serif = [ "Noto Serif" "Source Han Serif" ];
@@ -171,7 +170,7 @@
     dconf
     desktop-file-utils
     dig
-    du-dust
+    dust
     dracula-theme
     dracula-icon-theme
     exfat
@@ -179,6 +178,7 @@
     eza
     feh
     filezilla
+    file-roller
     firefox
     fish
     fzf
@@ -238,11 +238,10 @@
     nitrogen
     nixos-firewall-tool
     nmap
-    noto-fonts-color-emoji
     ntfs3g
     obconf
     okteta
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     openssl.dev # dev needed for openssl headers
     patchelf
     pciutils
@@ -250,13 +249,13 @@
     pkg-config
     polkit_gnome
     protontricks
-    protonup # update manager for proton
+    protonup-ng # update manager for proton
     pwvucontrol
-    python312Full
-    python312Packages.dbus-python
-    python312Packages.ipython
-    python312Packages.pip
-    python312Packages.ipdb
+    python314
+    #python314Packages.dbus-python
+    #python314Packages.ipython
+    #python314Packages.pip
+    #python314Packages.ipdb
     qalculate-gtk
     ripgrep
     rofi
@@ -292,14 +291,13 @@
     wayland
     wayland-pipewire-idle-inhibit
     wget
-    whatsapp-for-linux
     wl-clipboard
     wlogout
     unstable.wlr-layout-ui
     wlr-randr
     wofi
     wpaperd
-    wrapGAppsHook
+    wrapGAppsHook3
     x2goclient
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
