@@ -26,7 +26,7 @@ in {
         url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.05/nixos-mailserver-nixos-25.05.tar.gz";
         # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
         # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-        sha256 = "1qn5fg0h62r82q7xw54ib9wcpflakix2db2mahbicx540562la1y";
+        sha256 = "0la8v8d9vzhwrnxmmyz3xnb6vm76kihccjyidhfg6qfi3143fiwq";
       })
       # nextcloud-extras for caddy support
       "${fetchTarball {
@@ -265,6 +265,15 @@ in {
       	  X-Frame-Options "DENY"
       }
       reverse_proxy unix//var/www/sa3_document_manager/sa3_document_manager.sock
+    '';
+    virtualHosts."scas.b3lo.de".extraConfig = ''
+      header / {
+      	Strict-Transport-Security "max-age=31536000;"
+      	  X-XSS-Protection "1; mode=block"
+      	  X-Content-Type-Options "nosniff"
+      	  X-Frame-Options "DENY"
+      }
+      reverse_proxy unix//var/www/scas_browser/scas_browser.sock
     '';
     virtualHosts."sa3mcp.b3lo.de".extraConfig = ''
       reverse_proxy http://localhost:5555

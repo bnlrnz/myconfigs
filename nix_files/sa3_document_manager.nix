@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 let
   unstable = import (fetchTarball "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz") { config = config.nixpkgs.config; };
-  flaskAppDir = "/var/www/sa3_document_manager"; # Path to your Flask app
 
   pythonEnv = unstable.python313.withPackages (ps: with ps; [
     flask
     flask-cors
     gunicorn
     pandas
+    markdown
     openpyxl
     pathlib2
     requests
@@ -24,12 +24,27 @@ in
 
     serviceConfig = {
       ExecStart = "${pythonEnv}/bin/gunicorn --workers 3 --bind unix:/var/www/sa3_document_manager/sa3_document_manager.sock wsgi:app";
-      WorkingDirectory = flaskAppDir;
+      WorkingDirectory = "/var/www/sa3_document_manager";
       User = "caddy";  # Replace with the user that should run the service
       Group = "caddy"; # Replace with the group that should run the service
       Restart = "always";
     };
   };
+
+  systemd.services.scas_browser = {
+    description = "Flask app deployed with gunicorn";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pythonEnv}/bin/gunicorn --workers 3 --bind unix:/var/www/scas_browser/scas_browser.sock wsgi:app";
+      WorkingDirectory = "/var/www/scas_browser";
+      User = "caddy";  # Replace with the user that should run the service
+      Group = "caddy"; # Replace with the group that should run the service
+      Restart = "always";
+    };
+  };
+
 
   systemd.services.sa3_mcp = {
     description = "SA3 MCP Server (SSE Transport)";
