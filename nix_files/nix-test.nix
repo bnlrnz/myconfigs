@@ -156,7 +156,6 @@ in {
     thunar-archive-plugin
     thunar-volman
   ];
-  programs.file-roller.enable = true;
 
   # neovim
   programs.neovim.enable = true;
@@ -230,7 +229,7 @@ in {
     curl
     dconf
     desktop-file-utils
-    du-dust
+    dust
     dracula-theme
     dracula-icon-theme
     exfat
@@ -255,11 +254,11 @@ in {
     keepassxc
     killall
     kitty
-    libsForQt5.okular
+    kdePackages.okular
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     lsof
-    # lxappearance
+    ## lxappearance
     lxqt.lxqt-policykit
     mako
     ncurses
@@ -269,11 +268,11 @@ in {
     networkmanagerapplet
     nextcloud-client
     nfs-utils
-    # nixos-firewall-tool
+    ## nixos-firewall-tool
     noto-fonts-color-emoji
     ntfs3g
     obconf
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     openssl.dev # dev needed for openssl headers
     pciutils
     phinger-cursors
@@ -281,7 +280,7 @@ in {
     pwvucontrol
     ripgrep
     signal-desktop
-    # sqlitebrowser
+    ## sqlitebrowser
     tcpdump
     # telegram-desktop
     udevil
@@ -293,7 +292,7 @@ in {
     wget
     wmctrl
     rofi
-    wrapGAppsHook
+    wrapGAppsHook3
     xcape
     xdg-desktop-portal-gtk
     xdg-desktop-portal
