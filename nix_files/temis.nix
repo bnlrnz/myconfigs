@@ -14,6 +14,14 @@
 
   users.groups.fuse = { };
 
+  # since 25.11 this is kind of broken
+  environment.systemPackages = with pkgs; [
+    networkmanager-openconnect
+  ];
+  networking.networkmanager.plugins = with pkgs; [
+    networkmanager-openconnect
+  ];
+
   networking.networkmanager.ensureProfiles.profiles = {
     "TEMIS VPN" = {
       connection = {
