@@ -136,6 +136,9 @@
     curl
   ];
 
+  # for suggestion if package is not installed
+  programs.command-not-found.enable = true;
+
   environment.systemPackages = with pkgs; [
     ### unfree packages
     webex
