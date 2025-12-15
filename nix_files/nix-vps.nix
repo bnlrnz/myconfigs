@@ -16,6 +16,11 @@ in {
     };
   };
 
+  # Disable the stable n8n module and import unstable
+  disabledModules = [
+    "services/misc/n8n.nix"
+  ];
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration_nix-vps.nix
@@ -33,6 +38,7 @@ in {
         url = "https://github.com/onny/nixos-nextcloud-testumgebung/archive/fa6f062830b4bc3cedb9694c1dbf01d5fdf775ac.tar.gz";
         sha256 = "0gzd0276b8da3ykapgqks2zhsqdv4jjvbv97dsxg0hgrhb74z0fs";}}/nextcloud-extras.nix"
       "${sops-nix}/modules/sops"
+      "${unstableTarball}/nixos/modules/services/misc/n8n.nix"
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -524,6 +530,12 @@ in {
   ##################
   # n8n
   ##################
+  nixpkgs.overlays = [
+    (final: prev: {
+      n8n = pkgs.unstable.n8n;
+    })
+  ];
+
   services.n8n = {
     enable = true;
     openFirewall = true;
@@ -584,7 +596,6 @@ in {
     };
   };
  
-
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   networking.firewall.trustedInterfaces = [ "wg0" ];
   networking.interfaces.wg0.ipv4.routes = [
