@@ -11,7 +11,7 @@ in {
     };
   };
 
-  import = [
+  imports = [
     # nextcloud-extras for caddy support
     "${fetchTarball {
         url = "https://github.com/onny/nixos-nextcloud-testumgebung/archive/fa6f062830b4bc3cedb9694c1dbf01d5fdf775ac.tar.gz";

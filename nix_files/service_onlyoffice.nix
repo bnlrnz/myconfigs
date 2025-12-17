@@ -11,9 +11,6 @@ in {
     };
   };
 
-  import = [
-  ]
-
   services.caddy.virtualHosts."oo.b3lo.de".extraConfig = ''
     header / {
         Strict-Transport-Security "max-age=31536000;"

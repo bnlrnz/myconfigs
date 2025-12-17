@@ -3,7 +3,7 @@
 let
   sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
 in{
-  import = [
+  imports = [
         "${sops-nix}/modules/sops"
   ]
 

@@ -92,6 +92,7 @@ process_machine() {
 }
 
 # Main logic
+sudo mkdir /etc/nixos/secrets # just to be sure, even if we do not need it
 case "$hn" in
     "nix") process_machine NIX_HOME_FILES ;;
     "nix-vps") process_machine NIX_VPS_FILES ;;

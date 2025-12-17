@@ -3,7 +3,7 @@
 let
   snappymail_webroot = "/var/lib/snappymail";
 in{
-  import = [
+  imports = [
       (builtins.fetchTarball {
         # Pick a release version you are interested in and set its hash, e.g.
         url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";

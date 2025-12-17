@@ -16,7 +16,7 @@ in {
     "services/misc/n8n.nix"
   ];
 
-  import = [
+  imports = [
       "${unstableTarball}/nixos/modules/services/misc/n8n.nix"
   ]
 
