@@ -5,154 +5,100 @@ hn=$(hostname)
 echo "Copying files for $hn (from this folder to etc)"
 echo "If you don't see further output, nothing changed."
 
-if [ "$hn" == "nix" ]; then
-    if ! diff nix-home.nix /etc/nixos/configuration.nix > /dev/null ; then
-        diff nix-home.nix /etc/nixos/configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/nix-home"
-        sudo cp -v nix-home.nix /etc/nixos/configuration.nix
-    fi
-    if ! diff hardware-configuration_nix-home.nix /etc/nixos/hardware-configuration_nix-home.nix > /dev/null ; then
-        diff hardware-configuration_nix-home.nix /etc/nixos/hardware-configuration_nix-home.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/hardware-configuration_nix"
-        sudo cp -v hardware-configuration_nix-home.nix /etc/nixos/
-    fi
-    if ! diff packages.nix /etc/nixos/packages.nix > /dev/null ; then
-        diff packages.nix /etc/nixos/packages.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/packages.nix"
-        sudo cp -v packages.nix /etc/nixos/
-    fi
-    if ! diff services.nix /etc/nixos/services.nix > /dev/null ; then
-        diff services.nix /etc/nixos/services.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/services.nix"
-        sudo cp -v services.nix /etc/nixos/
-    fi
-    if ! diff steam.nix /etc/nixos/steam.nix > /dev/null ; then
-        diff steam.nix /etc/nixos/steam.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/steam.nix"
-        sudo cp -v steam.nix /etc/nixos/
-    fi
-    if ! diff pwn.nix /etc/nixos/pwn.nix > /dev/null ; then
-        diff pwn.nix /etc/nixos/pwn.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/pwn.nix"
-        sudo cp -v pwn.nix /etc/nixos/
-    fi
-    if ! diff k3s.nix /etc/nixos/k3s.nix > /dev/null ; then
-        diff k3s.nix /etc/nixos/k3s.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/k3s.nix"
-        sudo cp -v k3s.nix /etc/nixos/
-    fi
-    if ! diff temis.nix /etc/nixos/temis.nix > /dev/null ; then
-        diff temis.nix /etc/nixos/temis.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/temis.nix"
-        sudo cp -v temis.nix /etc/nixos/
-    fi
-    if ! diff podman.nix /etc/nixos/podman.nix > /dev/null ; then
-        diff podman.nix /etc/nixos/podman.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/podman.nix"
-        sudo cp -v podman.nix /etc/nixos/
-    fi
-fi
+# Machine-specific file lists
+declare -a NIX_HOME_FILES=(
+    "nix-home.nix:configuration.nix"
+    "hardware-configuration_nix-home.nix"
+    "packages.nix"
+    "services.nix"
+    "steam.nix"
+    "pwn.nix"
+    "k3s.nix"
+    "temis.nix"
+    "podman.nix"
+)
 
-if [ "$hn" == "tp-belo" ]; then
-    if ! diff nix-thinkpad.nix /etc/nixos/configuration.nix > /dev/null ; then
-        diff nix-thinkpad.nix /etc/nixos/configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/nix-thinkpad"
-        sudo cp -v nix-thinkpad.nix /etc/nixos/configuration.nix
-    fi
-    if ! diff hardware-configuration_nix-thinkpad.nix /etc/nixos/hardware-configuration_nix-thinkpad.nix > /dev/null ; then
-        diff hardware-configuration_nix-thinkpad.nix /etc/nixos/hardware-configuration_nix-thinkpad.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/hardware-configuration_nix"
-        sudo cp -v hardware-configuration_nix-thinkpad.nix /etc/nixos/
-    fi
-    if ! diff packages.nix /etc/nixos/packages.nix > /dev/null ; then
-        diff packages.nix /etc/nixos/packages.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/packages.nix"
-        sudo cp -v packages.nix /etc/nixos/
-    fi
-    if ! diff services.nix /etc/nixos/services.nix > /dev/null ; then
-        diff services.nix /etc/nixos/services.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/services.nix"
-        sudo cp -v services.nix /etc/nixos/
-    fi
-    if ! diff pwn.nix /etc/nixos/pwn.nix > /dev/null ; then
-        diff pwn.nix /etc/nixos/pwn.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/pwn.nix"
-        sudo cp -v pwn.nix /etc/nixos/
-    fi
-    if ! diff temis.nix /etc/nixos/temis.nix > /dev/null ; then
-        diff temis.nix /etc/nixos/temis.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/temis.nix"
-        sudo cp -v temis.nix /etc/nixos/
-    fi
-    if ! diff k3s.nix /etc/nixos/k3s.nix > /dev/null ; then
-        diff k3s.nix /etc/nixos/k3s.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/k3s.nix"
-        sudo cp -v k3s.nix /etc/nixos/
-    fi
-    if ! diff podman.nix /etc/nixos/podman.nix > /dev/null ; then
-        diff podman.nix /etc/nixos/podman.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/podman.nix"
-        sudo cp -v podman.nix /etc/nixos/
-    fi
-fi
+declare -a TP_BELO_FILES=(
+    "nix-thinkpad.nix:configuration.nix"
+    "hardware-configuration_nix-thinkpad.nix"
+    "packages.nix"
+    "services.nix"
+    "steam.nix"
+    "pwn.nix"
+    "k3s.nix"
+    "temis.nix"
+    "podman.nix"
+)
 
-if [ "$hn" == "nix-vps" ]; then
-    if ! diff nix-vps.nix /etc/nixos/configuration.nix > /dev/null ; then
-        diff nix-vps.nix /etc/nixos/configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/nix-vps"
-        sudo cp -v nix-vps.nix /etc/nixos/configuration.nix
-    fi
-    if ! diff hardware-configuration_nix-vps.nix /etc/nixos/hardware-configuration_nix-vps.nix > /dev/null ; then
-        diff hardware-configuration_nix-vps.nix /etc/nixos/hardware-configuration_nix-vps.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/hardware-configuration_nix"
-        sudo cp -v hardware-configuration_nix-vps.nix /etc/nixos/
-    fi
-    if ! diff sa3_document_manager.nix /etc/nixos/sa3_document_manager.nix > /dev/null ; then
-        diff sa3_document_manager.nix /etc/nixos/sa3_document_manager.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/sa3_document_manager.nix"
-        sudo cp -v sa3_document_manager.nix /etc/nixos/
-    fi
-    if ! diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml > /dev/null ; then
-        diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/secrets/secrets.yaml"
-        sudo cp -v -R ./secrets /etc/nixos/
-    fi
-fi
+declare -a NIX_VPS_FILES=(
+    "nix-vps.nix:configuration.nix"
+    "hardware-configuration_nix-vps.nix"
+    "service_sa3_document_manager.nix"
+    "secrets/secrets.yaml:secrets/secrets.yaml"
+    "service_wireguard.nix"
+    "service_mailserver.nix"
+    "service_immich.nix"
+    "service_n8n.nix"
+    "service_nextcloud.nix"
+    "service_onlyoffice.nix"
+)
 
-if [ "$hn" == "nix-pi" ]; then
-    if ! diff nix-pi.nix /etc/nixos/configuration.nix > /dev/null ; then
-        diff nix-pi.nix /etc/nixos/configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/nix-pi"
-        sudo cp -v nix-pi.nix /etc/nixos/configuration.nix
-    fi
-    if ! diff hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix > /dev/null ; then
-        diff hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/hardware-configuration_nix"
-        sudo cp -v hardware-configuration_nix-pi.nix /etc/nixos/hardware-configuration.nix
-    fi
-    if ! diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml > /dev/null ; then
-        diff ./secrets/secrets.yaml /etc/nixos/secrets/secrets.yaml
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/secrets/secrets.yaml"
-        sudo cp -v -R ./secrets /etc/nixos/
-    fi
-fi
+declare -a NIX_PI_FILES=(
+    "nix-pi.nix:configuration.nix"
+    "hardware-configuration_nix-pi.nix"
+    "secrets/secrets.yaml:secrets/secrets.yaml"
+)
 
-if [ "$hn" == "nix-test" ]; then
-    if ! diff nix-test.nix /etc/nixos/configuration.nix > /dev/null ; then
-        diff nix-test.nix /etc/nixos/configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/nix-test"
-        sudo cp -v nix-test.nix /etc/nixos/configuration.nix
-    fi
-    if ! diff hardware-configuration_nix-test.nix /etc/nixos/hardware-configuration.nix > /dev/null ; then
-        diff hardware-configuration_nix-test.nix /etc/nixos/hardware-configuration.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/hardware-configuration_nix"
-        sudo cp -v hardware-configuration_nix-test.nix /etc/nixos/hardware-configuration.nix
-    fi
-    if ! diff temis.nix /etc/nixos/temis.nix > /dev/null ; then
-        diff temis.nix /etc/nixos/temis.nix
-        read -n 1 -s -r -p "Press any key to overwrite /etc/nixos/temis.nix"
-        sudo cp -v temis.nix /etc/nixos/
-    fi
-fi
+declare -a NIX_TEST_FILES=(
+    "nix-test.nix:configuration.nix"
+    "hardware-configuration_nix-test.nix"
+    "temis.nix"
+)
 
+# Function to sync a file
+sync_file() {
+    local source="$1"
+    local dest_name="$2"
+    local destination="/etc/nixos/$dest_name"
+    
+    if ! diff "$source" "$destination" > /dev/null 2>&1; then
+        diff "$source" "$destination"
+        read -n 1 -s -r -p "Press any key to overwrite $destination"
+        
+        # Check if it's a directory (for secrets/) and use -R flag
+        if [ -d "$source" ]; then
+            sudo cp -v -R "$source" "$destination"
+        else
+            sudo cp -v "$source" "$destination"
+        fi
+    fi
+}
 
+# Function to process a machine's file list
+process_machine() {
+    local -n files_array=$1
+    
+    for file_pair in "${files_array[@]}"; do
+        # Split source and destination
+        if [[ "$file_pair" == *":"* ]]; then
+            IFS=':' read -r source dest <<< "$file_pair"
+        else
+            source="$file_pair"
+            dest="$file_pair"
+        fi
+        
+        sync_file "$source" "$dest"
+    done
+}
+
+# Main logic
+case "$hn" in
+    "nix") process_machine NIX_HOME_FILES ;;
+    "nix-vps") process_machine NIX_VPS_FILES ;;
+    "tp-belo") process_machine TP_BELO_FILES ;;
+    "nix-pi") process_machine NIX_PI_FILES ;;
+    "nix-test") process_machine NIX_TEST_FILES ;;
+    *)
+    echo "Unknown hostname: $hn"
+    exit 1 ;;
+esac
