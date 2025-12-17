@@ -11,7 +11,7 @@ in{
         # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
         sha256 = "16kanlk74xnj7xgmjsj7pahy31hlxqcbv76xnsg8qbh54b0hwxgq";
       })
-  ]
+  ];
 
   services.caddy.virtualHosts."mail.b3lo.de".extraConfig = ''
         root * ${pkgs.snappymail}

@@ -4,8 +4,8 @@ let
   sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
 in{
   imports = [
-        "${sops-nix}/modules/sops"
-  ]
+    "${sops-nix}/modules/sops"
+  ];
 
   ################
   # wireguard
