@@ -2,29 +2,19 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
-let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-in {
-  # add unstable channel
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
-    };
-  };
-
+{ config, lib, pkgs, ... }:{
   imports =
     [ # Include the results of the hardware scan.
+      ./unfree-packages.nix
       ./hardware-configuration_nix-vps.nix
       ./service_sa3_document_manager.nix
       ./service_wireguard.nix
       ./service_mailserver.nix
       ./service_immich.nix
       ./service_n8n.nix
-      ./service_nextcloud.nix
-      ./service_onlyoffice.nix
-      ./nextcloud-pass.nix
+      ./service_opencloud.nix
+      #./service_nextcloud.nix
+      #./service_onlyoffice.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -164,9 +154,7 @@ in {
 
   users.defaultUserShell = pkgs.fish;
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "corefonts"
-  ];
+  allowUnfreePackages = [ "corefonts" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

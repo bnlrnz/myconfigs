@@ -1,28 +1,6 @@
-
 { config, lib, pkgs, ... }:
-let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-in {
-  # add unstable channel
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
-    };
-  };
-
-  # Disable the stable n8n module and import unstable
-  disabledModules = [
-    "services/misc/n8n.nix"
-  ];
-
-  imports = [
-      "${unstableTarball}/nixos/modules/services/misc/n8n.nix"
-  ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "n8n"
-  ];
+{
+  allowUnfreePackages = [ "n8n" ];
 
   services.caddy.virtualHosts."n8n.b3lo.de".extraConfig = ''
     reverse_proxy http://localhost:5678
@@ -31,12 +9,6 @@ in {
   ##################
   # n8n
   ##################
-  nixpkgs.overlays = [
-    (final: prev: {
-      n8n = pkgs.unstable.n8n;
-    })
-  ];
-
   services.n8n = {
     enable = true;
     openFirewall = true;

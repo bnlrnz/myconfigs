@@ -31,6 +31,7 @@ declare -a TP_BELO_FILES=(
 )
 
 declare -a NIX_VPS_FILES=(
+    "unfree-packages.nix"
     "nix-vps.nix:configuration.nix"
     "hardware-configuration_nix-vps.nix"
     "service_sa3_document_manager.nix"
@@ -41,6 +42,7 @@ declare -a NIX_VPS_FILES=(
     "service_n8n.nix"
     "service_nextcloud.nix"
     "service_onlyoffice.nix"
+    "service_opencloud.nix"
 )
 
 declare -a NIX_PI_FILES=(
@@ -92,7 +94,7 @@ process_machine() {
 }
 
 # Main logic
-sudo mkdir /etc/nixos/secrets # just to be sure, even if we do not need it
+sudo mkdir -p /etc/nixos/secrets # just to be sure, even if we do not need it
 case "$hn" in
     "nix") process_machine NIX_HOME_FILES ;;
     "nix-vps") process_machine NIX_VPS_FILES ;;
