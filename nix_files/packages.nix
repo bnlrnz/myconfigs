@@ -136,6 +136,10 @@
     curl
   ];
 
+  # ausweisapp
+  programs.ausweisapp.enable = true;
+  programs.ausweisapp.openFirewall = true;
+
   # for suggestion if package is not installed
   programs.command-not-found.enable = true;
 
@@ -152,6 +156,7 @@
     alsa-utils
     android-tools
     arandr
+    ausweisapp
     autofs5
     bat
     bind
@@ -245,6 +250,7 @@
     obconf
     okteta
     onlyoffice-desktopeditors
+    opencloud-desktop
     openssl.dev # dev needed for openssl headers
     patchelf
     pciutils
