@@ -18,18 +18,92 @@ in
         wopi_server_url = "https://${collaboraDomain}";
         insecure = false; 
       };
+
+      collaboration = {
+        enable = true;
+      };
     };
 
     # Environment variables for sensitive or specific runtime config
     environment = {
-      IDM_ADMIN_PASSWORD = "superseca9f82czjn05za803k,ysxrjglvkym3.<F8>58c92tuazm9pxz";
-      OC_LOG_LEVEL = "info";
+      OC_LOG_LEVEL = "debug";
+
+      # ========== TLS & Proxy ==========
       OC_INSECURE = "true";
-      # Optional: You might also need these if they aren't auto-detected
-      PROXY_TLS = "false"; 
-      OCIS_URL = "https://cloud.b3lo.de";
+      PROXY_TLS = "false";
+
+      # ========== URL Configuration ==========
+      OCIS_URL = "https://${domain}";
+      OCIS_DOMAIN = "${domain}";
+
+      # ========== CSP Configuration ==========
+      PROXY_CSP_CONFIG_FILE_LOCATION = "/etc/opencloud/csp.yaml";
+
+      # ========== Enable Services ==========
+      OC_ADD_RUN_SERVICES = "collaboration,wopi";
+
+      # ========== Collaboration Service ==========
+      COLLABORATION_APP_NAME = "CollaboraOnline";
+      COLLABORATION_APP_PRODUCT = "Collabora";
+      COLLABORATION_APP_ADDR = "https://${collaboraDomain}";
+      COLLABORATION_APP_INSECURE = "false";
+      COLLABORATION_WOPI_SRC = "https://${domain}";
+      COLLABORATION_HTTP_ADDR = "127.0.0.1:9300";
+      COLLABORATION_GRPC_ADDR = "127.0.0.1:9301";
+
+      # ========== Collaboration Store Configuration ==========
+      COLLABORATION_STORE = "nats-js-kv";
+      COLLABORATION_STORE_NODES = "127.0.0.1:9233";
+      COLLABORATION_STORE_DATABASE = "collaboration";
+      COLLABORATION_STORE_TTL = "30m";
+
+      # ========== Proof Keys Configuration ==========
+      COLLABORATION_APP_PROOF_DISABLE = "true";
     };
   };
+
+  environment.etc."opencloud/csp.yaml".text = ''
+    directives:
+      child-src:
+        - "'self'"
+      connect-src:
+        - "'self'"
+        - "blob:"
+        - "https://raw.githubusercontent.com/opencloud-eu/awesome-apps/"
+        - "https://update.opencloud.eu/"
+      default-src:
+        - "'none'"
+      font-src:
+        - "'self'"
+      frame-ancestors:
+        - "'self'"
+      frame-src:
+        - "'self'"
+        - "blob:"
+        - "https://embed.diagrams.net/"
+        - "https://${collaboraDomain}/"
+        - "https://docs.opencloud.eu"
+      img-src:
+        - "'self'"
+        - "data:"
+        - "blob:"
+        - "https://raw.githubusercontent.com/opencloud-eu/awesome-apps/"
+        - "https://tile.openstreetmap.org/"
+        - "https://${collaboraDomain}/"
+      manifest-src:
+        - "'self'"
+      media-src:
+        - "'self'"
+      object-src:
+        - "'self'"
+        - "blob:"
+      script-src:
+        - "'self'"
+        - "'unsafe-inline'"
+      style-src:
+        - "'self'"
+        - "'unsafe-inline'"
+  '';
 
   # 2. Collabora Online (CODE) Service
   services.collabora-online = {
@@ -47,6 +121,7 @@ in
       net = {
         proto = "IPv4";
         listen = "loopback";
+        post_allow = ["::1"];
       };
 
       # WOPI Host: IMPORTANT
@@ -54,9 +129,12 @@ in
       # The dot needs to be escaped for the regex, or just use the domain.
       storage = {
         wopi = {
-          host = [ "${domain}" ];
+          "@allow" = true;
+          host = [ "${domain}" "127.0.0.1:9300" ];
         };
       };
+
+      server_name = "${collaboraDomain}";
     };
   };
 
@@ -88,8 +166,6 @@ in
             header_up X-Forwarded-For {remote}
             header_up X-Forwarded-Proto https
             header_up X-Forwarded-Port 443
-            header_up Upgrade {>Upgrade}
-            header_up Connection {>Connection}
           }
         '';
       };
