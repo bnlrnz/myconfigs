@@ -224,7 +224,6 @@ in {
     bind
     btrfs-progs
     cairo.dev
-    cliphist
     cpuid
     curl
     dconf
@@ -237,6 +236,7 @@ in {
     eza
     feh
     filezilla
+    file-roller
     firefox
     fish
     fzf
@@ -298,7 +298,7 @@ in {
     xdg-desktop-portal
     xorg.libX11
     xorg.xinit
-    unstable.zed-editor
+    zed-editor
     zip
   ];
 
