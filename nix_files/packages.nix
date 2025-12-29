@@ -222,7 +222,7 @@
     libcap
     libglibutil
     libreoffice
-    librewolf-bin
+    #librewolf-bin
     libsForQt5.kwallet
     kdePackages.okular
     libsForQt5.qt5ct
