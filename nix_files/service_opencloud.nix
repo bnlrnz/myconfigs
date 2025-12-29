@@ -124,6 +124,10 @@ in
         post_allow = ["::1"];
       };
 
+      admin_console.enable = "false";
+      admin_console.username = "admin";
+      admin_console.password = "";
+
       # WOPI Host: IMPORTANT
       # You must tell Collabora to trust your OpenCloud domain.
       # The dot needs to be escaped for the regex, or just use the domain.
