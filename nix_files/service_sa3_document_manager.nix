@@ -2,7 +2,7 @@
 let
   unstable = import (fetchTarball "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz") { config = config.nixpkgs.config; };
 
-  pythonEnv = unstable.python313.withPackages (ps: with ps; [
+  pythonEnv = pkgs.python313.withPackages (ps: with ps; [
     flask
     flask-cors
     gunicorn
