@@ -99,4 +99,85 @@ in{
       "listen.mode" = "0600";
     };
   };
+
+  ###############
+  # Mail Backup
+  ###############
+
+systemd = {
+  services.mail-to-opencloud-backup = {
+    description = "Backup mailserver to Opencloud user folder";
+    
+    # Required packages for the backup script
+    path = with pkgs; [ rsync ];
+   
+    unitConfig = {
+      OnSuccess = "opencloud.service";
+    };
+
+    serviceConfig = {
+      Type = "oneshot";
+      # Run as root to access both mail and nextcloud directories
+      User = "root";
+      
+      # Security hardening (optional but recommended)
+      ProtectSystem = "strict";
+      ReadWritePaths = [
+        "/var/vmail"
+        "/var/lib/opencloud/storage/users/users/aeb91904-01ed-4b87-84e9-8a88a161fee5/Sonstiges"
+      ];
+      ProtectHome = true;
+      NoNewPrivileges = true;
+      
+      # Logging
+      StandardOutput = "journal";
+      StandardError = "journal";
+    };
+    
+    script = ''
+      set -eu
+      
+      # Source mail directory (adjust to your mailDirectory setting)
+      MAIL_SOURCE="/var/vmail"
+      
+      # Opencloud destination (adjust username as needed)
+      NC_DEST="/var/lib/opencloud/storage/users/users/aeb91904-01ed-4b87-84e9-8a88a161fee5/Sonstiges/Backup_Mails"
+      
+      # Create destination if it doesn't exist
+      mkdir -p "$NC_DEST"
+      
+      # Backup with rsync
+      # -a: archive mode (preserves permissions, ownership, timestamps)
+      # -v: verbose
+      # --delete: remove files in destination that don't exist in source
+      # --stats: show transfer statistics
+      ${pkgs.rsync}/bin/rsync \
+        -av \
+        --delete \
+        --stats \
+        --exclude=".Trash" \
+        "$MAIL_SOURCE/" "$NC_DEST/"
+      
+      # Fix ownership for Opencloud (adjust user based on your install)
+      chown -R opencloud:opencloud "$NC_DEST"
+      
+      echo "Mail backup completed successfully"
+    '';
+  };
+  
+  timers.mail-to-opencloud-backup = {
+    description = "Daily mail to Opencloud backup";
+    wantedBy = [ "timers.target" ];
+    
+    # Run daily at 2 AM
+    timerConfig = {
+      OnCalendar = "*-*-* 02:34:13 Europe/Berlin";
+      Persistent = true;  # catch up if system was down
+    };
+    
+    # Associate with service
+    partOf = [ "mail-to-opencloud-backup.service" ];
+  };
+};
+
 }
