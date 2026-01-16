@@ -37,7 +37,7 @@ in
         X-Content-Type-Options "nosniff"
         X-Frame-Options "DENY"
     }
-    reverse_proxy unix//var/www/service_sa3_document_manager/service_sa3_document_manager.sock
+    reverse_proxy unix//var/www/sa3_document_manager/sa3_document_manager.sock
   '';
 
   systemd.services.scas_browser = {
@@ -63,36 +63,36 @@ in
     reverse_proxy unix//var/www/scas_browser/scas_browser.sock
   '';
 
-  systemd.services.sa3_mcp = {
-    description = "SA3 MCP Server (SSE Transport)";
-    after = [ "network.target" "sa3_document_manager.service" ];
-    wantedBy = [ "multi-user.target" ];
-
-    serviceConfig = {
-      ExecStart = "${pythonEnv}/bin/python /var/www/sa3_document_manager/sa3_document_manager_mcp_server.py";
-      WorkingDirectory = "/var/www/sa3_document_manager";
-      User = "caddy";
-      Group = "caddy";
-      Restart = "always";
-    
-      Environment = "API_BASE_URL=http://sa3.b3lo.de";
-    
-      # Security hardening
-      NoNewPrivileges = true;
-      PrivateTmp = true;
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      ReadWritePaths = "/var/www/sa3_document_manager";
-    };
-  };
-  services.caddy.virtualHosts."sa3mcp.b3lo.de".extraConfig = ''
-    reverse_proxy http://localhost:5555
-  
-    # CORS headers for ChatGPT
-    header {
-      Access-Control-Allow-Origin "*"
-      Access-Control-Allow-Methods "GET, POST, OPTIONS"
-      Access-Control-Allow-Headers "Content-Type"
-    }
-  '';
+  # systemd.services.sa3_mcp = {
+  #   description = "SA3 MCP Server (SSE Transport)";
+  #   after = [ "network.target" "sa3_document_manager.service" ];
+  #   wantedBy = [ "multi-user.target" ];
+  #
+  #   serviceConfig = {
+  #     ExecStart = "${pythonEnv}/bin/python /var/www/sa3_document_manager/sa3_document_manager_mcp_server.py";
+  #     WorkingDirectory = "/var/www/sa3_document_manager";
+  #     User = "caddy";
+  #     Group = "caddy";
+  #     Restart = "always";
+  #   
+  #     Environment = "API_BASE_URL=http://sa3.b3lo.de";
+  #   
+  #     # Security hardening
+  #     NoNewPrivileges = true;
+  #     PrivateTmp = true;
+  #     ProtectSystem = "strict";
+  #     ProtectHome = true;
+  #     ReadWritePaths = "/var/www/sa3_document_manager";
+  #   };
+  # };
+  # services.caddy.virtualHosts."sa3mcp.b3lo.de".extraConfig = ''
+  #   reverse_proxy http://localhost:5555
+  # 
+  #   # CORS headers for ChatGPT
+  #   header {
+  #     Access-Control-Allow-Origin "*"
+  #     Access-Control-Allow-Methods "GET, POST, OPTIONS"
+  #     Access-Control-Allow-Headers "Content-Type"
+  #   }
+  # '';
 }

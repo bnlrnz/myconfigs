@@ -9,15 +9,23 @@
   ##################
   # n8n
   ##################
+  nixpkgs.config.packageOverrides = pkgs: {
+    n8n = pkgs.n8n.overrideAttrs (oldAttrs: {
+      env = (oldAttrs.env or {}) // {
+        NODE_OPTIONS = "--max-old-space-size=4096";
+      };
+    });
+  };
+
   services.n8n = {
     enable = true;
     openFirewall = true;
     environment.WEBHOOK_URL = "n8n.b3lo.de";
     # default port is 5678
     # due to out of memory error, build needed to run with this:
-    # NODE_OPTIONS='--max-old-space-size=2000' sudo nixos-rebuild switch --upgrade
+    environment.NODE_OPTIONS="--max-old-space-size=512"; # NODE_OPTIONS='--max-old-space-size=512'sudo nixos-rebuild switch --upgrade
   };
-  
+
   systemd.services.n8n = {
     path = with pkgs; [
       nix        # Provides nix-shell command
@@ -25,7 +33,7 @@
       bash       # Provides bash
       coreutils  # Provides standard Unix utilities
     ];
-    
+
     # Optional: Add environment variables if needed
     environment = {
       NIX_PATH = "nixpkgs=${pkgs.path}";
