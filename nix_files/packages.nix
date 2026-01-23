@@ -48,13 +48,13 @@
   # kvantum theme
   xdg.portal.lxqt = {
     enable = true;
-  #  styles =
-  #    [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
+    #  styles =
+    #    [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
   };
 
   # setup wireshark - setcap and so on
   programs.wireshark.enable = true;
-  
+
   # this should work, but does not...
   # programs.tcpdump.enable = true;
   # lets do it by hand until fixed:
@@ -100,7 +100,7 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
-  ];
+    ];
 
   fonts = {
     packages = with pkgs; [
@@ -142,6 +142,29 @@
 
   # for suggestion if package is not installed
   programs.command-not-found.enable = true;
+
+  # firefox
+  programs.firefox = {
+    enable = true;
+    policies = {
+      DisableFirefoxStudies = true;
+      DisableTelemetry = true;
+      DontCheckDefaultBrowser = true;
+      FirefoxHome = {
+        SponsoredStories = false;
+        SponsoredTopSites = false;
+        Stories = false;
+      };
+      GenerativeAI = {
+        Enabled = false;
+      };
+      SearchEngines = {
+        Remove = [
+          "Perplexity"
+        ];
+      };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     ### unfree packages
@@ -187,7 +210,6 @@
     feh
     filezilla
     file-roller
-    firefox
     fish
     fzf
     font-awesome
@@ -213,7 +235,6 @@
     gvfs
     inetutils
     jetbrains-mono
-    joplin-desktop
     jq
     keepassxc
     killall
@@ -222,6 +243,10 @@
     libcap
     libglibutil
     libreoffice
+    hunspell
+    hunspellDicts.de-de
+    hunspellDicts.en-us
+    hyphenDicts.de-de # hyphenation for german
     #librewolf-bin
     libsForQt5.kwallet
     kdePackages.okular
