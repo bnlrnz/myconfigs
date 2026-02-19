@@ -39,6 +39,7 @@ in {
     ./packages.nix
     ./pwn.nix
     ./temis.nix
+    #./steam.nix
     #./k3s.nix
     #(import "${home-manager}/nixos")
   ];
