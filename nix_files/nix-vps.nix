@@ -13,6 +13,7 @@
       ./service_immich.nix
       ./service_n8n.nix
       ./service_opencloud.nix
+      ./service_staple-scheduler.nix
       #./service_nextcloud.nix
       #./service_onlyoffice.nix
     ];

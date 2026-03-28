@@ -47,6 +47,14 @@ in{
   networking.firewall.allowedUDPPorts = [ 51820 ];
 
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
+  # Enable NAT so VPN clients use VPS public IP; need this for evading geoblocking
+  networking.nat = {
+    enable = true;
+    externalInterface = "ens18";
+    internalInterfaces = [ "wg0" ];
+  };
+
   networking.firewall.trustedInterfaces = [ "wg0" ];
   networking.interfaces.wg0.ipv4.routes = [
     { address = "10.10.10.0"; prefixLength = 24; via = "10.10.11.201"; }

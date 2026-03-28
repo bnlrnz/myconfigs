@@ -2,7 +2,7 @@
 
 hn=$(hostname)
 
-echo "Copying files for $hn (from this folder to etc)"
+echo "Copying files for $hn (from etc folder to this folder)"
 echo "If you don't see further output, nothing changed."
 
 # Machine-specific file lists
@@ -43,6 +43,7 @@ declare -a NIX_VPS_FILES=(
     "service_nextcloud.nix"
     "service_onlyoffice.nix"
     "service_opencloud.nix"
+    "service_staple-scheduler.nix"
 )
 
 declare -a NIX_PI_FILES=(

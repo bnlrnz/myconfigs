@@ -43,6 +43,7 @@ declare -a NIX_VPS_FILES=(
     "service_nextcloud.nix"
     "service_onlyoffice.nix"
     "service_opencloud.nix"
+    "service_staple-scheduler.nix"
 )
 
 declare -a NIX_PI_FILES=(

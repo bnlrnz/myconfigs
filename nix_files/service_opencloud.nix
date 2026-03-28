@@ -3,13 +3,21 @@
 let
   domain = "cloud.b3lo.de";
   collaboraDomain = "oo.b3lo.de";
+  unstableTarball = fetchTarball
+    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
 in
   {
+  # 0. bring in unstable
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
+    };
+  };
   # 1. OpenCloud Service
   services.opencloud = {
     enable = true;
     url = "https://${domain}";
-
+    package = pkgs.unstable.opencloud;
     # Configure OpenCloud to use Collabora
     settings = {
       # These settings depend on the specific OpenCloud version structure

@@ -9,7 +9,7 @@ in{
         url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
         # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
         # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-        sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
+        sha256 = "0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
       })
   ];
 
@@ -132,11 +132,13 @@ systemd = {
       # Logging
       StandardOutput = "journal";
       StandardError = "journal";
+
+      ExecStopPost = "/run/current-system/sw/bin/systemctl restart opencloud.service";
     };
     
     script = ''
       set -eu
-      
+    
       # Source mail directory (adjust to your mailDirectory setting)
       MAIL_SOURCE="/var/vmail"
       
