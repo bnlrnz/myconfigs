@@ -1,5 +1,9 @@
 { pkgs, config, lib, ... }: 
+let
+  sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
+in
 {
+  imports = [ "${sops-nix}/modules/sops" ];
 
   networking.nameservers = [ "10.50.1.1" ];
   networking.firewall.allowedTCPPorts = [
@@ -91,6 +95,21 @@
     device = "fs1.temislab.de:/vsanfs/svc-scasbrowser";
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "nfsvers=4.1" ];
+  };
+
+  services.davfs2.enable = true;
+
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.secrets."webdav_bscw/webdav_bscw_secret" = {
+    sopsFile = ./secrets/nix/webdav_bscw.yaml;
+    path = "/etc/davfs2/secrets";
+    mode = "0600";
+  };
+
+  fileSystems."/mnt/BSCW" = {
+    device = "https://bscw.bund.de/sec/bscw.cgi/home/";
+    fsType = "davfs";
+    options = ["x-systemd.automount" "noauto" "_netdev"];
   };
 
   # PKI / self signed certificates

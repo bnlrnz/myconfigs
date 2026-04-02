@@ -179,7 +179,6 @@
     alsa-utils
     android-tools
     arandr
-    ausweisapp
     autofs5
     bat
     bind

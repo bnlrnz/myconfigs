@@ -10,6 +10,8 @@ declare -a NIX_HOME_FILES=(
     "configuration.nix:nix-home.nix"
     "hardware-configuration_nix-home.nix"
     "packages.nix"
+    "secrets/nix/webdav_bscw.yaml:secrets/nix/webdav_bscw.yaml"
+    "secrets/secrets.yaml:secrets/secrets.yaml"
     "services.nix"
     "steam.nix"
     "pwn.nix"
