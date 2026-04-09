@@ -2,6 +2,7 @@ keys:
   - &vps age1w5lhtjqnq2d45kgu64xfjgxszzpdnunc9h9q9ylnm5fgtfjpcgrsxzpq0q
   - &pi  age1xc03fkd60zstmu49uw7l4dhnhjeqtkedgtxfkp2ul53nhxfzp4fssyrv7n
   - &nix age1utzqrp7ldlqxlfwr6fmpsh6vndmtg4hejcc9j9qplnvst3atfuxsdl6dnp
+  - &tp-belo age18d0j5yx36v80ecu0d7cxth88tpsqly0xjdmmk62ymvjael75paaq3ztewa
 
 creation_rules:
   - path_regex: secrets.yaml$
@@ -13,4 +14,8 @@ creation_rules:
     key_groups:
       - age:
         - *nix
+  - path_regex: secrets/tp-belo/.*\.yaml$
+    key_groups:
+      - age:
+        - *tp-belo
 

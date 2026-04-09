@@ -25,6 +25,7 @@ declare -a TP_BELO_FILES=(
     "hardware-configuration_nix-thinkpad.nix"
     "packages.nix"
     "services.nix"
+    "secrets/nix/webdav_bscw.yaml:secrets/tp-belo/webdav_bscw.yaml"
     "steam.nix"
     "pwn.nix"
     "k3s.nix"
