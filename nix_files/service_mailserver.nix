@@ -40,7 +40,11 @@ in{
     loginAccounts = {
       "ben@b3lo.de" = {
         hashedPasswordFile = "/etc/ben_mailpw";
-        aliases = [ "me@b3lo.de" "security@b3lo.de" ];
+        aliases = [ "me@b3lo.de" "security@b3lo.de" "ben-bsi@b3lo.de" ];
+      };
+      "lisanne-bsi@b3lo.de" = {
+        hashedPasswordFile = "/etc/lisanne_mailpw";
+        aliases = [ "lisanne@b3lo.de" ];
       };
     };
 
