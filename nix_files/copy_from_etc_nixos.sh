@@ -58,6 +58,7 @@ declare -a NIX_PI_FILES=(
 declare -a NIX_TEST_FILES=(
     "configuration.nix:nix-test.nix"
     "hardware-configuration_nix-test.nix"
+    "secrets/nix/webdav_bscw.yaml:secrets/nix-test/webdav_bscw.yaml"
     "temis.nix"
 )
 

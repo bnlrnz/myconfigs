@@ -3,6 +3,7 @@ keys:
   - &pi  age1xc03fkd60zstmu49uw7l4dhnhjeqtkedgtxfkp2ul53nhxfzp4fssyrv7n
   - &nix age1utzqrp7ldlqxlfwr6fmpsh6vndmtg4hejcc9j9qplnvst3atfuxsdl6dnp
   - &tp-belo age18d0j5yx36v80ecu0d7cxth88tpsqly0xjdmmk62ymvjael75paaq3ztewa
+  - &nix-test age1gwehdkddk7x5lkwf0a9ywx8rplrn836rr3yc5cn6yhq5jsde49fsmpt2g4
 
 creation_rules:
   - path_regex: secrets.yaml$
@@ -22,4 +23,8 @@ creation_rules:
     key_groups:
       - age:
         - *tp-belo
+  - path_regex: secrets/nix-test/.*\.yaml$
+    key_groups:
+      - age:
+        - *nix-test
 
