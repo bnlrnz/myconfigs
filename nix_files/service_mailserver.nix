@@ -4,13 +4,13 @@ let
   snappymail_webroot = "/var/lib/snappymail";
 in{
   imports = [
-      (builtins.fetchTarball {
-        # Pick a release version you are interested in and set its hash, e.g.
-        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-        # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
-        # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-        sha256 = "0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
-      })
+    (builtins.fetchTarball {
+      # Pick a release version you are interested in and set its hash, e.g.
+      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
+      # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
+      # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
+      sha256 = "0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
+    })
   ];
 
   services.caddy.virtualHosts."mail.b3lo.de".extraConfig = ''
@@ -24,7 +24,7 @@ in{
           root * ${snappymail_webroot}
           php_fastcgi unix/${config.services.phpfpm.pools.snappymail.socket}
         }
-    '';
+  '';
 
   ###############
   # Mailserver
@@ -34,17 +34,77 @@ in{
     enable = true;
     fqdn = "mail.b3lo.de";
     domains = [ "b3lo.de" ];
-    
+
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
       "ben@b3lo.de" = {
         hashedPasswordFile = "/etc/ben_mailpw";
         aliases = [ "me@b3lo.de" "security@b3lo.de" "ben-bsi@b3lo.de" ];
+        sieveScript = ''
+          require ["fileinto", "mailbox"];
+
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.8") {
+            fileinto :create "3GPP SA3/SCAS_Container";
+            stop;
+          }
+          
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.7") {
+            fileinto :create "3GPP SA3/SCAS_CCF";
+            stop;
+          }
+
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
+            fileinto :create "3GPP SA3/SCAS";
+            stop;
+          }
+
+          if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
+            fileinto :create "3GPP SA3";
+            stop;
+          }
+
+          # This must be the last rule, it will check if list-id is set, and
+          # file the message into the Lists folder for further investigation
+          elsif header :matches "list-id" "<?*>" {
+            fileinto :create "Lists";
+            stop;
+          }
+        '';
       };
       "lisanne-bsi@b3lo.de" = {
         hashedPasswordFile = "/etc/lisanne_mailpw";
         aliases = [ "lisanne@b3lo.de" ];
+        sieveScript = ''
+          require ["fileinto", "mailbox"];
+
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.8") {
+            fileinto :create "3GPP SA3/SCAS_Container";
+            stop;
+          }
+          
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.7") {
+            fileinto :create "3GPP SA3/SCAS_CCF";
+            stop;
+          }
+
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
+            fileinto :create "3GPP SA3/SCAS";
+            stop;
+          }
+
+          if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
+            fileinto :create "3GPP SA3";
+            stop;
+          }
+
+          # This must be the last rule, it will check if list-id is set, and
+          # file the message into the Lists folder for further investigation
+          elsif header :matches "list-id" "<?*>" {
+            fileinto :create "Lists";
+            stop;
+          }
+        '';
       };
     };
 
@@ -108,82 +168,82 @@ in{
   # Mail Backup
   ###############
 
-systemd = {
-  services.mail-to-opencloud-backup = {
-    description = "Backup mailserver to Opencloud user folder";
-    
-    # Required packages for the backup script
-    path = with pkgs; [ rsync ];
-   
-    unitConfig = {
-      OnSuccess = "opencloud.service";
-    };
+  systemd = {
+    services.mail-to-opencloud-backup = {
+      description = "Backup mailserver to Opencloud user folder";
 
-    serviceConfig = {
-      Type = "oneshot";
-      # Run as root to access both mail and nextcloud directories
-      User = "root";
-      
-      # Security hardening (optional but recommended)
-      ProtectSystem = "strict";
-      ReadWritePaths = [
-        "/var/vmail"
-        "/var/lib/opencloud/storage/users/users/aeb91904-01ed-4b87-84e9-8a88a161fee5/Sonstiges"
-      ];
-      ProtectHome = true;
-      NoNewPrivileges = true;
-      
-      # Logging
-      StandardOutput = "journal";
-      StandardError = "journal";
+      # Required packages for the backup script
+      path = with pkgs; [ rsync ];
 
-      ExecStopPost = "/run/current-system/sw/bin/systemctl restart opencloud.service";
-    };
-    
-    script = ''
+      unitConfig = {
+        OnSuccess = "opencloud.service";
+      };
+
+      serviceConfig = {
+        Type = "oneshot";
+        # Run as root to access both mail and nextcloud directories
+        User = "root";
+
+        # Security hardening (optional but recommended)
+        ProtectSystem = "strict";
+        ReadWritePaths = [
+          "/var/vmail"
+          "/var/lib/opencloud/storage/users/users/aeb91904-01ed-4b87-84e9-8a88a161fee5/Sonstiges"
+        ];
+        ProtectHome = true;
+        NoNewPrivileges = true;
+
+        # Logging
+        StandardOutput = "journal";
+        StandardError = "journal";
+
+        ExecStopPost = "/run/current-system/sw/bin/systemctl restart opencloud.service";
+      };
+
+      script = ''
       set -eu
-    
+
       # Source mail directory (adjust to your mailDirectory setting)
       MAIL_SOURCE="/var/vmail"
-      
+
       # Opencloud destination (adjust username as needed)
       NC_DEST="/var/lib/opencloud/storage/users/users/aeb91904-01ed-4b87-84e9-8a88a161fee5/Sonstiges/Backup_Mails"
-      
+
       # Create destination if it doesn't exist
       mkdir -p "$NC_DEST"
-      
+
       # Backup with rsync
       # -a: archive mode (preserves permissions, ownership, timestamps)
       # -v: verbose
       # --delete: remove files in destination that don't exist in source
       # --stats: show transfer statistics
       ${pkgs.rsync}/bin/rsync \
-        -av \
-        --delete \
-        --stats \
-        --exclude=".Trash" \
-        "$MAIL_SOURCE/" "$NC_DEST/"
-      
+      -av \
+      --delete \
+      --stats \
+      --exclude=".Trash" \
+      "$MAIL_SOURCE/" "$NC_DEST/"
+
       # Fix ownership for Opencloud (adjust user based on your install)
       chown -R opencloud:opencloud "$NC_DEST"
-      
+
       echo "Mail backup completed successfully"
-    '';
-  };
-  
-  timers.mail-to-opencloud-backup = {
-    description = "Daily mail to Opencloud backup";
-    wantedBy = [ "timers.target" ];
-    
-    # Run daily at 2 AM
-    timerConfig = {
-      OnCalendar = "*-*-* 02:34:13 Europe/Berlin";
-      Persistent = true;  # catch up if system was down
+      '';
     };
-    
-    # Associate with service
-    partOf = [ "mail-to-opencloud-backup.service" ];
+
+    timers.mail-to-opencloud-backup = {
+      description = "Daily mail to Opencloud backup";
+      wantedBy = [ "timers.target" ];
+
+      # Run daily at 2 AM
+      timerConfig = {
+        OnCalendar = "*-*-* 02:34:13 Europe/Berlin";
+        Persistent = true;  # catch up if system was down
+      };
+
+      # Associate with service
+      partOf = [ "mail-to-opencloud-backup.service" ];
+    };
   };
-};
 
 }
