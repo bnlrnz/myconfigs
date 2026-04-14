@@ -41,6 +41,7 @@ declare -a NIX_VPS_FILES=(
     "service_sa3_document_manager.nix"
     ".sops.yaml"
     "secrets/secrets.yaml:secrets/secrets.yaml"
+    "secrets/nix-vps/n8n_task_runner_token.yaml:secrets/nix-vps/n8n_task_runner_token.yaml"
     "service_wireguard.nix"
     "service_mailserver.nix"
     "service_immich.nix"
