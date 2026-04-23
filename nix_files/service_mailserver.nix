@@ -45,22 +45,22 @@ in{
           require ["fileinto", "mailbox"];
 
           if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.8") {
-            fileinto :create "3GPP SA3/SCAS_Container";
+            fileinto :create "INBOX.3GPP SA3.SCAS_Container";
             stop;
           }
           
           if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.7") {
-            fileinto :create "3GPP SA3/SCAS_CCF";
+            fileinto :create "INBOX.3GPP SA3.SCAS_CCF";
             stop;
           }
 
           if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
-            fileinto :create "3GPP SA3/SCAS";
+            fileinto :create "INBOX.3GPP SA3.SCAS";
             stop;
           }
 
           if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
-            fileinto :create "3GPP SA3";
+            fileinto :create "INBOX.3GPP SA3";
             stop;
           }
 
@@ -78,23 +78,33 @@ in{
         sieveScript = ''
           require ["fileinto", "mailbox"];
 
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", address :contains "reply-to" "daniel.cho@ERICSSON.COM") {
+            fileinto :create "INBOX.3GPP SA3.<3";
+            stop;
+          }
+
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", address :contains "reply-to" "jeffrey.cichonski@nist.gov") {
+            fileinto :create "INBOX.3GPP SA3.<3";
+            stop;
+          }
+
           if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.8") {
-            fileinto :create "3GPP SA3/SCAS_Container";
+            fileinto :create "INBOX.3GPP SA3.SCAS_Container";
             stop;
           }
           
           if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.7") {
-            fileinto :create "3GPP SA3/SCAS_CCF";
+            fileinto :create "INBOX.3GPP SA3.SCAS_CCF";
             stop;
           }
 
           if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
-            fileinto :create "3GPP SA3/SCAS";
+            fileinto :create "INBOX.3GPP SA3.SCAS";
             stop;
           }
 
           if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
-            fileinto :create "3GPP SA3";
+            fileinto :create "INBOX.3GPP SA3";
             stop;
           }
 
