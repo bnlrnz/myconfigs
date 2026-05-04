@@ -238,7 +238,6 @@
     keepassxc
     killall
     kitty
-    kora-icon-theme
     libcap
     libglibutil
     libreoffice
@@ -311,8 +310,7 @@
     hyprpolkitagent
     unstable.nwg-look
     unstable.threema-desktop # currently broken 10/07/2024
-    unstable.tshark.dev
-    wireshark
+    # unstable.tshark.dev
     usbutils
     usermount
     usrsctp
