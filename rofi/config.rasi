@@ -1,0 +1,27 @@
+configuration {
+    modi: "drun,recursivebrowser";
+    show: "drun";
+    prompt: "...";
+    location: 0;              /* center */
+    width: 600;
+    lines: 0;
+    columns: 1;
+    orientation: "vertical";
+    padding: 0;
+    border: 0;
+    fullscreen: false;
+    font: "sans 12";
+    case-sensitive: false;
+    cycle: true;
+    drun-display-format: "{name}";
+    disable-history: false;
+    tokenize: true;
+
+    recursivebrowser {
+        directory: "~/";
+        cancel-returns-1: true;
+        filter-regex: "(.*cache.*|.*\\.o)";
+	command: "xdg-open";
+    }
+}
+@theme "~/.config/rofi/theme.rasi"
