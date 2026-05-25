@@ -200,6 +200,8 @@
     dconf
     desktop-file-utils
     dig
+    wstunnel
+    wireguard-tools
     dust
     dracula-theme
     dracula-icon-theme
@@ -233,7 +235,6 @@
     guvcview
     gvfs
     inetutils
-    jetbrains-mono
     jq
     keepassxc
     killall
@@ -290,7 +291,7 @@
     #python314Packages.ipdb
     qalculate-gtk
     ripgrep
-    rofi
+    ripgrep-all
     rustdesk-flutter
     scrcpy
     signal-desktop
@@ -327,6 +328,9 @@
     unstable.wlr-layout-ui
     wlr-randr
     wofi
+    rofi
+    rofimoji
+    wofi-emoji
     wpaperd
     wrapGAppsHook3
     x2goclient

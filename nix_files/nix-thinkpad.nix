@@ -34,11 +34,11 @@ let
   '';
 in {
   imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration_nix-thinkpad.nix
+    ./hardware-configuration_nix-thinkpad_throwaway.nix
     ./services.nix
     ./packages.nix
-    ./pwn.nix
-    ./temis.nix
+    #./pwn.nix
+    #./temis.nix
     #./steam.nix
     #./k3s.nix
     #(import "${home-manager}/nixos")
@@ -152,6 +152,52 @@ in {
     owner = "root";
     group = "tcpreplay";
     permissions = "u+rx,g+x";
+  };
+
+  
+  networking.wg-quick.interfaces = {
+    wghome = {
+      autostart = false;
+      address = [ "10.10.11.204/24" ];
+      privateKey = "WKGy5X1ajWI44pa7IgNe9F5dTSOzTdX4l/p65Ww6Ckg=";
+      
+      peers = [
+        {
+          publicKey = "fzWcwGSJfsJYW6Xx/gVKB28B57Wdg9sSYrwlqV+D/F4=";
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "b3lo.de:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+    wghometunnel = {
+      autostart = false;
+      address = [ "10.10.11.204/24" ];
+      privateKey = "WKGy5X1ajWI44pa7IgNe9F5dTSOzTdX4l/p65Ww6Ckg=";
+    
+      preUp = "${pkgs.wstunnel}/bin/wstunnel client --http-upgrade-path-prefix '4mtGd8IBgogyJr54ihNaTDirU4SkTqjb7dvhnRy6dcnYSUsiMgoVCqQXaHuocYcv' -L 'udp://51820:127.0.0.1:51820?timeout_sec=0' wss://tunnel.b3lo.de/& sleep 3";
+      postDown = "${pkgs.killall}/bin/killall wstunnel";
+        
+      peers = [
+        {
+          publicKey = "fzWcwGSJfsJYW6Xx/gVKB28B57Wdg9sSYrwlqV+D/F4=";
+          allowedIPs = [ 
+            "0.0.0.0/1" "128.0.0.0/4" "144.0.0.0/6"
+            "148.0.0.0/8" "149.0.0.0/10" "149.64.0.0/11"
+            "149.96.0.0/14" "149.100.0.0/15" "149.102.0.0/17"
+            "149.102.128.0/21" "149.102.136.0/22" "149.102.140.0/25"
+            "149.102.140.128/28" "149.102.140.144/30" "149.102.140.148/31"
+            "149.102.140.150/32" "149.102.140.152/29" "149.102.140.160/27"
+            "149.102.140.192/26" "149.102.141.0/24" "149.102.142.0/23"
+            "149.102.144.0/20" "149.102.160.0/19" "149.102.192.0/18"
+            "149.103.0.0/16" "149.104.0.0/13" "149.112.0.0/12"
+            "149.128.0.0/9" "150.0.0.0/7" "152.0.0.0/5"
+            "160.0.0.0/3" "192.0.0.0/2" ];
+          endpoint = "127.0.0.1:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
   };
 
   # integrated home-manager module... not used for now
