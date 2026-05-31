@@ -247,7 +247,7 @@
     hunspellDicts.en-us
     hyphenDicts.de-de # hyphenation for german
     #librewolf-bin
-    libsForQt5.kwallet
+    kdePackages.kwallet
     kdePackages.okular
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
@@ -258,7 +258,7 @@
     meson
     mpv
     ncurses
-    neofetch
+    freshfetch
     neovim
     netcat
     nettools
