@@ -7,7 +7,7 @@ if status --is-login
   if test -z "$DISPLAY"
     if set -q XDG_VTNR
       if test $XDG_VTNR = 1
-	      exec Hyprland
+	      exec start-hyprland
 	    end
 	  end
   end
