@@ -20,7 +20,7 @@
     heroic
     winetricks
     protontricks
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
   ];
 
   environment.sessionVariables = {

@@ -35,7 +35,7 @@
   # setup thunar
   programs.thunar.enable = true;
   programs.xfconf.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
+  programs.thunar.plugins = with pkgs; [
     thunar-archive-plugin
     thunar-volman
   ];
@@ -338,9 +338,9 @@
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     xdg-desktop-portal
-    xfce.xfce4-settings
-    xorg.libX11
-    xorg.xinit
+    xfce4-settings
+    libX11
+    xinit
     xwayland
     yazi # terminal file browser
     unstable.zed-editor
