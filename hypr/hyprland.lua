@@ -617,7 +617,7 @@ hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "up", hl.dsp.window.move({ directi
 
 hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "down", hl.dsp.window.move({ direction = "d" }))
 
-hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "W", hl.dsp.exec_cmd("bash -c killall .waybar-wrapped;waybar &"))
+hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "W", hl.dsp.exec_cmd("bash -c 'killall .waybar-wrapped;waybar &'"))
 
 hl.bind(mainMod .. " + " .. "less", hl.dsp.layout("togglesplit"))
 
