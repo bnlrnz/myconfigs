@@ -232,135 +232,106 @@ hl.gesture({
 -- Example windowrule v1
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(pavucontrol)$",
+        class = "pavucontrol",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(.blueman-manager-wrapped)$",
+        class = ".blueman-manager-wrapped",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(nm-connection-editor)$",
+        class = "nm-connection-editor",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(thunar)$",
+        class = "thunar",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(Thunar)$",
+        class = "Thunar",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(pcmanfm)$",
+        class = "pcmanfm",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(feh)$",
+        class = "feh",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "title:^(btop)$",
+        title = "btop",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "title:^(update-sys)$",
+        title = "update-sys",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "center",
     match = {
-        class = "^(org.gnome.FileRoller)$",
-    },
-    center = true,
-})
-
-hl.window_rule({
-    name  = "size_800_600",
-    match = {
-        class = "^(org.gnome.FileRoller)$",
+        class = "org.gnome.FileRoller",
     },
     size = "800 600",
+    center = true,
+    float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(org.gnome.FileRoller)$",
+        title = "Archive Manager",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "title:^(Archive Manager)$",
+        class = "CiscoCollabHost",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(CiscoCollabHost)$",
+        class = "qalculate-gtk",
     },
     float = true,
 })
 
 hl.window_rule({
-    name  = "float",
     match = {
-        class = "^(qalculate-gtk)$",
-    },
-    float = true,
-})
-
-hl.window_rule({
-    name  = "opacity_0_95_0_85",
-    match = {
-        class = "^(kitty)$",
+        class = "kitty",
     },
     opacity = "0.95 0.85",
 })
 
 hl.window_rule({
-    name  = "animation_popin",
     match = {
         class = "^(kitty)$",
         title = "^(update-sys)$",
