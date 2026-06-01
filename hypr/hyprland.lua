@@ -572,13 +572,13 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"))
 
 hl.bind(mainMod .. " + " .. "F", hl.dsp.window.fullscreen())
 
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize( { x = 10, y = 0, window = "activewindow"}))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize( { x = 10, y = 0, relative = true } ))
 
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize( { x = -10, y = 0, window = "activewindow"}))
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize( { x = -10, y = 0, relative = true }))
 
-hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize( { x = 0, y = -10, window = "activewindow"}))
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize( { x = 0, y = -10, relative = true }))
 
-hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize( { x = 0, y = 10, window = "activewindow"}))
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize( { x = 0, y = 10, relative = true }))
 
 hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "right", hl.dsp.window.move({ direction = "r" }))
 
