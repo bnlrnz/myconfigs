@@ -4,6 +4,10 @@
 
 { config, lib, pkgs, ... }:
 let
+  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  unstable = import unstableTarball {
+    config = config.nixpkgs.config;
+  };
   sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
 in
 {
@@ -12,6 +16,10 @@ in
       ./hardware-configuration.nix
       "${sops-nix}/modules/sops"
     ];
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    unstable = unstable;
+  };
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
@@ -94,7 +102,6 @@ in
 	eza
 	dust
 	bat
-#	ripgrep
 	zellij
   ];
 
@@ -114,6 +121,7 @@ in
 
   services.home-assistant = {
     enable = true;
+    package = unstable.home-assistant;
     extraComponents = [
       # Components required to complete the onboarding
       "esphome"

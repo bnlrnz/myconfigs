@@ -51,7 +51,7 @@ declare -a NIX_VPS_FILES=(
 
 declare -a NIX_PI_FILES=(
     "configuration.nix:nix-pi.nix"
-    "hardware-configuration_nix-pi.nix"
+    "hardware-configuration.nix:hardware-configuration_nix-pi.nix"
     "secrets/secrets.yaml:secrets/secrets.yaml"
 )
 

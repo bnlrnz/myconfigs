@@ -6,12 +6,13 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
+      "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+#  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
