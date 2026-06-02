@@ -323,6 +323,7 @@
     wayland
     wayland-pipewire-idle-inhibit
     wget
+    wireshark
     wl-clipboard
     wlogout
     unstable.wlr-layout-ui
