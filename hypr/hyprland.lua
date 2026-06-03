@@ -498,13 +498,13 @@ hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
 
-hl.bind("PRINT", hl.dsp.exec_cmd("grim -g $(slurp)-| swappy -f-"))
+hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 
-hl.bind("SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim-| swappy -f-"))
+hl.bind("SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim- | swappy -f -"))
 
 hl.bind("CONTROL + SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim && notify-send Screenshot saved under ~/"))
 
-hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list| wofi -dmenu| cliphist decode| wl-copy"))
+hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list | wofi -dmenu | cliphist decode | wl-copy"))
 
 -- open clipboard manager
 
