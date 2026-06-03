@@ -12,7 +12,11 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
+<<<<<<< Updated upstream
 #  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+=======
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+>>>>>>> Stashed changes
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
