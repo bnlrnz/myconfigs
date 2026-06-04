@@ -43,7 +43,11 @@ in{
           allowedIPs = [ "10.10.11.203/32" ];
           persistentKeepalive = 25;
         }
-
+        {
+          publicKey = "WEgWLtHd9JICZy+YNfxZMf1+ApwZNdvFAWFoDWWHsl8=";
+          allowedIPs = [ "10.10.11.204/32" ];
+          persistentKeepalive = 25;
+        }
       ];
     };
   };

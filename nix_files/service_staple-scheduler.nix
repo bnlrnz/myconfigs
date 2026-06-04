@@ -11,8 +11,8 @@ let
     vendorHash = "sha256-q23ouUNW+bJP4Jab1ow6wDbzAOQHYjasiQId8pVkcFY=";
     doCheck = false;
     postInstall = ''
-      mkdir -p $out/bin/templates
-      cp -r ${/home/ben/staple-scheduler}/templates/* $out/bin/templates/
+      mkdir -p $out/templates
+      cp -r ${/home/ben/staple-scheduler}/templates/* $out/templates/
     '';
   };
 in

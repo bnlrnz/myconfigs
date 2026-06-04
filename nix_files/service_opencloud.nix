@@ -27,6 +27,16 @@ in
         insecure = false; 
       };
 
+      sharing = {
+        events = {
+          tls_insecure = false;
+        };
+        service_account = {
+          service_account_id = "6e4a83fd-7bba-4630-8993-13e3aff18f53";
+          service_account_secret = "&1=ZPYs6ku$5&b7A*8lvLf2u^Jea%T41";
+        };
+      };
+
       collaboration = {
         enable = true;
       };

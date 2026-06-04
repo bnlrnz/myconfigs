@@ -1,4 +1,3 @@
-
 { config, lib, pkgs, ... }:
 let
   snappymail_webroot = "/var/lib/snappymail";
@@ -6,10 +5,10 @@ in{
   imports = [
     (builtins.fetchTarball {
       # Pick a release version you are interested in and set its hash, e.g.
-      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
+      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-26.05/nixos-mailserver-nixos-26.05.tar.gz";
       # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
       # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-      sha256 = "0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
+      sha256 = "0qj3by2wsv992xkv8rcyvg7vs7284jh34m5gg9mjiknhqpraljcm";
     })
   ];
 
@@ -37,7 +36,7 @@ in{
 
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
-    loginAccounts = {
+    accounts = {
       "ben@b3lo.de" = {
         hashedPasswordFile = "/etc/ben_mailpw";
         aliases = [ "me@b3lo.de" "security@b3lo.de" "ben-bsi@b3lo.de" ];
@@ -118,9 +117,9 @@ in{
       };
     };
 
-    certificateScheme = "manual";
-    certificateFile = "/etc/ssl/private/mailserver/fullchain.pem";
-    keyFile = "/etc/ssl/private/mailserver/privkey.pem";
+    #certificateScheme = "manual";
+    x509.certificateFile = "/etc/ssl/private/mailserver/fullchain.pem";
+    x509.privateKeyFile = "/etc/ssl/private/mailserver/privkey.pem";
   };
   users.groups.mail = { };  # Ensure group exists
 
