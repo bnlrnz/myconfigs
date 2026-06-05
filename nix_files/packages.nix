@@ -298,6 +298,7 @@
     slurp
     sqlite
     sqlitebrowser
+    satty
     swappy
     tcpdump
     tcpreplay

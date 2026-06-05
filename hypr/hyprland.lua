@@ -500,7 +500,7 @@ hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { 
 
 hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 
-hl.bind("SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim- | swappy -f -"))
+hl.bind("SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | satty -f - --copy-command wl-copy -o "~/%Y%m%d_%H%M%S.png"'))
 
 hl.bind("CONTROL + SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim && notify-send Screenshot saved under ~/"))
 
