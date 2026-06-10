@@ -338,6 +338,8 @@
     xwayland
     yazi # terminal file browser
     unstable.zed-editor
+    zellij
     zip
+    zoxide
   ];
 }
