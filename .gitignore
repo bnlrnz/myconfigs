@@ -30,5 +30,7 @@ hypr/monitors.conf
 !wofi/**
 !wpaperd/
 !wpaperd/**
+!yazi/
+!yazi/**
 !.gitignore
 !README.md
