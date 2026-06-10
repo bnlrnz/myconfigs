@@ -169,28 +169,26 @@
   environment.systemPackages = with pkgs; [
     ### unfree packages
     webex
-    mongodb-ce
-    mongodb-compass
+    #mongodb-ce
+    #mongodb-compass
     libsciter
     google-chrome
     vscode
     ###
-    allure
-    alsa-utils
+    #allure # testing report tool, had this for pySCASso
+    alsa-utils # audiostuff, alsa-mixer and others
     android-tools
-    arandr
     autofs5
     bat
     bind
     binwalk
-    #bless not maintained anymore -> try Okteta
     blueman
     bluez
     bluez-tools
     brightnessctl
     btop
     btrfs-progs
-    cairo.dev
+    #cairo.dev
     clang
     cliphist
     cmake
@@ -200,7 +198,7 @@
     dconf
     desktop-file-utils
     dig
-    wstunnel
+    wstunnel # websocket tunnel; I used it to hide wireguard VPN
     wireguard-tools
     dust
     dracula-theme
@@ -225,14 +223,13 @@
     dconf-editor
     gnumake
     gobject-introspection
-    google-chrome
     gparted
     grim
     gsettings-desktop-schemas
     gtk2
     gtk3
     gtk4
-    guvcview
+    guvcview # webcam settings
     gvfs
     inetutils
     jq
@@ -246,7 +243,6 @@
     hunspellDicts.de-de
     hunspellDicts.en-us
     hyphenDicts.de-de # hyphenation for german
-    #librewolf-bin
     kdePackages.kwallet
     kdePackages.okular
     libsForQt5.qt5ct
@@ -285,15 +281,11 @@
     protonup-ng # update manager for proton
     pwvucontrol
     python314
-    #python314Packages.dbus-python
-    #python314Packages.ipython
-    #python314Packages.pip
-    #python314Packages.ipdb
     qalculate-gtk
     ripgrep
     ripgrep-all
     rustdesk-flutter
-    scrcpy
+    scrcpy # android screensharing via adb
     signal-desktop
     slurp
     sqlite
@@ -329,9 +321,9 @@
     wlogout
     unstable.wlr-layout-ui
     wlr-randr
-    wofi
     rofi
     rofimoji
+    wofi
     wofi-emoji
     wpaperd
     wrapGAppsHook3
