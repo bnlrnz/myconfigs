@@ -8,7 +8,7 @@ in{
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-26.05/nixos-mailserver-nixos-26.05.tar.gz";
       # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
       # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-      sha256 = "0qj3by2wsv992xkv8rcyvg7vs7284jh34m5gg9mjiknhqpraljcm";
+      sha256 = "06di2kg36v7i2c9hhzc83v51cnpmklc9ri6phpcpay8hcaiavri6";
     })
   ];
 
@@ -62,13 +62,6 @@ in{
             fileinto :create "INBOX.3GPP SA3";
             stop;
           }
-
-          # This must be the last rule, it will check if list-id is set, and
-          # file the message into the Lists folder for further investigation
-          elsif header :matches "list-id" "<?*>" {
-            fileinto :create "Lists";
-            stop;
-          }
         '';
       };
       "lisanne-bsi@b3lo.de" = {
@@ -104,13 +97,6 @@ in{
 
           if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
             fileinto :create "INBOX.3GPP SA3";
-            stop;
-          }
-
-          # This must be the last rule, it will check if list-id is set, and
-          # file the message into the Lists folder for further investigation
-          elsif header :matches "list-id" "<?*>" {
-            fileinto :create "Lists";
             stop;
           }
         '';
