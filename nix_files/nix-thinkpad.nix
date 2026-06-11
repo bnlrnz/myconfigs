@@ -34,11 +34,11 @@ let
   '';
 in {
   imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration_nix-thinkpad_throwaway.nix
+    ./hardware-configuration_nix-thinkpad.nix
     ./services.nix
     ./packages.nix
     #./pwn.nix
-    #./temis.nix
+    ./temis.nix
     #./steam.nix
     #./k3s.nix
     #(import "${home-manager}/nixos")
