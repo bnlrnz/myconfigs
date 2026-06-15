@@ -140,6 +140,7 @@ hl.config({
         kb_options = "",
         kb_rules = "",
         follow_mouse = 2,
+        focus_on_close = 2,
         touchpad = {
             natural_scroll = true,
             scroll_factor = 0.5,
@@ -218,6 +219,12 @@ hl.config({
     master = {
         -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
         new_status = "master",
+    },
+})
+
+hl.config({
+    cursor = {
+        no_warps = false,
     },
 })
 
@@ -478,9 +485,11 @@ hl.bind(mainMod .. " + " .. "F4", hl.dsp.window.close())
 
 -- close the active window
 
-hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("hyprlock"))
+-- hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("noctalia-shell ipc call lockScreen lock"))
 
-hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
+-- hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
+hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
 
 -- show the logout window
 
@@ -496,7 +505,8 @@ hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 -- Allow a window to float
 
-hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
+-- hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
+hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
 
 hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 
@@ -623,7 +633,7 @@ hl.workspace_rule({
     workspace = "special:messengers",
     animation = "specialWorkspace",
     on_created_empty = "Telegram",
-    gaps_out = 24,
+    gaps_out = 10,
     gaps_in = 5,
 })
 
@@ -642,14 +652,15 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME")
     hl.exec_cmd("systemctl --user start graphical-session.target")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
-    hl.exec_cmd("mako")
-    hl.exec_cmd("blueman-applet")
+    --hl.exec_cmd("mako")
+    hl.exec_cmd("blueman-tray")
     hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("hypridle")
+    -- hl.exec_cmd("hypridle")
     hl.exec_cmd("wayland-pipewire-idle-inhibit")
     hl.exec_cmd("wl-paste --watch cliphist store")
-    hl.exec_cmd("wpaperd")
-    hl.exec_cmd("sleep 5 && pidof waybar || waybar")
+    --hl.exec_cmd("wpaperd")
+    --hl.exec_cmd("sleep 5 && pidof waybar || waybar")
+    hl.exec_cmd("noctalia-shell")
     hl.exec_cmd("nextcloud --background")
     hl.exec_cmd("firefox")
     hl.exec_cmd("opencloud")

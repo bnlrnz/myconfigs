@@ -203,12 +203,12 @@
     dust
     dracula-theme
     dracula-icon-theme
+    engrampa
     exfat
     exfatprogs
     eza
     feh
     filezilla
-    file-roller
     fish
     fzf
     font-awesome
@@ -250,7 +250,6 @@
     lsof
     lxappearance
     lxqt.lxqt-policykit
-    mako
     meson
     mpv
     ncurses
@@ -258,12 +257,12 @@
     neovim
     netcat
     nettools
+    unstable.noctalia-shell
     networkmanagerapplet
     nextcloud-client
     nfs-utils
     nil
     ninja
-    nitrogen
     nixos-firewall-tool
     nmap
     ntfs3g
@@ -299,7 +298,6 @@
     tmux
     udevil
     udiskie
-    hyprland-monitor-attached
     hyprshot
     hyprpolkitagent
     unstable.nwg-look
@@ -312,7 +310,6 @@
     vim
     vscode
     vulkan-tools
-    waybar
     wayland
     wayland-pipewire-idle-inhibit
     wget
@@ -321,11 +318,6 @@
     wlogout
     unstable.wlr-layout-ui
     wlr-randr
-    rofi
-    rofimoji
-    wofi
-    wofi-emoji
-    wpaperd
     wrapGAppsHook3
     x2goclient
     xdg-desktop-portal-hyprland
