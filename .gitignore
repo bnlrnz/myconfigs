@@ -16,6 +16,8 @@ hypr/monitors.conf
 !kitty/**
 !mako/
 !mako/**
+!noctalia/
+!noctalia/**
 !myconfigs/
 !myconfigs/**
 !nix_files/
