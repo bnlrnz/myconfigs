@@ -64,10 +64,13 @@ hl.monitor({
 -- LID behaviour
 
 -- trigger when the switch is turning off
+hl.bind("switch:on:Lid Switch",
+    hl.dsp.exec_cmd(
+        "hyprctl keyword monitor \"eDP-1, disable\"; [[ $(hyprctl monitors | grep -c 'Monitor') -ge 2 ]] || qs -c noctalia-shell ipc call lockScreen lock"
+    ), { locked = true }
+)
 
---bindl = , switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"; [[ $(hyprctl monitors | grep -c "Monitor") -ge 2 ]] && pidof hyprlock || hyprlock
-
---bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1\""), { locked = true })
 
 hl.config({
     xwayland = {
