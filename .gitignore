@@ -6,6 +6,8 @@
 !feh/**
 !fish/
 !fish/**
+!i3/
+!i3/**
 !home-manager/
 !home-manager/**
 !hypr/
