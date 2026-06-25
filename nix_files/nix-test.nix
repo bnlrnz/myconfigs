@@ -6,8 +6,8 @@
 
 let
 # unstable packages
-unstableTarball = fetchTarball
-"https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+#unstableTarball = fetchTarball
+#"https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -15,11 +15,11 @@ in {
   ];
 
 # add unstable channel
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
-    };
-  };
+#  nixpkgs.config = {
+#    packageOverrides = pkgs: {
+#      unstable = import unstableTarball { config = config.nixpkgs.config; };
+#    };
+#  };
 
 # Bootloader.
   boot.loader.grub.enable = true;
@@ -43,12 +43,12 @@ in {
 
 # Enable networking
   networking.hostName = "nix-test"; # Define your hostname.
-    networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
   networking.nameservers = [
     "1.1.1.1"
-      "9.9.9.9"
-      "8.8.8.8"
+    "9.9.9.9"
+    "8.8.8.8"
   ];
   services.resolved.enable = true;
   networking.firewall.enable = true;
@@ -78,7 +78,7 @@ in {
 # Configure console keymap
   console.keyMap = "de";
 
-  services.getty.autologinUser = "belo"; 
+#  services.getty.autologinUser = "belo"; 
 
 # allow users to build packages
   nix.settings.allowed-users = [ "@wheel" "belo" ];
@@ -101,22 +101,25 @@ in {
   services.xserver.enable = true;
   services.xserver.xkb.layout = "de";
   services.xserver.xkb.variant = "nodeadkeys";
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "belo";
-  services.xserver.displayManager.lightdm = {
-  	enable = true;
-	  greeters.gtk = {
-		  enable = true;
-		  theme.name = "Dracula";
-		  theme.package = pkgs.dracula-theme;
-		  iconTheme.name = "Dracula";
-		  iconTheme.package = pkgs.dracula-icon-theme;
-		  cursorTheme.name = "Phinger Cursors (light)";
-		  cursorTheme.package = pkgs.phinger-cursors;
-  	};
-  };
-  services.xserver.desktopManager.lxqt.enable = true;
-  xdg.portal.lxqt.enable = true;
+   environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw 
+   services.xserver = {
+     desktopManager = {
+       xterm.enable = false;
+     };
+  
+    windowManager.i3 = {
+      enable = true;
+       extraPackages = with pkgs; [
+         dmenu #application launcher most people use
+         i3status # gives you the default i3 status bar
+         i3blocks #if you are planning on using i3blocks over i3status
+      ];
+     };
+   };
+  
+  services.displayManager.defaultSession = "none+i3";
+  
+  programs.i3lock.enable = true; #default i3 screen locker
 
 # kwallet needed by python keyring
 #security.pam.services.kdewallet.enableKwallet = true;
@@ -141,20 +144,20 @@ in {
   services.udisks2.enable = true;
 
 # enable fwupd -> fwupdmgr
-  services.fwupd.enable = true;
+#  services.fwupd.enable = true;
 
 # enable fish
   programs.fish.enable = true;
 
 # gnome settings/themes
-  programs.dconf.enable = true;
+#  programs.dconf.enable = true;
 
 # setup thunar
   programs.thunar.enable = true;
   programs.xfconf.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
+  programs.thunar.plugins = with pkgs; [
     thunar-archive-plugin
-      thunar-volman
+    thunar-volman
   ];
 
 # neovim
@@ -170,7 +173,7 @@ in {
   security.polkit.enable = true;
 
 # gnome keyring is needed for network manager to store VPN passwords
-  services.gnome.gnome-keyring.enable = true;
+services.gnome.gnome-keyring.enable = true;
 
 # Allow unfree packages
 # nixpkgs.config.allowUnfree = true;
@@ -239,7 +242,6 @@ in {
       firefox
       fish
       fzf
-      font-awesome
       gio-sharp
       git
       dconf-editor
@@ -252,7 +254,7 @@ in {
       kitty
       kdePackages.okular
       lsof
-      lxqt.lxqt-policykit
+      #lxqt.lxqt-policykit
       mako
       ncurses
       neovim
@@ -261,12 +263,12 @@ in {
       networkmanagerapplet
       nextcloud-client
       nfs-utils
-      noto-fonts-color-emoji
+      #noto-fonts-color-emoji
       ntfs3g
       onlyoffice-desktopeditors
       openssl.dev # dev needed for openssl headers
       pciutils
-      phinger-cursors
+      #phinger-cursors
       pkg-config
       pwvucontrol
       ripgrep
@@ -284,8 +286,8 @@ in {
       xcape
       xdg-desktop-portal-gtk
       xdg-desktop-portal
-      xorg.libX11
-      xorg.xinit
+      libX11
+      xinit
       zed-editor
       zip
       ];
