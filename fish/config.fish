@@ -1,16 +1,20 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+	# Commands to run in interactive sessions can go here
 end
 
 # Start Hyprland at login
 if status --is-login
-  if test -z "$DISPLAY"
-    if set -q XDG_VTNR
-      if test $XDG_VTNR = 1
-	      exec start-hyprland
-	    end
-	  end
-  end
+	if test -z "$DISPLAY"
+		if set -q XDG_VTNR
+			if test $XDG_VTNR = 1
+				if test (hostname) = "nix-test"
+					exec xinit -- :0 vt1 > /dev/null 2>&1
+				else
+					exec start-hyprland
+				end
+			end
+		end
+	end
 end
 
 export TERM=xterm-256color
