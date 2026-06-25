@@ -48,6 +48,8 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
+set $term kitty
+
 # start a terminal
 bindsym $mod+Return exec kitty 
 bindsym Mod1+F1 exec kitty
@@ -55,6 +57,7 @@ bindsym Mod1+F1 exec kitty
 bindsym $mod+e exec thunar
 for_window [class="Thunar"] floating enable
 
+bindsym $mod+l exec i3lock
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -68,10 +71,6 @@ bindsym $mod+space exec rofi -show drun
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
 bindsym Mod1+Tab focus right
 
 # alternatively, you can use the cursor keys:
