@@ -658,7 +658,7 @@
         "translucentWidgets": false
     },
     "wallpaper": {
-        "automationEnabled": false,
+        "automationEnabled": true,
         "directory": "/home/belo/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
