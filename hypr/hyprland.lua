@@ -64,10 +64,13 @@ hl.monitor({
 -- LID behaviour
 
 -- trigger when the switch is turning off
+hl.bind("switch:on:Lid Switch",
+    hl.dsp.exec_cmd(
+        "hyprctl keyword monitor \"eDP-1, disable\"; [[ $(hyprctl monitors | grep -c 'Monitor') -ge 2 ]] || qs -c noctalia-shell ipc call lockScreen lock"
+    ), { locked = true }
+)
 
---bindl = , switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"; [[ $(hyprctl monitors | grep -c "Monitor") -ge 2 ]] && pidof hyprlock || hyprlock
-
---bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1\""), { locked = true })
 
 hl.config({
     xwayland = {
@@ -224,7 +227,7 @@ hl.config({
 
 hl.config({
     cursor = {
-        no_warps = false,
+        no_warps = true,
     },
 })
 
@@ -469,7 +472,24 @@ hl.config({
 
 local mainMod = "SUPER"
 
-hl.bind("ALT" .. " + " .. "mouse:272", hl.dsp.window.drag(), { mouse = true })
+-- alt drag only if no steam_app_ is running in fullscreen
+hl.bind("ALT" .. " + " .. "mouse:272",
+function()
+    local w = hl.get_active_window() or nil
+    if not w then
+        return
+    end
+
+    local cls = w.initialClass or w.class or ""
+    local is_steam_game = cls:match("^steam_app_%d+$") ~= nil
+    local is_fullscreen = (w.fullscreen == 1) or (w.fullscreen == 2) or (w.fullscreen == true)
+
+    if is_steam_game and is_fullscreen then
+        return
+    end
+
+    hl.dispatch(hl.dsp.window.drag())
+end, { mouse = true })
 
 hl.bind("ALT" .. " + " .. "mouse:273", hl.dsp.window.resize(), { mouse = true })
 

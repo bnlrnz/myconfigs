@@ -13,7 +13,11 @@
         "enableClipboardSmartIcons": true,
         "enableSessionSearch": true,
         "enableSettingsSearch": true,
+<<<<<<< HEAD
         "enableWindowsSearch": true,
+=======
+        "enableWindowsSearch": false,
+>>>>>>> 29bc16943416d78a79f375d11112b4b0b0feabea
         "iconMode": "tabler",
         "ignoreMouseInput": false,
         "overviewLayer": false,
@@ -24,7 +28,11 @@
         "showCategories": false,
         "showIconBackground": false,
         "sortByMostUsed": true,
+<<<<<<< HEAD
         "terminalCommand": "alacritty -e",
+=======
+        "terminalCommand": "kitty -e",
+>>>>>>> 29bc16943416d78a79f375d11112b4b0b0feabea
         "viewMode": "list"
     },
     "audio": {
@@ -92,7 +100,7 @@
                     "id": "Workspace",
                     "labelMode": "index",
                     "occupiedColor": "secondary",
-                    "pillSize": 0.6,
+                    "pillSize": 0.8,
                     "showApplications": false,
                     "showApplicationsHover": false,
                     "showBadge": true,
@@ -101,6 +109,22 @@
                 }
             ],
             "left": [
+                {
+                    "compactMode": false,
+                    "hideMode": "hidden",
+                    "hideWhenIdle": false,
+                    "id": "MediaMini",
+                    "maxWidth": 145,
+                    "panelShowAlbumArt": true,
+                    "scrollingMode": "hover",
+                    "showAlbumArt": true,
+                    "showArtistFirst": true,
+                    "showProgressRing": true,
+                    "showVisualizer": false,
+                    "textColor": "none",
+                    "useFixedWidth": false,
+                    "visualizerType": "linear"
+                },
                 {
                     "colorizeIcons": false,
                     "hideMode": "hidden",
@@ -151,7 +175,7 @@
                     "textColor": "none"
                 },
                 {
-                    "compactMode": true,
+                    "compactMode": false,
                     "diskPath": "/",
                     "iconColor": "none",
                     "id": "SystemMonitor",
@@ -331,14 +355,14 @@
         "allowPanelsOnScreenWithoutBar": true,
         "allowPasswordWithFprintd": false,
         "animationDisabled": false,
-        "animationSpeed": 2,
+        "animationSpeed": 3,
         "autoStartAuth": false,
-        "avatarImage": "/home/belo/.face",
+        "avatarImage": "/home/ben/Downloads/avatar.512.png",
         "boxRadiusRatio": 1,
-        "clockFormat": "hh\\nmm",
-        "clockStyle": "digital",
+        "clockFormat": "yyyy-MM-dd HH:mm  ",
+        "clockStyle": "custom",
         "compactLockScreen": true,
-        "dimmerOpacity": 0.2,
+        "dimmerOpacity": 0,
         "enableBlurBehind": false,
         "enableLockScreenCountdown": true,
         "enableLockScreenMediaControls": false,
@@ -371,14 +395,14 @@
         },
         "language": "",
         "lockOnSuspend": true,
-        "lockScreenAnimations": false,
-        "lockScreenBlur": 0.2,
-        "lockScreenCountdownDuration": 10000,
+        "lockScreenAnimations": true,
+        "lockScreenBlur": 0.8,
+        "lockScreenCountdownDuration": 5000,
         "lockScreenMonitors": [
         ],
-        "lockScreenTint": 0.2,
+        "lockScreenTint": 0.5,
         "passwordChars": true,
-        "radiusRatio": 1,
+        "radiusRatio": 0.4,
         "reverseScroll": false,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
@@ -481,7 +505,7 @@
         },
         "sounds": {
             "criticalSoundFile": "",
-            "enabled": true,
+            "enabled": false,
             "excludedApps": "discord,firefox,chrome,chromium,edge",
             "lowSoundFile": "",
             "normalSoundFile": "",
@@ -498,7 +522,7 @@
             1,
             2
         ],
-        "location": "top_right",
+        "location": "bottom",
         "monitors": [
         ],
         "overlayLayer": true
@@ -508,9 +532,9 @@
         "notifyUpdates": true
     },
     "sessionMenu": {
-        "countdownDuration": 10000,
+        "countdownDuration": 5000,
         "enableCountdown": true,
-        "largeButtonsLayout": "single-row",
+        "largeButtonsLayout": "grid",
         "largeButtonsStyle": true,
         "position": "center",
         "powerOptions": [
@@ -600,6 +624,32 @@
     },
     "templates": {
         "activeTemplates": [
+<<<<<<< HEAD
+=======
+            {
+                "enabled": true,
+                "id": "qt"
+            },
+            {
+                "enabled": true,
+                "id": "yazi"
+            },
+            {
+                "enabled": true,
+                "id": "zed"
+            },
+            {
+                "enabled": true,
+                "id": "gtk"
+            },
+            {
+                "enabled": true,
+                "id": "steam"
+            },
+            {
+                "enabled": true,
+                "id": "btop"
+            }
         ],
         "enableUserTheming": false
     },
@@ -609,10 +659,10 @@
         "fontDefaultScale": 1,
         "fontFixed": "monospace",
         "fontFixedScale": 1,
-        "panelBackgroundOpacity": 0,
+        "panelBackgroundOpacity": 0.9,
         "panelsAttachedToBar": true,
         "scrollbarAlwaysVisible": true,
-        "settingsPanelMode": "attached",
+        "settingsPanelMode": "centered",
         "settingsPanelSideBarCardStyle": false,
         "tooltipsEnabled": true,
         "translucentWidgets": false
@@ -653,7 +703,7 @@
         "useOriginalImages": false,
         "useSolidColor": false,
         "useWallhaven": false,
-        "viewMode": "single",
+        "viewMode": "browse",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
