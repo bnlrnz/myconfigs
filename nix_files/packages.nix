@@ -285,7 +285,7 @@
     ripgrep-all
     rustdesk-flutter
     scrcpy # android screensharing via adb
-    signal-desktop
+    unstable.signal-desktop
     slurp
     sqlite
     sqlitebrowser
