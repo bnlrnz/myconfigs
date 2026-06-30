@@ -44,7 +44,7 @@ in{
           persistentKeepalive = 25;
         }
         {
-          publicKey = "WEgWLtHd9JICZy+YNfxZMf1+ApwZNdvFAWFoDWWHsl8=";
+          publicKey = "ck2woPX7nSSr/gwnc3jQFNw0M1DrxLEGcwnUdW1gBEQ=";
           allowedIPs = [ "10.10.11.204/32" ];
           persistentKeepalive = 25;
         }
