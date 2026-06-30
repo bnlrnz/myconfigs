@@ -32,6 +32,7 @@ let
       DISPLAY=:0.0 ${pkgs.libnotify}/bin/notify-send -c device -u critical "󰁺 Low Battery" "Charge me or watch me die!"
     fi
   '';
+  sops-nix = builtins.fetchTarball https://github.com/mic92/sops-nix/archive/master.tar.gz;
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-thinkpad.nix
@@ -42,6 +43,7 @@ in {
     #./steam.nix
     #./k3s.nix
     #(import "${home-manager}/nixos")
+    "${sops-nix}/modules/sops"
   ];
 
   # add unstable channel
@@ -154,12 +156,17 @@ in {
     permissions = "u+rx,g+x";
   };
 
-  
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.keyFile = "/home/ben/.config/sops/age/keys.txt";
+  sops.age.generateKey = true;
+  sops.secrets."wireguard/tp-belo_private" = { };
+
   networking.wg-quick.interfaces = {
     wghome = {
       autostart = false;
       address = [ "10.10.11.204/24" ];
-      privateKey = "WKGy5X1ajWI44pa7IgNe9F5dTSOzTdX4l/p65Ww6Ckg=";
+      privateKeyFile = config.sops.secrets."wireguard/tp-belo_private".path;
       
       peers = [
         {
@@ -173,7 +180,7 @@ in {
     wghometunnel = {
       autostart = false;
       address = [ "10.10.11.204/24" ];
-      privateKey = "WKGy5X1ajWI44pa7IgNe9F5dTSOzTdX4l/p65Ww6Ckg=";
+      privateKeyFile = config.sops.secrets."wireguard/tp-belo_private".path;
     
       preUp = "${pkgs.wstunnel}/bin/wstunnel client --http-upgrade-path-prefix '4mtGd8IBgogyJr54ihNaTDirU4SkTqjb7dvhnRy6dcnYSUsiMgoVCqQXaHuocYcv' -L 'udp://51820:127.0.0.1:51820?timeout_sec=0' wss://tunnel.b3lo.de/& sleep 3";
       postDown = "${pkgs.killall}/bin/killall wstunnel";
