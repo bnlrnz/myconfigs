@@ -616,8 +616,6 @@
     },
     "templates": {
         "activeTemplates": [
-<<<<<<< HEAD
-=======
             {
                 "enabled": true,
                 "id": "qt"
