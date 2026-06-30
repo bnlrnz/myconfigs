@@ -13,11 +13,7 @@
         "enableClipboardSmartIcons": true,
         "enableSessionSearch": true,
         "enableSettingsSearch": true,
-<<<<<<< HEAD
-        "enableWindowsSearch": true,
-=======
         "enableWindowsSearch": false,
->>>>>>> 29bc16943416d78a79f375d11112b4b0b0feabea
         "iconMode": "tabler",
         "ignoreMouseInput": false,
         "overviewLayer": false,
@@ -28,11 +24,7 @@
         "showCategories": false,
         "showIconBackground": false,
         "sortByMostUsed": true,
-<<<<<<< HEAD
-        "terminalCommand": "alacritty -e",
-=======
         "terminalCommand": "kitty -e",
->>>>>>> 29bc16943416d78a79f375d11112b4b0b0feabea
         "viewMode": "list"
     },
     "audio": {
