@@ -68,6 +68,9 @@
   # enable fwupd -> fwupdmgr
   services.fwupd.enable = true;
 
+  # upower power management
+  services.upower.enable = true;
+  
   #services.ollama = {
   # 	enable = true;
 	#  acceleration = "rocm";
