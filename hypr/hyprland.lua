@@ -8,6 +8,8 @@
 
 -- See https://wiki.hyprland.org/Configuring/Monitors/
 
+local hostname = io.popen("hostname")
+
 hl.monitor({
     output   = "",
     mode     = "preferred",
@@ -102,37 +104,6 @@ hl.env("XDG_SESSION_TYPE", "wayland")
 
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 
--- See https://wiki.hyprland.org/Configuring/Keywords/ for more
-
--- Execute your favorite apps at launch
-
-
-
---WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- some theming stuff
-
-
-
-
-
--- as of hyprland v0.43
-
-
 -- For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 
 hl.config({
@@ -155,8 +126,8 @@ hl.config({
 
 hl.config({
     general = {
-        gaps_in = 3,
-        gaps_out = 5,
+        gaps_in = 2,
+        gaps_out = 2,
         border_size = 2,
         col = {
             active_border = { colors = { "rgba(bd93f9ff)", "rgba(ffb86cff)"}, angle = 45 },
@@ -672,18 +643,21 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME")
     hl.exec_cmd("systemctl --user start graphical-session.target")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
-    --hl.exec_cmd("mako")
     hl.exec_cmd("blueman-tray")
     hl.exec_cmd("nm-applet --indicator")
-    -- hl.exec_cmd("hypridle")
     hl.exec_cmd("wayland-pipewire-idle-inhibit")
     hl.exec_cmd("wl-paste --watch cliphist store")
-    --hl.exec_cmd("wpaperd")
-    --hl.exec_cmd("sleep 5 && pidof waybar || waybar")
     hl.exec_cmd("noctalia-shell")
-    hl.exec_cmd("nextcloud --background")
     hl.exec_cmd("firefox")
-    hl.exec_cmd("opencloud")
+   
+    if hostname == "tp-belo" then
+        hl.exec_cmd("nextcloud --background")
+    end
+    
+    if hostname == "nix" then
+        hl.exec_cmd("opencloud")
+    end
+
     hl.exec_cmd("dconf write /org/gnome/desktop/interface/gtk-theme 'Dracula'")
     hl.exec_cmd("dconf write /org/gnome/desktop/interface/icon-theme 'Dracula'")
     hl.exec_cmd("dconf write /org/gnome/desktop/interface/font-name 'Sans 11'")
@@ -692,5 +666,5 @@ end)
 
 -- Shutdown
 hl.on("hyprland.shutdown", function()
-    hl.exec_cmd("pkill -f firefox")
+    hl.exec_cmd("pkill -f firefox") -- send kill to FF so it shuts down gracefully
 end)
