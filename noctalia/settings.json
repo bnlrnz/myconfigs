@@ -147,7 +147,7 @@
                     "deviceNativePath": "__default__",
                     "displayMode": "graphic",
                     "hideIfIdle": false,
-                    "hideIfNotDetected": false,
+                    "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
                     "showPowerProfiles": false
@@ -524,8 +524,8 @@
         "notifyUpdates": true
     },
     "sessionMenu": {
-        "countdownDuration": 5000,
-        "enableCountdown": true,
+        "countdownDuration": 1000,
+        "enableCountdown": false,
         "largeButtonsLayout": "grid",
         "largeButtonsStyle": true,
         "position": "center",
