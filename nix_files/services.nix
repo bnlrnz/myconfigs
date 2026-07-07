@@ -68,13 +68,15 @@
   # enable fwupd -> fwupdmgr
   services.fwupd.enable = true;
 
+  # upower service for laptops/battery
   services.upower.enable = true;
 
   # disable speechd and orca
   services.speechd.enable = false;
   services.orca.enable = false;
 
-  virtualisation.docker.enable = true;
+  # docker
+  # virtualisation.docker.enable = true;
 
   #services.ollama = {
   # 	enable = true;
