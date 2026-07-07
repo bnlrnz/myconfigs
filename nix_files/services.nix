@@ -68,9 +68,14 @@
   # enable fwupd -> fwupdmgr
   services.fwupd.enable = true;
 
-  # upower power management
   services.upower.enable = true;
-  
+
+  # disable speechd and orca
+  services.speechd.enable = false;
+  services.orca.enable = false;
+
+  virtualisation.docker.enable = true;
+
   #services.ollama = {
   # 	enable = true;
 	#  acceleration = "rocm";
