@@ -614,7 +614,7 @@ hl.workspace_rule({
     workspace = "special:keepass",
     animation = "specialWorkspace",
     on_created_empty = "keepassxc",
-    gaps_out = 32,
+    gaps_out = 16,
     no_border = true,
 })
 
@@ -623,9 +623,9 @@ hl.bind(mainMod .. " + " .. "C", hl.dsp.workspace.toggle_special("messengers"))
 hl.workspace_rule({
     workspace = "special:messengers",
     animation = "specialWorkspace",
-    on_created_empty = "Telegram",
-    gaps_out = 10,
-    gaps_in = 5,
+    on_created_empty = "Telegram & signal-desktop",
+    gaps_out = 4,
+    gaps_in = 6,
 })
 
 --exec-once = hyprctl dispatch exec [workspace special:messenger silent] whatsie
