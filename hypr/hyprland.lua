@@ -11,73 +11,79 @@
 local hostname = io.popen("hostname")
 
 hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
-    scale    = 1,
+	output = "",
+	mode = "preferred",
+	position = "auto",
+	scale = 1,
 })
 
 hl.monitor({
-    output   = "HDMI-A-1",
-    mode     = "preferred",
-    position = "auto",
-    scale    = 1,
-    mirror = "eDP-1",
+	output = "HDMI-A-1",
+	mode = "preferred",
+	position = "auto",
+	scale = 1,
+	vrr = 0,
+	-- mirror = "eDP-1",
+})
+
+-- this misterious output is spawned when docked
+hl.monitor({
+	output = "DP-6",
+	disabled = true,
+	position = "auto",
+	scale = 1,
 })
 
 hl.monitor({
-    output   = "DP-6",
-    disabled = true,
-    position = "auto",
-    scale    = 1,
+	output = "DP-8",
+	mode = "preferred",
+	position = "auto",
+	scale = 1,
+	mirror = "eDP-1",
 })
 
--- DP-1 is on the left and  eDP-1 is on the right
-
---monitor=DP-1,2560x1440@165,0x0,1
-
---monitor=eDP-1,2560x1440@165,2560x0,1
-
---
-
 hl.monitor({
-    output   = "desc:AOC AG271QG4 0x0000002C",
-    mode     = "2560x1440@144",
-    position = "auto",
-    scale    = 1,
+	output = "desc:AOC AG271QG4 0x0000002C",
+	mode = "2560x1440@144",
+	position = "auto",
+	scale = 1,
 })
 
 -- work monitor
-
 hl.monitor({
-    output   = "desc:HP Inc. HP P34hc G4 CNC2081Q83",
-    mode     = "3440x1440@100",
-    position = "-1920x-1080",
-    scale    = 1,
+	output = "desc:HP Inc. HP P34hc G4 CNC2081Q83",
+	mode = "3440x1440@100",
+	position = "-1920x-1080",
+	scale = 1,
 })
 
 hl.monitor({
-    output   = "desc:HP Inc. HP P34hc G4 CNC2081QPF",
-    mode     = "3440x1440@100",
-    position = "-1920x-1080",
-    scale    = 1,
+	output = "desc:HP Inc. HP P34hc G4 CNC2081QPF",
+	mode = "3440x1440@100",
+	position = "-1920x-1080",
+	scale = 1,
 })
 
 -- LID behaviour
-
 -- trigger when the switch is turning off
-hl.bind("switch:on:Lid Switch",
-    hl.dsp.exec_cmd(
-        "hyprctl keyword monitor \"eDP-1, disable\"; [[ $(hyprctl monitors | grep -c 'Monitor') -ge 2 ]] || qs -c noctalia-shell ipc call lockScreen lock"
-    ), { locked = true }
+hl.bind(
+	"switch:on:Lid Switch",
+	hl.dsp.exec_cmd(
+		"hyprctl keyword monitor \"eDP-1, disable\"; [[ $(hyprctl monitors | grep -c 'Monitor') -ge 2 ]] || qs -c noctalia-shell ipc call lockScreen lock"
+	),
+	{ locked = true }
 )
 
-hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1\""), { locked = true })
+hl.bind(
+	"switch:off:Lid Switch",
+	hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, preferred, auto, 1"'),
+	{ locked = true }
+)
 
 hl.config({
-    xwayland = {
-        force_zero_scaling = true,
-    },
+	xwayland = {
+		force_zero_scaling = true,
+	},
 })
 
 hl.env("GDK_SCALE", 1)
@@ -107,336 +113,336 @@ hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 -- For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 
 hl.config({
-    input = {
-        kb_layout = "de",
-        kb_variant = "",
-        kb_model = "",
-        kb_options = "",
-        kb_rules = "",
-        follow_mouse = 2,
-        focus_on_close = 2,
-        touchpad = {
-            natural_scroll = true,
-            scroll_factor = 0.5,
-        },
-        sensitivity = 0,
-        -- -1.0 - 1.0, 0 means no modification.
-    },
+	input = {
+		kb_layout = "de",
+		kb_variant = "",
+		kb_model = "",
+		kb_options = "",
+		kb_rules = "",
+		follow_mouse = 2,
+		focus_on_close = 2,
+		touchpad = {
+			natural_scroll = true,
+			scroll_factor = 0.5,
+		},
+		sensitivity = 0,
+		-- -1.0 - 1.0, 0 means no modification.
+	},
 })
 
 hl.config({
-    general = {
-        gaps_in = 2,
-        gaps_out = 2,
-        border_size = 2,
-        col = {
-            active_border = { colors = { "rgba(bd93f9ff)", "rgba(ffb86cff)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
-        },
-        layout = "dwindle",
-    },
+	general = {
+		gaps_in = 2,
+		gaps_out = 2,
+		border_size = 2,
+		col = {
+			active_border = { colors = { "rgba(bd93f9ff)", "rgba(ffb86cff)" }, angle = 45 },
+			inactive_border = "rgba(595959aa)",
+		},
+		layout = "dwindle",
+	},
 })
 
 hl.config({
-    misc = {
-        disable_hyprland_logo = true,
-        vrr = 2,
-        mouse_move_enables_dpms = true,
-        key_press_enables_dpms = true,
-        allow_session_lock_restore = 1,
-    },
+	misc = {
+		disable_hyprland_logo = true,
+		vrr = 2,
+		mouse_move_enables_dpms = true,
+		key_press_enables_dpms = true,
+		allow_session_lock_restore = 1,
+	},
 })
 
 hl.config({
-    decoration = {
-        -- See https://wiki.hyprland.org/Configuring/Variables/ for more
-        rounding = 10,
-        blur = {
-            enabled = true,
-            size = 8,
-            passes = 1,
-            new_optimizations = true,
-            special = false,
-            --popups = false
-        },
-        --blurls = lockscreen #deprecated
-        shadow = {
-            enabled = false,
-        },
-    },
+	decoration = {
+		-- See https://wiki.hyprland.org/Configuring/Variables/ for more
+		rounding = 10,
+		blur = {
+			enabled = true,
+			size = 8,
+			passes = 1,
+			new_optimizations = true,
+			special = false,
+			--popups = false
+		},
+		--blurls = lockscreen #deprecated
+		shadow = {
+			enabled = false,
+		},
+	},
 })
 
 hl.config({
-    animations = {
-        enabled = true,
-        -- Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-    },
+	animations = {
+		enabled = true,
+		-- Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+	},
 })
 
 hl.animation({
-    leaf = "global",
-    enabled = true,
-    speed = 5,
-    bezier = "default",
+	leaf = "global",
+	enabled = true,
+	speed = 5,
+	bezier = "default",
 })
 
 hl.config({
-    dwindle = {
-        -- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        -- pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-        preserve_split = true,
-        -- you probably want this
-    },
+	dwindle = {
+		-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+		-- pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+		preserve_split = true,
+		-- you probably want this
+	},
 })
 
 hl.config({
-    master = {
-        -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-        new_status = "master",
-    },
+	master = {
+		-- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+		new_status = "master",
+	},
 })
 
 hl.config({
-    cursor = {
-        no_warps = true,
-    },
+	cursor = {
+		no_warps = true,
+	},
 })
 
 hl.gesture({
-    fingers = 4,
-    direction = "horizontal",
-    action = "workspace",
-    workspace_swipe_distance = 1300,
-    workspace_swipe_min_speed_to_force = 20,
+	fingers = 4,
+	direction = "horizontal",
+	action = "workspace",
+	workspace_swipe_distance = 1300,
+	workspace_swipe_min_speed_to_force = 20,
 })
 
 -- Example windowrule v1
 
 hl.window_rule({
-    match = {
-        class = "pavucontrol",
-    },
-    float = true,
+	match = {
+		class = "pavucontrol",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = ".blueman-manager-wrapped",
-    },
-    float = true,
+	match = {
+		class = ".blueman-manager-wrapped",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "nm-connection-editor",
-    },
-    float = true,
+	match = {
+		class = "nm-connection-editor",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "thunar",
-    },
-    float = true,
+	match = {
+		class = "thunar",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "Thunar",
-    },
-    float = true,
+	match = {
+		class = "Thunar",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "pcmanfm",
-    },
-    float = true,
+	match = {
+		class = "pcmanfm",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "feh",
-    },
-    float = true,
+	match = {
+		class = "feh",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        title = "btop",
-    },
-    float = true,
+	match = {
+		title = "btop",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        title = "update-sys",
-    },
-    float = true,
+	match = {
+		title = "update-sys",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "org.gnome.FileRoller",
-    },
-    size = "800 600",
-    center = true,
-    float = true,
+	match = {
+		class = "org.gnome.FileRoller",
+	},
+	size = "800 600",
+	center = true,
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        title = "Archive Manager",
-    },
-    float = true,
+	match = {
+		title = "Archive Manager",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "CiscoCollabHost",
-    },
-    float = true,
+	match = {
+		class = "CiscoCollabHost",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "qalculate-gtk",
-    },
-    float = true,
+	match = {
+		class = "qalculate-gtk",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    match = {
-        class = "kitty",
-    },
-    opacity = "0.95 0.85",
+	match = {
+		class = "kitty",
+	},
+	opacity = "0.95 0.85",
 })
 
 hl.window_rule({
-    match = {
-        class = "^(kitty)$",
-        title = "^(update-sys)$",
-    },
-    animation = "popin",
+	match = {
+		class = "^(kitty)$",
+		title = "^(update-sys)$",
+	},
+	animation = "popin",
 })
 
 hl.window_rule({
-    name  = "animation_popin",
-    match = {
-        class = "^(thunar)$",
-    },
-    animation = "popin",
+	name = "animation_popin",
+	match = {
+		class = "^(thunar)$",
+	},
+	animation = "popin",
 })
 
 hl.window_rule({
-    name  = "animation_popin",
-    match = {
-        class = "^(pcmanfm)$",
-    },
-    animation = "popin",
+	name = "animation_popin",
+	match = {
+		class = "^(pcmanfm)$",
+	},
+	animation = "popin",
 })
 
 hl.window_rule({
-    name  = "opacity_0_95_0_85",
-    match = {
-        class = "^(thunar)$",
-    },
-    opacity = "0.95 0.85",
+	name = "opacity_0_95_0_85",
+	match = {
+		class = "^(thunar)$",
+	},
+	opacity = "0.95 0.85",
 })
 
 hl.window_rule({
-    name  = "opacity_0_95_0_85",
-    match = {
-        class = "^(pcmanfm)$",
-    },
-    opacity = "0.95 0.85",
+	name = "opacity_0_95_0_85",
+	match = {
+		class = "^(pcmanfm)$",
+	},
+	opacity = "0.95 0.85",
 })
 
 hl.window_rule({
-    name  = "opacity_0_8_0_8",
-    match = {
-        class = "^(VSCodium)$",
-    },
-    opacity = "0.8 0.8",
+	name = "opacity_0_8_0_8",
+	match = {
+		class = "^(VSCodium)$",
+	},
+	opacity = "0.8 0.8",
 })
 
 hl.window_rule({
-    name  = "animation_popin",
-    match = {
-        class = "^(librewolf)$",
-    },
-    animation = "popin",
+	name = "animation_popin",
+	match = {
+		class = "^(librewolf)$",
+	},
+	animation = "popin",
 })
 
 hl.window_rule({
-    name  = "animation_popin",
-    match = {
-        class = "^(feh)$",
-    },
-    animation = "popin",
+	name = "animation_popin",
+	match = {
+		class = "^(feh)$",
+	},
+	animation = "popin",
 })
 
 hl.window_rule({
-    name  = "move_cursor_-3__-105",
-    match = {
-        class = "^(wofi)$",
-    },
-    move = "cursor -3% -105%",
+	name = "move_cursor_-3__-105",
+	match = {
+		class = "^(wofi)$",
+	},
+	move = "cursor -3% -105%",
 })
 
 hl.window_rule({
-    name  = "noanim",
-    match = {
-        class = "^(wofi)$",
-    },
-    no_anim = true,
+	name = "noanim",
+	match = {
+		class = "^(wofi)$",
+	},
+	no_anim = true,
 })
 
 hl.window_rule({
-    name  = "opacity_0_8_0_6",
-    match = {
-        class = "^(wofi)$",
-    },
-    opacity = "0.8 0.6",
+	name = "opacity_0_8_0_6",
+	match = {
+		class = "^(wofi)$",
+	},
+	opacity = "0.8 0.6",
 })
 
 hl.layer_rule({
-    match = {
-        namespace = "wofi",
-    },
-    ignore_alpha = 0,
+	match = {
+		namespace = "wofi",
+	},
+	ignore_alpha = 0,
 })
 
 hl.window_rule({
-    name  = "nofocus",
-    match = {
-        class = "^ghidra-.+$",
-        title = "^win.+$",
-        float = true,
-        fullscreen = 0,
-    },
-    no_focus = true,
+	name = "nofocus",
+	match = {
+		class = "^ghidra-.+$",
+		title = "^win.+$",
+		float = true,
+		fullscreen = 0,
+	},
+	no_focus = true,
 })
 
 -- Fix some dragging issues with XWayland
 
 hl.window_rule({
-    name  = "nofocus",
-    match = {
-        class = "^$",
-        title = "^$",
-        xwayland = 1,
-        float = true,
-        fullscreen = 0,
-        pin = true,
-    },
-    no_focus = true,
+	name = "nofocus",
+	match = {
+		class = "^$",
+		title = "^$",
+		xwayland = 1,
+		float = true,
+		fullscreen = 0,
+		pin = true,
+	},
+	no_focus = true,
 })
 
 hl.config({
-    binds = {
-        scroll_event_delay = 0,
-    },
+	binds = {
+		scroll_event_delay = 0,
+	},
 })
 
 -- See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -444,22 +450,21 @@ hl.config({
 local mainMod = "SUPER"
 
 -- alt drag only if no steam_app_ is running in fullscreen
-hl.bind("ALT" .. " + " .. "mouse:272",
-function()
-    local w = hl.get_active_window() or nil
-    if not w then
-        return
-    end
+hl.bind("ALT" .. " + " .. "mouse:272", function()
+	local w = hl.get_active_window() or nil
+	if not w then
+		return
+	end
 
-    local cls = w.initialClass or w.class or ""
-    local is_steam_game = cls:match("^steam_app_%d+$") ~= nil
-    local is_fullscreen = (w.fullscreen == 1) or (w.fullscreen == 2) or (w.fullscreen == true)
+	local cls = w.initialClass or w.class or ""
+	local is_steam_game = cls:match("^steam_app_%d+$") ~= nil
+	local is_fullscreen = (w.fullscreen == 1) or (w.fullscreen == 2) or (w.fullscreen == true)
 
-    if is_steam_game and is_fullscreen then
-        return
-    end
+	if is_steam_game and is_fullscreen then
+		return
+	end
 
-    hl.dispatch(hl.dsp.window.drag())
+	hl.dispatch(hl.dsp.window.drag())
 end, { mouse = true })
 
 hl.bind("ALT" .. " + " .. "mouse:273", hl.dsp.window.resize(), { mouse = true })
@@ -501,7 +506,10 @@ hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia-shell ipc call 
 
 hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 
-hl.bind("SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | satty -f - --copy-command wl-copy -o "~/%Y%m%d_%H%M%S.png"'))
+hl.bind(
+	"SHIFT" .. " + " .. "PRINT",
+	hl.dsp.exec_cmd('grim -g "$(slurp)" - | satty -f - --copy-command wl-copy -o "~/%Y%m%d_%H%M%S.png"')
+)
 
 hl.bind("CONTROL + SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim && notify-send Screenshot saved under ~/"))
 
@@ -511,16 +519,16 @@ hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list | wofi -dmenu | cl
 
 -- Move focus with mainMod + arrow keys
 
-hl.bind(mainMod .. " + " .. "left", hl.dsp.focus({ direction = "left"}))
-hl.bind(mainMod .. " + " .. "right", hl.dsp.focus({ direction = "right"}))
-hl.bind(mainMod .. " + " .. "up", hl.dsp.focus({ direction = "up"}))
-hl.bind(mainMod .. " + " .. "down", hl.dsp.focus({ direction = "down"}))
+hl.bind(mainMod .. " + " .. "left", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + " .. "right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + " .. "up", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + " .. "down", hl.dsp.focus({ direction = "down" }))
 
 hl.bind("CONTROL + ALT" .. " + " .. "right", hl.dsp.focus({ workspace = "r+1" }))
 hl.bind("CONTROL + ALT" .. " + " .. "left", hl.dsp.focus({ workspace = "r-1" }))
 
-hl.bind("CONTROL + ALT + SHIFT" .. " + " .. "right", hl.dsp.window.move({ workspace = "r+1"}))
-hl.bind("CONTROL + ALT + SHIFT" .. " + " .. "left", hl.dsp.window.move({ workspace = "r-1"}))
+hl.bind("CONTROL + ALT + SHIFT" .. " + " .. "right", hl.dsp.window.move({ workspace = "r+1" }))
+hl.bind("CONTROL + ALT + SHIFT" .. " + " .. "left", hl.dsp.window.move({ workspace = "r-1" }))
 
 -- Switch workspaces with mainMod + [0-9]
 
@@ -537,16 +545,16 @@ hl.bind(mainMod .. " + " .. 0, hl.dsp.focus({ workspace = 10 }))
 
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 1, hl.dsp.window.move({ workspace = 1}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 2, hl.dsp.window.move({ workspace = 2}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 3, hl.dsp.window.move({ workspace = 3}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 4, hl.dsp.window.move({ workspace = 4}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 5, hl.dsp.window.move({ workspace = 5}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 6, hl.dsp.window.move({ workspace = 6}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 7, hl.dsp.window.move({ workspace = 7}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 8, hl.dsp.window.move({ workspace = 8}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 9, hl.dsp.window.move({ workspace = 9}))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 0, hl.dsp.window.move({ workspace = 0}))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 1, hl.dsp.window.move({ workspace = 1 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 2, hl.dsp.window.move({ workspace = 2 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 3, hl.dsp.window.move({ workspace = 3 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 4, hl.dsp.window.move({ workspace = 4 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 5, hl.dsp.window.move({ workspace = 5 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 6, hl.dsp.window.move({ workspace = 6 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 7, hl.dsp.window.move({ workspace = 7 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 8, hl.dsp.window.move({ workspace = 8 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 9, hl.dsp.window.move({ workspace = 9 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 0, hl.dsp.window.move({ workspace = 0 }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 
@@ -573,13 +581,13 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"))
 
 hl.bind(mainMod .. " + " .. "F", hl.dsp.window.fullscreen())
 
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize( { x = 10, y = 0, relative = true } ))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }))
 
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize( { x = -10, y = 0, relative = true }))
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({ x = -10, y = 0, relative = true }))
 
-hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize( { x = 0, y = -10, relative = true }))
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize({ x = 0, y = -10, relative = true }))
 
-hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize( { x = 0, y = 10, relative = true }))
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize({ x = 0, y = 10, relative = true }))
 
 hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "right", hl.dsp.window.move({ direction = "r" }))
 
@@ -601,31 +609,31 @@ local env_var = require("env_var")
 
 -- special workspaces
 hl.animation({
-    leaf = "specialWorkspace",
-    enabled = true,
-    speed = 4,
-    bezier = "default",
-    style = "slidevert -100%",
+	leaf = "specialWorkspace",
+	enabled = true,
+	speed = 4,
+	bezier = "default",
+	style = "slidevert -100%",
 })
 
 hl.bind(mainMod .. " + " .. "K", hl.dsp.workspace.toggle_special("keepass"))
 
 hl.workspace_rule({
-    workspace = "special:keepass",
-    animation = "specialWorkspace",
-    on_created_empty = "keepassxc",
-    gaps_out = 16,
-    no_border = true,
+	workspace = "special:keepass",
+	animation = "specialWorkspace",
+	on_created_empty = "keepassxc",
+	gaps_out = 16,
+	no_border = true,
 })
 
 hl.bind(mainMod .. " + " .. "C", hl.dsp.workspace.toggle_special("messengers"))
 
 hl.workspace_rule({
-    workspace = "special:messengers",
-    animation = "specialWorkspace",
-    on_created_empty = "Telegram & signal-desktop",
-    gaps_out = 4,
-    gaps_in = 6,
+	workspace = "special:messengers",
+	animation = "specialWorkspace",
+	on_created_empty = "Telegram & signal-desktop",
+	gaps_out = 4,
+	gaps_in = 6,
 })
 
 --exec-once = hyprctl dispatch exec [workspace special:messenger silent] whatsie
@@ -638,33 +646,33 @@ hl.workspace_rule({
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("~/.config/hypr/xdg-portal-hyprland")
-    hl.exec_cmd("dbus-update-activation-environment --systemd --all")
-    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME")
-    hl.exec_cmd("systemctl --user start graphical-session.target")
-    hl.exec_cmd("systemctl --user start hyprpolkitagent")
-    hl.exec_cmd("blueman-tray")
-    hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("wayland-pipewire-idle-inhibit")
-    hl.exec_cmd("wl-paste --watch cliphist store")
-    hl.exec_cmd("noctalia-shell")
-    hl.exec_cmd("firefox")
-   
-    if hostname == "tp-belo" then
-        hl.exec_cmd("nextcloud --background")
-    end
-    
-    if hostname == "nix" then
-        hl.exec_cmd("opencloud")
-    end
+	hl.exec_cmd("~/.config/hypr/xdg-portal-hyprland")
+	hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME")
+	hl.exec_cmd("systemctl --user start graphical-session.target")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("blueman-tray")
+	hl.exec_cmd("nm-applet --indicator")
+	hl.exec_cmd("wayland-pipewire-idle-inhibit")
+	hl.exec_cmd("wl-paste --watch cliphist store")
+	hl.exec_cmd("noctalia-shell")
+	hl.exec_cmd("firefox")
 
-    hl.exec_cmd("dconf write /org/gnome/desktop/interface/gtk-theme 'Dracula'")
-    hl.exec_cmd("dconf write /org/gnome/desktop/interface/icon-theme 'Dracula'")
-    hl.exec_cmd("dconf write /org/gnome/desktop/interface/font-name 'Sans 11'")
-    hl.exec_cmd("dconf write /org/gnome/desktop/interface/color-scheme 'prefer-dark'")
+	if hostname == "tp-belo" then
+		hl.exec_cmd("nextcloud --background")
+	end
+
+	if hostname == "nix" then
+		hl.exec_cmd("opencloud")
+	end
+
+	hl.exec_cmd("dconf write /org/gnome/desktop/interface/gtk-theme 'Dracula'")
+	hl.exec_cmd("dconf write /org/gnome/desktop/interface/icon-theme 'Dracula'")
+	hl.exec_cmd("dconf write /org/gnome/desktop/interface/font-name 'Sans 11'")
+	hl.exec_cmd("dconf write /org/gnome/desktop/interface/color-scheme 'prefer-dark'")
 end)
 
 -- Shutdown
 hl.on("hyprland.shutdown", function()
-    hl.exec_cmd("pkill -f firefox") -- send kill to FF so it shuts down gracefully
+	hl.exec_cmd("pkill -f firefox") -- send kill to FF so it shuts down gracefully
 end)
