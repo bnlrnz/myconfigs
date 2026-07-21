@@ -109,7 +109,7 @@ in
   fileSystems."/mnt/BSCW" = {
     device = "https://bscw.bund.de/sec/bscw.cgi/home/";
     fsType = "davfs";
-    options = ["x-systemd.automount" "noauto" "_netdev"];
+    options = ["x-systemd.automount" "noauto" "_netdev" "uid=1000" "gid=1000" "dir_mode=0755" "file_mode=0664"];
   };
 
   # PKI / self signed certificates
