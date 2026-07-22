@@ -473,6 +473,8 @@ hl.bind("ALT" .. " + " .. "Tab", hl.dsp.window.cycle_next())
 
 -- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 
+hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("wayscriber --daemon-toggle"))
+
 hl.bind("ALT" .. " + " .. "F1", hl.dsp.exec_cmd("kitty"))
 
 --open the terminal
@@ -488,18 +490,13 @@ hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("noctalia-shell ipc call lockSc
 hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
 
 -- show the logout window
-
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "M", hl.dsp.exit())
 
--- Exit Hyprland all together no (force quit Hyprland)
-
+-- Show the graphical file browser
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("thunar"))
 
--- Show the graphical file browser
-
-hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
-
 -- Allow a window to float
+hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 -- hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
 hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
