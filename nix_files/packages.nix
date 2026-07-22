@@ -312,6 +312,7 @@
     vulkan-tools
     wayland
     wayland-pipewire-idle-inhibit
+    wayscriber
     wget
     wireshark
     wl-clipboard
