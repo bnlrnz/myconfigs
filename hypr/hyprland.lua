@@ -8,7 +8,6 @@
 
 -- See https://wiki.hyprland.org/Configuring/Monitors/
 
-local hostname = io.popen("hostname")
 
 hl.monitor({
 	output = "",
@@ -655,11 +654,22 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("noctalia-shell")
 	hl.exec_cmd("firefox")
 
+	local function getHostname()
+    local f = io.popen ("hostname")
+    local hostname = f:read("*a") or ""
+    f:close()
+    hostname =string.gsub(hostname, "\n$", "")
+    return hostname
+	end
+
+	local hostname = getHostname()
+	
 	if hostname == "tp-belo" then
 		hl.exec_cmd("nextcloud --background")
 	end
 
 	if hostname == "nix" then
+		hl.exec_cmd("nextcloud --background")
 		hl.exec_cmd("opencloud")
 	end
 
