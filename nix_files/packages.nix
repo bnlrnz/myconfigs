@@ -1,5 +1,16 @@
-{ config, pkgs, unstable-pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
+let
+  unstableTarball = fetchTarball
+    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+in
 {
+  # add unstable channel
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
+    };
+  };
+
   # linux kernel package
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -28,6 +39,8 @@
         gtk-theme = "Dracula";
         icon-theme = "Dracula";
         font-name = "Sans 11";
+        document-font-name = "Noto Sans Medium 11";
+        monospace-font-name = "Noto Sans Mono Medium 11";
       };
     }
   ];
@@ -108,7 +121,6 @@
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
       font-awesome
-      nerd-fonts.ubuntu
       nerd-fonts.jetbrains-mono
       source-han-sans
       open-sans
@@ -290,6 +302,8 @@
     sqlite
     sqlitebrowser
     satty
+    ssh-to-age
+    sops
     swappy
     tcpdump
     tcpreplay

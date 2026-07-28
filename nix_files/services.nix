@@ -1,4 +1,16 @@
-{ config, pkgs, unstable-pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  unstableTarball = fetchTarball
+    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+in
+{
+  # add unstable channel
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
+    };
+  };
+
   # allow nix flakes  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -12,15 +24,15 @@
   programs.xwayland.enable = true;
   programs.hyprland = {
     enable = true;
+    package = pkgs.unstable.hyprland;
     xwayland.enable = true;
   };
 
-  services.hypridle = {
-    enable = true;
-    #settings = {
-    #   
-    #};
-  };
+  # FIX: temporary for hyprland 0.56 and firefox 153.0
+	environment.sessionVariables.XDG_DATA_DIRS = [
+		"${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+		"${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+	];
 
   # enable pipewire
   security.rtkit.enable = true;

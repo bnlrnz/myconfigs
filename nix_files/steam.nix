@@ -16,8 +16,8 @@
     mangohud
     goverlay
     protonup-qt
-    #    lutris
-    heroic
+    # lutris
+    # heroic # disabled for now because of npn vulnerabilities
     winetricks
     protontricks
     wineWow64Packages.waylandFull

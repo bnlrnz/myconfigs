@@ -2,12 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, unstable-pkgs, lib, ... }:
-
-let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-in {
+{ config, pkgs, lib, ... }:{
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration_nix-home.nix
     ./services.nix
@@ -18,13 +13,6 @@ in {
     #./podman.nix
     ./temis.nix
   ];
-
-  # add unstable channel
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
-    };
-  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
