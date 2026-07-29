@@ -9,7 +9,6 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./unfree-packages.nix
       ./hardware-configuration_nix-vps.nix
       ./service_sa3_document_manager.nix
       ./service_wireguard.nix
