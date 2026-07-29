@@ -290,6 +290,7 @@
     sqlite
     sqlitebrowser
     satty
+    sops
     swappy
     tcpdump
     tcpreplay
