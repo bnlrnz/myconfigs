@@ -373,3 +373,8 @@ keymap = [
 	# Filtering
 	{ on = "f", run = "filter", desc = "Filter help items" },
 ]
+
+[[mgr.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = "<S-f>"
+run = "plugin bunny"
