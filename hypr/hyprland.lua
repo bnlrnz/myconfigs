@@ -246,17 +246,10 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = {
-		class = "Thunar",
-	},
-	float = true,
-})
-
-hl.window_rule({
-	match = {
-		class = "pcmanfm",
-	},
-	float = true,
+  match = { class = "yazi-float" },
+  float = true,
+  size = "800 600",
+  center = true,
 })
 
 hl.window_rule({
@@ -282,17 +275,10 @@ hl.window_rule({
 
 hl.window_rule({
 	match = {
-		class = "org.gnome.FileRoller",
+		class = "engrampa",
 	},
 	size = "800 600",
 	center = true,
-	float = true,
-})
-
-hl.window_rule({
-	match = {
-		title = "Archive Manager",
-	},
 	float = true,
 })
 
@@ -336,80 +322,9 @@ hl.window_rule({
 hl.window_rule({
 	name = "animation_popin",
 	match = {
-		class = "^(pcmanfm)$",
-	},
-	animation = "popin",
-})
-
-hl.window_rule({
-	name = "opacity_0_95_0_85",
-	match = {
-		class = "^(thunar)$",
-	},
-	opacity = "0.95 0.85",
-})
-
-hl.window_rule({
-	name = "opacity_0_95_0_85",
-	match = {
-		class = "^(pcmanfm)$",
-	},
-	opacity = "0.95 0.85",
-})
-
-hl.window_rule({
-	name = "opacity_0_8_0_8",
-	match = {
-		class = "^(VSCodium)$",
-	},
-	opacity = "0.8 0.8",
-})
-
-hl.window_rule({
-	name = "animation_popin",
-	match = {
-		class = "^(librewolf)$",
-	},
-	animation = "popin",
-})
-
-hl.window_rule({
-	name = "animation_popin",
-	match = {
 		class = "^(feh)$",
 	},
 	animation = "popin",
-})
-
-hl.window_rule({
-	name = "move_cursor_-3__-105",
-	match = {
-		class = "^(wofi)$",
-	},
-	move = "cursor -3% -105%",
-})
-
-hl.window_rule({
-	name = "noanim",
-	match = {
-		class = "^(wofi)$",
-	},
-	no_anim = true,
-})
-
-hl.window_rule({
-	name = "opacity_0_8_0_6",
-	match = {
-		class = "^(wofi)$",
-	},
-	opacity = "0.8 0.6",
-})
-
-hl.layer_rule({
-	match = {
-		namespace = "wofi",
-	},
-	ignore_alpha = 0,
 })
 
 hl.window_rule({
@@ -493,6 +408,9 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "M", hl.dsp.exit())
 
 -- Show the graphical file browser
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("thunar"))
+
+-- Show the graphical file browser
+hl.bind(mainMod .. " + " .. " + SHIFT + " .. "E", hl.dsp.exec_cmd("kitty --class yazi-float yazi"))
 
 -- Allow a window to float
 hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
