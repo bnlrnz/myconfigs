@@ -7,105 +7,106 @@ echo "If you don't see further output, nothing changed."
 
 # Machine-specific file lists
 declare -a NIX_HOME_FILES=(
-    "configuration.nix:nix-home.nix"
-    "hardware-configuration_nix-home.nix"
-    "packages.nix"
-    "secrets/nix/webdav_bscw.yaml:secrets/nix/webdav_bscw.yaml"
-    "secrets/secrets.yaml:secrets/secrets.yaml"
-    "services.nix"
-    "steam.nix"
-    "pwn.nix"
-    "k3s.nix"
-    "temis.nix"
-    "podman.nix"
+  "configuration.nix:nix-home.nix"
+  "hardware-configuration_nix-home.nix"
+  "packages.nix"
+  "secrets/nix/webdav_bscw.yaml:secrets/nix/webdav_bscw.yaml"
+  "secrets/secrets.yaml:secrets/secrets.yaml"
+  "services.nix"
+  "steam.nix"
+  "pwn.nix"
+  "k3s.nix"
+  "temis.nix"
+  "podman.nix"
 )
 
 declare -a TP_BELO_FILES=(
-    "configuration.nix:nix-thinkpad.nix"
-    "hardware-configuration_nix-thinkpad.nix"
-    "packages.nix"
-    "services.nix"
-    "secrets/nix/webdav_bscw.yaml:secrets/tp-belo/webdav_bscw.yaml"
-    "steam.nix"
-    "pwn.nix"
-    "k3s.nix"
-    "temis.nix"
-    "podman.nix"
+  "configuration.nix:nix-thinkpad.nix"
+  "hardware-configuration_nix-thinkpad.nix"
+  "packages.nix"
+  "services.nix"
+  "secrets/nix/webdav_bscw.yaml:secrets/tp-belo/webdav_bscw.yaml"
+  "steam.nix"
+  "pwn.nix"
+  "k3s.nix"
+  "temis.nix"
+  "podman.nix"
 )
 
 declare -a NIX_VPS_FILES=(
-    "unfree-packages.nix"
-    "configuration.nix:nix-vps.nix"
-    "hardware-configuration_nix-vps.nix"
-    "service_sa3_document_manager.nix"
-    "secrets/secrets.yaml:secrets/secrets.yaml"
-    "service_wireguard.nix"
-    "service_mailserver.nix"
-    "service_immich.nix"
-    "service_n8n.nix"
-    "service_nextcloud.nix"
-    "service_onlyoffice.nix"
-    "service_opencloud.nix"
-    "service_staple-scheduler.nix"
+  "unfree-packages.nix"
+  "configuration.nix:nix-vps.nix"
+  "hardware-configuration_nix-vps.nix"
+  "service_sa3_document_manager.nix"
+  "secrets/secrets.yaml:secrets/secrets.yaml"
+  "service_wireguard.nix"
+  "service_mailserver.nix"
+  "service_immich.nix"
+  "service_n8n.nix"
+  "service_nextcloud.nix"
+  "service_onlyoffice.nix"
+  "service_opencloud.nix"
+  "service_staple-scheduler.nix"
 )
 
 declare -a NIX_PI_FILES=(
-    "configuration.nix:nix-pi.nix"
-    "hardware-configuration.nix:hardware-configuration_nix-pi.nix"
-    "secrets/secrets.yaml:secrets/secrets.yaml"
+  "configuration.nix:nix-pi.nix"
+  "hardware-configuration.nix:hardware-configuration_nix-pi.nix"
+  "secrets/secrets.yaml:secrets/secrets.yaml"
 )
 
 declare -a NIX_TEST_FILES=(
-    "configuration.nix:nix-test.nix"
-    "hardware-configuration_nix-test.nix"
-    "secrets/nix/webdav_bscw.yaml:secrets/nix-test/webdav_bscw.yaml"
-    "temis.nix"
+  "configuration.nix:nix-test.nix"
+  "hardware-configuration_nix-test.nix"
+  "secrets/nix/webdav_bscw.yaml:secrets/nix-test/webdav_bscw.yaml"
+  "temis.nix"
 )
 
 # Function to sync a file
 sync_file() {
-    local source="/etc/nixos/$1"
-    local dest_name="$2"
-    local destination="$dest_name"
-    
-    if ! diff "$source" "$destination" > /dev/null 2>&1; then
-        diff "$source" "$destination"
-        read -n 1 -s -r -p "Press any key to overwrite $destination"
-        
-        # Check if it's a directory (for secrets/) and use -R flag
-        if [ -d "$source" ]; then
-            sudo cp -v -R "$source" "$destination"
-        else
-            sudo cp -v "$source" "$destination"
-        fi
+  local source="/etc/nixos/$1"
+  local dest_name="$2"
+  local destination="$dest_name"
+
+  if ! diff "$source" "$destination" >/dev/null 2>&1; then
+    diff "$source" "$destination"
+    read -n 1 -s -r -p "Press any key to overwrite $destination"
+
+    # Check if it's a directory (for secrets/) and use -R flag
+    if [ -d "$source" ]; then
+      sudo cp -v -R "$source" "$destination"
+    else
+      sudo cp -v "$source" "$destination"
     fi
+  fi
 }
 
 # Function to process a machine's file list
 process_machine() {
-    local -n files_array=$1
-    
-    for file_pair in "${files_array[@]}"; do
-        # Split source and destination
-        if [[ "$file_pair" == *":"* ]]; then
-            IFS=':' read -r source dest <<< "$file_pair"
-        else
-            source="$file_pair"
-            dest="$file_pair"
-        fi
-        
-        sync_file "$source" "$dest"
-    done
+  local -n files_array=$1
+
+  for file_pair in "${files_array[@]}"; do
+    # Split source and destination
+    if [[ "$file_pair" == *":"* ]]; then
+      IFS=':' read -r source dest <<<"$file_pair"
+    else
+      source="$file_pair"
+      dest="$file_pair"
+    fi
+
+    sync_file "$source" "$dest"
+  done
 }
 
 # Main logic
 case "$hn" in
-    "nix") process_machine NIX_HOME_FILES ;;
-    "nix-vps") process_machine NIX_VPS_FILES ;;
-    "tp-belo") process_machine TP_BELO_FILES ;;
-    "nix-pi") process_machine NIX_PI_FILES ;;
-    "nix-test") process_machine NIX_TEST_FILES ;;
-    *)
-    echo "Unknown hostname: $hn"
-    exit 1 ;;
+"nix") process_machine NIX_HOME_FILES ;;
+"nix-vps") process_machine NIX_VPS_FILES ;;
+"tp-belo") process_machine TP_BELO_FILES ;;
+"nix-pi") process_machine NIX_PI_FILES ;;
+"nix-test") process_machine NIX_TEST_FILES ;;
+*)
+  echo "Unknown hostname: $hn"
+  exit 1
+  ;;
 esac
