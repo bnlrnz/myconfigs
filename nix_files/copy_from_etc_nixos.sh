@@ -18,6 +18,8 @@ declare -a NIX_HOME_FILES=(
   "k3s.nix"
   "temis.nix"
   "podman.nix"
+  "ai.nix"
+  "unfree-packages.nix"
 )
 
 declare -a TP_BELO_FILES=(

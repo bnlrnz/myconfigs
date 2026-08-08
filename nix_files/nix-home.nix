@@ -4,6 +4,7 @@
 
 { config, pkgs, lib, ... }:{
   imports = [ # Include the results of the hardware scan.
+    ./unfree-packages.nix
     ./hardware-configuration_nix-home.nix
     ./services.nix
     ./packages.nix
@@ -11,6 +12,7 @@
     ./pwn.nix
     #./k3s.nix
     #./podman.nix
+    ./ai.nix
     ./temis.nix
   ];
 

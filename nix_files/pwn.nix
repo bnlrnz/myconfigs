@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
 {
+  allowUnfreePackages = [ "burpsuite" ];
+
   environment.systemPackages = with pkgs; [
     binwalk
     burpsuite

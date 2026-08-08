@@ -88,7 +88,7 @@ in
   services.orca.enable = false;
 
   # docker
-  # virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   #services.ollama = {
   # 	enable = true;
