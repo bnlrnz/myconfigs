@@ -241,12 +241,20 @@ hl.window_rule({
 hl.window_rule({
 	match = {
 		class = "thunar",
+		class = "Thunar"
 	},
 	float = true,
 })
 
 hl.window_rule({
   match = { class = "yazi-float" },
+  float = true,
+  size = "800 600",
+  center = true,
+})
+
+hl.window_rule({
+  match = { class = "xdg-desktop-portal-gtk" },
   float = true,
   size = "800 600",
   center = true,

@@ -29,10 +29,10 @@ in
   };
 
   # FIX: temporary for hyprland 0.56 and firefox 153.0
-	environment.sessionVariables.XDG_DATA_DIRS = [
-		"${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
-		"${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
-	];
+	#environment.sessionVariables.XDG_DATA_DIRS = [
+  #		"${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+  #		"${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+	#];
 
   # enable pipewire
   security.rtkit.enable = true;
@@ -89,9 +89,4 @@ in
 
   # docker
   virtualisation.docker.enable = true;
-
-  #services.ollama = {
-  # 	enable = true;
-	#  acceleration = "rocm";
-  #};
 }

@@ -329,7 +329,7 @@ in
     wireshark
     wl-clipboard
     wlogout
-    unstable.wlr-layout-ui
+    #unstable.wlr-layout-ui
     wlr-randr
     wrapGAppsHook3
     x2goclient
