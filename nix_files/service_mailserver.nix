@@ -34,6 +34,14 @@ in{
     fqdn = "mail.b3lo.de";
     domains = [ "b3lo.de" ];
 
+    fullTextSearch = {
+      enable = true;
+      # index new email as they arrive
+      autoIndex = true;
+      # only query index
+      fallback = false;
+    };
+
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     accounts = {
