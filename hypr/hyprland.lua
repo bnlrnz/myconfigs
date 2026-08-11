@@ -240,8 +240,7 @@ hl.window_rule({
 
 hl.window_rule({
 	match = {
-		class = "thunar",
-		class = "Thunar"
+		class = "Thunar|thunar|feh|btop|qalculate-gtk|CiscoCollabHost"
 	},
 	float = true,
 })
@@ -262,45 +261,10 @@ hl.window_rule({
 
 hl.window_rule({
 	match = {
-		class = "feh",
-	},
-	float = true,
-})
-
-hl.window_rule({
-	match = {
-		title = "btop",
-	},
-	float = true,
-})
-
-hl.window_rule({
-	match = {
-		title = "update-sys",
-	},
-	float = true,
-})
-
-hl.window_rule({
-	match = {
 		class = "engrampa",
 	},
 	size = "800 600",
 	center = true,
-	float = true,
-})
-
-hl.window_rule({
-	match = {
-		class = "CiscoCollabHost",
-	},
-	float = true,
-})
-
-hl.window_rule({
-	match = {
-		class = "qalculate-gtk",
-	},
 	float = true,
 })
 
