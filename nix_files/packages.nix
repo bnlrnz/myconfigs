@@ -58,11 +58,22 @@ in
 
   qt.platformTheme = "lxqt";
 
-  # kvantum theme
-  xdg.portal.lxqt = {
+  xdg.portal = {
     enable = true;
-    #  styles =
-    #    [ pkgs.libsForQt5.qtstyleplugin-kvantum pkgs.breeze-qt5 pkgs.qtcurve ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk 
+      #pkgs.xdg-desktop-portal-hyprland # handled by programs.hyprland.enable
+      #pkgs.xdg-desktop-portal-wlr
+    ];
+    config = {
+      common = {
+        # Use the GTK portal as a fallback for file pickers/Thunar
+        default = [ "gtk" ];
+      };
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+      };
+    };
   };
 
   # setup wireshark - setcap and so on
@@ -333,10 +344,6 @@ in
     wlr-randr
     wrapGAppsHook3
     x2goclient
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-wlr
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal
     xfce4-settings
     libX11
     xinit
