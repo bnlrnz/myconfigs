@@ -186,7 +186,7 @@
                     "showSwapUsage": false,
                     "textColor": "none",
                     "useMonospaceFont": true,
-                    "usePadding": false
+                    "usePadding": true
                 },
                 {
                     "clockColor": "none",
@@ -659,7 +659,7 @@
     },
     "wallpaper": {
         "automationEnabled": true,
-        "directory": "/home/belo/Wallpapers",
+        "directory": "/home/ben/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
