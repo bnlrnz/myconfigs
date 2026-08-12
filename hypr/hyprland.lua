@@ -8,7 +8,6 @@
 
 -- See https://wiki.hyprland.org/Configuring/Monitors/
 
-
 hl.monitor({
 	output = "",
 	mode = "preferred",
@@ -131,8 +130,8 @@ hl.config({
 
 hl.config({
 	general = {
-		gaps_in = 2,
-		gaps_out = 2,
+		gaps_in = 1,
+		gaps_out = 1,
 		border_size = 2,
 		col = {
 			active_border = { colors = { "rgba(bd93f9ff)", "rgba(ffb86cff)" }, angle = 45 },
@@ -240,23 +239,23 @@ hl.window_rule({
 
 hl.window_rule({
 	match = {
-		class = "Thunar|thunar|feh|btop|qalculate-gtk|CiscoCollabHost"
+		class = "Thunar|thunar|feh|btop|qalculate-gtk|CiscoCollabHost",
 	},
 	float = true,
 })
 
 hl.window_rule({
-  match = { class = "yazi-float" },
-  float = true,
-  size = "800 600",
-  center = true,
+	match = { class = "yazi-float" },
+	float = true,
+	size = "800 600",
+	center = true,
 })
 
 hl.window_rule({
-  match = { class = "xdg-desktop-portal-gtk" },
-  float = true,
-  size = "800 600",
-  center = true,
+	match = { class = "xdg-desktop-portal-gtk" },
+	float = true,
+	size = "800 600",
+	center = true,
 })
 
 hl.window_rule({
@@ -545,15 +544,15 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("firefox")
 
 	local function getHostname()
-    local f = io.popen ("hostname")
-    local hostname = f:read("*a") or ""
-    f:close()
-    hostname =string.gsub(hostname, "\n$", "")
-    return hostname
+		local f = io.popen("hostname")
+		local hostname = f:read("*a") or ""
+		f:close()
+		hostname = string.gsub(hostname, "\n$", "")
+		return hostname
 	end
 
 	local hostname = getHostname()
-	
+
 	if hostname == "tp-belo" then
 		hl.exec_cmd("nextcloud --background")
 	end
