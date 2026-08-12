@@ -37,7 +37,7 @@ in
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.secrets."n8n_task_runner/n8n_task_runner_token" = {
-    sopsFile = ./secrets/nix-vps/n8n_task_runner_token.yaml;
+    sopsFile = ./secrets/n8n_task_runner_token.yaml;
   };
 
   services.n8n = {

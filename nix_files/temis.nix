@@ -101,7 +101,7 @@ in
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.secrets."webdav_bscw/webdav_bscw_secret" = {
-    sopsFile = ./secrets/nix/webdav_bscw.yaml;
+    sopsFile = ./secrets/webdav_bscw.yaml;
     path = "/etc/davfs2/secrets";
     mode = "0600";
   };

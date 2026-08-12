@@ -157,7 +157,7 @@ in {
     permissions = "u+rx,g+x";
   };
 
-  sops.defaultSopsFile = ./secrets/tp-belo/wireguard.yaml;
+  sops.defaultSopsFile = ./secrets/wireguard.yaml;
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.age.keyFile = "/home/ben/.config/sops/age/keys.txt";
   sops.age.generateKey = true;

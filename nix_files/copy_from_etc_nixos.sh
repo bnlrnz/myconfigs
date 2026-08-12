@@ -10,8 +10,6 @@ declare -a NIX_HOME_FILES=(
   "configuration.nix:nix-home.nix"
   "hardware-configuration_nix-home.nix"
   "packages.nix"
-  "secrets/nix/webdav_bscw.yaml:secrets/nix/webdav_bscw.yaml"
-  "secrets/secrets.yaml:secrets/secrets.yaml"
   "services.nix"
   "steam.nix"
   "pwn.nix"
@@ -27,7 +25,6 @@ declare -a TP_BELO_FILES=(
   "hardware-configuration_nix-thinkpad.nix"
   "packages.nix"
   "services.nix"
-  "secrets/nix/webdav_bscw.yaml:secrets/tp-belo/webdav_bscw.yaml"
   "steam.nix"
   "pwn.nix"
   "k3s.nix"
@@ -41,7 +38,6 @@ declare -a NIX_VPS_FILES=(
   "configuration.nix:nix-vps.nix"
   "hardware-configuration_nix-vps.nix"
   "service_sa3_document_manager.nix"
-  "secrets/secrets.yaml:secrets/secrets.yaml"
   "service_wireguard.nix"
   "service_mailserver.nix"
   "service_immich.nix"
@@ -55,13 +51,11 @@ declare -a NIX_VPS_FILES=(
 declare -a NIX_PI_FILES=(
   "configuration.nix:nix-pi.nix"
   "hardware-configuration.nix:hardware-configuration_nix-pi.nix"
-  "secrets/secrets.yaml:secrets/secrets.yaml"
 )
 
 declare -a NIX_TEST_FILES=(
   "configuration.nix:nix-test.nix"
   "hardware-configuration_nix-test.nix"
-  "secrets/nix/webdav_bscw.yaml:secrets/nix-test/webdav_bscw.yaml"
   "temis.nix"
 )
 
