@@ -1,6 +1,190 @@
 { config, lib, pkgs, ... }:
 let
   snappymail_webroot = "/var/lib/snappymail";
+
+  snappymailDracula = pkgs.runCommand "snappymail-dracula" {} ''
+    mkdir -p $out
+    cp -r ${pkgs.snappymail}/* $out/
+
+    mkdir -p $out/themes/Dracula
+
+    cat > $out/themes/Dracula/styles.css <<'EOF'
+:root {
+	color-scheme: dark;
+
+	/* MAIN */
+	--main-color: #F8F8F2;              /* Foreground */
+	--main-bg-color: #282A36;          /* Background */
+	--main-bg-image: none;             /* url("images/background.png"); */
+	--main-bg-size: auto;
+	--main-bg-repeat: repeat;
+	--main-font-size: 14px;
+	--link-color: #bd93f9;             /* Cyan */
+	--border-color: #44475A;           /* Selection / borders */
+	--border-radius: 5px;
+	--hr-color: #44475A;
+
+	--panel-bg-clr: #21222C;           /* Background (dark) */
+
+	--warning-clr: #FFB86C;            /* Orange */
+	--warning-bg-clr: #2B2520;
+	--warning-border-clr: #FFB86C;
+
+	--error-clr: #FF5555;              /* Red */
+	--error-bg-clr: #2A1E23;
+	--error-border-clr: #FF5555;
+
+	--info-clr: #0081D6;               /* Functional Cyan from spec */
+	--info-bg-clr: #1D2530;
+	--info-border-clr: #0081D6;
+
+	/* LOADING */
+	--loading-color: #F8F8F2;
+	--loading-text-shadow: none;       /* 0px 1px 0px rgba(0, 0, 0, 0.5); */
+
+	/* LOGIN */
+	--login-color: #F8F8F2;
+	--login-bg-color: #21222C;
+	--login-box-shadow: 0px 2px 10px rgba(0,0,0,0.6);
+	--login-border: 1px solid #44475A;
+	--login-border-radius: 7px;
+
+	--spinner-color: #50FA7B;          /* Green */
+
+	/* MENU */
+	--dropdown-menu-color: #F8F8F2;
+	--dropdown-menu-bg-color: #282A36;
+	--dropdown-menu-hover-bg-color: #44475A;
+	--dropdown-menu-hover-color: #F8F8F2;
+	--dropdown-menu-disabled-color: #6272A4;  /* Comment */
+	--dropdown-menu-border-clr: rgba(0,0,0,.6);
+
+	/* FOLDERS */
+	--folders-color: #F8F8F2;
+	--folders-disabled-color: #6272A4;
+	--folders-selected-color: #F8F8F2;
+	--folders-selected-bg-color: #44475A;
+	--folders-focused-color: #F8F8F2;
+	--folders-focused-bg-color: #44475A;
+	--folders-hover-color: #F8F8F2;
+	--folders-hover-bg-color: #343746;
+	--folders-drop-color: #F8F8F2;
+	--folders-drop-bg-color: #BD93F9;  /* Purple accent */
+	--unread-count-color: #282A36;
+	--unread-count-bg-color: #FF79C6;  /* Pink badge */
+
+	/* SETTINGS */
+	--settings-menu-color: #F8F8F2;
+	--settings-menu-selected-color: #F8F8F2;
+	--settings-menu-selected-bg-color: #44475A;
+	--settings-menu-hover-color: #F8F8F2;
+	--settings-menu-hover-bg-color: #343746;
+
+	/* MESSAGES */
+	--message-list-toolbar-bg-color: #21222C;
+	--message-header-bg-clr: #343746;
+
+	/* DIALOGS */
+	--dialog-clr: #F8F8F2;
+	--dialog-bg-clr: #282A36;
+	--dialog-border-clr: rgba(0,0,0,.7);
+	--dialog-border-radius: 6px;
+
+	/* FORMS */
+	--btn-clr: #F8F8F2;
+	--btn-bg-clr: #44475A;
+	--btn-border-clr: #44475A;
+	--btn-border-radius: 3px;
+	--btn-success-bg-clr: #FF79C6;    
+	--btn-danger-bg-clr: #FF5555;      /* Red */
+
+	--input-clr: #F8F8F2;
+	--input-bg-clr: #282A36;
+	--input-border-clr: #44475A;
+	--input-border-radius: 3px;
+	--input-focus-border-clr: #BD93F9; /* Purple highlight */
+
+	/* TABLES */
+	--tr-hover-bg-clr: #343746;
+	--tr-odd-bg-clr: #21222C;          /* when striped */
+
+	/* TABS */
+	--tab-active-bg-clr: #282A36;
+	--tab-hover-border-clr: #44475A;
+
+	--smDialogShrink: 20px;
+	--smMainShadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Default background for HTML message body */
+.mail-body {
+  background-color: #ffffff;  /* default canvas */
+  color: #000000;             /* readable plain text */
+}
+
+/* Toolbar + generic buttons */
+.toolbar {
+  background-color: var(--panel-bg-clr);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Base Dracula button look */
+.toolbar .button,
+.toolbar .btn,
+.button,
+.btn {
+  background-color: var(--btn-bg-clr);
+  color: var(--btn-clr);
+  border: 1px solid var(--btn-border-clr);
+  border-radius: var(--btn-border-radius);
+}
+
+/* Hover state */
+.toolbar .button:hover,
+.toolbar .btn:hover,
+.button:hover,
+.btn:hover {
+  background-color: var(--btn-success-bg-clr); /* subtle accent */
+  color: #282A36; /* dark text on accent */
+}
+
+/* New message should NOT be hardcoded neon green */
+.toolbar .button.compose,
+.toolbar .button.new-message {
+  background-color: var(--btn-bg-clr);
+  color: var(--btn-clr);
+  border-color: var(--btn-border-clr);
+}
+
+/* Optional: slightly stronger hover just for New message */
+.toolbar .button.compose:hover,
+.toolbar .button.new-message:hover {
+  background-color: var(--btn-success-bg-clr);
+  color: #282A36;
+}
+
+/* message list selected */
+.messageListItem.selected,
+.messageListItem.selected:hover {
+  background-color: #CCABFA6B;
+  border-left-color: #BD93F9;
+}
+
+/* message list unread/unseen */
+.messageListItem.unseen,
+.messageListItem.unseen.focused,
+.messageListItem.unseen:hover {
+  background-color: #FF79C62B;
+  border-left-color: #FF79C6;
+}
+
+/* message list hover */
+.messageListItem:hover {
+  background-color: #282A36DE;
+}
+
+EOF
+  '';
 in{
   imports = [
     (builtins.fetchTarball {
@@ -13,7 +197,7 @@ in{
   ];
 
   services.caddy.virtualHosts."mail.b3lo.de".extraConfig = ''
-        root * ${pkgs.snappymail}
+        root * ${snappymailDracula}
         php_fastcgi unix/${config.services.phpfpm.pools.snappymail.socket}
         file_server
         encode gzip
@@ -51,17 +235,22 @@ in{
         sieveScript = ''
           require ["fileinto", "mailbox"];
 
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.8") {
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.4") {
+            fileinto :create "INBOX.3GPP SA3.SCAS_Container";
+            stop;
+          }
+
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.2") {
             fileinto :create "INBOX.3GPP SA3.SCAS_Container";
             stop;
           }
           
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.7") {
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
             fileinto :create "INBOX.3GPP SA3.SCAS_CCF";
             stop;
           }
 
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.2") {
             fileinto :create "INBOX.3GPP SA3.SCAS";
             stop;
           }
@@ -88,17 +277,17 @@ in{
             stop;
           }
 
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.8") {
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.2") {
             fileinto :create "INBOX.3GPP SA3.SCAS_Container";
             stop;
           }
           
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.7") {
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
             fileinto :create "INBOX.3GPP SA3.SCAS_CCF";
             stop;
           }
 
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
+          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.2") {
             fileinto :create "INBOX.3GPP SA3.SCAS";
             stop;
           }
