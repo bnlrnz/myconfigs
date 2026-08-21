@@ -28,13 +28,62 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+set $alpha dd
+set $background 282a36
+set $selection 44475a
+set $comment 6272a4
+set $yellow f1fa8c
+set $orange ffb86c
+set $red ff5555
+set $magenta ff79c6
+set $blue 6272a4
+set $cyan 8be9fd
+set $green 50fa7b
+
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock \
+  --no-fork \
+  --insidever-color=$selection$alpha \
+  --insidewrong-color=$selection$alpha \
+  --inside-color=$selection$alpha \
+  --ringver-color=$green$alpha \
+  --ringwrong-color=$red$alpha \
+  --ringver-color=$green$alpha \
+  --ringwrong-color=$red$alpha \
+  --ring-color=$blue$alpha \
+  --line-uses-ring \
+  --keyhl-color=$magenta$alpha \
+  --bshl-color=$orange$alpha \
+  --separator-color=$selection$alpha \
+  --verif-color=$green \
+  --wrong-color=$red \
+  --modif-color=$red \
+  --layout-color=$blue \
+  --date-color=$blue \
+  --time-color=$blue \
+  --screen 1 \
+  --blur 1 \
+  --clock \
+  --indicator \
+  --time-str="%H:%M:%S" \
+  --date-str="%A %e %B %Y" \
+  --verif-text="Checking..." \
+  --wrong-text="Wrong pwd" \
+  --noinput="No Input" \
+  --lock-text="Locking..." \
+  --lockfailed="Lock Failed" \
+  --radius=120 \
+  --ring-width=10 \
+  --pass-media-keys \
+  --pass-screen-keys \
+  --pass-volume-keys
 
 exec --no-startup-id feh --bg-fill --randomize --slideshow-delay 300 ~/Wallpapers/
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+exec --no-startup-id nextcloud --background
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -59,7 +108,41 @@ bindsym Mod1+F1 exec kitty
 bindsym $mod+e exec thunar
 for_window [class="Thunar"] floating enable
 
-bindsym $mod+l exec i3lock
+bindsym $mod+l exec i3lock \
+  --insidever-color=$selection$alpha \
+  --insidewrong-color=$selection$alpha \
+  --inside-color=$selection$alpha \
+  --ringver-color=$green$alpha \
+  --ringwrong-color=$red$alpha \
+  --ringver-color=$green$alpha \
+  --ringwrong-color=$red$alpha \
+  --ring-color=$blue$alpha \
+  --line-uses-ring \
+  --keyhl-color=$magenta$alpha \
+  --bshl-color=$orange$alpha \
+  --separator-color=$selection$alpha \
+  --verif-color=$green \
+  --wrong-color=$red \
+  --modif-color=$red \
+  --layout-color=$blue \
+  --date-color=$blue \
+  --time-color=$blue \
+  --screen 1 \
+  --blur 5 \
+  --clock \
+  --indicator \
+  --time-str="%H:%M:%S" \
+  --date-str="%A %e %B %Y" \
+  --verif-text="Checking..." \
+  --wrong-text="Wrong pwd" \
+  --noinput="No Input" \
+  --lock-text="Locking..." \
+  --lockfailed="Lock Failed" \
+  --radius=120 \
+  --ring-width=10 \
+  --pass-media-keys \
+  --pass-screen-keys \
+  --pass-volume-keys
 
 # kill focused window
 bindsym $mod+Shift+q kill
