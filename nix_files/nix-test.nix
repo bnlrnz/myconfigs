@@ -39,14 +39,46 @@ in {
     options = "--delete-older-than 30d";
   };
 
-  virtualisation.virtualbox.guest.enable = true;
+# this is broken right now because it build with an incompatible linux kernel version
+#virtualisation.virtualbox.guest.enable = true;
+  systemd.services.vboxservice = {
+    description = "VirtualBox Guest Service";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "display-manager.service" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.linuxPackages_latest.virtualboxGuestAdditions}/bin/VBoxService -v -f";
+      Restart = "always";
+    };
+  };
+  users.groups.vboxuserdev = { };
+
+  services.udev.packages = lib.singleton (
+    pkgs.writeTextFile {
+      name = "virtualboxGuestAdditions";
+      text = ''
+      # /dev/vboxuser is necessary for VBoxClient to work
+      KERNEL=="vboxuser", OWNER="root", GROUP="vboxuserdev", MODE="0660", TAG+="uaccess"
+
+      # Allow systemd dependencies on vboxguest.
+      SUBSYSTEM=="misc", KERNEL=="vboxguest", TAG+="systemd"
+      '';
+      destination = "/etc/udev/rules.d/70-virtualboxGuestAdditions.rules";
+    }
+  );
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+# remove documentation
+  documentation = {
+    doc.enable = false;
+    info.enable = false;
+  };
 
 # Enable networking
   networking.hostName = "nix-test"; # Define your hostname.
-    networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
   networking.nameservers = [
-    "1.1.1.1"
+      "1.1.1.1"
       "9.9.9.9"
       "8.8.8.8"
   ];
@@ -87,7 +119,7 @@ in {
   users.users.belo = {
     isNormalUser = true;
     description = "belo";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "wireguard" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "wireguard" "vboxuserdev" ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
@@ -110,17 +142,31 @@ in {
         i3status # gives you the default i3 status bar
         dex
         xss-lock
+        gcr
       ];
     };
     desktopManager.xterm.enable = false;
-    displayManager.startx.enable = true; 
+    displayManager.startx.enable = true;
+    updateDbusEnvironment = true;
+    resolutions = [
+      { x = 1920; y = 1040; }
+    ];
+    xrandrHeads = [
+      {
+        output = "Virtual-1";
+        monitorConfig = ''
+          Modeline "1920x1040_60.00"  165.50  1920 2040 2240 2560  1040 1043 1053 1079 -hsync +vsync
+          Option "PreferredMode" "1920x1040_60.00"
+        '';
+      }
+    ];
   };
 
   programs.i3lock.enable = true; #default i3 screen locker
 
 # kwallet needed by python keyring
-#security.pam.services.kdewallet.enableKwallet = true;
-    security.pam.services.xscreensaver.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.xscreensaver.enable = true;
 
 # enable pipewire
   security.rtkit.enable = true;
@@ -131,6 +177,10 @@ in {
     pulse.enable = true;
     wireplumber.enable = true;
   };
+
+# remove speechd (default for graphical nixos)
+  services.speechd.enable = false;
+  services.orca.enable = false;
 
 # Audio for apps
   nixpkgs.config.pulseaudio = true;
@@ -186,10 +236,10 @@ in {
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
-        font-awesome
+#font-awesome
         source-han-sans
         open-sans
-        google-fonts
+#google-fonts
         corefonts
         vista-fonts
     ];
@@ -205,18 +255,17 @@ in {
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libcxx
-      libpcap
-      openssl
-      stdenv.cc.cc
-      zlib
-      fuse3
-      curl
+    libpcap
+    openssl
+    stdenv.cc.cc
+    zlib
+    fuse3
+    curl
   ];
 
   environment.systemPackages = with pkgs; [
-### unfree packages
     vscode
-###
+    linuxPackages_latest.virtualboxGuestAdditions
       alsa-utils
       arandr
       autofs5
@@ -230,12 +279,12 @@ in {
       dust
       dracula-theme
       dracula-icon-theme
+      engrampa
       exfat
       exfatprogs
       eza
       feh
       filezilla
-      file-roller
       firefox
       fish
       fzf
@@ -251,7 +300,6 @@ in {
       kitty
       kdePackages.okular
       lsof
-#lxqt.lxqt-policykit
       mako
       ncurses
       neovim
@@ -260,12 +308,10 @@ in {
       networkmanagerapplet
       nextcloud-client
       nfs-utils
-#noto-fonts-color-emoji
       ntfs3g
       onlyoffice-desktopeditors
       openssl.dev # dev needed for openssl headers
       pciutils
-#phinger-cursors
       pkg-config
       pwvucontrol
       ripgrep
@@ -285,9 +331,9 @@ in {
       xdg-desktop-portal
       libX11
       xinit
-      zed-editor
+      yazi
       zip
-      ];
+  ];
 
 # This value determines the NixOS release from which the default
 # settings for stateful data, like file locations and database versions
