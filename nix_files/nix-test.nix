@@ -162,7 +162,10 @@ in {
     ];
   };
 
-  programs.i3lock.enable = true; #default i3 screen locker
+  programs.i3lock = {
+    enable = true; #default i3 screen locker
+    package = pkgs.i3lock-color;
+  };
 
 # kwallet needed by python keyring
   security.pam.services.login.enableGnomeKeyring = true;
@@ -331,6 +334,7 @@ in {
       xdg-desktop-portal
       libX11
       xinit
+      xclip
       yazi
       zip
   ];
