@@ -163,24 +163,35 @@ let
   color: #282A36;
 }
 
-/* message list selected */
-.messageListItem.selected,
-.messageListItem.selected:hover {
-  background-color: #CCABFA6B;
-  border-left-color: #BD93F9;
+/* Base Unread: Pink accent bar, normal background */
+.messageListItem.unseen {
+  background-color: #FF79C622;
+  border-left: 4px solid #FF79C6;
 }
 
-/* message list unread/unseen */
-.messageListItem.unseen,
-.messageListItem.unseen.focused,
-.messageListItem.unseen:hover {
-  background-color: #FF79C62B;
+/* Base Selected: Purple accent bar, elevated background */
+.messageListItem.selected {
+  background-color: #BD93F922;
+  border-left: 4px solid #BD93F9;
+  outline: 1px solid #BD93F9; /* Dracula Cyan for high contrast focus */
+  outline-offset: -1px;
+}
+
+/* COMBINED STATES (Explicit overrides to prevent visual merging) */
+
+/* Unread + Selected: Keeps Unread Pink bar, uses Selected Purple background */
+.messageListItem.unseen.selected {
+  background-color: #FF79C622;
+  border-left-color: #FF79C6; 
+}
+
+/* Unread + Selected + Focused: Distinct background + Pink bar + Cyan outline */
+.messageListItem.unseen.selected.focused,
+.messageListItem.unseen.selected:focus {
+  background-color: #FF79C622; /* Brighter surface so it pops against base selected */
   border-left-color: #FF79C6;
-}
-
-/* message list hover */
-.messageListItem:hover {
-  background-color: #282A36DE;
+  outline: 1px solid #FF79C6;
+  outline-offset: -1px;
 }
 
 EOF
