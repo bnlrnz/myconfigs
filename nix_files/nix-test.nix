@@ -168,8 +168,15 @@ in {
   };
 
 # kwallet needed by python keyring
+  security.pam.services.i3lock.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
-  security.pam.services.xscreensaver.enable = true;
+
+# Configure XDG Desktop Portals
+xdg.portal = {
+  enable = true;
+  extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  config.common.default = "gtk";
+};
 
 # enable pipewire
   security.rtkit.enable = true;
@@ -224,6 +231,20 @@ in {
 
 # gnome keyring is needed for network manager to store VPN passwords
   services.gnome.gnome-keyring.enable = true;
+  services.passSecretService.enable = true;
+
+systemd.user.services.polkit-gnome-authentication-agent-1 = {
+  description = "polkit-gnome-authentication-agent-1";
+  wantedBy = [ "graphical-session.target" ];
+  wants = [ "graphical-session.target" ];
+  after = [ "graphical-session.target" ];
+  serviceConfig = {
+    Type = "simple";
+    ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    Restart = "on-failure";
+    RestartSec = 1;
+  };
+};
 
 # Allow unfree packages
 # nixpkgs.config.allowUnfree = true;

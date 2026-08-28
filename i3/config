@@ -22,6 +22,8 @@ font pango:monospace 8
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xdg-desktop-portal-gtk -r &
+exec --no-startup-id dbus-update-activation-environment --systemd --all
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -41,7 +43,6 @@ set $cyan 8be9fd
 set $green 50fa7b
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock \
-  --no-fork \
   --insidever-color=$selection$alpha \
   --insidewrong-color=$selection$alpha \
   --inside-color=$selection$alpha \
@@ -84,6 +85,14 @@ exec --no-startup-id feh --bg-fill --randomize --slideshow-delay 300 ~/Wallpaper
 exec --no-startup-id nm-applet
 
 exec --no-startup-id nextcloud --background
+
+# Workspace assignments
+assign [class="^Firefox$"] number 1
+assign [class="^KeePassXC$"] number 9
+
+# Start applications
+exec --no-startup-id firefox
+exec --no-startup-id keepassxc
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -284,5 +293,5 @@ new_window 1pixel
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command i3status -c ~/.config/i3status/config
 }
