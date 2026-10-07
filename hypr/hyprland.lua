@@ -398,7 +398,8 @@ hl.bind(
 
 hl.bind("CONTROL + SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim && notify-send Screenshot saved under ~/"))
 
-hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list | wofi -dmenu | cliphist decode | wl-copy"))
+-- hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list | wofi -dmenu | cliphist decode | wl-copy"))
+hl.bind("ALT + V", hl.dsp.exec_cmd("noctalia-shell msg launcher clipboard"))
 
 -- open clipboard manager
 
@@ -539,7 +540,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("blueman-tray")
 	hl.exec_cmd("nm-applet --indicator")
 	hl.exec_cmd("wayland-pipewire-idle-inhibit")
-	hl.exec_cmd("wl-paste --watch cliphist store")
 	hl.exec_cmd("noctalia-shell")
 	hl.exec_cmd("firefox")
 
