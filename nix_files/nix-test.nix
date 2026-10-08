@@ -155,8 +155,8 @@ in {
       {
         output = "Virtual-1";
         monitorConfig = ''
-          Modeline "1920x1040_60.00"  165.50  1920 2040 2240 2560  1040 1043 1053 1079 -hsync +vsync
-          Option "PreferredMode" "1920x1040_60.00"
+          Modeline "1920x1050_60.00"  167.25  1920 2040 2240 2560  1050 1053 1063 1089 -hsync +vsync
+          Option "PreferredMode" "1920x1050_60.00"
         '';
       }
     ];
