@@ -17,8 +17,9 @@ if status --is-login
 	end
 end
 
-export TERM=xterm-256color
-export EDITOR=nvim
+set -gx TERM xterm-256color
+set -gx EDITOR nvim
+set -gx VISUAL nvim
 
 alias vi="nvim"
 alias vim="nvim" 
@@ -42,3 +43,11 @@ function y
 	end
 	command rm -f -- "$tmp"
 end
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+fish_add_path "$HOME/.local/bin"
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /home/ben/.lmstudio/bin
+# End of LM Studio CLI section
+
