@@ -117,9 +117,19 @@ let
 }
 
 /* Default background for HTML message body */
-.mail-body {
-  background-color: #ffffff;  /* default canvas */
-  color: #000000;             /* readable plain text */
+/* Isolated light iframe/container for incoming HTML mail */
+.mail-body,
+.message-body {
+  background-color: #ffffff !important;
+  color: #1e1e1e !important;
+  color-scheme: light !important; /* Tells browser engine to force light rendering */
+  border-radius: var(--border-radius);
+  padding: 12px;
+}
+
+/* Ensure inner elements without explicit backgrounds inherit readable dark text */
+.mail-body *:not([style*="background"]) {
+  color: inherit;
 }
 
 /* Toolbar + generic buttons */
