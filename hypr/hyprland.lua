@@ -381,7 +381,7 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "M", hl.dsp.exit())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("thunar"))
 
 -- Show the graphical file browser
-hl.bind(mainMod .. " + " .. " + SHIFT + " .. "E", hl.dsp.exec_cmd("kitty --class yazi-float yazi"))
+hl.bind(mainMod .. " + " .. " + SHIFT + " .. "E", hl.dsp.exec_cmd("kitty --class yazi-float fish -c yazi"))
 
 -- Allow a window to float
 hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
