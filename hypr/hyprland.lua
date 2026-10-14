@@ -62,21 +62,24 @@ hl.monitor({
 	scale = 1,
 })
 
+local function handle_lid_close()
+	local monitors = hl.get_monitors()
+
+	if #monitors > 1 then
+		hl.dispatch("monitor", "eDP-1, disable")
+	else
+		hl.exec_cmd("noctalia-shell ipc call sessionMenu lockAndSuspend")
+	end
+end
+
+local function handle_lid_open()
+	hl.dispatch("monitor", "eDP-1, preferred, auto, 1")
+end
+
 -- LID behaviour
 -- trigger when the switch is turning off
-hl.bind(
-	"switch:on:Lid Switch",
-	hl.dsp.exec_cmd(
-		"hyprctl keyword monitor \"eDP-1, disable\"; [[ $(hyprctl monitors | grep -c 'Monitor') -ge 2 ]] || qs -c noctalia-shell ipc call lockScreen lock"
-	),
-	{ locked = true }
-)
-
-hl.bind(
-	"switch:off:Lid Switch",
-	hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, preferred, auto, 1"'),
-	{ locked = true }
-)
+hl.bind("switch:on:Lid Switch", handle_lid_close, { locked = true })
+hl.bind("switch:off:Lid Switch", handle_lid_open, { locked = true })
 
 hl.config({
 	xwayland = {
