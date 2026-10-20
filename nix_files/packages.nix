@@ -99,7 +99,7 @@ in
 
   # idle and lock
   # allow pam access for swaylock
-  programs.hyprlock.enable = true; # this is a handy trick: config.networking.hostName == "tp-belo";
+  programs.hyprlock.enable = true;
 
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
@@ -110,6 +110,7 @@ in
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
   allowUnfreePackages = [
+      "lmstudio"
       "webex"
       "mongodb-ce"
       "mongodb-compass"
@@ -321,6 +322,7 @@ in
     tmux
     udevil
     udiskie
+    unstable.hyprmoncfg
     hyprshot
     hyprpolkitagent
     unstable.nwg-look
