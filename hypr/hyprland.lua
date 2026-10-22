@@ -375,7 +375,7 @@ hl.bind(mainMod .. " + " .. "F4", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("noctalia msg session lock"))
 
 -- hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
-hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia msg panel-toggle power-menu"))
+hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 
 -- show the logout window
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "M", hl.dsp.exit())
