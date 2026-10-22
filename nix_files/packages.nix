@@ -279,7 +279,7 @@ in
     neovim
     netcat
     nettools
-    unstable.noctalia-shell
+    unstable.noctalia
     networkmanagerapplet
     nextcloud-client
     nfs-utils
@@ -292,6 +292,7 @@ in
     okteta
     onlyoffice-desktopeditors
     opencloud-desktop
+    opencode
     openssl.dev # dev needed for openssl headers
     patchelf
     pciutils
@@ -319,6 +320,7 @@ in
     tcpreplay
     telegram-desktop
     themechanger
+    thunderbird
     tmux
     udevil
     udiskie
