@@ -68,7 +68,7 @@ local function handle_lid_close()
 	if #monitors > 1 then
 		hl.dispatch("monitor", "eDP-1, disable")
 	else
-		hl.exec_cmd("noctalia-shell ipc call sessionMenu lockAndSuspend")
+		hl.exec_cmd("noctalia msg session lock-and-suspend")
 	end
 end
 
@@ -372,10 +372,10 @@ hl.bind(mainMod .. " + " .. "F4", hl.dsp.window.close())
 -- close the active window
 
 -- hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("noctalia-shell ipc call lockScreen lock"))
+hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("noctalia msg session lock"))
 
 -- hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
-hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
+hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia msg panel-toggle power-menu"))
 
 -- show the logout window
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "M", hl.dsp.exit())
@@ -390,7 +390,7 @@ hl.bind(mainMod .. " + " .. " + SHIFT + " .. "E", hl.dsp.exec_cmd("kitty --class
 hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 -- hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
-hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
+hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 
 hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 
@@ -402,7 +402,7 @@ hl.bind(
 hl.bind("CONTROL + SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim && notify-send Screenshot saved under ~/"))
 
 -- hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list | wofi -dmenu | cliphist decode | wl-copy"))
-hl.bind("ALT + V", hl.dsp.exec_cmd("noctalia-shell msg launcher clipboard"))
+hl.bind("ALT + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 
 -- open clipboard manager
 
@@ -543,7 +543,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("blueman-tray")
 	hl.exec_cmd("nm-applet --indicator")
 	hl.exec_cmd("wayland-pipewire-idle-inhibit")
-	hl.exec_cmd("noctalia-shell")
+	hl.exec_cmd("noctalia")
 	hl.exec_cmd("firefox")
 
 	local function getHostname()
@@ -575,3 +575,6 @@ end)
 hl.on("hyprland.shutdown", function()
 	hl.exec_cmd("pkill -f firefox") -- send kill to FF so it shuts down gracefully
 end)
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
