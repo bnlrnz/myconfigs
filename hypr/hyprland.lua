@@ -235,6 +235,13 @@ hl.window_rule({
 
 hl.window_rule({
 	match = {
+		class = "com.gabm.satty",
+	},
+	float = true,
+})
+
+hl.window_rule({
+	match = {
 		class = "nm-connection-editor",
 	},
 	float = true,
@@ -392,14 +399,12 @@ hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 -- hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
 hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 
-hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
-
 hl.bind(
 	"SHIFT" .. " + " .. "PRINT",
 	hl.dsp.exec_cmd('grim -g "$(slurp)" - | satty -f - --copy-command wl-copy -o "~/%Y%m%d_%H%M%S.png"')
 )
 
-hl.bind("CONTROL + SHIFT" .. " + " .. "PRINT", hl.dsp.exec_cmd("grim && notify-send Screenshot saved under ~/"))
+hl.bind("PRINT", hl.dsp.exec_cmd("grim && noctalia msg notification-show 'Screenshot saved under ~/'"))
 
 -- hl.bind("ALT" .. " + " .. "V", hl.dsp.exec_cmd("cliphist list | wofi -dmenu | cliphist decode | wl-copy"))
 hl.bind("ALT + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
