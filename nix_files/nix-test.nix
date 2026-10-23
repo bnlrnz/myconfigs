@@ -192,9 +192,6 @@ xdg.portal = {
   services.speechd.enable = false;
   services.orca.enable = false;
 
-# Audio for apps
-  nixpkgs.config.pulseaudio = true;
-
 # automount usb
   services.devmon.enable = true;
   services.gvfs.enable = true;
