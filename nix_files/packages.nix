@@ -104,9 +104,6 @@ in
   # kwallet needed by python keyring
   security.pam.services.kdewallet.enableKwallet = true;
 
-  # Audio for apps
-  nixpkgs.config.pulseaudio = true;
-
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
   allowUnfreePackages = [
@@ -292,7 +289,7 @@ in
     okteta
     onlyoffice-desktopeditors
     opencloud-desktop
-    opencode
+    unstable.opencode
     openssl.dev # dev needed for openssl headers
     patchelf
     pciutils

@@ -79,17 +79,14 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = [
+      pkgs.rocmPackages.clr.icd
+    ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  hardware.graphics.extraPackages = [
-    #pkgs.amdvlk
-    pkgs.rocmPackages.clr.icd
-  ];
-  #hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
   # TESTING: force RADV - amdvlk seams to crash some games...
   environment.variables.AMD_VULKAN_ICD = "RADV";
