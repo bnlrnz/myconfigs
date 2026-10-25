@@ -213,7 +213,7 @@ in{
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-26.05/nixos-mailserver-nixos-26.05.tar.gz";
       # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
       # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-      sha256 = "0jicsxjg2c3vami08csrfccw6273yv12627ws8qx69lg5wz43abx";
+      sha256 = "0xp7ip4vafi6wx38ghwa191v4d84h2l9pczw2jzxysh5qdcv4akb";
     })
   ];
 
@@ -234,10 +234,12 @@ in{
   # Mailserver
   ###############
   mailserver = {
-    stateVersion = 3;
+    stateVersion = 5;
     enable = true;
     fqdn = "mail.b3lo.de";
     domains = [ "b3lo.de" ];
+
+    enableManageSieve = true;
 
     fullTextSearch = {
       enable = true;
@@ -253,71 +255,10 @@ in{
       "ben@b3lo.de" = {
         hashedPasswordFile = "/etc/ben_mailpw";
         aliases = [ "me@b3lo.de" "security@b3lo.de" "ben-bsi@b3lo.de" ];
-        sieveScript = ''
-          require ["fileinto", "mailbox"];
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.4") {
-            fileinto :create "INBOX.3GPP SA3.SCAS_Container";
-            stop;
-          }
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.2.2") {
-            fileinto :create "INBOX.3GPP SA3.SCAS_Container";
-            stop;
-          }
-          
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
-            fileinto :create "INBOX.3GPP SA3.SCAS_CCF";
-            stop;
-          }
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.2") {
-            fileinto :create "INBOX.3GPP SA3.SCAS";
-            stop;
-          }
-
-          if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
-            fileinto :create "INBOX.3GPP SA3";
-            stop;
-          }
-        '';
       };
       "lisanne-bsi@b3lo.de" = {
         hashedPasswordFile = "/etc/lisanne_mailpw";
         aliases = [ "lisanne@b3lo.de" ];
-        sieveScript = ''
-          require ["fileinto", "mailbox"];
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", address :contains "reply-to" "daniel.cho@ERICSSON.COM") {
-            fileinto :create "INBOX.3GPP SA3.<3";
-            stop;
-          }
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", address :contains "reply-to" "jeffrey.cichonski@nist.gov") {
-            fileinto :create "INBOX.3GPP SA3.<3";
-            stop;
-          }
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.2") {
-            fileinto :create "INBOX.3GPP SA3.SCAS_Container";
-            stop;
-          }
-          
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.3") {
-            fileinto :create "INBOX.3GPP SA3.SCAS_CCF";
-            stop;
-          }
-
-          if allof(address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org", header :contains "subject" "5.1.2") {
-            fileinto :create "INBOX.3GPP SA3.SCAS";
-            stop;
-          }
-
-          if address :is "to" "3GPP_TSG_SA_WG3@list.etsi.org" {
-            fileinto :create "INBOX.3GPP SA3";
-            stop;
-          }
-        '';
       };
     };
 
@@ -380,7 +321,6 @@ in{
   ###############
   # Mail Backup
   ###############
-
   systemd = {
     services.mail-to-opencloud-backup = {
       description = "Backup mailserver to Opencloud user folder";

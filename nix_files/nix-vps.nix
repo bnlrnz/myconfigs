@@ -18,8 +18,6 @@ in
       ./service_n8n.nix
       ./service_opencloud.nix
       ./service_staple-scheduler.nix
-      #./service_nextcloud.nix
-      #./service_onlyoffice.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -175,8 +173,6 @@ in
     neovim
     curl
     fd
-    #python314
-    #python314Packages.flask
     ripgrep
     gcc
     bat
