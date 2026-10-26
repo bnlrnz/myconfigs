@@ -4,7 +4,7 @@ capsule = true
 capsule_padding = 8.0
 capsule_thickness = 0.89999998360872269
 center = [ "workspaces" ]
-compositor_blur = true
+compositor_blur = false
 end = [ "tray", "bluetooth", "volume", "brightness", "battery", "date", "clock", "notifications" ]
 margin_ends = 0
 position = "bottom"
@@ -142,13 +142,13 @@ directory = "~/Wallpapers"
     interval_seconds = 600
 
     [wallpaper.default]
-    path = "/home/ben/Wallpapers/cpVxieY.png"
+    path = "/home/ben/Wallpapers/Buffalo-Trail-The-Impending-Storm-Albert-Bierstadt.png"
 
     [wallpaper.last]
-    path = "/home/ben/Wallpapers/cpVxieY.png"
+    path = "/home/ben/Wallpapers/Buffalo-Trail-The-Impending-Storm-Albert-Bierstadt.png"
 
     [wallpaper.monitors.DP-3]
-    path = "/home/ben/Wallpapers/cpVxieY.png"
+    path = "/home/ben/Wallpapers/Buffalo-Trail-The-Impending-Storm-Albert-Bierstadt.png"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/belo/Wallpapers/PXL_20250907_130854244.PORTRAIT.ORIGINAL~2.jpg"
