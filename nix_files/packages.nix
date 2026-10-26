@@ -2,8 +2,39 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+
+  myEditor = "dev.zed.Zed.desktop"; 
+  textMimeTypes = [
+    "text/plain"
+    "text/html"
+    "text/css"
+    "text/csv"
+    "text/markdown"
+    "text/x-vcard"
+    "text/x-csrc"
+    "text/x-chdr"
+    "text/x-c++src"
+    "text/x-c++hdr"
+    "text/x-python"
+    "text/x-shellscript"
+    "text/x-patch"
+    "text/x-diff"
+    "application/json"
+    "application/xml"
+    "application/toml"
+    "application/yaml"
+    "application/javascript"
+    "application/x-desktop"
+  ];
 in
 {
+  # default apps / file associations
+  xdg.mime.defaultApplications = (lib.genAttrs textMimeTypes (name: myEditor)) // {
+    "application/pdf" = "org.kde.okular.desktop";
+    "image/png" = "feh.desktop";
+    "image/jpeg" = "feh.desktop";
+  };
+
   # add unstable channel
   nixpkgs.config = {
     packageOverrides = pkgs: {
@@ -184,6 +215,8 @@ in
       };
     };
   };
+
+
 
   environment.systemPackages = with pkgs; [
     ### unfree packages
