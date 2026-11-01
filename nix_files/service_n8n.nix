@@ -20,6 +20,7 @@ in
   
   nixpkgs.overlays = [  # add this
     (self: super: {
+      n8n = unstable.n8n;
       n8n-task-runner-launcher = unstable.n8n-task-runner-launcher;
     })
   ];
@@ -28,7 +29,7 @@ in
   # n8n
   ##################
   nixpkgs.config.packageOverrides = pkgs: {
-    n8n = pkgs.n8n.overrideAttrs (oldAttrs: {
+    n8n = unstable.n8n.overrideAttrs (oldAttrs: {
       env = (oldAttrs.env or {}) // {
         NODE_OPTIONS = "--max-old-space-size=4096";
       };
