@@ -51,3 +51,6 @@ fish_add_path "$HOME/.local/bin"
 set -gx PATH $PATH /home/ben/.lmstudio/bin
 # End of LM Studio CLI section
 
+
+# opencode
+fish_add_path /home/ben/.opencode/bin
