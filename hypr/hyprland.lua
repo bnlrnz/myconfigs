@@ -382,10 +382,7 @@ hl.bind(mainMod .. " + " .. "F4", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("noctalia msg session lock"))
 
 -- hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
-hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
-
--- show the logout window
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "M", hl.dsp.exit())
+hl.bind(mainMod .. " + " .. "ESCAPE", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 
 -- Show the graphical file browser
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("thunar"))
@@ -397,7 +394,7 @@ hl.bind(mainMod .. " + " .. " + SHIFT + " .. "E", hl.dsp.exec_cmd("kitty --class
 hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
 
 -- hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("pkill wofi || wofi"), { repeating = true })
-hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+hl.bind(mainMod .. " + " .. "SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"), { release = true })
 
 hl.bind(
 	"SHIFT" .. " + " .. "PRINT",
@@ -496,26 +493,29 @@ hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "W", hl.dsp.exec_cmd("bash -c 'kil
 hl.bind(mainMod .. " + " .. "less", hl.dsp.layout("togglesplit"))
 
 -- Source a file (multi-file configs)
-
--- source = ~/.config/hypr/myColors.conf
-
 local env_var = require("env_var")
 
 -- special workspaces
 hl.animation({
-	leaf = "specialWorkspace",
-	enabled = true,
-	speed = 4,
-	bezier = "default",
-	style = "slidevert -100%",
+    leaf = "specialWorkspaceIn",
+    enabled = true,
+    speed = 4,
+    bezier = "default",
+    style = "slidevert -100%",
+})
+
+hl.animation({
+    leaf = "specialWorkspaceOut",
+    enabled = true,
+    speed = 4,
+    bezier = "default",
+    style = "slidevert -100%",
 })
 
 hl.bind(mainMod .. " + " .. "K", hl.dsp.workspace.toggle_special("keepass"))
 
 hl.workspace_rule({
 	workspace = "special:keepass",
-	animation = "specialWorkspace",
-	on_created_empty = "keepassxc",
 	gaps_out = 16,
 	no_border = true,
 })
@@ -524,19 +524,30 @@ hl.bind(mainMod .. " + " .. "C", hl.dsp.workspace.toggle_special("messengers"))
 
 hl.workspace_rule({
 	workspace = "special:messengers",
-	animation = "specialWorkspace",
-	on_created_empty = "Telegram & signal-desktop",
 	gaps_out = 4,
 	gaps_in = 6,
 })
 
---exec-once = hyprctl dispatch exec [workspace special:messenger silent] whatsie
+local workspace_programs = {
+    ["special:keepass"] = { "keepassxc" },
+    ["special:messengers"] = { "Telegram & signal-desktop" },
+}
 
---exec-once = hyprctl dispatch exec [workspace special:messenger silent] threema
+hl.on("workspace.created", function(ws)
+    if not ws.is_empty then return end
 
---exec-once = hyprctl dispatch exec [workspace special:messenger silent] telegram-desktop
+    local program = workspace_programs[ws.name]
+    if program == nil then return end
 
---exec-once = hyprctl dispatch exec [workspace special:messenger silent] signal-desktop
+    local cmd, rules = table.unpack(program)
+
+    -- If rules require targeting the workspace, apply window rules dynamically or let them open silent
+    if rules and rules.float then
+        -- handle window rules or pass correctly to execution
+    end
+
+    os.execute(cmd .. " &")
+end)
 
 -- Autostart
 hl.on("hyprland.start", function()
