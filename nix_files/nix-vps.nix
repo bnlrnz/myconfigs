@@ -81,7 +81,7 @@ in
   boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
 
   # Disable ftrace debugging
-  boot.kernel.sysctl."kernel.ftrace_enabled" = false;
+  boot.kernel.sysctl."kernel.ftrace_enabled" = lib.mkForce null;
 
   # Enable strict reverse path filtering (that is, do not attempt to route
   # packets that "obviously" do not belong to the iface's network; dropped

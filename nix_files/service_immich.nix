@@ -13,6 +13,7 @@
   ###############
   services.immich = {
     enable = true;
+    package = pkgs.unstable.immich;
     port = 2283;
     host = "localhost";
     accelerationDevices = null;
