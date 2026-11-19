@@ -18,12 +18,12 @@ in
     reverse_proxy http://localhost:5678
   '';
   
-  nixpkgs.overlays = [  # add this
-    (self: super: {
-      n8n = unstable.n8n;
-      n8n-task-runner-launcher = unstable.n8n-task-runner-launcher;
-    })
-  ];
+  #nixpkgs.overlays = [  # add this
+  #  (self: super: {
+  #    n8n = unstable.n8n;
+  #    n8n-task-runner-launcher = unstable.n8n-task-runner-launcher;
+  #  })
+  #];
 
   ##################
   # n8n
