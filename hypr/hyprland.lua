@@ -530,7 +530,7 @@ hl.workspace_rule({
 
 local workspace_programs = {
     ["special:keepass"] = { "keepassxc" },
-    ["special:messengers"] = { "Telegram & signal-desktop & signal-desktop --user-data-dir='~/.config/Signal-Work'" },
+    ["special:messengers"] = { "Telegram & signal-desktop & signal-desktop --user-data-dir='.config/Signal-Work'" },
 }
 
 hl.on("workspace.created", function(ws)
