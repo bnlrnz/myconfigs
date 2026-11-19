@@ -40,6 +40,13 @@ in
       collaboration = {
         enable = true;
       };
+
+      frontend = {
+        archiver = {
+          max_size = 10737418240;
+          max_num_files = 50000;
+        };
+      };
     };
 
     # Environment variables for sensitive or specific runtime config
