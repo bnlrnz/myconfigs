@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edi this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
@@ -85,6 +85,9 @@ in
      isNormalUser = true;
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
      shell = pkgs.fish;
+     openssh.authorizedKeys.keys = [
+     	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN0jGwF1wByZm58XDg8NABzwssYN8PWiSi7aw62Mm0lW bnlrnz@gmail.com" # nix-vps
+     ];
    };
 
   users.defaultUserShell = pkgs.fish; 
@@ -106,7 +109,14 @@ in
   ];
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+    	PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+	PermitRootLogin = "no";
+    };
+  };
 
   # adguard home setup
   services.adguardhome = {
@@ -143,9 +153,10 @@ in
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {
-      hostName = "builder@nix";
+      hostName = "10.10.10.208";
       systems = [ "x86_64-linux" "aarch64-linux" ];
-      sshKey = "/home/ben/.ssh/id_builder";
+      sshUser = "builder";
+      sshKey = "/root/.ssh/id_builder";
       maxJobs = 4;
       speedFactor = 4;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -153,11 +164,11 @@ in
   ];
 
   programs.ssh.extraConfig = ''
-Host nix
+Host 10.10.10.208
   Port 22
   User builder
   IdentitiesOnly yes
-  IdentityFile /home/ben/.ssh/id_builder
+  IdentityFile /root/.ssh/id_builder
   '';
 
   # wireguard
