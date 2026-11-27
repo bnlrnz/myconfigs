@@ -18,10 +18,6 @@ hypr/monitors.conf
 !noctalia/**
 !myconfigs/
 !myconfigs/**
-!nix_files/
-!nix_files/**
-!nix_files/secrets/
-!nix_files/secrets/**
 !wpaperd/
 !wpaperd/**
 !yazi/
